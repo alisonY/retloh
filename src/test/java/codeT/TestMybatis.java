@@ -10,8 +10,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.xxs.model.MUser;
-import com.xxs.service.MUserService;
+import com.retloh.model.MUser;
+import com.retloh.service.MUserService;
 
 import com.alibaba.fastjson.JSON;
 

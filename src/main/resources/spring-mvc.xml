@@ -17,8 +17,8 @@
 >
    
     <!--对web包中的所有类进行扫描，以完成Bean创建和自动依赖注入的功能 -->  
-	<context:component-scan base-package="com.xxs.controller" />
-	<context:component-scan base-package="com.xxs.service" />
+	<context:component-scan base-package="com.retloh.controller" />
+	<context:component-scan base-package="com.retloh.service" />
 	
 	<!-- 处理请求返回json字符串的中文乱码问题 -->
     <mvc:annotation-driven>
@@ -56,7 +56,7 @@
     <!-- 针对freemarker的视图配置 -->  
     <bean  id="viewResolver"  
         class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
-        <property name="viewClass" value="com.xxs.framework.RichFreeMarkerView" />
+        <property name="viewClass" value="com.retloh.framework.RichFreeMarkerView" />
         <property name="cache" value="true" />
         <property name="prefix" value="" />
         <property name="suffix" value=".ftl" />

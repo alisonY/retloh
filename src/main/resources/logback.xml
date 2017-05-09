@@ -141,19 +141,19 @@
     -->
 
 	<!-- 记录SQL查询日志 -->
-	<logger name="com.xxs.dao" level="DEBUG" addtivity="false">
+	<logger name="com.retloh.dao" level="DEBUG" addtivity="false">
         <appender-ref ref="SQL" />
     </logger>
 
 	<!-- 记录controller 和 service中的错误日志 -->
-	<logger name="com.xxs.controller" level="ERROR" addtivity="false">
+	<logger name="com.retloh.controller" level="ERROR" addtivity="false">
         <appender-ref ref="ERROR" />
     </logger>
-	<logger name="com.xxs.service" level="ERROR" addtivity="false">
+	<logger name="com.retloh.service" level="ERROR" addtivity="false">
         <appender-ref ref="ERROR" />
     </logger>
     
-    <logger name="com.xxs.utils" level="ERROR" addtivity="false">
+    <logger name="com.retloh.utils" level="ERROR" addtivity="false">
         <appender-ref ref="UTILS" />
     </logger>
     
