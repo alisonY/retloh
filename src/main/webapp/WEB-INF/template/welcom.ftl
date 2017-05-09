@@ -14,8 +14,11 @@
 	<img src = ${rootPath}${BasePath}/images/guidance.jpg />
 	</BR>
 	<a href="${rootPath}${BasePath}/muser/listUser.do">User List</a>
-	
+	</BR>
 	<a href="${rootPath}${BasePath}/muser/getJson.do">Json List</a>
+	</BR>
+	<a href="${rootPath}${BasePath}/idiot.do">idiot</a>
+	
 	
 	</body>  
 </html> 
