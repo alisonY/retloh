@@ -76,7 +76,7 @@
 	</aop:config>
 
 	<!-- druid和Spring关联监控配置 start -->
-	<bean id="druid-stat-interceptor"
+<!-- 	<bean id="druid-stat-interceptor"
 	  class="com.alibaba.druid.support.spring.stat.DruidStatInterceptor">
 	</bean>
 	<bean id="druid-stat-pointcut" class="org.springframework.aop.support.JdkRegexpMethodPointcut"
@@ -90,7 +90,7 @@
 	<aop:config>
 	    <aop:advisor advice-ref="druid-stat-interceptor"
 	        pointcut-ref="druid-stat-pointcut" />
-	</aop:config>
+	</aop:config> -->
 	<!-- druid和Spring关联监控配置 end -->
 
 </beans>
