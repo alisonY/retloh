@@ -58,7 +58,8 @@ public class LocalCacheUtil {
     	}
     	Object obj_value = this.getLocalCache(key);
     	if(null!=obj_value){
-    		return JSON.toJSONString(obj_value);
+    		//return JSON.toJSONString(obj_value);
+    		return String.valueOf(obj_value);
     	}
     	return null;
     }

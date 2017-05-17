@@ -11,10 +11,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.retloh.framework.cache.LocalCacheUtil;
+import com.retloh.model.TUser;
+import com.retloh.utils.JacksonMapper;
+
 import ch.qos.logback.core.net.SyslogOutputStream;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/main")
 public class SpringMvcController { 
     
     
@@ -36,6 +40,16 @@ public class SpringMvcController {
         return mv;  
     }
     
+    
+    @RequestMapping(value="/getCache",method={RequestMethod.GET})
+    @ResponseBody
+    public String getCache(String key){
+    	TUser fromToCache = (TUser)LocalCacheUtil.getInstance().getLocalCache(key);
+    	String loginName = fromToCache.getLoginName();
+    	long l = LocalCacheUtil.getInstance().getRemainTime(key);
+    	String cache = JacksonMapper.beanToJson(fromToCache);
+        return cache+"~~~"+l+"~~~"+loginName;
+    }
     
     
     

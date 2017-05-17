@@ -13,7 +13,7 @@ import com.retloh.dao.MUserMapper;
 import com.retloh.model.MUser;
 import com.retloh.service.MUserService;
 
-@Service("muserService")
+@Service
 public class MUserServiceImpl implements MUserService{
 	
     private static final Logger LOGGER     = LoggerFactory.getLogger(MUserServiceImpl.class);

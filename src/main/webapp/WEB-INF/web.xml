@@ -124,7 +124,7 @@
     <!-- druid监控数据库 end-->
     
     <welcome-file-list>
-        <welcome-file>welcome.do</welcome-file>
+        <welcome-file>main/welcome.do</welcome-file>
     </welcome-file-list>
 </web-app>
 

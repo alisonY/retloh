@@ -16,7 +16,7 @@ import com.retloh.framework.context.UserContextHolder;
  * @author yang.mq
  *
  */
-public class MemberSignInAuthorizationInterceptor extends AbstractHandlerInterceptor {
+public class UserLogininAuthorizationInterceptor extends AbstractHandlerInterceptor {
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
