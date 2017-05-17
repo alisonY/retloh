@@ -1,4 +1,4 @@
-package com.retloh.framework;
+package com.retloh.framework.cache;
 
 
 import java.text.SimpleDateFormat;
@@ -33,21 +33,12 @@ public class LocalCacheUtil {
 	 * @return
 	 */
     public Object getLocalCache(String key) {
-    	long s = System.currentTimeMillis();
     	if(this.getRemainTime(key)<0){
-    		long s1 = System.currentTimeMillis();
-    		System.out.println("step1:"+(s1-s));
             Thread thread = new InvalidateThread(key);
             thread.start();      
-    		long s2 = System.currentTimeMillis();
-    		System.out.println("step2:"+(s2-s1));
     		return null;
     	}
-    	long s1 = System.currentTimeMillis();
-    	System.out.println("step_1:"+(s1-s));
     	Object[] obj = (Object[])LocalCache.getInstance().getIfPresent(key);
-    	long s2 = System.currentTimeMillis();
-    	System.out.println("step_2:"+(s2-s1));
     	if(obj!=null && obj.length>0){
     		return obj[0];
     	}
@@ -60,6 +51,11 @@ public class LocalCacheUtil {
      * @return
      */
     public String getLocalCacheForString(String key){
+    	if(this.getRemainTime(key)<0){
+            Thread thread = new InvalidateThread(key);
+            thread.start();      
+    		return null;
+    	}
     	Object obj_value = this.getLocalCache(key);
     	if(null!=obj_value){
     		return JSON.toJSONString(obj_value);
@@ -118,6 +114,20 @@ public class LocalCacheUtil {
     	Object[] object = new Object[3];
     	object[0] = value; 
     	object[1] = createTime;
+    	object[2] = localExpiration;
+    	LocalCache.getInstance().put(key, object);
+    }
+    
+    /**
+     * 存放本地缓存
+     * @param key
+     * @param value
+     * @param localExpiration
+     */
+    public void putLocalCache(String key,Object value,long localExpiration){
+    	Object[] object = new Object[3];
+    	object[0] = value; 
+    	object[1] = new Date();
     	object[2] = localExpiration;
     	LocalCache.getInstance().put(key, object);
     }

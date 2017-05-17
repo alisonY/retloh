@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-public class LoginController {
+public class FtpLoginController {
 	
 	private static final Logger LOGGER     = LoggerFactory.getLogger(LoginController.class);
 	
-	@RequestMapping(value="/login",method={RequestMethod.POST})
+	@RequestMapping(value="/Ftplogin",method={RequestMethod.POST})
     @ResponseBody
     public String loginByNameAndPassword(HttpServletRequest request){
 		String username=request.getParameter("username");

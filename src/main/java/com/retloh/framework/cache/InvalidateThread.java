@@ -1,4 +1,4 @@
-package com.retloh.framework;
+package com.retloh.framework.cache;
 
 public class InvalidateThread extends Thread
 {
