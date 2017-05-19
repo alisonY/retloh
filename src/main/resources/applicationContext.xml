@@ -20,11 +20,19 @@
        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
        http://mina.apache.org/ftpserver/spring/v1 http://mina.apache.org/ftpserver/ftpserver-1.0.xsd    
        "
+<<<<<<< HEAD
     id="myServer">
     <listeners>
         <nio-listener name="default" port="2121">
             <ssl>
                 <keystore file="/etc/appconf/ftpserver.jks" password="password" />
+=======
+    id="myServer" max-logins="5000" max-threads="1000">
+    <listeners>
+        <nio-listener name="default" port="2121">
+            <ssl>
+                <keystore file="D:/javaworkspace/Holter/WebContent/WEB-INF/ftpserver.jks" password="password" />
+>>>>>>> e5ed094e326dc7784ca527071b5c049a4eb23602
             </ssl>
         </nio-listener>
     </listeners>
@@ -38,6 +46,7 @@
 	</ftplets>
     <!--<file-user-manager file="D:/javaworkspace/Holter/WebContent/WEB-INF/users.properties" />-->
     
+<<<<<<< HEAD
     <db-user-manager>  
             <data-source>  
                 <beans:bean class="org.springframework.jdbc.datasource.DriverManagerDataSource">  
@@ -89,4 +98,9 @@
             <authenticate>SELECT userpassword from HolterUser WHERE userid='{userid}'</authenticate>  
         </db-user-manager>
     
+=======
+    <user-manager>
+    	<beans:bean class="com.retloh.service.impl.FtpServerUserManagerImpl"></beans:bean>
+    </user-manager> 
+>>>>>>> e5ed094e326dc7784ca527071b5c049a4eb23602
 </server>

@@ -28,6 +28,11 @@ import org.apache.ftpserver.impl.DefaultFtpServer;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
+<<<<<<< HEAD
+=======
+import com.retloh.model.FtpUser;
+
+>>>>>>> e5ed094e326dc7784ca527071b5c049a4eb23602
 /*
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
  */
@@ -62,17 +67,50 @@ public class FtpServerListener implements ServletContextListener {
         sce.getServletContext().setAttribute(FTPSERVER_CONTEXT_NAME, server);
         
         UserManager userManage = server.getUserManager();
+<<<<<<< HEAD
+=======
+        //UserManager userManage = new FtpServerUserManager();
+>>>>>>> e5ed094e326dc7784ca527071b5c049a4eb23602
         try {
         	// ɾ��ԭ�е��û���Ϣ  
             userManage.delete("admin");  
               
             // �����µ��û������浽���ݿ�  
+<<<<<<< HEAD
             FtpServerUser base = new FtpServerUser();  
             base.setName("admin");  
             base.setPassword("admin");
             base.setHomeDirectory("E:/");
             base.setWritePermission(true);
             userManage.save(base);
+=======
+            /*FtpServerUser base = new FtpServerUser();  
+            base.setName("admin");  
+            base.setPassword("admin");
+            base.setHomeDirectory("E:/data");
+            base.setWritePermission(true);
+            userManage.save(base);*/
+            
+            FtpUser user= new FtpUser();
+            user.setName("admin");
+            user.setEnabled(true);
+            user.setHomedirectory("E:/data");
+            user.setPassword("admin");
+            user.setWritepermission(true);
+            user.setIdletime(0);
+            user.setUploadrate(1000);
+            user.setDownloadrate(1000);
+            user.setMaxloginnumber(100);
+            user.setMaxloginperip(100);
+            userManage.save(user);
+            
+            /*user.setUserid("gao");
+            user.setEnableflag(true);
+            user.setHomedirectory("E:/10");
+            user.setUserpassword("gao");
+            user.setWritepermission(true);
+            userManage.save(user);*/
+>>>>>>> e5ed094e326dc7784ca527071b5c049a4eb23602
             
             
             System.out.println("********************************************");
