@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.retloh.dao.FtpUserMapper" >
+  <resultMap id="BaseResultMap" type="com.retloh.model.FtpUser" >
+    <id column="name" property="name" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="homeDirectory" property="homedirectory" jdbcType="VARCHAR" />
+    <result column="enabled" property="enabled" jdbcType="BIT" />
+    <result column="writePermission" property="writepermission" jdbcType="BIT" />
+    <result column="idletime" property="idletime" jdbcType="INTEGER" />
+    <result column="uploadrate" property="uploadrate" jdbcType="INTEGER" />
+    <result column="downloadrate" property="downloadrate" jdbcType="INTEGER" />
+    <result column="maxloginnumber" property="maxloginnumber" jdbcType="INTEGER" />
+    <result column="maxloginperip" property="maxloginperip" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    name, password, homeDirectory, enabled, writePermission, idletime, uploadrate, downloadrate, 
+    maxloginnumber, maxloginperip
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.retloh.model.FtpUserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from holteruser
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from holteruser
+    where name = #{name,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from holteruser
+    where name = #{name,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.retloh.model.FtpUserExample" >
+    delete from holteruser
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.retloh.model.FtpUser" >
+    insert into holteruser (name, password, homeDirectory, 
+      enabled, writePermission, idletime, 
+      uploadrate, downloadrate, maxloginnumber, 
+      maxloginperip)
+    values (#{name,jdbcType=VARCHAR}, MD5(#{password,jdbcType=VARCHAR}), #{homedirectory,jdbcType=VARCHAR}, 
+      #{enabled,jdbcType=BIT}, #{writepermission,jdbcType=BIT}, #{idletime,jdbcType=INTEGER}, 
+      #{uploadrate,jdbcType=INTEGER}, #{downloadrate,jdbcType=INTEGER}, #{maxloginnumber,jdbcType=INTEGER}, 
+      #{maxloginperip,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.retloh.model.FtpUser" >
+    insert into holteruser
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="homedirectory != null" >
+        homeDirectory,
+      </if>
+      <if test="enabled != null" >
+        enabled,
+      </if>
+      <if test="writepermission != null" >
+        writePermission,
+      </if>
+      <if test="idletime != null" >
+        idletime,
+      </if>
+      <if test="uploadrate != null" >
+        uploadrate,
+      </if>
+      <if test="downloadrate != null" >
+        downloadrate,
+      </if>
+      <if test="maxloginnumber != null" >
+        maxloginnumber,
+      </if>
+      <if test="maxloginperip != null" >
+        maxloginperip,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        MD5(#{password,jdbcType=VARCHAR}),
+      </if>
+      <if test="homedirectory != null" >
+        #{homedirectory,jdbcType=VARCHAR},
+      </if>
+      <if test="enabled != null" >
+        #{enabled,jdbcType=BIT},
+      </if>
+      <if test="writepermission != null" >
+        #{writepermission,jdbcType=BIT},
+      </if>
+      <if test="idletime != null" >
+        #{idletime,jdbcType=INTEGER},
+      </if>
+      <if test="uploadrate != null" >
+        #{uploadrate,jdbcType=INTEGER},
+      </if>
+      <if test="downloadrate != null" >
+        #{downloadrate,jdbcType=INTEGER},
+      </if>
+      <if test="maxloginnumber != null" >
+        #{maxloginnumber,jdbcType=INTEGER},
+      </if>
+      <if test="maxloginperip != null" >
+        #{maxloginperip,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.retloh.model.FtpUserExample" resultType="java.lang.Integer" >
+    select count(*) from holteruser
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update holteruser
+    <set >
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null" >
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.homedirectory != null" >
+        homeDirectory = #{record.homedirectory,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enabled != null" >
+        enabled = #{record.enabled,jdbcType=BIT},
+      </if>
+      <if test="record.writepermission != null" >
+        writePermission = #{record.writepermission,jdbcType=BIT},
+      </if>
+      <if test="record.idletime != null" >
+        idletime = #{record.idletime,jdbcType=INTEGER},
+      </if>
+      <if test="record.uploadrate != null" >
+        uploadrate = #{record.uploadrate,jdbcType=INTEGER},
+      </if>
+      <if test="record.downloadrate != null" >
+        downloadrate = #{record.downloadrate,jdbcType=INTEGER},
+      </if>
+      <if test="record.maxloginnumber != null" >
+        maxloginnumber = #{record.maxloginnumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.maxloginperip != null" >
+        maxloginperip = #{record.maxloginperip,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update holteruser
+    set name = #{record.name,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      homeDirectory = #{record.homedirectory,jdbcType=VARCHAR},
+      enabled = #{record.enabled,jdbcType=BIT},
+      writePermission = #{record.writepermission,jdbcType=BIT},
+      idletime = #{record.idletime,jdbcType=INTEGER},
+      uploadrate = #{record.uploadrate,jdbcType=INTEGER},
+      downloadrate = #{record.downloadrate,jdbcType=INTEGER},
+      maxloginnumber = #{record.maxloginnumber,jdbcType=INTEGER},
+      maxloginperip = #{record.maxloginperip,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.retloh.model.FtpUser" >
+    update holteruser
+    <set >
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="homedirectory != null" >
+        homeDirectory = #{homedirectory,jdbcType=VARCHAR},
+      </if>
+      <if test="enabled != null" >
+        enabled = #{enabled,jdbcType=BIT},
+      </if>
+      <if test="writepermission != null" >
+        writePermission = #{writepermission,jdbcType=BIT},
+      </if>
+      <if test="idletime != null" >
+        idletime = #{idletime,jdbcType=INTEGER},
+      </if>
+      <if test="uploadrate != null" >
+        uploadrate = #{uploadrate,jdbcType=INTEGER},
+      </if>
+      <if test="downloadrate != null" >
+        downloadrate = #{downloadrate,jdbcType=INTEGER},
+      </if>
+      <if test="maxloginnumber != null" >
+        maxloginnumber = #{maxloginnumber,jdbcType=INTEGER},
+      </if>
+      <if test="maxloginperip != null" >
+        maxloginperip = #{maxloginperip,jdbcType=INTEGER},
+      </if>
+    </set>
+    where name = #{name,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.retloh.model.FtpUser" >
+    update holteruser
+    set password = #{password,jdbcType=VARCHAR},
+      homeDirectory = #{homedirectory,jdbcType=VARCHAR},
+      enabled = #{enabled,jdbcType=BIT},
+      writePermission = #{writepermission,jdbcType=BIT},
+      idletime = #{idletime,jdbcType=INTEGER},
+      uploadrate = #{uploadrate,jdbcType=INTEGER},
+      downloadrate = #{downloadrate,jdbcType=INTEGER},
+      maxloginnumber = #{maxloginnumber,jdbcType=INTEGER},
+      maxloginperip = #{maxloginperip,jdbcType=INTEGER}
+    where name = #{name,jdbcType=VARCHAR}
+  </update>
+</mapper>
