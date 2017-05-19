@@ -8,15 +8,9 @@
 		</commentGenerator>
 		<jdbcConnection 
 			driverClass="com.mysql.jdbc.Driver" 
-<<<<<<< HEAD
-			connectionURL="jdbc:mysql://192.168.211.248:3306/notifiction_db?useUnicode=true&amp;characterEncoding=utf-8" 
-			userId="mysql" 
-			password="mysql"
-=======
 			connectionURL="jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&amp;characterEncoding=utf-8" 
 			userId="root" 
 			password=""
->>>>>>> e5ed094e326dc7784ca527071b5c049a4eb23602
 		>
 		</jdbcConnection>
 		<javaTypeResolver>
@@ -36,11 +30,7 @@
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
 		<!-- table name,  change tableName and domainObjectName  -->
-<<<<<<< HEAD
-		<table tableName="plus_order" domainObjectName="PlusOrder" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" />
-=======
 		<table tableName="holteruser" domainObjectName="FtpUser" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true" />
->>>>>>> e5ed094e326dc7784ca527071b5c049a4eb23602
 		
 	</context>
 </generatorConfiguration>
