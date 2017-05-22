@@ -55,7 +55,7 @@ int upload(CURL *curlhandle, const char * remotepath, const char * localpath, lo
     curl_easy_setopt(curlhandle, CURLOPT_WRITEFUNCTION, discardfunc);  
     curl_easy_setopt(curlhandle, CURLOPT_READFUNCTION, readfunc);  
     curl_easy_setopt(curlhandle, CURLOPT_READDATA, f);  
-    //curl_easy_setopt(curlhandle, CURLOPT_FTPPORT, "-"); /* disable passive mode */
+    //curl_easy_setopt(curlhandle, CURLOPT_FTPPORT, "-"); /* disable passive mode --*/
     curl_easy_setopt(curlhandle, CURLOPT_FTP_USE_EPSV, 0L);  
     curl_easy_setopt(curlhandle, CURLOPT_FTP_CREATE_MISSING_DIRS, 1L);  
     curl_easy_setopt(curlhandle, CURLOPT_VERBOSE, 1L);  
