@@ -34,4 +34,10 @@ public class CacheConstant {
 	 * 会员登录数据缓存前缀
 	 */
 	public static final String USER_SESSION_CACHE = CACHE_PREFIX + "USER_SESSION_CACHE_";
+	
+	
+	/**
+	 * 客户端登录数据缓存前缀
+	 */
+	public static final String CLIENT_SESSION_CACHE = CACHE_PREFIX + "CLIENT_SESSION_CACHE_";
 }
