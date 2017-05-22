@@ -24,8 +24,19 @@
     <listeners>
         <nio-listener name="default" port="2121">
             <ssl>
-                <keystore file="/etc/appconf/ftpserver.jks" password="password" />
+                <keystore file="D:/javaworkspace/Holter/WebContent/WEB-INF/ftpserver.jks" password="password" />
             </ssl>
+            <data-connection idle-timeout="300">
+            	<!--
+            	1.若是外网访问，主动模式是不行的，因为客户端报告给服务器的IP地址是内网IP，服务器无法主动向此地址发起连接。必须使用被动模式。
+				2.使用被动模式时，是由服务器端告诉客户端向哪个IP哪些端口发起连接。那么哪个IP，哪些端口？配置如下，其中“xxx.xxx.xxx.xxx”是此服务器的外网IP，
+				“1034-1040”则是可供客户端连接的端口，注意防火墙要将这些端口放行。
+				-->
+            	<active enabled="true" local-port="2123" ip-check="false" />
+                <passive ports="2125" external-address="172.104.78.181"/>
+            	<!--<active enabled="true" local-address="1.2.3.4" local-port="2121" ip-check="true" ></active>
+            	<passive ports="2121" address="1.2.3.4" external-address="1.2.3.4"> </passive>-->
+        	</data-connection>
         </nio-listener>
     </listeners>
     <!-- 坑比  ftplets 必須放在file-user-manager前面 不然报标签错误 -->
