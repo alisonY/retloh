@@ -19,8 +19,13 @@ public abstract class AbstractHandlerInterceptor implements HandlerInterceptor {
 	 * @param cacheKey
 	 * @return Object
 	 */
-	protected String getIncached(String cacheKey) {
+	protected String getIncachedStr(String cacheKey) {
 		return LocalCacheUtil.getInstance().getLocalCacheForString(cacheKey);
+	}
+	
+	
+	protected Object getIncached(String cacheKey) {
+		return LocalCacheUtil.getInstance().getLocalCache(cacheKey);
 	}
 	
 	/**
@@ -32,9 +37,15 @@ public abstract class AbstractHandlerInterceptor implements HandlerInterceptor {
 	 * @param cacheSeconds
 	 * @return Serializable
 	 */
-	protected void putIncached(String cacheKey, String cacheObjectStr, int cacheSeconds) {
+	protected void putIncachedStr(String cacheKey, String cacheObjectStr, int cacheSeconds) {
 		LocalCacheUtil.getInstance().putLocalCache(cacheKey, cacheObjectStr, cacheSeconds);
 	}
+	
+	
+	protected void putIncached(String cacheKey, Object obj, int cacheSeconds) {
+		LocalCacheUtil.getInstance().putLocalCache(cacheKey, obj, cacheSeconds);
+	}
+	
 	
 
     /**

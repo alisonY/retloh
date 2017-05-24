@@ -30,6 +30,7 @@ public class UserLogininAuthorizationInterceptor extends AbstractHandlerIntercep
 			urlBuilder.append(super.obtainRequestContextPath(request));
 //			int beginIndex = (urlBuilder.charAt(urlBuilder.length() - 1) == '/' && Values.prototype.memberSignInUri.charAt(0) == '/') ? 1 : 0;
 //			urlBuilder.append(Values.prototype.memberSignInUri.substring(beginIndex));
+			urlBuilder.append("auth/toLogin.do");
 			
 			// Http request with ajax
 			if ("XMLHttpRequest".equalsIgnoreCase(request.getHeader("X-Requested-With"))) {
