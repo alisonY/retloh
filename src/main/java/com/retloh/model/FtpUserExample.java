@@ -434,6 +434,136 @@ public class FtpUserExample {
             return (Criteria) this;
         }
 
+        public Criteria andStatusIsNull() {
+            addCriterion("status is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusIsNotNull() {
+            addCriterion("status is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusEqualTo(Integer value) {
+            addCriterion("status =", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusNotEqualTo(Integer value) {
+            addCriterion("status <>", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusGreaterThan(Integer value) {
+            addCriterion("status >", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusGreaterThanOrEqualTo(Integer value) {
+            addCriterion("status >=", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusLessThan(Integer value) {
+            addCriterion("status <", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusLessThanOrEqualTo(Integer value) {
+            addCriterion("status <=", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusIn(List<Integer> values) {
+            addCriterion("status in", values, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusNotIn(List<Integer> values) {
+            addCriterion("status not in", values, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusBetween(Integer value1, Integer value2) {
+            addCriterion("status between", value1, value2, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusNotBetween(Integer value1, Integer value2) {
+            addCriterion("status not between", value1, value2, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andPdfexportIsNull() {
+            addCriterion("pdfexport is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPdfexportIsNotNull() {
+            addCriterion("pdfexport is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPdfexportEqualTo(String value) {
+            addCriterion("pdfexport =", value, "pdfexport");
+            return (Criteria) this;
+        }
+
+        public Criteria andPdfexportNotEqualTo(String value) {
+            addCriterion("pdfexport <>", value, "pdfexport");
+            return (Criteria) this;
+        }
+
+        public Criteria andPdfexportGreaterThan(String value) {
+            addCriterion("pdfexport >", value, "pdfexport");
+            return (Criteria) this;
+        }
+
+        public Criteria andPdfexportGreaterThanOrEqualTo(String value) {
+            addCriterion("pdfexport >=", value, "pdfexport");
+            return (Criteria) this;
+        }
+
+        public Criteria andPdfexportLessThan(String value) {
+            addCriterion("pdfexport <", value, "pdfexport");
+            return (Criteria) this;
+        }
+
+        public Criteria andPdfexportLessThanOrEqualTo(String value) {
+            addCriterion("pdfexport <=", value, "pdfexport");
+            return (Criteria) this;
+        }
+
+        public Criteria andPdfexportLike(String value) {
+            addCriterion("pdfexport like", value, "pdfexport");
+            return (Criteria) this;
+        }
+
+        public Criteria andPdfexportNotLike(String value) {
+            addCriterion("pdfexport not like", value, "pdfexport");
+            return (Criteria) this;
+        }
+
+        public Criteria andPdfexportIn(List<String> values) {
+            addCriterion("pdfexport in", values, "pdfexport");
+            return (Criteria) this;
+        }
+
+        public Criteria andPdfexportNotIn(List<String> values) {
+            addCriterion("pdfexport not in", values, "pdfexport");
+            return (Criteria) this;
+        }
+
+        public Criteria andPdfexportBetween(String value1, String value2) {
+            addCriterion("pdfexport between", value1, value2, "pdfexport");
+            return (Criteria) this;
+        }
+
+        public Criteria andPdfexportNotBetween(String value1, String value2) {
+            addCriterion("pdfexport not between", value1, value2, "pdfexport");
+            return (Criteria) this;
+        }
+
         public Criteria andIdletimeIsNull() {
             addCriterion("idletime is null");
             return (Criteria) this;
