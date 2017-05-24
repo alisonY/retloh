@@ -24,7 +24,7 @@
     <listeners>
         <nio-listener name="default" port="2121">
             <ssl>
-                <keystore file="D:/javaworkspace/Holter/WebContent/WEB-INF/ftpserver.jks" password="password" />
+                <keystore file="/etc/appconf/ftpserver.jks" password="password" />
             </ssl>
             <data-connection idle-timeout="300">
             	<!--

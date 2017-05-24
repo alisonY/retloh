@@ -24,7 +24,6 @@ public class ClientAuthController {
     
     @Autowired
     private UserServices userServices;
-    
 	
     @RequestMapping(value="/login",method={RequestMethod.POST})
     @ResponseBody
@@ -41,6 +40,7 @@ public class ClientAuthController {
     			modelMap.put("token", token);
     		}else{
     			modelMap.put("errorInfo", "Authentication failed,here is some message.");
+    			LOGGER.error("client Authentication is failed,query result is loginName={},password={}", loginName, password);
     		}
     	}
     	return JacksonMapper.beanToJson(modelMap);
