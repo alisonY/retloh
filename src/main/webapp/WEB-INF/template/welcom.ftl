@@ -19,6 +19,9 @@
 	</BR>
 	<a href="${rootPath}${BasePath}/idiot.do">idiot</a>
 	
+	</BR>
+	</BR>
+	<a href="${rootPath}${BasePath}/auth/logout.do">logout</a>
 	
 	</body>  
 </html> 

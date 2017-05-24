@@ -18,21 +18,15 @@ import com.retloh.service.UserServices;
  */
 public class OncePerRequestInterceptor extends AbstractHandlerInterceptor {
 
+	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-
-		String from = request.getParameter("from");
-		if(StringUtils.isNotBlank(from)){
-			request.getSession().setAttribute("from", from);
-		}
 		String userInfoCacheKey=getUserInfoCacheKey(request);
 		TUser userInfoVoCached = (TUser)getIncached(userInfoCacheKey);
 		if(userInfoVoCached != null){
-                putIncached(userInfoCacheKey, userInfoCacheKey, CacheConstant.USER_LOGOUT_TIMES);//缓存持久化
-		}else{
-            //未登录过
+                putIncached(userInfoCacheKey, userInfoVoCached, CacheConstant.USER_LOGOUT_TIMES);//缓存持久化
 		}
         // 设置会员上下文信息
-        UserContextHolder.setUserInfoVo(userInfoVoCached);
+		UserContextHolder.setUserInfoVo(userInfoVoCached);
 		return true;
 	}
 
@@ -43,15 +37,19 @@ public class OncePerRequestInterceptor extends AbstractHandlerInterceptor {
 		TUser userInfoVoCached = (TUser)getIncached(userInfoCacheKey);
 		if(userInfoVoCached == null){
 			UserContextHolder.resetUserAttributes();
+		}else{
+			UserContextHolder.setUserInfoVo(userInfoVoCached);
 		}
 		// 注入当前会员信息
 		if (modelAndView != null) {
+			String urls = request.getParameter("redirectURL");
+			//response.sendRedirect(urls);
+			System.out.println(urls);
 		}
 	}
 
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-		
 	}
 
 	/**

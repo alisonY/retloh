@@ -54,6 +54,21 @@
 	-->
 
 
+	
+<!-- 	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<bean class="com.retloh.framework.interceptor.OncePerRequestInterceptor"/>
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/main/**"/>
+			<mvc:mapping path="/muser/**"/>
+			<bean class="com.retloh.framework.interceptor.UserLogininAuthorizationInterceptor"/>
+		</mvc:interceptor>
+	</mvc:interceptors> -->
+
+
+
     <!-- 针对freemarker的视图配置 -->  
     <bean  id="viewResolver"  
         class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">

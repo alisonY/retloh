@@ -51,10 +51,8 @@ public class LoginController {
     			String cacheKey = CacheConstant.USER_SESSION_CACHE + request.getSession().getId();
     			LOGGER.error("login action is success,quert result is jsonStr={},cacheKey={}", jsonStr, cacheKey);
     			//PUT TO CACHE
-    			//LocalCacheUtil.getInstance().putLocalCache(cacheKey, jsonStr, CacheConstant.USER_LOGOUT_TIMES);
     			LocalCacheUtil.getInstance().putLocalCache(cacheKey, temp, CacheConstant.USER_LOGOUT_TIMES);
-    			mv.setViewName("welcom");
-    			mv.addObject("name", temp.getUserName());
+    			mv.setViewName("redirect:/main/welcome.do");
     			return mv;  
     		}
     	}
@@ -65,6 +63,17 @@ public class LoginController {
 		mv.setViewName("redirect:/auth/toLogin.do");//使用重定向
         return mv;  
     }
+    
+    
+    @RequestMapping(value="/logout",method={RequestMethod.GET})
+    public ModelAndView login(ModelMap modelMap,HttpServletRequest request) {
+		String cacheKey = CacheConstant.USER_SESSION_CACHE + request.getSession().getId();
+		LocalCacheUtil.getInstance().delLocalCache(cacheKey);
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("redirect:/auth/toLogin.do");//使用重定向
+        return mv;  
+    }
+    
     
     private static boolean isNumber(String str) {
     	LOGGER.error(str);
