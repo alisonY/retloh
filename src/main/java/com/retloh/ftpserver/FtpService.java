@@ -1,5 +1,6 @@
 package com.retloh.ftpserver;
 
+import java.io.File;
 import java.io.IOException;
 
 import org.apache.ftpserver.ftplet.DefaultFtplet;
@@ -9,6 +10,7 @@ import org.apache.ftpserver.ftplet.FtpRequest;
 import org.apache.ftpserver.ftplet.FtpSession;
 import org.apache.ftpserver.ftplet.FtpletContext;
 import org.apache.ftpserver.ftplet.FtpletResult;
+import org.apache.ftpserver.ftplet.User;
 
 public class FtpService extends DefaultFtplet{
 
@@ -188,12 +190,20 @@ public class FtpService extends DefaultFtplet{
 	@Override
 	public FtpletResult onUploadEnd(FtpSession session, FtpRequest request) throws FtpException, IOException {
 		// TODO Auto-generated method stub
+		User user = session.getUser();
+	    //File workingDir = workingDir(session);
+	    String fileName = request.getArgument();
+	    
 		return super.onUploadEnd(session, request);
 	}
 
 	@Override
 	public FtpletResult onUploadStart(FtpSession session, FtpRequest request) throws FtpException, IOException {
 		// TODO Auto-generated method stub
+		User user = session.getUser();
+	    //File workingDir = workingDir(session);
+	    String fileName = request.getArgument();
+	    
 		return super.onUploadStart(session, request);
 	}
 
