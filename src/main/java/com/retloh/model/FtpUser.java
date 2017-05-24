@@ -17,6 +17,10 @@ public class FtpUser implements User{
 
     private Boolean writepermission;
 
+    private Integer status;
+
+    private String pdfexport;
+
     private Integer idletime;
 
     private Integer uploadrate;
@@ -49,6 +53,22 @@ public class FtpUser implements User{
 
     public void setWritepermission(Boolean writepermission) {
         this.writepermission = writepermission;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public String getPdfexport() {
+        return pdfexport;
+    }
+
+    public void setPdfexport(String pdfexport) {
+        this.pdfexport = pdfexport == null ? null : pdfexport.trim();
     }
 
     public Integer getIdletime() {
@@ -138,6 +158,4 @@ public class FtpUser implements User{
 		// TODO Auto-generated method stub
 		return homedirectory;
 	}
-    
-    
 }

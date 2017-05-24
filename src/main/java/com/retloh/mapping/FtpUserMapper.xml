@@ -7,6 +7,8 @@
     <result column="homeDirectory" property="homedirectory" jdbcType="VARCHAR" />
     <result column="enabled" property="enabled" jdbcType="BIT" />
     <result column="writePermission" property="writepermission" jdbcType="BIT" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="pdfexport" property="pdfexport" jdbcType="VARCHAR" />
     <result column="idletime" property="idletime" jdbcType="INTEGER" />
     <result column="uploadrate" property="uploadrate" jdbcType="INTEGER" />
     <result column="downloadrate" property="downloadrate" jdbcType="INTEGER" />
@@ -72,8 +74,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    name, password, homeDirectory, enabled, writePermission, idletime, uploadrate, downloadrate, 
-    maxloginnumber, maxloginperip
+    name, password, homeDirectory, enabled, writePermission, status, pdfexport, idletime, 
+    uploadrate, downloadrate, maxloginnumber, maxloginperip
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.retloh.model.FtpUserExample" >
     select
@@ -108,13 +110,15 @@
   </delete>
   <insert id="insert" parameterType="com.retloh.model.FtpUser" >
     insert into holteruser (name, password, homeDirectory, 
-      enabled, writePermission, idletime, 
-      uploadrate, downloadrate, maxloginnumber, 
-      maxloginperip)
+      enabled, writePermission, status, 
+      pdfexport, idletime, uploadrate, 
+      downloadrate, maxloginnumber, maxloginperip
+      )
     values (#{name,jdbcType=VARCHAR}, MD5(#{password,jdbcType=VARCHAR}), #{homedirectory,jdbcType=VARCHAR}, 
-      #{enabled,jdbcType=BIT}, #{writepermission,jdbcType=BIT}, #{idletime,jdbcType=INTEGER}, 
-      #{uploadrate,jdbcType=INTEGER}, #{downloadrate,jdbcType=INTEGER}, #{maxloginnumber,jdbcType=INTEGER}, 
-      #{maxloginperip,jdbcType=INTEGER})
+      #{enabled,jdbcType=BIT}, #{writepermission,jdbcType=BIT}, #{status,jdbcType=INTEGER}, 
+      #{pdfexport,jdbcType=VARCHAR}, #{idletime,jdbcType=INTEGER}, #{uploadrate,jdbcType=INTEGER}, 
+      #{downloadrate,jdbcType=INTEGER}, #{maxloginnumber,jdbcType=INTEGER}, #{maxloginperip,jdbcType=INTEGER}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.retloh.model.FtpUser" >
     insert into holteruser
@@ -133,6 +137,12 @@
       </if>
       <if test="writepermission != null" >
         writePermission,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="pdfexport != null" >
+        pdfexport,
       </if>
       <if test="idletime != null" >
         idletime,
@@ -165,6 +175,12 @@
       </if>
       <if test="writepermission != null" >
         #{writepermission,jdbcType=BIT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="pdfexport != null" >
+        #{pdfexport,jdbcType=VARCHAR},
       </if>
       <if test="idletime != null" >
         #{idletime,jdbcType=INTEGER},
@@ -207,6 +223,12 @@
       <if test="record.writepermission != null" >
         writePermission = #{record.writepermission,jdbcType=BIT},
       </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.pdfexport != null" >
+        pdfexport = #{record.pdfexport,jdbcType=VARCHAR},
+      </if>
       <if test="record.idletime != null" >
         idletime = #{record.idletime,jdbcType=INTEGER},
       </if>
@@ -234,6 +256,8 @@
       homeDirectory = #{record.homedirectory,jdbcType=VARCHAR},
       enabled = #{record.enabled,jdbcType=BIT},
       writePermission = #{record.writepermission,jdbcType=BIT},
+      status = #{record.status,jdbcType=INTEGER},
+      pdfexport = #{record.pdfexport,jdbcType=VARCHAR},
       idletime = #{record.idletime,jdbcType=INTEGER},
       uploadrate = #{record.uploadrate,jdbcType=INTEGER},
       downloadrate = #{record.downloadrate,jdbcType=INTEGER},
@@ -257,6 +281,12 @@
       </if>
       <if test="writepermission != null" >
         writePermission = #{writepermission,jdbcType=BIT},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="pdfexport != null" >
+        pdfexport = #{pdfexport,jdbcType=VARCHAR},
       </if>
       <if test="idletime != null" >
         idletime = #{idletime,jdbcType=INTEGER},
@@ -282,6 +312,8 @@
       homeDirectory = #{homedirectory,jdbcType=VARCHAR},
       enabled = #{enabled,jdbcType=BIT},
       writePermission = #{writepermission,jdbcType=BIT},
+      status = #{status,jdbcType=INTEGER},
+      pdfexport = #{pdfexport,jdbcType=VARCHAR},
       idletime = #{idletime,jdbcType=INTEGER},
       uploadrate = #{uploadrate,jdbcType=INTEGER},
       downloadrate = #{downloadrate,jdbcType=INTEGER},
