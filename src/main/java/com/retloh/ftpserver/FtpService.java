@@ -11,8 +11,15 @@ import org.apache.ftpserver.ftplet.FtpSession;
 import org.apache.ftpserver.ftplet.FtpletContext;
 import org.apache.ftpserver.ftplet.FtpletResult;
 import org.apache.ftpserver.ftplet.User;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.retloh.dao.FtpUserMapper;
+import com.retloh.model.FtpUser;
 
 public class FtpService extends DefaultFtplet{
+	@Autowired
+	private FtpUserMapper ftpuserMapper;
+	
 
 	@Override
 	public FtpletResult afterCommand(FtpSession session, FtpRequest request, FtpReply reply)
@@ -130,6 +137,15 @@ public class FtpService extends DefaultFtplet{
 	@Override
 	public FtpletResult onDownloadEnd(FtpSession session, FtpRequest request) throws FtpException, IOException {
 		// TODO Auto-generated method stub
+		
+		User user = session.getUser();
+	    //File workingDir = workingDir(session);
+	    String fileName = request.getArgument();
+	    FtpUser ftpuser= new FtpUser();
+	    ftpuser=(FtpUser) user;
+	    ftpuser.setStatus(1);
+	    ftpuserMapper.updateByPrimaryKey(ftpuser);
+		
 		return super.onDownloadEnd(session, request);
 	}
 
@@ -193,6 +209,10 @@ public class FtpService extends DefaultFtplet{
 		User user = session.getUser();
 	    //File workingDir = workingDir(session);
 	    String fileName = request.getArgument();
+	    FtpUser ftpuser= new FtpUser();
+	    ftpuser=(FtpUser) user;
+	    ftpuser.setStatus(0);
+	    ftpuserMapper.updateByPrimaryKey(ftpuser);
 	    
 		return super.onUploadEnd(session, request);
 	}
