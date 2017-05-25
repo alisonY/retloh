@@ -44,8 +44,8 @@ public class UserLogininAuthorizationInterceptor extends AbstractHandlerIntercep
 				return false;
 			}
 			
-			urlBuilder.append("?redirectURL=");
-			urlBuilder.append(URLEncoder.encode(getRedirectURL(request), "UTF-8"));
+			//urlBuilder.append("?redirectURL=");
+			//urlBuilder.append(URLEncoder.encode(getRedirectURL(request), "UTF-8"));
 			response.sendRedirect(urlBuilder.toString());
 			return false;
 		}

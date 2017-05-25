@@ -55,7 +55,8 @@
 
 
 	
-<!-- 	<mvc:interceptors>
+<!-- 	
+	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/**"/>
 			<bean class="com.retloh.framework.interceptor.OncePerRequestInterceptor"/>
@@ -65,7 +66,8 @@
 			<mvc:mapping path="/muser/**"/>
 			<bean class="com.retloh.framework.interceptor.UserLogininAuthorizationInterceptor"/>
 		</mvc:interceptor>
-	</mvc:interceptors> -->
+	</mvc:interceptors>
+	 -->
 
 
 
