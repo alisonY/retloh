@@ -19,6 +19,9 @@ import com.retloh.utils.JacksonMapper;
 
 @Controller
 public class CaseInfoController {
+	/*
+	 * 病例信息入库
+	 */
 	
 	@Autowired
     private CaseInfoServices caseInfoServices;
