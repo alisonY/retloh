@@ -35,6 +35,7 @@ HolterLoadDate 回放时间
 
 create table CaseInfo 
 (  
+   name varchar(20) not null primary key,
    daolianshu int default 0,  
    sum_hours int default 0,  
    pacemaker_parameter int default 0,  
@@ -43,7 +44,6 @@ create table CaseInfo
    record_mounth int default 0,
    record_day int default 0,
    record_year int default 0,  
-   name varchar(20) default null,  
    hospital_number int default 0,  
    serial_number int default 0,  
    sex varchar(10) default null,
