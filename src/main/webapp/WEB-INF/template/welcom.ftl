@@ -8,7 +8,10 @@
 	<body>  
 		<div style="margin:20px 0;"><!--测试顶部留空--></div>
     	<div class="easyui-layout" style="width:100%;height:500px;">
-	        <div id="p" data-options="region:'west'" title="菜单" style="width:15%;padding:10px">
+		    <div data-options="region:'north'" border="true">
+					<div>logo is here___logo is here___logo is here___</div>
+			</div>
+	        <div id="menu" split="true"  data-options="region:'west'" title="导航菜单" style="width:10%;padding:0px">
 	        	<ul class="easyui-tree" data-options="animate:true">
 			        <li>
 		                <span>主菜单</span>
@@ -38,7 +41,11 @@
 		            </li>
 	        	</ul>
 	        </div>
-	        <div data-options="region:'center'" style="padding:10px" title="内容">
+	        <div id="mainPanel" data-options="region:'center'" style="padding:0px">
+	        	<div id="tabs" class="easyui-tabs"  fit="true" border="false" >
+				</div>
+	        
+	        
 	        		帮助IS here
 	        		</BR>
 	                Hello ${name}
@@ -56,8 +63,12 @@
 					<a href="${rootPath}${BasePath}/idiot.do">idiot</a>
 					</BR>
 					</BR>
+					
+
+					
 	        </div>
+	        <div data-options="region:'south'" border="false">Copyright&copy;  2017，xxxxxxxxxx有限公司</div>
         </div>
-    </div>																
+    </div>
 	</body>  
 </html> 
