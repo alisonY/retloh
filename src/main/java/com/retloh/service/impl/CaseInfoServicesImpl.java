@@ -1,11 +1,13 @@
 package com.retloh.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.retloh.dao.CaseInfoMapper;
 import com.retloh.model.CaseInfo;
 import com.retloh.service.CaseInfoServices;
 
+@Service
 public class CaseInfoServicesImpl implements CaseInfoServices{
 	
 	@Autowired
