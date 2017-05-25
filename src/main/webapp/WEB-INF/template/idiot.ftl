@@ -20,7 +20,7 @@
     function call(){
 	   $.ajax({
 				type:"GET",
-				url: "${rootPath}${BasePath}/random.do",
+				url: "${rootPath}${BasePath}/main/random.do",
 				datatype: "text",       
 				success:function(data){
 				var htmlContent = $("#textC");
