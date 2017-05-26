@@ -33,6 +33,7 @@
 		                            </li>
 		                        </ul>
 		                    </li>
+		                    <li><a href="javascript:void(0);" onclick="javascript:addPanel('测试','${rootPath}${BasePath}/muser/listUser.do');">添加tab</a></li>
 		                    <li><a href="${rootPath}${BasePath}/main/idiot.do">测试ajax</a></li>
 		                    <li><a href="${rootPath}${BasePath}/muser/getJson.do">测试json</a></li>
 		                    <li><a href="${rootPath}${BasePath}/muser/listUser.do">测试表</a></li>
@@ -70,5 +71,45 @@
 	        <div data-options="region:'south'" border="false">Copyright&copy;  2017，xxxxxxxxxx有限公司</div>
         </div>
     </div>
-	</body>  
+	</body>
+	
+	
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		center();
+	}); 
+
+    function center(){
+        $.messager.show({
+            title:'ATTENTIONS',
+            msg:'welcom.ftl中有树形demo,树形中的'+"'"+'添加tab'+"'"+'用来给右侧框中添加一个新的tab',
+            showType:'fade',
+            style:{
+                right:'',
+                bottom:''
+            }
+        });
+    }
+
+	//添加窗体
+    function addPanel(title, url){
+    	if ($('#tabs').tabs('exists', title)){
+			$('#tabs').tabs('select', title);//选中并刷新
+			var currTab = $('#tabs').tabs('getSelected');
+		} else {
+			var content = createFrame(url);
+			$('#tabs').tabs('add',{
+				title:title,
+				content:content,
+				closable:true
+			});
+		}
+    }
+    function createFrame(url) {
+		var s = '<iframe scrolling="auto" frameborder="0"  src="'+url+'" style="width:100%;height:100%;"></iframe>';
+		return s;
+	}
+</script>	
+	
 </html> 
