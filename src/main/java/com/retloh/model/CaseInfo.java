@@ -1,6 +1,8 @@
 package com.retloh.model;
 
 public class CaseInfo {
+    private String id;
+
     private String name;
 
     private Integer daolianshu;
@@ -66,6 +68,14 @@ public class CaseInfo {
     private Integer holterLoadDate;
 
     private String handwrittenConclusion;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id == null ? null : id.trim();
+    }
 
     public String getName() {
         return name;

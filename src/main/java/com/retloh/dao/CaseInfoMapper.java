@@ -10,7 +10,7 @@ public interface CaseInfoMapper {
 
     int deleteByExample(CaseInfoExample example);
 
-    int deleteByPrimaryKey(String name);
+    int deleteByPrimaryKey(String id);
 
     int insert(CaseInfo record);
 
@@ -18,7 +18,7 @@ public interface CaseInfoMapper {
 
     List<CaseInfo> selectByExample(CaseInfoExample example);
 
-    CaseInfo selectByPrimaryKey(String name);
+    CaseInfo selectByPrimaryKey(String id);
 
     int updateByExampleSelective(@Param("record") CaseInfo record, @Param("example") CaseInfoExample example);
 

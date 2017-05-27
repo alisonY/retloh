@@ -8,9 +8,9 @@
 		</commentGenerator>
 		<jdbcConnection 
 			driverClass="com.mysql.jdbc.Driver" 
-			connectionURL="jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&amp;characterEncoding=utf-8" 
+			connectionURL="jdbc:mysql://172.104.78.181:19217/retloh?useUnicode=true&amp;characterEncoding=utf-8" 
 			userId="root" 
-			password=""
+			password="Holter_2017"
 		>
 		</jdbcConnection>
 		<javaTypeResolver>
@@ -30,7 +30,7 @@
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
 		<!-- table name,  change tableName and domainObjectName  -->
-		<table tableName="holteruser" domainObjectName="FtpUser" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true" />
+		<table tableName="CaseInfo" domainObjectName="CaseInfo" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true" />
 		
 	</context>
 </generatorConfiguration>
