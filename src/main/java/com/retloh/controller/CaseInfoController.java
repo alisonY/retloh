@@ -42,5 +42,22 @@ public class CaseInfoController {
 	    caseInfoServices.insert(caseinfo);
     	return "ok";
     }
+	
+	@RequestMapping(value="/allCaseInfo",method={RequestMethod.POST})
+    @ResponseBody
+    public String allCaseInfo(HttpServletRequest request) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream()));
+		String line = null;
+        StringBuilder sb = new StringBuilder();
+        while((line = br.readLine())!=null){
+            sb.append(line);
+        }
+        String jsonstr = sb.toString();
+        
+		ObjectMapper mapper = new ObjectMapper();
+	    CaseInfo caseinfo = mapper.readValue(jsonstr, CaseInfo.class);
+	    caseInfoServices.insert(caseinfo);
+    	return "ok";
+    }
 
 }

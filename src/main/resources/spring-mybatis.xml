@@ -35,10 +35,6 @@
 		<property name="filters" value="mergeStat" />
 	</bean>
 
-	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="dataSource" ref="dataSource" />
-		<property name="mapperLocations" value="classpath:com/retloh/mapping/*.xml" />
-	</bean>
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="com.retloh.dao" />
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
@@ -74,6 +70,40 @@
 		<aop:pointcut id="transactionPointcut" expression="execution(* com.retloh.service.impl..*Impl.*(..))" />
 		<aop:advisor pointcut-ref="transactionPointcut" advice-ref="transactionAdvice" />
 	</aop:config>
+
+
+	<!--
+		<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+			<property name="dataSource" ref="dataSource" />
+			<property name="mapperLocations" value="classpath:com/retloh/mapping/*.xml" />
+		</bean>
+	-->
+
+
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+	    <property name="dataSource" ref="dataSource"/>
+	    <property name="mapperLocations">
+	        <array>
+	            <value>classpath:com/retloh/mapping/*.xml</value>
+	        </array>
+	    </property>
+	    <property name="typeAliasesPackage" value="com.retloh.model"/>
+	    <property name="plugins">
+	        <array>
+	            <bean class="com.github.pagehelper.PageInterceptor">
+	                <!-- 这里的几个配置主要演示如何使用，如果不理解，一定要去掉下面的配置 -->
+	                <!-- https://github.com/pagehelper/Mybatis-PageHelper/blob/master/wikis/zh/HowToUse.md -->
+	                <property name="properties">
+	                    <value>
+	                        helperDialect=mysql
+	                        reasonable=true
+	                    </value>
+	                </property>
+	            </bean>
+	        </array>
+	    </property>
+	</bean>
+
 
 	<!-- druid和Spring关联监控配置 start -->
 <!-- 	<bean id="druid-stat-interceptor"
