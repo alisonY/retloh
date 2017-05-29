@@ -33,6 +33,20 @@
 		                            </li>
 		                        </ul>
 		                    </li>
+		                    <li>
+		                    	<a href="javascript:void(0);" 
+		                    		onclick="javascript:addPanel('病例信息','${rootPath}${BasePath}/case/toPage.do');">
+		                    		病例信息
+		                    	</a>
+		                    </li>
+		                    <li>
+		                    	<a href="javascript:void(0);" 
+		                    		onclick="javascript:addPanel('测试','${rootPath}${BasePath}/muser/listUser.do');">
+		                    		添加tab\
+		                    	</a>
+		                    </li>
+		                    
+		                    
 		                    <li><a href="javascript:void(0);" onclick="javascript:addPanel('测试','${rootPath}${BasePath}/muser/listUser.do');">添加tab</a></li>
 		                    <li><a href="${rootPath}${BasePath}/main/idiot.do">测试ajax</a></li>
 		                    <li><a href="${rootPath}${BasePath}/muser/getJson.do">测试json</a></li>
