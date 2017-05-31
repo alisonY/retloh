@@ -8,22 +8,26 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.codehaus.jackson.map.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageInfo;
 import com.retloh.model.CaseInfo;
 import com.retloh.model.PageQuery;
+import com.retloh.model.commonVo.MyPageInfo;
 import com.retloh.service.CaseInfoServices;
 import com.retloh.utils.JacksonMapper;
+
 
 @Controller
 @RequestMapping("/case")
 public class CaseInfoController {
+	
+	
+	private static final Logger LOGGER     = LoggerFactory.getLogger(CaseInfoController.class);
 	/*
 	 * 病例信息入库
 	 */
@@ -55,14 +59,14 @@ public class CaseInfoController {
     }
 	
 	
-	@RequestMapping(value="/getInfo",method={RequestMethod.GET})
+	@RequestMapping(value="/getInfo",method={RequestMethod.POST})
     @ResponseBody
     public String getCaseInfo(HttpServletRequest request,CaseInfo caseinfo,PageQuery pageQuery) throws IOException {
-		pageQuery.setPageNum(1);
-		pageQuery.setPageSize(5);
 	    //pageinfo用法 http://pageswww.cnblogs.com/digdeep/p/4608933.html
-	    PageInfo<CaseInfo> resultList = new PageInfo<CaseInfo>(caseInfoServices.getCaseInfo(caseinfo, pageQuery));
+	    MyPageInfo<CaseInfo> resultList = new MyPageInfo<CaseInfo>(caseInfoServices.getCaseInfo(caseinfo, pageQuery));
 	    String resultJson = JacksonMapper.beanToJson(resultList);
+	    LOGGER.error(resultList.toString());
+	    LOGGER.error(resultJson);
     	return resultJson;
     }
 

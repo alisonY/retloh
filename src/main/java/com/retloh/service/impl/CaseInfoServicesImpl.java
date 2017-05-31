@@ -46,7 +46,7 @@ public class CaseInfoServicesImpl implements CaseInfoServices{
 				caseinfomapper.selectByExample(example);
 			}
 		});*/
-		PageHelper.startPage(query.getPageNum(), query.getPageSize());
+		PageHelper.startPage(query.getPage(), query.getRows());
 		return caseinfomapper.selectByExample(example);
 	}
 

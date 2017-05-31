@@ -1,11 +1,11 @@
-package com.retloh.model;
+package com.retloh.model.commonVo;
 
 
 /**
  * 前端控件分页参数接收VO
  *
  */
-public class PageQuery {
+public class MyPaginationParms {
 	
     private Integer page;
     

@@ -7,7 +7,7 @@
 </head>  
 	<body>  
 		<div style="margin:20px 0;"><!--测试顶部留空--></div>
-    	<div class="easyui-layout" style="width:100%;height:500px;">
+    	<div class="easyui-layout" style="width:100%;height:760px;">
 		    <div data-options="region:'north'" border="true">
 					<div>logo is here___logo is here___logo is here___</div>
 			</div>
@@ -59,28 +59,6 @@
 	        <div id="mainPanel" data-options="region:'center'" style="padding:0px">
 	        	<div id="tabs" class="easyui-tabs"  fit="true" border="false" >
 				</div>
-	        
-	        
-	        		帮助IS here
-	        		</BR>
-	                Hello ${name}
-					</BR>
-					rootPath is ${rootPath}
-					</BR>
-					BasePath is ${BasePath}
-					</BR>
-					<img src = ${rootPath}${BasePath}/images/guidance.jpg />
-					</BR>
-					<a href="${rootPath}${BasePath}/muser/listUser.do">User List</a>
-					</BR>
-					<a href="${rootPath}${BasePath}/muser/getJson.do">Json List</a>
-					</BR>
-					<a href="${rootPath}${BasePath}/idiot.do">idiot</a>
-					</BR>
-					</BR>
-					
-
-					
 	        </div>
 	        <div data-options="region:'south'" border="false">Copyright&copy;  2017，xxxxxxxxxx有限公司</div>
         </div>
