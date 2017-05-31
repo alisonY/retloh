@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">  
 <html>  
 <head>  
-	<title>xxxftl tasdasdasest pagesdsd!</title>  
+	<title>系统首页</title>  
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">  
 	<#include "commonHead.ftl" />
 </head>  
@@ -23,16 +23,10 @@
 		                        <span>展开demo</span>
 		                        <ul>
 		                            <li>
-		                                <span>爹</span>
+		                                <span>测试1</span>
 		                            </li>
 		                            <li>
-		                                <span>娘</span>
-		                            </li>
-		                            <li>
-		                                <span>老婆</span>
-		                            </li>
-		                            <li>
-		                                <span>娃</span>
+		                                <span>测试2</span>
 		                            </li>
 		                        </ul>
 		                    </li>
@@ -67,8 +61,6 @@
         </div>
     </div>
 	</body>
-	
-	
 
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -77,7 +69,7 @@
 
     function center(){
         $.messager.show({
-            title:'ATTENTIONS',
+            title:'测试通知窗',
             msg:'welcom.ftl中有树形demo,树形中的'+"'"+'添加tab'+"'"+'用来给右侧框中添加一个新的tab',
             showType:'fade',
             style:{

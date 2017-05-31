@@ -20,6 +20,7 @@ import com.retloh.model.PageQuery;
 import com.retloh.model.commonVo.MyPageInfo;
 import com.retloh.service.CaseInfoServices;
 import com.retloh.utils.JacksonMapper;
+import com.retloh.utils.JacksonUtils;
 
 
 @Controller
@@ -64,10 +65,14 @@ public class CaseInfoController {
     public String getCaseInfo(HttpServletRequest request,CaseInfo caseinfo,PageQuery pageQuery) throws IOException {
 	    //pageinfo用法 http://pageswww.cnblogs.com/digdeep/p/4608933.html
 	    MyPageInfo<CaseInfo> resultList = new MyPageInfo<CaseInfo>(caseInfoServices.getCaseInfo(caseinfo, pageQuery));
+	    long l1 = System.currentTimeMillis();
 	    String resultJson = JacksonMapper.beanToJson(resultList);
-	    LOGGER.error(resultList.toString());
-	    LOGGER.error(resultJson);
-    	return resultJson;
+	    long l2 = System.currentTimeMillis();
+	    String resultJson2 = JacksonUtils.getInstance().obj2Json(resultList);
+	    long l3 = System.currentTimeMillis();
+	    LOGGER.error(String.valueOf(l2-l1));
+	    LOGGER.error(String.valueOf(l3-l2));
+    	return resultJson2;
     }
 
 }
