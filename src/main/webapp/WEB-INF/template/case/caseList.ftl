@@ -7,9 +7,7 @@
 </head>
 <body>
 
-    <table id="caseInfo" class="easyui-datagrid" style="width:100%;height:auto"
-            url="${rootPath}${BasePath}/case/getInfo.do"
-            rownumbers="true" pagination="true">
+    <table id="caseInfo" style="width:100%;height:auto" >
         <thead>
             <tr>
                 <th field="id" width="80">ID</th>
@@ -56,12 +54,13 @@
 	}); 
 
 	function datagrid(){
-        var dg = $('#caseInfo');
-        dg.datagrid('loadData',[]);
-        dg.datagrid({pagePosition:'bottom'});//bottom,top,both
-        dg.datagrid('getPager').pagination({
-            layout:['list','sep','first','prev','sep','manual','sep','next','last','sep','refresh']
-        });
+		var urls = "${rootPath}${BasePath}/case/getInfo.do";
+		$('#caseInfo').datagrid({
+			rownumbers:true,
+			pagination:true,
+			pagePosition:'bottom',//bottom,top,both
+			url:urls
+		});
 	}
 </script>
 </html>

@@ -6,10 +6,13 @@
 	<#include "commonHead.ftl" />
 </head>  
 	<body>  
-		<div style="margin:20px 0;"><!--测试顶部留空--></div>
+		<!--测试顶部留空-->
+		<!--
+			<div style="margin:20px 0;"></div>
+    	-->
     	<div class="easyui-layout" style="width:100%;height:760px;">
-		    <div data-options="region:'north'" border="true">
-					<div>logo is here___logo is here___logo is here___</div>
+		    <div data-options="region:'north'" border="true" style="height:80px;">
+					<div><img src="${rootPath}${BasePath}/images/logo_01.jpg" /></div>
 			</div>
 	        <div id="menu" split="true"  data-options="region:'west'" title="导航菜单" style="width:10%;padding:0px">
 	        	<ul class="easyui-tree" data-options="animate:true">
