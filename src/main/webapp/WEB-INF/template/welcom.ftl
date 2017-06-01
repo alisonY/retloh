@@ -6,58 +6,29 @@
 	<#include "commonHead.ftl" />
 </head>  
 	<body>  
-		<!--测试顶部留空-->
-		<!--
-			<div style="margin:20px 0;"></div>
-    	-->
-    	<div class="easyui-layout" style="width:100%;height:760px;">
-		    <div data-options="region:'north'" border="true" style="height:80px;">
-					<div><img src="${rootPath}${BasePath}/images/logo_01.jpg" /></div>
-			</div>
-	        <div id="menu" split="true"  data-options="region:'west'" title="导航菜单" style="width:10%;padding:0px">
-	        	<ul class="easyui-tree" data-options="animate:true">
-			        <li>
-		                <span>主菜单</span>
-		                <ul>
-		                    <li data-options="state:'closed'">
-		                        <span>展开demo</span>
-		                        <ul>
-		                            <li>
-		                                <span>测试1</span>
-		                            </li>
-		                            <li>
-		                                <span>测试2</span>
-		                            </li>
-		                        </ul>
-		                    </li>
-		                    <li>
-		                    	<a href="javascript:void(0);" 
-		                    		onclick="javascript:addPanel('病例信息','${rootPath}${BasePath}/case/toPage.do');">
-		                    		病例信息
-		                    	</a>
-		                    </li>
-		                    <li>
-		                    	<a href="javascript:void(0);" 
-		                    		onclick="javascript:addPanel('测试','${rootPath}${BasePath}/muser/listUser.do');">
-		                    		添加tab\
-		                    	</a>
-		                    </li>
-		                    
-		                    
-		                    <li><a href="javascript:void(0);" onclick="javascript:addPanel('测试','${rootPath}${BasePath}/muser/listUser.do');">添加tab</a></li>
-		                    <li><a href="${rootPath}${BasePath}/main/idiot.do">测试ajax</a></li>
-		                    <li><a href="${rootPath}${BasePath}/muser/getJson.do">测试json</a></li>
-		                    <li><a href="${rootPath}${BasePath}/muser/listUser.do">测试表</a></li>
-		                    <li><a href="${rootPath}${BasePath}/auth/logout.do">退出登录</a></li>
-		                </ul>
-		            </li>
-	        	</ul>
-	        </div>
-	        <div id="mainPanel" data-options="region:'center'" style="padding:0px">
-	        	<div id="tabs" class="easyui-tabs"  fit="true" border="false" >
-				</div>
-	        </div>
-	        <div data-options="region:'south'" border="false">Copyright&copy;  2017，xxxxxxxxxx有限公司</div>
+    <div class="easyui-layout" style="width:100%;height:700px;">
+        <div data-options="region:'north'" style="height:80px">
+        	<div><img src="${rootPath}${BasePath}/images/logo_01.jpg" /></div>
+        </div>
+        
+        <div data-options="region:'center'"  style="padding:5px">
+            <div class="easyui-layout" data-options="fit:true">
+                <div data-options="region:'north',split:true" title="菜单" style="height:70px">
+					<div class="easyui-panel" style="padding:5px;">
+						<a href="javascript:void(0);" class="easyui-linkbutton"  data-options="iconCls:'icon-edit'" onclick="javascript:addPanel('病例信息','${rootPath}${BasePath}/case/toPage.do');">
+		                    	病例信息
+		                </a>
+					</div>
+               </div>
+                <div data-options="region:'center'">
+            		<div id="tabs" class="easyui-tabs"  fit="true" border="false" >
+					</div>
+                </div>
+            </div>
+        </div>
+        
+        <div data-options="region:'south',split:true" style="height:50px;">
+        	Copyright&copy;  2017，xxxxxxxxxx有限公司
         </div>
     </div>
 	</body>
