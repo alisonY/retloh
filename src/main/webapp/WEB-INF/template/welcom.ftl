@@ -14,7 +14,7 @@
         <div data-options="region:'center'"  style="padding:5px">
             <div class="easyui-layout" data-options="fit:true">
                 <div data-options="region:'north',split:true" title="菜单" style="height:70px">
-					<div class="easyui-panel" style="padding:5px;">
+					<div class="easyui-panel" data-options="fit:true" style="padding:5px;">
 						<a href="javascript:void(0);" class="easyui-linkbutton"  data-options="iconCls:'icon-edit'" onclick="javascript:addPanel('病例信息','${rootPath}${BasePath}/case/toPage.do');">
 		                    	病例信息
 		                </a>
