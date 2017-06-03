@@ -15,7 +15,12 @@
 			iconCls:'icon-edit',
 			buttons: '#dlg-buttons'
 		">
-		The dialog content.
+		登录账号: <input /><br/>
+		密码: <input /><br/>
+		用户名: <input /><br/>
+		部门: <input /><br/>
+		等级: <input /><br/>
+		类型: <input />
 	</div>
 	<div id="dlg-buttons">
 		<a href="javascript:void(0)" class="easyui-linkbutton" onclick="javascript:alert('save')">Save</a>
