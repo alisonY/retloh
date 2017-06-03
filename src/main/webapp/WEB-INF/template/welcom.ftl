@@ -15,6 +15,11 @@
             <div class="easyui-layout" data-options="fit:true">
                 <div data-options="region:'north',split:true" title="菜单" style="height:70px">
 					<div class="easyui-panel" data-options="fit:true" style="padding:5px;">
+					
+						<a href="javascript:void(0);" class="easyui-linkbutton"  data-options="iconCls:'icon-edit'" onclick="javascript:addPanel('病例信息','${rootPath}${BasePath}/case/toPage.do');">
+		                    	用户管理
+		                </a>
+		                
 						<a href="javascript:void(0);" class="easyui-linkbutton"  data-options="iconCls:'icon-edit'" onclick="javascript:addPanel('病例信息','${rootPath}${BasePath}/case/toPage.do');">
 		                    	病例信息
 		                </a>
@@ -28,7 +33,7 @@
         </div>
         
         <div data-options="region:'south',split:true" style="height:50px;">
-        	Copyright&copy;  2017，xxxxxxxxxx有限公司
+        	Copyright&copy;  2017，北京先锋众城医疗设备有限公司
         </div>
     </div>
 	</body>
