@@ -80,7 +80,7 @@ public class FtpServerListener implements ServletContextListener {
             FtpUser user= new FtpUser();
             user.setName("admin");
             user.setEnabled(true);
-            user.setHomedirectory("E:/data");
+            user.setHomedirectory("/data");
             user.setPassword("admin");
             user.setWritepermission(true);
             user.setIdletime(0);
