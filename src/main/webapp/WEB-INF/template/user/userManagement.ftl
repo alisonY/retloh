@@ -57,10 +57,10 @@
 			'<a href="javascript:void(0);" class="editCls" onclick="editRow('+"'"+row.id+"'"+')"></a>';  
 	}
 	function delRow(id){
-		$.messager.confirm('警告','即将删除这条病历记录',function(b){
+		$.messager.confirm('警告','即将删除这条用户记录',function(b){
 		if(b){ 
 			var data={id:id};		    						
-			var url = "${rootPath}${BasePath}/case/delInfo.do";
+			var url = "${rootPath}${BasePath}/user/delInfo.do";
 			$.post(url,data,function(result){
 			if(result.status>0){
 				$.messager.show({title:'提示',msg:result.msg,timeout:2000});

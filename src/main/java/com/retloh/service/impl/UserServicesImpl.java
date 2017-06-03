@@ -1,5 +1,6 @@
 package com.retloh.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -7,8 +8,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.github.pagehelper.PageHelper;
 import com.retloh.dao.TUserMapper;
 import com.retloh.framework.cache.LocalCacheUtil;
+import com.retloh.model.PageQuery;
 import com.retloh.model.TUser;
 import com.retloh.model.TUserExample;
 import com.retloh.service.UserServices;
@@ -31,6 +34,47 @@ public class UserServicesImpl implements UserServices {
 		}else{
 			return null;
 		}
+	}
+
+	@Override
+	public List<TUser> getAll() {
+		// TODO Auto-generated method stub
+		LOGGER.error("get all {} ", new Date());
+		return tUserMapper.getAll();
+	}
+
+	@Override
+	public TUser selectByPrimaryKey(String id) {
+		// TODO Auto-generated method stub
+		return tUserMapper.selectByPrimaryKey(id);
+	}
+
+	@Override
+	public int insert(TUser tuser) {
+		// TODO Auto-generated method stub
+		return tUserMapper.insert(tuser);
+	}
+
+	@Override
+	public int update(TUser tuser) {
+		// TODO Auto-generated method stub
+		return tUserMapper.updateByPrimaryKey(tuser);
+	}
+
+	@Override
+	public int delete(String id) {
+		// TODO Auto-generated method stub
+		return tUserMapper.deleteByPrimaryKey(id);
+	}
+
+	@Override
+	public List<TUser> getUserInfo(TUser tuser, PageQuery pageQuery) {
+		// TODO Auto-generated method stub
+		TUserExample userexample =new TUserExample();
+		
+		PageHelper.startPage(pageQuery.getPage(), pageQuery.getRows());
+		
+		return tUserMapper.selectByExample(userexample);
 	}
 
 }
