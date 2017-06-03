@@ -8,24 +8,48 @@
     <table id="caseInfo" style="width:100%;height:auto" > </table></body>
 <script type="text/javascript">
 	$(document).ready(function(){
-		datagrid();
+	
+		var toolbar = [{
+	        text:'删除',
+	        iconCls:'icon-remove',
+	        handler:function(){
+	        delRow();
+	        }
+	    },'-',{
+	        text:'详情',
+	        iconCls:'icon-man',
+	        handler:function(){
+	        viewRow();
+	        }
+	    },'-',{
+	        text:'编辑',
+	        iconCls:'icon-edit',
+	        handler:function(){
+	        editUser();
+	        }
+	    },'-',{
+	        text:'查询',
+	        iconCls:'icon-search',
+	        handler:function(){
+	        getSelected();
+	        }
+	    }];
+	
+		datagrid(toolbar);
 	}); 
 
-	function datagrid(){
+	function datagrid(toolbar){
 		var urls = "${rootPath}${BasePath}/case/getInfo.do";
 		$('#caseInfo').datagrid({
 			rownumbers:true,
 			pagination:true,
-			fitColumns:true,  
+			fitColumns:true,
+			toolbar:toolbar,
     		singleSelect: true, 
 			pagePosition:'bottom',//bottom,top,both
 			url:urls,
 			columns:[[
-  	        {field:'operat',title:'操作',width:170,align:'center',
-	        	formatter:function (value,row,index){
-	        		return gridOperate(row);
-	        	}
-	        },
+			{field:'ck',checkbox:true},
 	        {field:'id',title:'id',width:120,align:"center"},
 	        {field:'name',title:'姓名',width:120,align:"center"},
 	        {field:'operationDoctor',title:'操作医生',width:120,align:"center"},
@@ -37,10 +61,6 @@
 	        {field:'serialNumber',title:'身份证号',width:120,align:"center"}
 	        ]],
 			onLoadSuccess:function(data){
-				//按钮格式化
-		        $('.delCls').linkbutton({text:'删除',plain:true,iconCls:'icon-remove'});
-		        $('.editCls').linkbutton({text:'编辑',plain:true,iconCls:'icon-edit'});
-		        $('.viewCls').linkbutton({text:'查看',plain:true,iconCls:'icon-man'});
 		        //调整表格宽高
 		        $('#caseInfo').datagrid('resize', {
 					width:function(){return document.body.clientWidth;},
@@ -49,34 +69,46 @@
 		    } 
 		});
 	}
-	function gridOperate(row){
-		return '<a href="javascript:void(0);" class="delCls" onclick="delRow('+"'"+row.id+"'"+')"></a>'+
-			'<a href="javascript:void(0);" class="viewCls" onclick="viewRow('+"'"+row.id+"'"+')"></a>'+
-			'<a href="javascript:void(0);" class="editCls" onclick="editRow('+"'"+row.id+"'"+')"></a>';  
-	}
-	function delRow(id){
+	function delRow(){
+		if(!getSelected()){
+			return;
+		}
 		$.messager.confirm('警告','即将删除这条病历记录',function(b){
-		if(b){ 
-			var data={id:id};		    						
-			var url = "${rootPath}${BasePath}/case/delInfo.do";
-			$.post(url,data,function(result){
-			if(result.status>0){
-				$.messager.show({title:'提示',msg:result.msg,timeout:2000});
-				$('#caseInfo').datagrid('reload');
-			}else{
-				$.messager.show({title:'提示',msg:result.msg});
+			if(b){ 
+				var data={id:id};		    						
+				var url = "${rootPath}${BasePath}/case/delInfo.do";
+				$.post(url,data,function(result){
+				if(result.status>0){
+					$.messager.show({title:'提示',msg:result.msg,timeout:2000});
+					$('#caseInfo').datagrid('reload');
+				}else{
+					$.messager.show({title:'提示',msg:result.msg});
+				}
+				
+				},'json');
 			}
-			
-			},'json');
-		}		
-	})
-		
+		});
 	}
+	
 	function editRow(id){
 		alert(id);
 	}
-	function viewRow(id){
+	function viewRow(){
+		if(!getSelected()){
+			return;
+		}
 		alert(id);
 	}
+	
+	function getSelected(){  
+        var selected = $('#caseInfo').datagrid('getSelected');
+        var id = "";
+        if (selected){  
+            id = selected.id;
+        }else{
+        	$.messager.show({title:'提示',msg:'没有选择行。'});
+        }
+        return id;
+    }
 </script>
 </html>
