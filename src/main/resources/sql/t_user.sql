@@ -1,3 +1,5 @@
+#user 表
+
 CREATE TABLE `t_user` (
   `id` varchar(64) NOT NULL DEFAULT '',
   `login_name` varchar(64) DEFAULT NULL COMMENT '登录账号',
