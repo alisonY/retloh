@@ -5,48 +5,7 @@
 	<#include "commonHead.ftl" />
 </head>
 <body>
-
-    <table id="caseInfo" style="width:100%;height:auto" >
-        <thead>
-            <tr>
-                <th field="id" width="80">ID</th>
-                <th field="name" width="120">姓名</th>
-                <th field="serialNumber" width="120">编号</th>
-                <th field="sex" width="70" align="right">性别</th>
-                <th field="age" width="70" align="right">年龄</th>
-                <th field="operationDoctor" width="70" align="right">操作医生</th>
-                <th field="diagnosticDoctor" width="70">诊断医生</th>
-                <th field="daolianshu" width="70">导联数</th>
-                <th field="sumHours" width="70">记录小时数</th>
-                <th field="pacemakerParameter" width="120">起搏器参数</th>
-                <th field="offset" width="120">文件偏移量</th>
-                <th field="recordYear" width="70">年</th>
-                <th field="recordMounth" width="70">月</th>
-                <th field="recordDay" width="70">日</th>
-                <th field="recordMinutes" width="70">分</th>
-                <th field="hospitalNumber" width="60">住院号</th>
-                <th field="clinicNumber" width="120">门诊号</th>
-                <th field="bedNumber" width="120">床号</th>
-                <th field="department" width="200">科室</th>
-                <th field="yongyaoshuoming" width="200">用药说明</th>
-                <th field="hospitalName" width="200">医院名称</th>
-                <th field="defaultHospitalName" width="200">默认医院名</th>
-                <th field="hospitalAddress" width="200">医院地址</th>
-                <th field="hospitalPhonenum" width="100">医院电话</th>
-                <th field="hospitalFax" width="100" align="center">医院传真</th>
-                <th field="patientYear" width="60" align="center">患者年</th>
-                <th field="patientMonth" width="60" align="center">患者月</th>
-                <th field="patientDay" width="60" align="center">患者日</th>
-                <th field="suggest" width="200" align="center">建议</th>
-                <th field="note" width="200" align="center">注意</th>
-                <th field="caseTag" width="200" align="center">病例库标记语</th>
-                <th field="holterLoadDate" width="100" align="center">回放时间</th>
-                <th field="handwrittenConclusion" width="200" align="center">手写结论</th>
-            </tr>
-        </thead>
-    </table>
-
-</body>
+    <table id="caseInfo" style="width:100%;height:auto" > </table></body>
 <script type="text/javascript">
 	$(document).ready(function(){
 		datagrid();
@@ -57,9 +16,67 @@
 		$('#caseInfo').datagrid({
 			rownumbers:true,
 			pagination:true,
+			fitColumns:true,  
+    		singleSelect: true, 
 			pagePosition:'bottom',//bottom,top,both
-			url:urls
+			url:urls,
+			columns:[[
+  	        {field:'operat',title:'操作',width:170,align:'center',
+	        	formatter:function (value,row,index){
+	        		return gridOperate(row);
+	        	}
+	        },
+	        {field:'id',title:'id',width:120,align:"center"},
+	        {field:'name',title:'姓名',width:120,align:"center"},
+	        {field:'operationDoctor',title:'操作医生',width:120,align:"center"},
+	        {field:'diagnosticDoctor',title:'诊断医生',width:120,align:"center"},
+	        {field:'serialNumber',title:'编号',width:120,align:"center"},
+	        {field:'holterLoadDate',title:'回放时间',width:120,align:"center"},
+	        {field:'sex',title:'性别',width:120,align:"center"},
+	        {field:'age',title:'年龄',width:120,align:"center"},
+	        {field:'serialNumber',title:'身份证号',width:120,align:"center"}
+	        ]],
+			onLoadSuccess:function(data){
+				//按钮格式化
+		        $('.delCls').linkbutton({text:'删除',plain:true,iconCls:'icon-remove'});
+		        $('.editCls').linkbutton({text:'编辑',plain:true,iconCls:'icon-edit'});
+		        $('.viewCls').linkbutton({text:'查看',plain:true,iconCls:'icon-man'});
+		        //调整表格宽高
+		        $('#caseInfo').datagrid('resize', {
+					width:function(){return document.body.clientWidth;},
+					height:function(){return document.body.clientHeight;},
+				});
+		    } 
 		});
+	}
+	function gridOperate(row){
+		return '<a href="javascript:void(0);" class="delCls" onclick="delRow('+"'"+row.id+"'"+')"></a>'+
+			'<a href="javascript:void(0);" class="viewCls" onclick="viewRow('+"'"+row.id+"'"+')"></a>'+
+			'<a href="javascript:void(0);" class="editCls" onclick="editRow('+"'"+row.id+"'"+')"></a>';  
+	}
+	function delRow(id){
+		$.messager.confirm('警告','即将删除这条病历记录',function(b){
+		if(b){ 
+			var data={id:id};		    						
+			var url = "${rootPath}${BasePath}/case/delInfo.do";
+			$.post(url,data,function(result){
+			if(result.status>0){
+				$.messager.show({title:'提示',msg:result.msg,timeout:2000});
+				$('#caseInfo').datagrid('reload');
+			}else{
+				$.messager.show({title:'提示',msg:result.msg});
+			}
+			
+			},'json');
+		}		
+	})
+		
+	}
+	function editRow(id){
+		alert(id);
+	}
+	function viewRow(id){
+		alert(id);
 	}
 </script>
 </html>

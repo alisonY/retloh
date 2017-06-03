@@ -7,11 +7,13 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.StringUtils;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -73,6 +75,26 @@ public class CaseInfoController {
 	    LOGGER.error(String.valueOf(l2-l1));
 	    LOGGER.error(String.valueOf(l3-l2));
     	return resultJson2;
+    }
+	
+	
+	@RequestMapping(value="/delInfo",method={RequestMethod.POST})
+    @ResponseBody
+    public String delInfo(HttpServletRequest request,String id,ModelMap map) throws IOException {
+		int result = 0;
+		if(StringUtils.isNotBlank(id)){
+			result = caseInfoServices.delete(id);
+			if(result>0){
+				map.put("msg","删除成功");
+			}else{
+				map.put("msg","删除失败");
+			}
+		}else{
+			map.put("msg","操作失败，请重试_"+id);
+		}
+		map.put("status",result);
+		String resultJson = JacksonMapper.beanToJson(map);
+		return resultJson;
     }
 
 }

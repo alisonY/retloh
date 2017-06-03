@@ -27,17 +27,13 @@ public class CaseInfoServicesImpl implements CaseInfoServices{
 
 	@Override
 	public int update(CaseInfo caseinfo) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	@Override
 	public int delete(String id) {
-		// TODO Auto-generated method stub
-		return 0;
+		return caseinfomapper.deleteByPrimaryKey(id);
 	}
 
-	@Override
 	public List<CaseInfo> getCaseInfo(CaseInfo caseinfo, PageQuery query) {
 		CaseInfoExample example = new CaseInfoExample();
 /*		long count = PageHelper.count(new ISelect() {
@@ -48,6 +44,10 @@ public class CaseInfoServicesImpl implements CaseInfoServices{
 		});*/
 		PageHelper.startPage(query.getPage(), query.getRows());
 		return caseinfomapper.selectByExample(example);
+	}
+
+	public CaseInfo getCaseInfoById(String id) {
+		return caseinfomapper.selectByPrimaryKey(id);
 	}
 
 }
