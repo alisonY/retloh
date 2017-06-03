@@ -37,9 +37,11 @@
 	        {field:'serialNumber',title:'身份证号',width:120,align:"center"}
 	        ]],
 			onLoadSuccess:function(data){
+				//按钮格式化
 		        $('.delCls').linkbutton({text:'删除',plain:true,iconCls:'icon-remove'});
 		        $('.editCls').linkbutton({text:'编辑',plain:true,iconCls:'icon-edit'});
 		        $('.viewCls').linkbutton({text:'查看',plain:true,iconCls:'icon-man'});
+		        //调整表格宽高
 		        $('#caseInfo').datagrid('resize', {
 					width:function(){return document.body.clientWidth;},
 					height:function(){return document.body.clientHeight;},
@@ -49,13 +51,31 @@
 	}
 	function gridOperate(row){
 		return '<a href="javascript:void(0);" class="delCls" onclick="delRow('+"'"+row.id+"'"+')"></a>'+
-			'<a href="javascript:void(0);" class="viewCls" onclick="delRow('+"'"+row.id+"'"+')"></a>'+
-			'<a href="javascript:void(0);" class="editCls" onclick="delRow('+"'"+row.id+"'"+')"></a>';  
+			'<a href="javascript:void(0);" class="viewCls" onclick="viewRow('+"'"+row.id+"'"+')"></a>'+
+			'<a href="javascript:void(0);" class="editCls" onclick="editRow('+"'"+row.id+"'"+')"></a>';  
 	}
 	function delRow(id){
-		alert(id);
+		$.messager.confirm('警告','即将删除这条病历记录',function(b){
+		if(b){ 
+			var data={id:id};		    						
+			var url = "${rootPath}${BasePath}/case/delInfo.do";
+			$.post(url,data,function(result){
+			if(result.status>0){
+				$.messager.show({title:'提示',msg:result.msg,timeout:2000});
+				$('#caseInfo').datagrid('reload');
+			}else{
+				$.messager.show({title:'提示',msg:result.msg});
+			}
+			
+			},'json');
+		}		
+	})
+		
 	}
 	function editRow(id){
+		alert(id);
+	}
+	function viewRow(id){
 		alert(id);
 	}
 </script>

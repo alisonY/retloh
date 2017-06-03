@@ -14,5 +14,7 @@ public interface CaseInfoServices {
     int delete(String id);
     
     List<CaseInfo> getCaseInfo(CaseInfo caseinfo,PageQuery pageQuery);
+    
+    CaseInfo getCaseInfoById(String id);
 
 }
