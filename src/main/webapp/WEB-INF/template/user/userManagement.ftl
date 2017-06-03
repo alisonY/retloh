@@ -5,14 +5,59 @@
 	<#include "commonHead.ftl" />
 </head>
 <body>
-    <table id="userInfo" style="width:100%;height:auto" > </table>
+    <table id="userInfo" style="width:100%;height:auto" ></table>
+    
+	<!--对话框-->
+	<div id="dlg" class="easyui-dialog" title="添加用户" style="width:400px;height:200px;padding:10px"
+		data-options="
+			closed:'true',
+			modal:'true',
+			iconCls:'icon-edit',
+			buttons: '#dlg-buttons'
+		">
+		The dialog content.
+	</div>
+	<div id="dlg-buttons">
+		<a href="javascript:void(0)" class="easyui-linkbutton" onclick="javascript:alert('save')">Save</a>
+		<a href="javascript:void(0)" class="easyui-linkbutton" onclick="javascript:$('#dlg').dialog('close')">Close</a>
+	</div>
+    
 </body>
 <script type="text/javascript">
 	$(document).ready(function(){
-		datagrid();
+	
+	   var toolbar = [{
+	        text:'添加',
+	        iconCls:'icon-add',
+	        handler:function(){
+	        addUser();
+	        }
+	    },'-',{
+	        text:'删除',
+	        iconCls:'icon-add',
+	        handler:function(){
+	        delUser();
+	        }
+	    },'-',{
+	        text:'编辑',
+	        iconCls:'icon-add',
+	        handler:function(){
+	        editUser();
+	        }
+	    },'-',{
+	        text:'查询',
+	        iconCls:'icon-search',
+	        handler:function(){
+	        searchUser();
+	        }
+	    }];
+	    
+		datagrid(toolbar);
 	}); 
 
-	function datagrid(){
+
+
+	function datagrid(toolbar){
 		var urls = "${rootPath}${BasePath}/user/getInfo.do";
 		$('#userInfo').datagrid({
 			rownumbers:true,
@@ -21,42 +66,27 @@
     		singleSelect: true, 
 			pagePosition:'bottom',//bottom,top,both
 			url:urls,
+			toolbar:toolbar,
 			columns:[[
-  	        {field:'operat',title:'操作',width:170,align:'center',
-	        	formatter:function (value,row,index){
-	        		return gridOperate(row);
-	        	}
-	        },
+  	        {field:'ck',checkbox:true},
 	        {field:'id',title:'id',width:120,align:"center"},
-	        {field:'login_name',title:'登录账号',width:120,align:"center"},
+	        {field:'loginName',title:'登录账号',width:120,align:"center"},
 	        {field:'password',title:'密码',width:120,align:"center"},
-	        {field:'user_name',title:'用户名',width:120,align:"center"},
+	        {field:'userName',title:'用户名',width:120,align:"center"},
 	        {field:'department',title:'部门',width:120,align:"center"},
-	        {field:'user_rank',title:'等级',width:120,align:"center"},
-	        {field:'user_type',title:'类型',width:120,align:"center"},
-	        {field:'update_time',title:'修改时间',width:120,align:"center"},
-	        {field:'create_time',title:'创建时间',width:120,align:"center"},
+	        {field:'userRank',title:'等级',width:120,align:"center"},
+	        {field:'userType',title:'类型',width:120,align:"center"},
+	        {field:'updateTime',title:'修改时间',width:120,align:"center"},
+	        {field:'createTime',title:'创建时间',width:120,align:"center"},
 	        {field:'operator',title:'操作人',width:120,align:"center"},
 	        ]],
 			onLoadSuccess:function(data){
-				//按钮格式化
-		        $('.delCls').linkbutton({text:'删除',plain:true,iconCls:'icon-remove'});
-		        $('.editCls').linkbutton({text:'编辑',plain:true,iconCls:'icon-edit'});
-		        $('.viewCls').linkbutton({text:'查看',plain:true,iconCls:'icon-man'});
-		        //调整表格宽高
-		        $('#caseInfo').datagrid('resize', {
-					width:function(){return document.body.clientWidth;},
-					height:function(){return document.body.clientHeight;},
-				});
+				console.info("loadsuccss");
 		    } 
 		});
 	}
-	function gridOperate(row){
-		return '<a href="javascript:void(0);" class="delCls" onclick="delRow('+"'"+row.id+"'"+')"></a>'+
-			'<a href="javascript:void(0);" class="viewCls" onclick="viewRow('+"'"+row.id+"'"+')"></a>'+
-			'<a href="javascript:void(0);" class="editCls" onclick="editRow('+"'"+row.id+"'"+')"></a>';  
-	}
-	function delRow(id){
+	
+	function delUser(){
 		$.messager.confirm('警告','即将删除这条用户记录',function(b){
 		if(b){ 
 			var data={id:id};		    						
@@ -74,11 +104,19 @@
 	})
 		
 	}
-	function editRow(id){
-		alert(id);
+	function editUser(){
+		$('#dlg').dialog({title: "编辑用户"});
+		$('#dlg').dialog('open');
 	}
 	function viewRow(id){
 		alert(id);
+	}
+	function addUser(){
+		$('#dlg').dialog({title: "添加用户"});
+		$('#dlg').dialog('open');
+	}
+	function searchUser(){
+		alert("adduser");
 	}
 </script>
 </html>
