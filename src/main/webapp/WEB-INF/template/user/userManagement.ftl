@@ -126,7 +126,7 @@
 				$.post(url,data,function(result){
 				if(result.status>0){
 					$.messager.show({title:'提示',msg:result.msg,timeout:2000});
-					$('#caseInfo').datagrid('reload');
+					$('#userInfo').datagrid('reload');
 				}else{
 					$.messager.show({title:'提示',msg:result.msg});
 				}
@@ -168,7 +168,7 @@
 	}
 	
 	function getSelected(){  
-        var selected = $('#caseInfo').datagrid('getSelected');
+        var selected = $('#userInfo').datagrid('getSelected');
         var id = "";
         if (selected){  
             id = selected.id;
