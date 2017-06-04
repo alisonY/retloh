@@ -23,6 +23,7 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
 import org.apache.ftpserver.FtpServer;
+import org.apache.ftpserver.ftplet.FtpException;
 import org.apache.ftpserver.ftplet.UserManager;
 import org.apache.ftpserver.impl.DefaultFtpServer;
 import org.springframework.web.context.WebApplicationContext;
@@ -35,77 +36,61 @@ import com.retloh.model.FtpUser;
  */
 public class FtpServerListener implements ServletContextListener {
 
-    public static final String FTPSERVER_CONTEXT_NAME = "org.apache.ftpserver";
-    
-    public void contextDestroyed(ServletContextEvent sce) {
-        System.out.println("Stopping FtpServer");
-        
-        FtpServer server = (FtpServer) sce.getServletContext().getAttribute(FTPSERVER_CONTEXT_NAME);
-        
-        if(server != null) {
-            server.stop();
-            
-            sce.getServletContext().removeAttribute(FTPSERVER_CONTEXT_NAME);
-            
-            System.out.println("FtpServer stopped");
-        } else {
-            System.out.println("No running FtpServer found");
-        }
-        
-    }
+	public static final String FTPSERVER_CONTEXT_NAME = "org.apache.ftpserver";
 
-    public void contextInitialized(ServletContextEvent sce) {
-        System.out.println("Starting FtpServer");   
+	public void contextDestroyed(ServletContextEvent sce) {
+		System.out.println("Stopping FtpServer");
 
-        WebApplicationContext ctx = WebApplicationContextUtils.getWebApplicationContext(sce.getServletContext());
-        
-        DefaultFtpServer server = (DefaultFtpServer ) ctx.getBean("myServer");
-        
-        sce.getServletContext().setAttribute(FTPSERVER_CONTEXT_NAME, server);
-        
-        UserManager userManage = server.getUserManager();
-        //UserManager userManage = new FtpServerUserManager();
-        try {
-        	// ɾ��ԭ�е��û���Ϣ  
-            userManage.delete("admin");  
-              
-            // �����µ��û������浽���ݿ�  
-            /*FtpServerUser base = new FtpServerUser();  
-            base.setName("admin");  
-            base.setPassword("admin");
-            base.setHomeDirectory("E:/data");
-            base.setWritePermission(true);
-            userManage.save(base);*/
-            
-            FtpUser user= new FtpUser();
-            user.setName("admin");
-            user.setEnabled(true);
-            user.setHomedirectory("/data");
-            user.setPassword("admin");
-            user.setWritepermission(true);
-            user.setIdletime(0);
-            user.setUploadrate(1000);
-            user.setDownloadrate(1000);
-            user.setMaxloginnumber(100);
-            user.setMaxloginperip(100);
-            userManage.save(user);
-            
-            /*user.setUserid("gao");
-            user.setEnableflag(true);
-            user.setHomedirectory("E:/10");
-            user.setUserpassword("gao");
-            user.setWritepermission(true);
-            userManage.save(user);*/
-            
-            
-            System.out.println("********************************************");
-            System.out.println(userManage.getAdminName());
-        	
-            server.start();
-            System.out.println("FtpServer started");
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to start FtpServer", e);
-        }
-    }
+		FtpServer server = (FtpServer) sce.getServletContext().getAttribute(FTPSERVER_CONTEXT_NAME);
+
+		if (server != null) {
+			server.stop();
+
+			sce.getServletContext().removeAttribute(FTPSERVER_CONTEXT_NAME);
+
+			System.out.println("FtpServer stopped");
+		} else {
+			System.out.println("No running FtpServer found");
+		}
+
+	}
+
+	public void contextInitialized(ServletContextEvent sce) {
+		System.out.println("Starting FtpServer");
+
+		WebApplicationContext ctx = WebApplicationContextUtils.getWebApplicationContext(sce.getServletContext());
+
+		DefaultFtpServer server = (DefaultFtpServer) ctx.getBean("myServer");
+
+		sce.getServletContext().setAttribute(FTPSERVER_CONTEXT_NAME, server);
+
+		UserManager userManage = server.getUserManager();
+		// UserManager userManage = new FtpServerUserManager();
+		try {
+			
+			userManage.delete("admin");
+
+			FtpUser user = new FtpUser();
+			user.setName("admin");
+			user.setEnabled(true);
+			user.setHomedirectory("/data");
+			user.setPassword("admin");
+			user.setWritepermission(true);
+			user.setIdletime(0);
+			user.setUploadrate(1000);
+			user.setDownloadrate(1000);
+			user.setMaxloginnumber(100);
+			user.setMaxloginperip(100);
+			userManage.save(user);
+
+			System.out.println("********************************************");
+			System.out.println(userManage.getAdminName());
+
+			server.start();
+			System.out.println("FtpServer started");
+		} catch (Exception e) {
+			throw new RuntimeException("Failed to start FtpServer", e);
+		}
+	}
 
 }

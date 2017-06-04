@@ -9,6 +9,7 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.ftpserver.ftplet.FtpException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +20,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.retloh.model.FtpUser;
 import com.retloh.model.PageQuery;
 import com.retloh.model.TUser;
 import com.retloh.model.commonVo.MyPageInfo;
 import com.retloh.service.UserServices;
+import com.retloh.service.impl.FtpServerUserManagerImpl;
 import com.retloh.utils.JacksonMapper;
 import com.retloh.utils.JacksonUtils;
 
@@ -32,6 +35,9 @@ public class TUserController {
 	
 	@Autowired
 	private UserServices userservices;
+	@Autowired
+	private FtpServerUserManagerImpl ftpserver;
+	
 	private static final Logger LOGGER     = LoggerFactory.getLogger(TUserController.class);
 	
 	
@@ -98,11 +104,32 @@ public class TUserController {
 		user.setId(id);
 		int result  = 0 ;
 		result = userservices.insert(user);
+		
+		FtpUser ftpuser = new FtpUser();
+		ftpuser.setName(user.getUserName());
+		ftpuser.setEnabled(true);
+		ftpuser.setHomedirectory("/data");
+		ftpuser.setPassword(user.getPassword());
+		ftpuser.setWritepermission(true);
+		ftpuser.setIdletime(0);
+		ftpuser.setUploadrate(1000);
+		ftpuser.setDownloadrate(1000);
+		ftpuser.setMaxloginnumber(100);
+		ftpuser.setMaxloginperip(100);
+		
+		try {
+			ftpserver.save(ftpuser);
+		} catch (FtpException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		if(result>0){
 			map.put("msg","添加成功");
 		}else{
 			map.put("msg","添加失败");
 		}
+		
 		map.put("status",result);
 		String resultJson = JacksonMapper.beanToJson(map);
 		return resultJson;
