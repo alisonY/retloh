@@ -35,7 +35,7 @@
         </div>
         
         <div data-options="region:'south',split:true" style="height:50px;text-align:center;line-height:35px;">
-        	Copyright&copy;  2017，北京先锋众城医疗设备有限公司
+        	Copyright&copy;  2017，北京先锋众诚医疗设备有限公司
         </div>
     </div>
 	</body>
