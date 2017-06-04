@@ -17,6 +17,7 @@
 		">
 
 		<form id="userForm" method="post">
+			<input type="hidden" id="userid" name="id" value="" />
 			<div style="margin-bottom:20px">
 				<input class="easyui-textbox" name="loginName" style="width:100%" data-options="label:'登录账号:',required:true">
 			</div>
@@ -34,7 +35,7 @@
 			</div>
 			<div style="margin-bottom:20px">
 				<select class="easyui-combobox" name="userType"  data-options="label:'类型:'" style="width:100%">
-					<option value="2">分析段</option>
+					<option value="2">分析端</option>
 					<option value="1">采集端</option>
 					<option value="0">管理员</option>
 				</select>
@@ -106,7 +107,7 @@
 	        ]],
 			onLoadSuccess:function(data){
 				console.info("loadsuccss");
-		    } 
+		    }
 		});
 	}
 	
@@ -119,7 +120,7 @@
 		if(!id){
 			return;
 		}
-		$.messager.confirm('警告','即将删除这条病历记录',function(b){
+		$.messager.confirm('警告','即将删除这条用户记录',function(b){
 			if(b){ 
 				var data={id:id};		    						
 				var url = "${rootPath}${BasePath}/user/deleteUser.do";
@@ -137,20 +138,36 @@
 	}
 	
 	function editUser(){
+		var id=getSelected();
+		if(!id){
+			return;
+		}
 		$('#dlg').dialog({title: "编辑用户"});
 		$('#dlg').dialog('open');
+		loadLocal()
 	}
 	function viewRow(id){
 		alert(id);
 	}
 	function addUser(){
+		$('#dlg').form('clear');
 		$('#dlg').dialog({title: "添加用户"});
 		$('#dlg').dialog('open');
 	}
 	function formSubmit() {
+		var selected = $('#userInfo').datagrid('getSelected');
+        var id = "";
+        if (selected){  
+            id = selected.id;
+        }
+		if(!id){
+			var url='${rootPath}${BasePath}/user/addUserAction.do';
+		}else{
+			var url='${rootPath}${BasePath}/user/updateUserAction.do';
+		}
 	    $('#userForm').form('submit', 
 			{
-				url: '${rootPath}${BasePath}/user/addUserAction.do',
+				url: url,
 				onSubmit: function() {
 					return $(this).form('enableValidation').form('validate');
 				},
@@ -177,5 +194,18 @@
         }
         return id;
     }
+    
+    function loadLocal(){
+    	var selected = $('#userInfo').datagrid('getSelected');
+        $('#dlg').form('load',{
+        	id:selected.id,
+            loginName:selected.loginName,
+            password:selected.password,
+            userName:selected.userName,
+            department:selected.department,
+            userRank:selected.userRank,
+            userType:selected.userType
+        });
+     }
 </script>
 </html>
