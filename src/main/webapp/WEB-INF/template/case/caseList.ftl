@@ -17,13 +17,114 @@
 
 		<form id="userForm" method="post">
 			    <div id="infoLayout" style="width:770px;height:500px;">
+			    	<!--
 			        <div data-options="region:'north'" style="height:50px">
 			        </div>
+			    	-->
 			        <div data-options="region:'south'" style="height:50px;">
 			        </div>
-			        <div data-options="region:'west'" style="width:385px;">
+			        <div data-options="region:'west'" style="width:385px;padding:20px;">
+							<div style="margin-bottom:20px">
+								<input class="easyui-textbox" name="name" style="width:100%" data-options="label:'姓名:',required:true">
+							</div>
+							<div style="margin-bottom:20px">
+								<input class="easyui-textbox" name="clinicNumber" style="width:100%" data-options="label:'住院号:',required:true">
+							</div>
+							<div style="margin-bottom:20px">
+								<input class="easyui-textbox" name="bedNumber" style="width:100%" data-options="label:'床号:',required:true">
+							</div>
+							<div style="margin-bottom:20px">
+								<input class="easyui-textbox" name="age" style="width:100%;" data-options="label:'年龄:'">
+							</div>
+							<div style="margin-bottom:20px">
+								<input class="easyui-textbox" name="sex" style="width:100%;" data-options="label:'性别:'">
+							</div>
+							<div style="margin-bottom:20px">
+								<input class="easyui-textbox" name="bedNumber" style="width:100%;" data-options="label:'床号:'">
+							</div>
+							<div style="margin-bottom:20px">
+								<input class="easyui-textbox" name="department" style="width:100%;" data-options="label:'性别:'">
+							</div>
+							<div style="margin-bottom:20px">
+								<input class="easyui-textbox" name="hospitalNumber" style="width:100%;" data-options="label:'门诊号:'">
+							</div>
+							<div style="margin-bottom:20px">
+								<input class="easyui-textbox" name="defaultHospitalName" style="width:100%;" data-options="label:'默认医院名:'">
+							</div>
+							<div style="margin-bottom:20px">
+								<input class="easyui-textbox" name="hospitalAddress" style="width:100%;" data-options="label:'医院地址:'">
+							</div>
+							<div style="margin-bottom:20px">
+								<input class="easyui-textbox" name="hospitalPhonenum" style="width:100%;" data-options="label:'医院电话:'">
+							</div>
+							<div style="margin-bottom:20px">
+								<input class="easyui-textbox" name="hospitalFax" style="width:100%;" data-options="label:'医院传真:'">
+							</div>
+							<div style="margin-bottom:20px">
+								<input class="easyui-textbox" name="daolianshu" style="width:100%;" data-options="label:'导联数:'">
+							</div>
+							<div style="margin-bottom:20px">
+								<input class="easyui-textbox" name="sumHours" style="width:100%;" data-options="label:'记录小时数:'">
+							</div>
+							<div style="margin-bottom:20px">
+								<input class="easyui-textbox" name="recordYear" style="width:100%;" data-options="label:'年:'">
+							</div>
+							<div style="margin-bottom:20px">
+								<input class="easyui-textbox" name="recordDay" style="width:100%;" data-options="label:'日:'">
+							</div>
+							<div style="margin-bottom:20px">
+								<input class="easyui-textbox" name="recordMounth" style="width:100%;" data-options="label:'月:'">
+							</div>
+							<div style="margin-bottom:20px">
+								<input class="easyui-textbox" name="recordMinutes" style="width:100%;" data-options="label:'分:'">
+							</div>
+							<div style="margin-bottom:20px">
+								<input class="easyui-textbox" name="holterLoadDate" style="width:100%;" data-options="label:'回放时间:'">
+							</div>
 			        </div>
 			        <div data-options="region:'center'" style="padding:20px">
+			        		<div style="margin-bottom:20px">
+								<input class="easyui-textbox" name="pacemakerParameter" style="width:100%;" data-options="label:'起搏器参数:'">
+							</div>
+							<div style="margin-bottom:20px">
+								<input class="easyui-textbox" name="offset" style="width:100%;" data-options="label:'文件偏移量:'">
+							</div>
+							<div style="margin-bottom:20px">
+								<input class="easyui-textbox" name="conclusion" style="width:100%" data-options="label:'结论:',required:true">
+							</div>
+							<div style="margin-bottom:20px">
+								<input class="easyui-textbox" name="operationDoctor" style="width:100%" data-options="label:'操作医生:',required:true">
+							</div>
+							<div style="margin-bottom:20px">
+								<input class="easyui-textbox" name="diagnosticDoctor" style="width:100%" data-options="label:'诊断医生:',required:true">
+							</div>
+							<div style="margin-bottom:20px">
+								<input class="easyui-textbox" name="department" style="width:100%;" data-options="label:'科室:'">
+							</div>
+							<div style="margin-bottom:20px">
+								<input class="easyui-textbox" name="yongyaoshuoming" style="width:100%;" data-options="label:'用药说明:'">
+							</div>
+							<div style="margin-bottom:20px">
+								<input class="easyui-textbox" name="suggest" style="width:100%;" data-options="label:'建议:'">
+							</div>
+							<div style="margin-bottom:20px">
+								<input class="easyui-textbox" name="note" style="width:100%;" data-options="label:'注意:'">
+							</div>
+							<div style="margin-bottom:20px">
+								<input class="easyui-textbox" name="caseTag" style="width:100%;" data-options="label:'病例库标记语:'">
+							</div>
+							<div style="margin-bottom:20px">
+								<input class="easyui-textbox" name="handwrittenConclusion" style="width:100%;" data-options="label:'医生手写结论:'">
+							</div>
+							<div style="margin-bottom:20px">
+								<input class="easyui-textbox" name="patientDay" style="width:100%;" data-options="label:'患者日:'">
+							</div>
+							<div style="margin-bottom:20px">
+								<input class="easyui-textbox" name="patientMonth" style="width:100%;" data-options="label:'患者月:'">
+							</div>
+							<div style="margin-bottom:20px">
+								<input class="easyui-textbox" name="patientYear" style="width:100%;" data-options="label:'患者年:'">
+							</div>
 			        </div>
 			    </div>
 		</form>
@@ -129,8 +230,19 @@
 		$('#infoLayout').layout();
 		$('#dlg').dialog({title: "查看病例"});
 		$('#dlg').dialog('open');
+		var data={id:id};		    						
+		var url = "${rootPath}${BasePath}/case/viewInfo.do";
+		$.post(url,data,function(result){
+			if(result.status){
+				console.info(result.msg);
+				$('#userForm').form('load', result.msg);
+			}else{
+				$.messager.show({title:'提示',msg:result.msg});
+			}
+		},'json');		
 		
-		alert(id);
+		
+		
 	}
 	
 	function getSelected(){  

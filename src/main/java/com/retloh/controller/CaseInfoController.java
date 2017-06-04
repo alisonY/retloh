@@ -106,9 +106,9 @@ public class CaseInfoController {
 			CaseInfo caseInfo = caseInfoServices.getCaseInfoById(id);
 			if(caseInfo!=null){
 				map.put("status",true);
-				map.put("result", caseInfo);
+				map.put("msg", caseInfo);
 			}else{
-				map.put("result", "查无此结果");
+				map.put("msg", "查无此结果");
 			}
 		}else{
 			map.put("msg","操作失败，请重试_"+id);

@@ -6,7 +6,7 @@
 	<#include "commonHead.ftl" />
 </head>  
 	<body>  
-    <div class="easyui-layout" style="width:100%;height:700px;">
+    <div class="easyui-layout" style="width:100%;height:850px;">
         <div data-options="region:'north'" style="height:80px">
         	<div><img src="${rootPath}${BasePath}/images/logo_01.jpg" /></div>
         </div>
