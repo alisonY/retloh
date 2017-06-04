@@ -49,18 +49,6 @@
 								<input class="easyui-textbox" name="hospitalNumber" style="width:100%;" data-options="label:'门诊号:'">
 							</div>
 							<div style="margin-bottom:20px">
-								<input class="easyui-textbox" name="defaultHospitalName" style="width:100%;" data-options="label:'默认医院名:'">
-							</div>
-							<div style="margin-bottom:20px">
-								<input class="easyui-textbox" name="hospitalAddress" style="width:100%;" data-options="label:'医院地址:'">
-							</div>
-							<div style="margin-bottom:20px">
-								<input class="easyui-textbox" name="hospitalPhonenum" style="width:100%;" data-options="label:'医院电话:'">
-							</div>
-							<div style="margin-bottom:20px">
-								<input class="easyui-textbox" name="hospitalFax" style="width:100%;" data-options="label:'医院传真:'">
-							</div>
-							<div style="margin-bottom:20px">
 								<input class="easyui-textbox" name="daolianshu" style="width:100%;" data-options="label:'导联数:'">
 							</div>
 							<div style="margin-bottom:20px">
@@ -81,13 +69,28 @@
 							<div style="margin-bottom:20px">
 								<input class="easyui-textbox" name="holterLoadDate" style="width:100%;" data-options="label:'回放时间:'">
 							</div>
-			        </div>
-			        <div data-options="region:'center'" style="padding:20px">
-			        		<div style="margin-bottom:20px">
+							<div style="margin-bottom:20px">
 								<input class="easyui-textbox" name="pacemakerParameter" style="width:100%;" data-options="label:'起搏器参数:'">
 							</div>
 							<div style="margin-bottom:20px">
 								<input class="easyui-textbox" name="offset" style="width:100%;" data-options="label:'文件偏移量:'">
+							</div>
+			        </div>
+			        <div data-options="region:'center'" style="padding:20px">
+			        		<div style="margin-bottom:20px">
+								<input class="easyui-textbox" name="holterLoadDate" style="width:100%;" data-options="label:'回放时间:'">
+							</div>
+			        		<div style="margin-bottom:20px">
+								<input class="easyui-textbox" name="defaultHospitalName" style="width:100%;" data-options="label:'默认医院名:'">
+							</div>
+							<div style="margin-bottom:20px">
+								<input class="easyui-textbox" name="hospitalAddress" style="width:100%;" data-options="label:'医院地址:'">
+							</div>
+							<div style="margin-bottom:20px">
+								<input class="easyui-textbox" name="hospitalPhonenum" style="width:100%;" data-options="label:'医院电话:'">
+							</div>
+							<div style="margin-bottom:20px">
+								<input class="easyui-textbox" name="hospitalFax" style="width:100%;" data-options="label:'医院传真:'">
 							</div>
 							<div style="margin-bottom:20px">
 								<input class="easyui-textbox" name="conclusion" style="width:100%" data-options="label:'结论:',required:true">
