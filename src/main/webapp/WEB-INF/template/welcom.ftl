@@ -26,7 +26,7 @@
 					</div>
                </div>
                 <div data-options="region:'center'">
-            		<div id="tabs" class="easyui-tabs"  fit="true" border="false" style="background-image:url('${rootPath}${BasePath}/images/timg.jpeg');background-repeat:no-repeat;background-position:center;">
+            		<div id="tabs" class="easyui-tabs"  fit="true" border="false" style="background-image:url('${rootPath}${BasePath}/images/timg.jpeg');background-repeat:no-repeat;background-position:center">
             		
 					</div>
 					
