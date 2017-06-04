@@ -3,7 +3,9 @@ package com.retloh.controller;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -80,7 +82,8 @@ public class CaseInfoController {
 	
 	@RequestMapping(value="/delInfo",method={RequestMethod.POST})
     @ResponseBody
-    public String delInfo(HttpServletRequest request,String id,ModelMap map) throws IOException {
+    public String delInfo(HttpServletRequest request,String id){
+		Map<String,Object> map = new HashMap<String, Object>();
 		int result = 0;
 		if(StringUtils.isNotBlank(id)){
 			result = caseInfoServices.delete(id);

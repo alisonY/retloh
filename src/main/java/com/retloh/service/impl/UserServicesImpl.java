@@ -49,9 +49,7 @@ public class UserServicesImpl implements UserServices {
 		return tUserMapper.selectByPrimaryKey(id);
 	}
 
-	@Override
 	public int insert(TUser tuser) {
-		// TODO Auto-generated method stub
 		return tUserMapper.insert(tuser);
 	}
 
@@ -61,9 +59,7 @@ public class UserServicesImpl implements UserServices {
 		return tUserMapper.updateByPrimaryKey(tuser);
 	}
 
-	@Override
 	public int delete(String id) {
-		// TODO Auto-generated method stub
 		return tUserMapper.deleteByPrimaryKey(id);
 	}
 

@@ -5,7 +5,8 @@
 	<#include "commonHead.ftl" />
 </head>
 <body>
-    <table id="caseInfo" style="width:100%;height:auto" > </table></body>
+    <table id="caseInfo" style="width:100%;height:auto" > </table>
+</body>
 <script type="text/javascript">
 	$(document).ready(function(){
 	
@@ -70,7 +71,8 @@
 		});
 	}
 	function delRow(){
-		if(!getSelected()){
+		var id = getSelected();
+		if(!id){
 			return;
 		}
 		$.messager.confirm('警告','即将删除这条病历记录',function(b){
@@ -94,7 +96,8 @@
 		alert(id);
 	}
 	function viewRow(){
-		if(!getSelected()){
+		var id = getSelected();
+		if(!id){
 			return;
 		}
 		alert(id);

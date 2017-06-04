@@ -1,11 +1,14 @@
 package com.retloh.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.retloh.model.CaseInfo;
 import com.retloh.model.PageQuery;
 import com.retloh.model.TUser;
 import com.retloh.model.commonVo.MyPageInfo;
@@ -83,12 +85,27 @@ public class TUserController {
     }
 	
 	
-	@RequestMapping(value="/addUserAction")
-	public ModelAndView addUserAction(TUser user) {
+    /**
+	 * USED
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value="/addUserAction",method={RequestMethod.POST})
+	@ResponseBody
+	public String addUserAction(HttpServletRequest request,TUser user) {
+		Map<String,Object> map = new HashMap<String, Object>();
 		String id = UUID.randomUUID().toString();
 		user.setId(id);
-		userservices.insert(user);
-		return new ModelAndView("redirect:/muser/listUser.do");
+		int result  = 0 ;
+		result = userservices.insert(user);
+		if(result>0){
+			map.put("msg","添加成功");
+		}else{
+			map.put("msg","添加失败");
+		}
+		map.put("status",result);
+		String resultJson = JacksonMapper.beanToJson(map);
+		return resultJson;
 	}
 	
 	
@@ -109,10 +126,29 @@ public class TUserController {
 	}
 	
 	
-   @RequestMapping(value="/deleteUser")
-    public ModelAndView deleteUser(String id) {
-	   userservices.delete(id);
-        return new ModelAndView("redirect:/muser/listUser.do");
+	/**
+	 * USED
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value="/deleteUser",method={RequestMethod.POST})
+	@ResponseBody
+    public String deleteUser(String id) {
+		Map<String,Object> map = new HashMap<String, Object>();
+		int result = 0;
+		if(StringUtils.isNotBlank(id)){
+			result = userservices.delete(id);
+			if(result>0){
+				map.put("msg","删除成功");
+			}else{
+				map.put("msg","删除失败");
+			}
+		}else{
+			map.put("msg","操作失败，请重试_"+id);
+		}
+		map.put("status",result);
+		String resultJson = JacksonMapper.beanToJson(map);
+		return resultJson;
     }
 
 }
