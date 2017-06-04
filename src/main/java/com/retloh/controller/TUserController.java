@@ -164,6 +164,15 @@ public class TUserController {
 	@ResponseBody
 	public String updateUser(HttpServletRequest request,TUser user) {
 		Map<String, Object> map = new HashMap<String, Object>();
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// 设置日期格式
+		Date date = null;
+		try {
+			date = df.parse(df.format(new Date()));// new Date()为获取当前系统时间
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		user.setUpdateTime(date);
 		
 		int result=userservices.update(user);
 		if (result > 0) {
