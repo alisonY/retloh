@@ -4,18 +4,14 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
-
 import org.apache.commons.lang3.StringUtils;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -99,5 +95,26 @@ public class CaseInfoController {
 		String resultJson = JacksonMapper.beanToJson(map);
 		return resultJson;
     }
-
+	
+	
+	@RequestMapping(value="/viewInfo",method={RequestMethod.POST})
+    @ResponseBody
+    public String viewInfo(HttpServletRequest request,String id){
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("status",false);
+		if(StringUtils.isNotBlank(id)){
+			CaseInfo caseInfo = caseInfoServices.getCaseInfoById(id);
+			if(caseInfo!=null){
+				map.put("status",true);
+				map.put("result", caseInfo);
+			}else{
+				map.put("result", "查无此结果");
+			}
+		}else{
+			map.put("msg","操作失败，请重试_"+id);
+		}
+		String resultJson = JacksonMapper.beanToJson(map);
+		return resultJson;
+    }
+	
 }

@@ -6,6 +6,32 @@
 </head>
 <body>
     <table id="caseInfo" style="width:100%;height:auto" > </table>
+	<!--对话框-->
+	<div id="dlg" class="easyui-dialog" title="病例信息" style="width:800px;height:600px;padding:10px"
+		data-options="
+			closed:'true',
+			modal:'true',
+			iconCls:'icon-edit',
+			buttons: '#dlg-buttons'
+		">
+
+		<form id="userForm" method="post">
+			    <div id="infoLayout" style="width:770px;height:500px;">
+			        <div data-options="region:'north'" style="height:50px">
+			        </div>
+			        <div data-options="region:'south'" style="height:50px;">
+			        </div>
+			        <div data-options="region:'west'" style="width:385px;">
+			        </div>
+			        <div data-options="region:'center'" style="padding:20px">
+			        </div>
+			    </div>
+		</form>
+	</div>
+	<div id="dlg-buttons">
+		<a href="javascript:void(0)" class="easyui-linkbutton" onclick="formSubmit()">Save</a>
+		<a href="javascript:void(0)" class="easyui-linkbutton" onclick="javascript:$('#dlg').dialog('close')">Close</a>
+	</div>  
 </body>
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -26,7 +52,7 @@
 	        text:'编辑',
 	        iconCls:'icon-edit',
 	        handler:function(){
-	        editUser();
+	        editRow();
 	        }
 	    },'-',{
 	        text:'查询',
@@ -100,6 +126,10 @@
 		if(!id){
 			return;
 		}
+		$('#infoLayout').layout();
+		$('#dlg').dialog({title: "查看病例"});
+		$('#dlg').dialog('open');
+		
 		alert(id);
 	}
 	
