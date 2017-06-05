@@ -25,9 +25,8 @@ public class CaseInfoServicesImpl implements CaseInfoServices{
 		return caseinfomapper.insert(caseinfo);
 	}
 
-	@Override
 	public int update(CaseInfo caseinfo) {
-		return 0;
+		return caseinfomapper.updateByPrimaryKey(caseinfo);
 	}
 
 	public int delete(String id) {

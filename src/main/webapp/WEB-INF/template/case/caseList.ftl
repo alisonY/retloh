@@ -15,7 +15,7 @@
 			buttons: '#dlg-buttons'
 		">
 
-		<form id="userForm" method="post">
+		<form id="caseForm" method="post">
 			    <div id="infoLayout" style="width:770px;height:500px;">
 			    	<!--
 			        <div data-options="region:'north'" style="height:50px">
@@ -40,7 +40,7 @@
 								<input class="easyui-textbox" name="sex" style="width:100%;" data-options="label:'性别:'">
 							</div>
 							<div style="margin-bottom:20px">
-								<input class="easyui-textbox" name="bedNumber" style="width:100%;" data-options="label:'床号:'">
+								<input class="easyui-textbox" name="serialNumber" style="width:100%;" data-options="label:'编号:'">
 							</div>
 							<div style="margin-bottom:20px">
 								<input class="easyui-textbox" name="department" style="width:100%;" data-options="label:'性别:'">
@@ -128,13 +128,14 @@
 							<div style="margin-bottom:20px">
 								<input class="easyui-textbox" name="patientYear" style="width:100%;" data-options="label:'患者年:'">
 							</div>
+							<input  type="hidden" name="id" />
 			        </div>
 			    </div>
 		</form>
 	</div>
 	<div id="dlg-buttons">
-		<a href="javascript:void(0)" class="easyui-linkbutton" onclick="formSubmit()">Save</a>
-		<a href="javascript:void(0)" class="easyui-linkbutton" onclick="javascript:$('#dlg').dialog('close')">Close</a>
+		<a href="javascript:void(0)" id="saveBtn" class="easyui-linkbutton" onclick="formSubmit()">保存</a>
+		<a href="javascript:void(0)" id="editBtn" class="easyui-linkbutton" onclick="javascript:$('#dlg').dialog('close')">关闭</a>
 	</div>  
 </body>
 <script type="text/javascript">
@@ -221,31 +222,62 @@
 			}
 		});
 	}
+	function viewRow(){
+		loadData("病例查看","view");
+	}
+	
 	
 	function editRow(id){
-		alert(id);
+		loadData("病例编辑","edit");
 	}
-	function viewRow(){
+	
+	function formSubmit(){
+	    $('#caseForm').form('submit', 
+			{
+				url: "${rootPath}${BasePath}/case/editInfo.do",
+				onSubmit: function() {
+					return $(this).form('enableValidation').form('validate');
+				},
+				success: function(result) {
+					result = $.parseJSON(result);
+					if(result.status>0){
+						$.messager.show({title:'提示',msg:result.msg,timeout:2000});
+						$('#dlg').dialog('close');
+						$('#caseInfo').datagrid('reload');
+					}else{
+						$.messager.show({title:'提示',msg:result.msg});
+					}
+				}
+			}
+		);
+	}
+	
+	
+	function loadData(title,type){
 		var id = getSelected();
 		if(!id){
 			return;
 		}
 		$('#infoLayout').layout();
-		$('#dlg').dialog({title: "查看病例"});
+		$('#dlg').dialog({title: title});
 		$('#dlg').dialog('open');
+		$("#caseForm").form('clear');
+		if(type == "edit"){
+			//设置保存按钮不可编辑
+			$("#saveBtn").linkbutton("enable");
+		}
+		if(type == "view"){
+			$("#saveBtn").linkbutton("disable");
+		}
 		var data={id:id};		    						
 		var url = "${rootPath}${BasePath}/case/viewInfo.do";
 		$.post(url,data,function(result){
 			if(result.status){
-				console.info(result.msg);
-				$('#userForm').form('load', result.msg);
+				$('#caseForm').form('load', result.msg);
 			}else{
 				$.messager.show({title:'提示',msg:result.msg});
 			}
 		},'json');		
-		
-		
-		
 	}
 	
 	function getSelected(){  

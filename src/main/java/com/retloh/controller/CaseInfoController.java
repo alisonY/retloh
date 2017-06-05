@@ -117,4 +117,32 @@ public class CaseInfoController {
 		return resultJson;
     }
 	
+	
+	@RequestMapping(value="/editInfo",method={RequestMethod.POST})
+    @ResponseBody
+    public String editInfo(HttpServletRequest request,CaseInfo caseinfo){
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("status",false);
+		int result = 0;
+		if(StringUtils.isNotBlank(caseinfo.getId())){
+			try {
+				result = caseInfoServices.update(caseinfo);
+			} catch (Exception e) {
+				map.put("msg", "修改内容不合法");
+				String resultJson = JacksonMapper.beanToJson(map);
+				return resultJson;
+			}
+			if(result>0){
+				map.put("status",true);
+				map.put("msg", "修改成功");
+			}else{
+				map.put("msg", "修改失败");
+			}
+		}else{
+			map.put("msg","修改失败，请重试");
+		}
+		String resultJson = JacksonMapper.beanToJson(map);
+		return resultJson;
+    }
+	
 }
