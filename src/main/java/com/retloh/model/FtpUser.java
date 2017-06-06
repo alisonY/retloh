@@ -7,11 +7,15 @@ import org.apache.ftpserver.ftplet.AuthorizationRequest;
 import org.apache.ftpserver.ftplet.User;
 
 public class FtpUser implements User{
+    private String id;
+
     private String name;
 
     private String password;
 
     private String homedirectory;
+
+    private String filepath;
 
     private Boolean enabled;
 
@@ -31,6 +35,14 @@ public class FtpUser implements User{
 
     private Integer maxloginperip;
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id == null ? null : id.trim();
+    }
+
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
     }
@@ -41,6 +53,14 @@ public class FtpUser implements User{
 
     public void setHomedirectory(String homedirectory) {
         this.homedirectory = homedirectory == null ? null : homedirectory.trim();
+    }
+
+    public String getFilepath() {
+        return filepath;
+    }
+
+    public void setFilepath(String filepath) {
+        this.filepath = filepath == null ? null : filepath.trim();
     }
 
     public void setEnabled(Boolean enabled) {
@@ -110,7 +130,7 @@ public class FtpUser implements User{
     public void setMaxloginperip(Integer maxloginperip) {
         this.maxloginperip = maxloginperip;
     }
-
+    
     @Override
 	public String getName() {
 		// TODO Auto-generated method stub
@@ -158,4 +178,5 @@ public class FtpUser implements User{
 		// TODO Auto-generated method stub
 		return homedirectory;
 	}
+    
 }

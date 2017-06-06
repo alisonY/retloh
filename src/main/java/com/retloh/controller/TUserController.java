@@ -121,6 +121,7 @@ public class TUserController {
 		result = userservices.insert(user);
 
 		FtpUser ftpuser = new FtpUser();
+		ftpuser.setId(user.getId());
 		ftpuser.setName(user.getUserName());
 		ftpuser.setEnabled(true);
 		ftpuser.setHomedirectory("/data");
@@ -198,7 +199,8 @@ public class TUserController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		int result = 0;
 		try {
-			ftpserver.delete(userservices.selectByPrimaryKey(id).getUserName());
+			//ftpserver.delete(userservices.selectByPrimaryKey(id).getUserName());
+			ftpserver.delete(id);
 		} catch (FtpException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

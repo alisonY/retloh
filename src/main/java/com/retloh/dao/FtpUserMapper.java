@@ -10,7 +10,7 @@ public interface FtpUserMapper {
 
     int deleteByExample(FtpUserExample example);
 
-    int deleteByPrimaryKey(String name);
+    int deleteByPrimaryKey(String id);
 
     int insert(FtpUser record);
 
@@ -18,7 +18,7 @@ public interface FtpUserMapper {
 
     List<FtpUser> selectByExample(FtpUserExample example);
 
-    FtpUser selectByPrimaryKey(String name);
+    FtpUser selectByPrimaryKey(String id);
 
     int updateByExampleSelective(@Param("record") FtpUser record, @Param("example") FtpUserExample example);
 

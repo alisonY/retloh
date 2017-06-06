@@ -209,9 +209,15 @@ public class FtpService extends DefaultFtplet{
 		User user = session.getUser();
 	    //File workingDir = workingDir(session);
 	    String fileName = request.getArgument();
+	    String filepath=session.getFileSystemView().getWorkingDirectory().getAbsolutePath()+"/"+fileName;
 	    FtpUser ftpuser= new FtpUser();
 	    ftpuser=(FtpUser) user;
 	    ftpuser.setStatus(0);
+	    if(fileName.toUpperCase().endsWith(".PDF")){
+	    	ftpuser.setPdfexport(filepath);
+	    }else{
+	    	ftpuser.setFilepath(filepath);
+	    }
 	    ftpuserMapper.updateByPrimaryKey(ftpuser);
 	    
 		return super.onUploadEnd(session, request);

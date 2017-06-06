@@ -19,6 +19,8 @@
 
 package com.retloh.ftpserver;
 
+import java.util.UUID;
+
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
@@ -71,6 +73,8 @@ public class FtpServerListener implements ServletContextListener {
 			userManage.delete("admin");
 
 			FtpUser user = new FtpUser();
+			String id = UUID.randomUUID().toString();
+			user.setId(id);
 			user.setName("admin");
 			user.setEnabled(true);
 			user.setHomedirectory("/data");

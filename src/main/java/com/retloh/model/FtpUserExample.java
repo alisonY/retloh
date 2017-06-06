@@ -104,6 +104,76 @@ public class FtpUserExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
+        public Criteria andIdIsNull() {
+            addCriterion("id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdIsNotNull() {
+            addCriterion("id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdEqualTo(String value) {
+            addCriterion("id =", value, "id");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdNotEqualTo(String value) {
+            addCriterion("id <>", value, "id");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdGreaterThan(String value) {
+            addCriterion("id >", value, "id");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdGreaterThanOrEqualTo(String value) {
+            addCriterion("id >=", value, "id");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdLessThan(String value) {
+            addCriterion("id <", value, "id");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdLessThanOrEqualTo(String value) {
+            addCriterion("id <=", value, "id");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdLike(String value) {
+            addCriterion("id like", value, "id");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdNotLike(String value) {
+            addCriterion("id not like", value, "id");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdIn(List<String> values) {
+            addCriterion("id in", values, "id");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdNotIn(List<String> values) {
+            addCriterion("id not in", values, "id");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdBetween(String value1, String value2) {
+            addCriterion("id between", value1, value2, "id");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdNotBetween(String value1, String value2) {
+            addCriterion("id not between", value1, value2, "id");
+            return (Criteria) this;
+        }
+
         public Criteria andNameIsNull() {
             addCriterion("name is null");
             return (Criteria) this;
@@ -311,6 +381,76 @@ public class FtpUserExample {
 
         public Criteria andHomedirectoryNotBetween(String value1, String value2) {
             addCriterion("homeDirectory not between", value1, value2, "homedirectory");
+            return (Criteria) this;
+        }
+
+        public Criteria andFilepathIsNull() {
+            addCriterion("filePath is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFilepathIsNotNull() {
+            addCriterion("filePath is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFilepathEqualTo(String value) {
+            addCriterion("filePath =", value, "filepath");
+            return (Criteria) this;
+        }
+
+        public Criteria andFilepathNotEqualTo(String value) {
+            addCriterion("filePath <>", value, "filepath");
+            return (Criteria) this;
+        }
+
+        public Criteria andFilepathGreaterThan(String value) {
+            addCriterion("filePath >", value, "filepath");
+            return (Criteria) this;
+        }
+
+        public Criteria andFilepathGreaterThanOrEqualTo(String value) {
+            addCriterion("filePath >=", value, "filepath");
+            return (Criteria) this;
+        }
+
+        public Criteria andFilepathLessThan(String value) {
+            addCriterion("filePath <", value, "filepath");
+            return (Criteria) this;
+        }
+
+        public Criteria andFilepathLessThanOrEqualTo(String value) {
+            addCriterion("filePath <=", value, "filepath");
+            return (Criteria) this;
+        }
+
+        public Criteria andFilepathLike(String value) {
+            addCriterion("filePath like", value, "filepath");
+            return (Criteria) this;
+        }
+
+        public Criteria andFilepathNotLike(String value) {
+            addCriterion("filePath not like", value, "filepath");
+            return (Criteria) this;
+        }
+
+        public Criteria andFilepathIn(List<String> values) {
+            addCriterion("filePath in", values, "filepath");
+            return (Criteria) this;
+        }
+
+        public Criteria andFilepathNotIn(List<String> values) {
+            addCriterion("filePath not in", values, "filepath");
+            return (Criteria) this;
+        }
+
+        public Criteria andFilepathBetween(String value1, String value2) {
+            addCriterion("filePath between", value1, value2, "filepath");
+            return (Criteria) this;
+        }
+
+        public Criteria andFilepathNotBetween(String value1, String value2) {
+            addCriterion("filePath not between", value1, value2, "filepath");
             return (Criteria) this;
         }
 
