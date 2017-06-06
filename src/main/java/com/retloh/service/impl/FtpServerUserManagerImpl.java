@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import com.retloh.dao.FtpUserMapper;
 import com.retloh.model.FtpUser;
+import com.retloh.model.FtpUserExample;
 
 @Service
 public class FtpServerUserManagerImpl implements UserManager {
@@ -80,11 +81,20 @@ public class FtpServerUserManagerImpl implements UserManager {
 
 		return null;
 	}
+	
+	public void deleteByName(String username){
+		FtpUserExample example= new FtpUserExample();
+		example.createCriteria().andNameEqualTo(username);
+		ftpuserMapper.deleteByExample(example);
+	}
 
 	@Override
 	public void delete(String userid) throws FtpException {
 		// TODO Auto-generated method stub
-		ftpuserMapper.deleteByPrimaryKey(userid);
+		int result=ftpuserMapper.deleteByPrimaryKey(userid);
+		if (result==0){
+			deleteByName(userid);
+		}
 
 	}
 
@@ -109,12 +119,16 @@ public class FtpServerUserManagerImpl implements UserManager {
 	@Override
 	public User getUserByName(String username) throws FtpException {
 		// TODO Auto-generated method stub
-		System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaa");
+		/*System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaa");
 		System.out.println(username);
 		User user = ftpuserMapper.selectByPrimaryKey(username);
-		System.out.println(user.getHomeDirectory());
-
-		return ftpuserMapper.selectByPrimaryKey(username);
+		System.out.println(user.getHomeDirectory());*/
+		
+		//TODO id为主键，name有可能出现重复风险
+		FtpUserExample example= new FtpUserExample();
+		example.createCriteria().andNameEqualTo(username);
+		User user = ftpuserMapper.selectByExample(example).get(0);
+		return user;
 	}
 
 	@Override
