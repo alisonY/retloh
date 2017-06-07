@@ -38,8 +38,8 @@ public class CaseInfoController {
 	
 	@RequestMapping(value="/postcase",method={RequestMethod.POST})
     @ResponseBody
-    public String postCase(HttpServletRequest request) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream()));
+    public String postCase(HttpServletRequest request,String caseJson) throws IOException {
+/*		BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream()));
 		String line = null;
         StringBuilder sb = new StringBuilder();
         while((line = br.readLine())!=null){
@@ -49,8 +49,13 @@ public class CaseInfoController {
         
 		ObjectMapper mapper = new ObjectMapper();
 	    CaseInfo caseinfo = mapper.readValue(jsonstr, CaseInfo.class);
-	    caseInfoServices.insert(caseinfo);
-    	return "ok";
+	    caseInfoServices.insert(caseinfo);*/
+		int length = 0;
+		if(StringUtils.isNotBlank(caseJson)){
+			length = caseJson.length();
+			LOGGER.error("receive json:"+caseJson);
+		}
+    	return String.valueOf(length);
     }
 	
 	
