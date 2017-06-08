@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.retloh.dao.StatisticsMapper" >
+  <resultMap id="BaseResultMap" type="com.retloh.model.Statistics" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="data_id" property="dataId" jdbcType="VARCHAR" />
+    <result column="data_type" property="dataType" jdbcType="BIT" />
+    <result column="action" property="action" jdbcType="BIT" />
+    <result column="operation_time" property="operationTime" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, user_id, data_id, data_type, action, operation_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.retloh.model.StatisticsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from statistics
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from statistics
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from statistics
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.retloh.model.StatisticsExample" >
+    delete from statistics
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.retloh.model.Statistics" >
+    insert into statistics (id, user_id, data_id, 
+      data_type, action, operation_time
+      )
+    values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{dataId,jdbcType=VARCHAR}, 
+      #{dataType,jdbcType=BIT}, #{action,jdbcType=BIT}, #{operationTime,jdbcType=BIT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.retloh.model.Statistics" >
+    insert into statistics
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="dataId != null" >
+        data_id,
+      </if>
+      <if test="dataType != null" >
+        data_type,
+      </if>
+      <if test="action != null" >
+        action,
+      </if>
+      <if test="operationTime != null" >
+        operation_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="dataId != null" >
+        #{dataId,jdbcType=VARCHAR},
+      </if>
+      <if test="dataType != null" >
+        #{dataType,jdbcType=BIT},
+      </if>
+      <if test="action != null" >
+        #{action,jdbcType=BIT},
+      </if>
+      <if test="operationTime != null" >
+        #{operationTime,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.retloh.model.StatisticsExample" resultType="java.lang.Integer" >
+    select count(*) from statistics
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update statistics
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dataId != null" >
+        data_id = #{record.dataId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dataType != null" >
+        data_type = #{record.dataType,jdbcType=BIT},
+      </if>
+      <if test="record.action != null" >
+        action = #{record.action,jdbcType=BIT},
+      </if>
+      <if test="record.operationTime != null" >
+        operation_time = #{record.operationTime,jdbcType=BIT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update statistics
+    set id = #{record.id,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=VARCHAR},
+      data_id = #{record.dataId,jdbcType=VARCHAR},
+      data_type = #{record.dataType,jdbcType=BIT},
+      action = #{record.action,jdbcType=BIT},
+      operation_time = #{record.operationTime,jdbcType=BIT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.retloh.model.Statistics" >
+    update statistics
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="dataId != null" >
+        data_id = #{dataId,jdbcType=VARCHAR},
+      </if>
+      <if test="dataType != null" >
+        data_type = #{dataType,jdbcType=BIT},
+      </if>
+      <if test="action != null" >
+        action = #{action,jdbcType=BIT},
+      </if>
+      <if test="operationTime != null" >
+        operation_time = #{operationTime,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.retloh.model.Statistics" >
+    update statistics
+    set user_id = #{userId,jdbcType=VARCHAR},
+      data_id = #{dataId,jdbcType=VARCHAR},
+      data_type = #{dataType,jdbcType=BIT},
+      action = #{action,jdbcType=BIT},
+      operation_time = #{operationTime,jdbcType=BIT}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

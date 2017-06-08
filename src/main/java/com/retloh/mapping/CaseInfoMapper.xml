@@ -3,26 +3,22 @@
 <mapper namespace="com.retloh.dao.CaseInfoMapper" >
   <resultMap id="BaseResultMap" type="com.retloh.model.CaseInfo" >
     <id column="id" property="id" jdbcType="VARCHAR" />
-    <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="daolianshu" property="daolianshu" jdbcType="INTEGER" />
-    <result column="sum_hours" property="sumHours" jdbcType="INTEGER" />
-    <result column="pacemaker_parameter" property="pacemakerParameter" jdbcType="INTEGER" />
-    <result column="offset" property="offset" jdbcType="INTEGER" />
-    <result column="record_minutes" property="recordMinutes" jdbcType="INTEGER" />
-    <result column="record_mounth" property="recordMounth" jdbcType="INTEGER" />
-    <result column="record_day" property="recordDay" jdbcType="INTEGER" />
-    <result column="record_year" property="recordYear" jdbcType="INTEGER" />
-    <result column="hospital_number" property="hospitalNumber" jdbcType="INTEGER" />
     <result column="serial_number" property="serialNumber" jdbcType="INTEGER" />
-    <result column="sex" property="sex" jdbcType="VARCHAR" />
-    <result column="operation_doctor" property="operationDoctor" jdbcType="VARCHAR" />
-    <result column="diagnostic_doctor" property="diagnosticDoctor" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="citizen_number" property="citizenNumber" jdbcType="VARCHAR" />
     <result column="age" property="age" jdbcType="INTEGER" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
     <result column="clinic_number" property="clinicNumber" jdbcType="INTEGER" />
     <result column="bed_number" property="bedNumber" jdbcType="INTEGER" />
+    <result column="record_year" property="recordYear" jdbcType="INTEGER" />
+    <result column="record_mounth" property="recordMounth" jdbcType="INTEGER" />
+    <result column="record_day" property="recordDay" jdbcType="INTEGER" />
+    <result column="record_minutes" property="recordMinutes" jdbcType="INTEGER" />
+    <result column="operation_doctor" property="operationDoctor" jdbcType="VARCHAR" />
+    <result column="diagnostic_doctor" property="diagnosticDoctor" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
     <result column="department" property="department" jdbcType="VARCHAR" />
-    <result column="yongyaoshuoming" property="yongyaoshuoming" jdbcType="VARCHAR" />
-    <result column="conclusion" property="conclusion" jdbcType="VARCHAR" />
+    <result column="hospital_number" property="hospitalNumber" jdbcType="INTEGER" />
     <result column="hospital_name" property="hospitalName" jdbcType="VARCHAR" />
     <result column="default_hospital_name" property="defaultHospitalName" jdbcType="VARCHAR" />
     <result column="hospital_address" property="hospitalAddress" jdbcType="VARCHAR" />
@@ -31,11 +27,20 @@
     <result column="patient_year" property="patientYear" jdbcType="INTEGER" />
     <result column="patient_month" property="patientMonth" jdbcType="INTEGER" />
     <result column="patient_day" property="patientDay" jdbcType="INTEGER" />
+    <result column="daolianshu" property="daolianshu" jdbcType="INTEGER" />
+    <result column="sum_hours" property="sumHours" jdbcType="INTEGER" />
+    <result column="pacemaker_parameter" property="pacemakerParameter" jdbcType="INTEGER" />
+    <result column="offset" property="offset" jdbcType="INTEGER" />
     <result column="suggest" property="suggest" jdbcType="VARCHAR" />
+    <result column="conclusion" property="conclusion" jdbcType="VARCHAR" />
+    <result column="yongyaoshuoming" property="yongyaoshuoming" jdbcType="VARCHAR" />
     <result column="note" property="note" jdbcType="VARCHAR" />
     <result column="case_tag" property="caseTag" jdbcType="VARCHAR" />
     <result column="holter_load_date" property="holterLoadDate" jdbcType="INTEGER" />
     <result column="handwritten_conclusion" property="handwrittenConclusion" jdbcType="VARCHAR" />
+    <result column="pdfexport_filePath" property="pdfexportFilepath" jdbcType="VARCHAR" />
+    <result column="original_filePath" property="originalFilepath" jdbcType="VARCHAR" />
+    <result column="analyzed_filePath" property="analyzedFilepath" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -96,11 +101,13 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, name, daolianshu, sum_hours, pacemaker_parameter, offset, record_minutes, record_mounth, 
-    record_day, record_year, hospital_number, serial_number, sex, operation_doctor, diagnostic_doctor, 
-    age, clinic_number, bed_number, department, yongyaoshuoming, conclusion, hospital_name, 
-    default_hospital_name, hospital_address, hospital_phonenum, hospital_fax, patient_year, 
-    patient_month, patient_day, suggest, note, case_tag, holter_load_date, handwritten_conclusion
+    id, serial_number, name, citizen_number, age, sex, clinic_number, bed_number, record_year, 
+    record_mounth, record_day, record_minutes, operation_doctor, diagnostic_doctor, status, 
+    department, hospital_number, hospital_name, default_hospital_name, hospital_address, 
+    hospital_phonenum, hospital_fax, patient_year, patient_month, patient_day, daolianshu, 
+    sum_hours, pacemaker_parameter, offset, suggest, conclusion, yongyaoshuoming, note, 
+    case_tag, holter_load_date, handwritten_conclusion, pdfexport_filePath, original_filePath, 
+    analyzed_filePath
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.retloh.model.CaseInfoExample" >
     select
@@ -134,30 +141,34 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.retloh.model.CaseInfo" >
-    insert into caseinfo (id, name, daolianshu, 
-      sum_hours, pacemaker_parameter, offset, 
-      record_minutes, record_mounth, record_day, 
-      record_year, hospital_number, serial_number, 
-      sex, operation_doctor, diagnostic_doctor, 
-      age, clinic_number, bed_number, 
-      department, yongyaoshuoming, conclusion, 
-      hospital_name, default_hospital_name, hospital_address, 
-      hospital_phonenum, hospital_fax, patient_year, 
-      patient_month, patient_day, suggest, 
-      note, case_tag, holter_load_date, 
-      handwritten_conclusion)
-    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{daolianshu,jdbcType=INTEGER}, 
-      #{sumHours,jdbcType=INTEGER}, #{pacemakerParameter,jdbcType=INTEGER}, #{offset,jdbcType=INTEGER}, 
-      #{recordMinutes,jdbcType=INTEGER}, #{recordMounth,jdbcType=INTEGER}, #{recordDay,jdbcType=INTEGER}, 
-      #{recordYear,jdbcType=INTEGER}, #{hospitalNumber,jdbcType=INTEGER}, #{serialNumber,jdbcType=INTEGER}, 
-      #{sex,jdbcType=VARCHAR}, #{operationDoctor,jdbcType=VARCHAR}, #{diagnosticDoctor,jdbcType=VARCHAR}, 
-      #{age,jdbcType=INTEGER}, #{clinicNumber,jdbcType=INTEGER}, #{bedNumber,jdbcType=INTEGER}, 
-      #{department,jdbcType=VARCHAR}, #{yongyaoshuoming,jdbcType=VARCHAR}, #{conclusion,jdbcType=VARCHAR}, 
-      #{hospitalName,jdbcType=VARCHAR}, #{defaultHospitalName,jdbcType=VARCHAR}, #{hospitalAddress,jdbcType=VARCHAR}, 
-      #{hospitalPhonenum,jdbcType=INTEGER}, #{hospitalFax,jdbcType=INTEGER}, #{patientYear,jdbcType=INTEGER}, 
-      #{patientMonth,jdbcType=INTEGER}, #{patientDay,jdbcType=INTEGER}, #{suggest,jdbcType=VARCHAR}, 
-      #{note,jdbcType=VARCHAR}, #{caseTag,jdbcType=VARCHAR}, #{holterLoadDate,jdbcType=INTEGER}, 
-      #{handwrittenConclusion,jdbcType=VARCHAR})
+    insert into caseinfo (id, serial_number, name, 
+      citizen_number, age, sex, 
+      clinic_number, bed_number, record_year, 
+      record_mounth, record_day, record_minutes, 
+      operation_doctor, diagnostic_doctor, status, 
+      department, hospital_number, hospital_name, 
+      default_hospital_name, hospital_address, hospital_phonenum, 
+      hospital_fax, patient_year, patient_month, 
+      patient_day, daolianshu, sum_hours, 
+      pacemaker_parameter, offset, suggest, 
+      conclusion, yongyaoshuoming, note, 
+      case_tag, holter_load_date, handwritten_conclusion, 
+      pdfexport_filePath, original_filePath, analyzed_filePath
+      )
+    values (#{id,jdbcType=VARCHAR}, #{serialNumber,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
+      #{citizenNumber,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, #{sex,jdbcType=VARCHAR}, 
+      #{clinicNumber,jdbcType=INTEGER}, #{bedNumber,jdbcType=INTEGER}, #{recordYear,jdbcType=INTEGER}, 
+      #{recordMounth,jdbcType=INTEGER}, #{recordDay,jdbcType=INTEGER}, #{recordMinutes,jdbcType=INTEGER}, 
+      #{operationDoctor,jdbcType=VARCHAR}, #{diagnosticDoctor,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+      #{department,jdbcType=VARCHAR}, #{hospitalNumber,jdbcType=INTEGER}, #{hospitalName,jdbcType=VARCHAR}, 
+      #{defaultHospitalName,jdbcType=VARCHAR}, #{hospitalAddress,jdbcType=VARCHAR}, #{hospitalPhonenum,jdbcType=INTEGER}, 
+      #{hospitalFax,jdbcType=INTEGER}, #{patientYear,jdbcType=INTEGER}, #{patientMonth,jdbcType=INTEGER}, 
+      #{patientDay,jdbcType=INTEGER}, #{daolianshu,jdbcType=INTEGER}, #{sumHours,jdbcType=INTEGER}, 
+      #{pacemakerParameter,jdbcType=INTEGER}, #{offset,jdbcType=INTEGER}, #{suggest,jdbcType=VARCHAR}, 
+      #{conclusion,jdbcType=VARCHAR}, #{yongyaoshuoming,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}, 
+      #{caseTag,jdbcType=VARCHAR}, #{holterLoadDate,jdbcType=INTEGER}, #{handwrittenConclusion,jdbcType=VARCHAR}, 
+      #{pdfexportFilepath,jdbcType=VARCHAR}, #{originalFilepath,jdbcType=VARCHAR}, #{analyzedFilepath,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.retloh.model.CaseInfo" >
     insert into caseinfo
@@ -165,50 +176,20 @@
       <if test="id != null" >
         id,
       </if>
-      <if test="name != null" >
-        name,
-      </if>
-      <if test="daolianshu != null" >
-        daolianshu,
-      </if>
-      <if test="sumHours != null" >
-        sum_hours,
-      </if>
-      <if test="pacemakerParameter != null" >
-        pacemaker_parameter,
-      </if>
-      <if test="offset != null" >
-        offset,
-      </if>
-      <if test="recordMinutes != null" >
-        record_minutes,
-      </if>
-      <if test="recordMounth != null" >
-        record_mounth,
-      </if>
-      <if test="recordDay != null" >
-        record_day,
-      </if>
-      <if test="recordYear != null" >
-        record_year,
-      </if>
-      <if test="hospitalNumber != null" >
-        hospital_number,
-      </if>
       <if test="serialNumber != null" >
         serial_number,
       </if>
-      <if test="sex != null" >
-        sex,
+      <if test="name != null" >
+        name,
       </if>
-      <if test="operationDoctor != null" >
-        operation_doctor,
-      </if>
-      <if test="diagnosticDoctor != null" >
-        diagnostic_doctor,
+      <if test="citizenNumber != null" >
+        citizen_number,
       </if>
       <if test="age != null" >
         age,
+      </if>
+      <if test="sex != null" >
+        sex,
       </if>
       <if test="clinicNumber != null" >
         clinic_number,
@@ -216,14 +197,32 @@
       <if test="bedNumber != null" >
         bed_number,
       </if>
+      <if test="recordYear != null" >
+        record_year,
+      </if>
+      <if test="recordMounth != null" >
+        record_mounth,
+      </if>
+      <if test="recordDay != null" >
+        record_day,
+      </if>
+      <if test="recordMinutes != null" >
+        record_minutes,
+      </if>
+      <if test="operationDoctor != null" >
+        operation_doctor,
+      </if>
+      <if test="diagnosticDoctor != null" >
+        diagnostic_doctor,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
       <if test="department != null" >
         department,
       </if>
-      <if test="yongyaoshuoming != null" >
-        yongyaoshuoming,
-      </if>
-      <if test="conclusion != null" >
-        conclusion,
+      <if test="hospitalNumber != null" >
+        hospital_number,
       </if>
       <if test="hospitalName != null" >
         hospital_name,
@@ -249,8 +248,26 @@
       <if test="patientDay != null" >
         patient_day,
       </if>
+      <if test="daolianshu != null" >
+        daolianshu,
+      </if>
+      <if test="sumHours != null" >
+        sum_hours,
+      </if>
+      <if test="pacemakerParameter != null" >
+        pacemaker_parameter,
+      </if>
+      <if test="offset != null" >
+        offset,
+      </if>
       <if test="suggest != null" >
         suggest,
+      </if>
+      <if test="conclusion != null" >
+        conclusion,
+      </if>
+      <if test="yongyaoshuoming != null" >
+        yongyaoshuoming,
       </if>
       <if test="note != null" >
         note,
@@ -264,55 +281,34 @@
       <if test="handwrittenConclusion != null" >
         handwritten_conclusion,
       </if>
+      <if test="pdfexportFilepath != null" >
+        pdfexport_filePath,
+      </if>
+      <if test="originalFilepath != null" >
+        original_filePath,
+      </if>
+      <if test="analyzedFilepath != null" >
+        analyzed_filePath,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         #{id,jdbcType=VARCHAR},
       </if>
-      <if test="name != null" >
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="daolianshu != null" >
-        #{daolianshu,jdbcType=INTEGER},
-      </if>
-      <if test="sumHours != null" >
-        #{sumHours,jdbcType=INTEGER},
-      </if>
-      <if test="pacemakerParameter != null" >
-        #{pacemakerParameter,jdbcType=INTEGER},
-      </if>
-      <if test="offset != null" >
-        #{offset,jdbcType=INTEGER},
-      </if>
-      <if test="recordMinutes != null" >
-        #{recordMinutes,jdbcType=INTEGER},
-      </if>
-      <if test="recordMounth != null" >
-        #{recordMounth,jdbcType=INTEGER},
-      </if>
-      <if test="recordDay != null" >
-        #{recordDay,jdbcType=INTEGER},
-      </if>
-      <if test="recordYear != null" >
-        #{recordYear,jdbcType=INTEGER},
-      </if>
-      <if test="hospitalNumber != null" >
-        #{hospitalNumber,jdbcType=INTEGER},
-      </if>
       <if test="serialNumber != null" >
         #{serialNumber,jdbcType=INTEGER},
       </if>
-      <if test="sex != null" >
-        #{sex,jdbcType=VARCHAR},
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
       </if>
-      <if test="operationDoctor != null" >
-        #{operationDoctor,jdbcType=VARCHAR},
-      </if>
-      <if test="diagnosticDoctor != null" >
-        #{diagnosticDoctor,jdbcType=VARCHAR},
+      <if test="citizenNumber != null" >
+        #{citizenNumber,jdbcType=VARCHAR},
       </if>
       <if test="age != null" >
         #{age,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=VARCHAR},
       </if>
       <if test="clinicNumber != null" >
         #{clinicNumber,jdbcType=INTEGER},
@@ -320,14 +316,32 @@
       <if test="bedNumber != null" >
         #{bedNumber,jdbcType=INTEGER},
       </if>
+      <if test="recordYear != null" >
+        #{recordYear,jdbcType=INTEGER},
+      </if>
+      <if test="recordMounth != null" >
+        #{recordMounth,jdbcType=INTEGER},
+      </if>
+      <if test="recordDay != null" >
+        #{recordDay,jdbcType=INTEGER},
+      </if>
+      <if test="recordMinutes != null" >
+        #{recordMinutes,jdbcType=INTEGER},
+      </if>
+      <if test="operationDoctor != null" >
+        #{operationDoctor,jdbcType=VARCHAR},
+      </if>
+      <if test="diagnosticDoctor != null" >
+        #{diagnosticDoctor,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
       <if test="department != null" >
         #{department,jdbcType=VARCHAR},
       </if>
-      <if test="yongyaoshuoming != null" >
-        #{yongyaoshuoming,jdbcType=VARCHAR},
-      </if>
-      <if test="conclusion != null" >
-        #{conclusion,jdbcType=VARCHAR},
+      <if test="hospitalNumber != null" >
+        #{hospitalNumber,jdbcType=INTEGER},
       </if>
       <if test="hospitalName != null" >
         #{hospitalName,jdbcType=VARCHAR},
@@ -353,8 +367,26 @@
       <if test="patientDay != null" >
         #{patientDay,jdbcType=INTEGER},
       </if>
+      <if test="daolianshu != null" >
+        #{daolianshu,jdbcType=INTEGER},
+      </if>
+      <if test="sumHours != null" >
+        #{sumHours,jdbcType=INTEGER},
+      </if>
+      <if test="pacemakerParameter != null" >
+        #{pacemakerParameter,jdbcType=INTEGER},
+      </if>
+      <if test="offset != null" >
+        #{offset,jdbcType=INTEGER},
+      </if>
       <if test="suggest != null" >
         #{suggest,jdbcType=VARCHAR},
+      </if>
+      <if test="conclusion != null" >
+        #{conclusion,jdbcType=VARCHAR},
+      </if>
+      <if test="yongyaoshuoming != null" >
+        #{yongyaoshuoming,jdbcType=VARCHAR},
       </if>
       <if test="note != null" >
         #{note,jdbcType=VARCHAR},
@@ -367,6 +399,15 @@
       </if>
       <if test="handwrittenConclusion != null" >
         #{handwrittenConclusion,jdbcType=VARCHAR},
+      </if>
+      <if test="pdfexportFilepath != null" >
+        #{pdfexportFilepath,jdbcType=VARCHAR},
+      </if>
+      <if test="originalFilepath != null" >
+        #{originalFilepath,jdbcType=VARCHAR},
+      </if>
+      <if test="analyzedFilepath != null" >
+        #{analyzedFilepath,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -382,50 +423,20 @@
       <if test="record.id != null" >
         id = #{record.id,jdbcType=VARCHAR},
       </if>
-      <if test="record.name != null" >
-        name = #{record.name,jdbcType=VARCHAR},
-      </if>
-      <if test="record.daolianshu != null" >
-        daolianshu = #{record.daolianshu,jdbcType=INTEGER},
-      </if>
-      <if test="record.sumHours != null" >
-        sum_hours = #{record.sumHours,jdbcType=INTEGER},
-      </if>
-      <if test="record.pacemakerParameter != null" >
-        pacemaker_parameter = #{record.pacemakerParameter,jdbcType=INTEGER},
-      </if>
-      <if test="record.offset != null" >
-        offset = #{record.offset,jdbcType=INTEGER},
-      </if>
-      <if test="record.recordMinutes != null" >
-        record_minutes = #{record.recordMinutes,jdbcType=INTEGER},
-      </if>
-      <if test="record.recordMounth != null" >
-        record_mounth = #{record.recordMounth,jdbcType=INTEGER},
-      </if>
-      <if test="record.recordDay != null" >
-        record_day = #{record.recordDay,jdbcType=INTEGER},
-      </if>
-      <if test="record.recordYear != null" >
-        record_year = #{record.recordYear,jdbcType=INTEGER},
-      </if>
-      <if test="record.hospitalNumber != null" >
-        hospital_number = #{record.hospitalNumber,jdbcType=INTEGER},
-      </if>
       <if test="record.serialNumber != null" >
         serial_number = #{record.serialNumber,jdbcType=INTEGER},
       </if>
-      <if test="record.sex != null" >
-        sex = #{record.sex,jdbcType=VARCHAR},
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
       </if>
-      <if test="record.operationDoctor != null" >
-        operation_doctor = #{record.operationDoctor,jdbcType=VARCHAR},
-      </if>
-      <if test="record.diagnosticDoctor != null" >
-        diagnostic_doctor = #{record.diagnosticDoctor,jdbcType=VARCHAR},
+      <if test="record.citizenNumber != null" >
+        citizen_number = #{record.citizenNumber,jdbcType=VARCHAR},
       </if>
       <if test="record.age != null" >
         age = #{record.age,jdbcType=INTEGER},
+      </if>
+      <if test="record.sex != null" >
+        sex = #{record.sex,jdbcType=VARCHAR},
       </if>
       <if test="record.clinicNumber != null" >
         clinic_number = #{record.clinicNumber,jdbcType=INTEGER},
@@ -433,14 +444,32 @@
       <if test="record.bedNumber != null" >
         bed_number = #{record.bedNumber,jdbcType=INTEGER},
       </if>
+      <if test="record.recordYear != null" >
+        record_year = #{record.recordYear,jdbcType=INTEGER},
+      </if>
+      <if test="record.recordMounth != null" >
+        record_mounth = #{record.recordMounth,jdbcType=INTEGER},
+      </if>
+      <if test="record.recordDay != null" >
+        record_day = #{record.recordDay,jdbcType=INTEGER},
+      </if>
+      <if test="record.recordMinutes != null" >
+        record_minutes = #{record.recordMinutes,jdbcType=INTEGER},
+      </if>
+      <if test="record.operationDoctor != null" >
+        operation_doctor = #{record.operationDoctor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.diagnosticDoctor != null" >
+        diagnostic_doctor = #{record.diagnosticDoctor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
       <if test="record.department != null" >
         department = #{record.department,jdbcType=VARCHAR},
       </if>
-      <if test="record.yongyaoshuoming != null" >
-        yongyaoshuoming = #{record.yongyaoshuoming,jdbcType=VARCHAR},
-      </if>
-      <if test="record.conclusion != null" >
-        conclusion = #{record.conclusion,jdbcType=VARCHAR},
+      <if test="record.hospitalNumber != null" >
+        hospital_number = #{record.hospitalNumber,jdbcType=INTEGER},
       </if>
       <if test="record.hospitalName != null" >
         hospital_name = #{record.hospitalName,jdbcType=VARCHAR},
@@ -466,8 +495,26 @@
       <if test="record.patientDay != null" >
         patient_day = #{record.patientDay,jdbcType=INTEGER},
       </if>
+      <if test="record.daolianshu != null" >
+        daolianshu = #{record.daolianshu,jdbcType=INTEGER},
+      </if>
+      <if test="record.sumHours != null" >
+        sum_hours = #{record.sumHours,jdbcType=INTEGER},
+      </if>
+      <if test="record.pacemakerParameter != null" >
+        pacemaker_parameter = #{record.pacemakerParameter,jdbcType=INTEGER},
+      </if>
+      <if test="record.offset != null" >
+        offset = #{record.offset,jdbcType=INTEGER},
+      </if>
       <if test="record.suggest != null" >
         suggest = #{record.suggest,jdbcType=VARCHAR},
+      </if>
+      <if test="record.conclusion != null" >
+        conclusion = #{record.conclusion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.yongyaoshuoming != null" >
+        yongyaoshuoming = #{record.yongyaoshuoming,jdbcType=VARCHAR},
       </if>
       <if test="record.note != null" >
         note = #{record.note,jdbcType=VARCHAR},
@@ -481,6 +528,15 @@
       <if test="record.handwrittenConclusion != null" >
         handwritten_conclusion = #{record.handwrittenConclusion,jdbcType=VARCHAR},
       </if>
+      <if test="record.pdfexportFilepath != null" >
+        pdfexport_filePath = #{record.pdfexportFilepath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.originalFilepath != null" >
+        original_filePath = #{record.originalFilepath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.analyzedFilepath != null" >
+        analyzed_filePath = #{record.analyzedFilepath,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -489,26 +545,22 @@
   <update id="updateByExample" parameterType="map" >
     update caseinfo
     set id = #{record.id,jdbcType=VARCHAR},
-      name = #{record.name,jdbcType=VARCHAR},
-      daolianshu = #{record.daolianshu,jdbcType=INTEGER},
-      sum_hours = #{record.sumHours,jdbcType=INTEGER},
-      pacemaker_parameter = #{record.pacemakerParameter,jdbcType=INTEGER},
-      offset = #{record.offset,jdbcType=INTEGER},
-      record_minutes = #{record.recordMinutes,jdbcType=INTEGER},
-      record_mounth = #{record.recordMounth,jdbcType=INTEGER},
-      record_day = #{record.recordDay,jdbcType=INTEGER},
-      record_year = #{record.recordYear,jdbcType=INTEGER},
-      hospital_number = #{record.hospitalNumber,jdbcType=INTEGER},
       serial_number = #{record.serialNumber,jdbcType=INTEGER},
-      sex = #{record.sex,jdbcType=VARCHAR},
-      operation_doctor = #{record.operationDoctor,jdbcType=VARCHAR},
-      diagnostic_doctor = #{record.diagnosticDoctor,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      citizen_number = #{record.citizenNumber,jdbcType=VARCHAR},
       age = #{record.age,jdbcType=INTEGER},
+      sex = #{record.sex,jdbcType=VARCHAR},
       clinic_number = #{record.clinicNumber,jdbcType=INTEGER},
       bed_number = #{record.bedNumber,jdbcType=INTEGER},
+      record_year = #{record.recordYear,jdbcType=INTEGER},
+      record_mounth = #{record.recordMounth,jdbcType=INTEGER},
+      record_day = #{record.recordDay,jdbcType=INTEGER},
+      record_minutes = #{record.recordMinutes,jdbcType=INTEGER},
+      operation_doctor = #{record.operationDoctor,jdbcType=VARCHAR},
+      diagnostic_doctor = #{record.diagnosticDoctor,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER},
       department = #{record.department,jdbcType=VARCHAR},
-      yongyaoshuoming = #{record.yongyaoshuoming,jdbcType=VARCHAR},
-      conclusion = #{record.conclusion,jdbcType=VARCHAR},
+      hospital_number = #{record.hospitalNumber,jdbcType=INTEGER},
       hospital_name = #{record.hospitalName,jdbcType=VARCHAR},
       default_hospital_name = #{record.defaultHospitalName,jdbcType=VARCHAR},
       hospital_address = #{record.hospitalAddress,jdbcType=VARCHAR},
@@ -517,11 +569,20 @@
       patient_year = #{record.patientYear,jdbcType=INTEGER},
       patient_month = #{record.patientMonth,jdbcType=INTEGER},
       patient_day = #{record.patientDay,jdbcType=INTEGER},
+      daolianshu = #{record.daolianshu,jdbcType=INTEGER},
+      sum_hours = #{record.sumHours,jdbcType=INTEGER},
+      pacemaker_parameter = #{record.pacemakerParameter,jdbcType=INTEGER},
+      offset = #{record.offset,jdbcType=INTEGER},
       suggest = #{record.suggest,jdbcType=VARCHAR},
+      conclusion = #{record.conclusion,jdbcType=VARCHAR},
+      yongyaoshuoming = #{record.yongyaoshuoming,jdbcType=VARCHAR},
       note = #{record.note,jdbcType=VARCHAR},
       case_tag = #{record.caseTag,jdbcType=VARCHAR},
       holter_load_date = #{record.holterLoadDate,jdbcType=INTEGER},
-      handwritten_conclusion = #{record.handwrittenConclusion,jdbcType=VARCHAR}
+      handwritten_conclusion = #{record.handwrittenConclusion,jdbcType=VARCHAR},
+      pdfexport_filePath = #{record.pdfexportFilepath,jdbcType=VARCHAR},
+      original_filePath = #{record.originalFilepath,jdbcType=VARCHAR},
+      analyzed_filePath = #{record.analyzedFilepath,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -529,50 +590,20 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.retloh.model.CaseInfo" >
     update caseinfo
     <set >
-      <if test="name != null" >
-        name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="daolianshu != null" >
-        daolianshu = #{daolianshu,jdbcType=INTEGER},
-      </if>
-      <if test="sumHours != null" >
-        sum_hours = #{sumHours,jdbcType=INTEGER},
-      </if>
-      <if test="pacemakerParameter != null" >
-        pacemaker_parameter = #{pacemakerParameter,jdbcType=INTEGER},
-      </if>
-      <if test="offset != null" >
-        offset = #{offset,jdbcType=INTEGER},
-      </if>
-      <if test="recordMinutes != null" >
-        record_minutes = #{recordMinutes,jdbcType=INTEGER},
-      </if>
-      <if test="recordMounth != null" >
-        record_mounth = #{recordMounth,jdbcType=INTEGER},
-      </if>
-      <if test="recordDay != null" >
-        record_day = #{recordDay,jdbcType=INTEGER},
-      </if>
-      <if test="recordYear != null" >
-        record_year = #{recordYear,jdbcType=INTEGER},
-      </if>
-      <if test="hospitalNumber != null" >
-        hospital_number = #{hospitalNumber,jdbcType=INTEGER},
-      </if>
       <if test="serialNumber != null" >
         serial_number = #{serialNumber,jdbcType=INTEGER},
       </if>
-      <if test="sex != null" >
-        sex = #{sex,jdbcType=VARCHAR},
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="operationDoctor != null" >
-        operation_doctor = #{operationDoctor,jdbcType=VARCHAR},
-      </if>
-      <if test="diagnosticDoctor != null" >
-        diagnostic_doctor = #{diagnosticDoctor,jdbcType=VARCHAR},
+      <if test="citizenNumber != null" >
+        citizen_number = #{citizenNumber,jdbcType=VARCHAR},
       </if>
       <if test="age != null" >
         age = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=VARCHAR},
       </if>
       <if test="clinicNumber != null" >
         clinic_number = #{clinicNumber,jdbcType=INTEGER},
@@ -580,14 +611,32 @@
       <if test="bedNumber != null" >
         bed_number = #{bedNumber,jdbcType=INTEGER},
       </if>
+      <if test="recordYear != null" >
+        record_year = #{recordYear,jdbcType=INTEGER},
+      </if>
+      <if test="recordMounth != null" >
+        record_mounth = #{recordMounth,jdbcType=INTEGER},
+      </if>
+      <if test="recordDay != null" >
+        record_day = #{recordDay,jdbcType=INTEGER},
+      </if>
+      <if test="recordMinutes != null" >
+        record_minutes = #{recordMinutes,jdbcType=INTEGER},
+      </if>
+      <if test="operationDoctor != null" >
+        operation_doctor = #{operationDoctor,jdbcType=VARCHAR},
+      </if>
+      <if test="diagnosticDoctor != null" >
+        diagnostic_doctor = #{diagnosticDoctor,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
       <if test="department != null" >
         department = #{department,jdbcType=VARCHAR},
       </if>
-      <if test="yongyaoshuoming != null" >
-        yongyaoshuoming = #{yongyaoshuoming,jdbcType=VARCHAR},
-      </if>
-      <if test="conclusion != null" >
-        conclusion = #{conclusion,jdbcType=VARCHAR},
+      <if test="hospitalNumber != null" >
+        hospital_number = #{hospitalNumber,jdbcType=INTEGER},
       </if>
       <if test="hospitalName != null" >
         hospital_name = #{hospitalName,jdbcType=VARCHAR},
@@ -613,8 +662,26 @@
       <if test="patientDay != null" >
         patient_day = #{patientDay,jdbcType=INTEGER},
       </if>
+      <if test="daolianshu != null" >
+        daolianshu = #{daolianshu,jdbcType=INTEGER},
+      </if>
+      <if test="sumHours != null" >
+        sum_hours = #{sumHours,jdbcType=INTEGER},
+      </if>
+      <if test="pacemakerParameter != null" >
+        pacemaker_parameter = #{pacemakerParameter,jdbcType=INTEGER},
+      </if>
+      <if test="offset != null" >
+        offset = #{offset,jdbcType=INTEGER},
+      </if>
       <if test="suggest != null" >
         suggest = #{suggest,jdbcType=VARCHAR},
+      </if>
+      <if test="conclusion != null" >
+        conclusion = #{conclusion,jdbcType=VARCHAR},
+      </if>
+      <if test="yongyaoshuoming != null" >
+        yongyaoshuoming = #{yongyaoshuoming,jdbcType=VARCHAR},
       </if>
       <if test="note != null" >
         note = #{note,jdbcType=VARCHAR},
@@ -628,31 +695,36 @@
       <if test="handwrittenConclusion != null" >
         handwritten_conclusion = #{handwrittenConclusion,jdbcType=VARCHAR},
       </if>
+      <if test="pdfexportFilepath != null" >
+        pdfexport_filePath = #{pdfexportFilepath,jdbcType=VARCHAR},
+      </if>
+      <if test="originalFilepath != null" >
+        original_filePath = #{originalFilepath,jdbcType=VARCHAR},
+      </if>
+      <if test="analyzedFilepath != null" >
+        analyzed_filePath = #{analyzedFilepath,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.retloh.model.CaseInfo" >
     update caseinfo
-    set name = #{name,jdbcType=VARCHAR},
-      daolianshu = #{daolianshu,jdbcType=INTEGER},
-      sum_hours = #{sumHours,jdbcType=INTEGER},
-      pacemaker_parameter = #{pacemakerParameter,jdbcType=INTEGER},
-      offset = #{offset,jdbcType=INTEGER},
-      record_minutes = #{recordMinutes,jdbcType=INTEGER},
-      record_mounth = #{recordMounth,jdbcType=INTEGER},
-      record_day = #{recordDay,jdbcType=INTEGER},
-      record_year = #{recordYear,jdbcType=INTEGER},
-      hospital_number = #{hospitalNumber,jdbcType=INTEGER},
-      serial_number = #{serialNumber,jdbcType=INTEGER},
-      sex = #{sex,jdbcType=VARCHAR},
-      operation_doctor = #{operationDoctor,jdbcType=VARCHAR},
-      diagnostic_doctor = #{diagnosticDoctor,jdbcType=VARCHAR},
+    set serial_number = #{serialNumber,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      citizen_number = #{citizenNumber,jdbcType=VARCHAR},
       age = #{age,jdbcType=INTEGER},
+      sex = #{sex,jdbcType=VARCHAR},
       clinic_number = #{clinicNumber,jdbcType=INTEGER},
       bed_number = #{bedNumber,jdbcType=INTEGER},
+      record_year = #{recordYear,jdbcType=INTEGER},
+      record_mounth = #{recordMounth,jdbcType=INTEGER},
+      record_day = #{recordDay,jdbcType=INTEGER},
+      record_minutes = #{recordMinutes,jdbcType=INTEGER},
+      operation_doctor = #{operationDoctor,jdbcType=VARCHAR},
+      diagnostic_doctor = #{diagnosticDoctor,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
       department = #{department,jdbcType=VARCHAR},
-      yongyaoshuoming = #{yongyaoshuoming,jdbcType=VARCHAR},
-      conclusion = #{conclusion,jdbcType=VARCHAR},
+      hospital_number = #{hospitalNumber,jdbcType=INTEGER},
       hospital_name = #{hospitalName,jdbcType=VARCHAR},
       default_hospital_name = #{defaultHospitalName,jdbcType=VARCHAR},
       hospital_address = #{hospitalAddress,jdbcType=VARCHAR},
@@ -661,11 +733,20 @@
       patient_year = #{patientYear,jdbcType=INTEGER},
       patient_month = #{patientMonth,jdbcType=INTEGER},
       patient_day = #{patientDay,jdbcType=INTEGER},
+      daolianshu = #{daolianshu,jdbcType=INTEGER},
+      sum_hours = #{sumHours,jdbcType=INTEGER},
+      pacemaker_parameter = #{pacemakerParameter,jdbcType=INTEGER},
+      offset = #{offset,jdbcType=INTEGER},
       suggest = #{suggest,jdbcType=VARCHAR},
+      conclusion = #{conclusion,jdbcType=VARCHAR},
+      yongyaoshuoming = #{yongyaoshuoming,jdbcType=VARCHAR},
       note = #{note,jdbcType=VARCHAR},
       case_tag = #{caseTag,jdbcType=VARCHAR},
       holter_load_date = #{holterLoadDate,jdbcType=INTEGER},
-      handwritten_conclusion = #{handwrittenConclusion,jdbcType=VARCHAR}
+      handwritten_conclusion = #{handwrittenConclusion,jdbcType=VARCHAR},
+      pdfexport_filePath = #{pdfexportFilepath,jdbcType=VARCHAR},
+      original_filePath = #{originalFilepath,jdbcType=VARCHAR},
+      analyzed_filePath = #{analyzedFilepath,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>
