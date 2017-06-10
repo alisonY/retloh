@@ -1,6 +1,8 @@
 package com.retloh.controller;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -88,6 +90,71 @@ public class CaseInfoController {
 			return resultJson;
 		}
     }
+	
+	
+	@RequestMapping(value="/postcaseT",method={RequestMethod.POST})
+    @ResponseBody
+    public String postcaseT(HttpServletRequest request,String caseJson){
+		
+		String line = null;
+		StringBuilder sb = new StringBuilder();
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("status", false);
+
+		try {
+			BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream()));
+			while((line = br.readLine())!=null){
+			    sb.append(line);
+			}
+		} catch (IOException e1) {
+			map.put("msg", "json转换异常");
+			String resultJson = JacksonMapper.beanToJson(map);
+			return resultJson;
+		}
+        String jsonstr = sb.toString();
+        
+        if(StringUtils.isBlank(caseJson) || StringUtils.isNotBlank(jsonstr)){
+        	caseJson = jsonstr;
+        }
+        
+		LOGGER.error("receive json:"+caseJson);
+
+		if(StringUtils.isNotBlank(caseJson)){
+			CaseInfo info = new CaseInfo();
+			try {
+				info = JacksonMapper.jsonToBean(caseJson, CaseInfo.class);
+				if(info!=null){
+					info.setId(UUID.randomUUID().toString());
+					info.setCreateTime(new Date());
+					info.setUpdateTime(new Date());
+					int flag = caseInfoServices.insert(info);
+					if(flag>0){
+						map.put("status", true);
+						String resultJson = JacksonMapper.beanToJson(map);
+						return resultJson; 
+					}else{
+						map.put("msg", "写库失败");
+						String resultJson = JacksonMapper.beanToJson(map);
+						return resultJson; 
+					}
+				}else{
+					map.put("msg", "参数异常");
+					String resultJson = JacksonMapper.beanToJson(map);
+					return resultJson;
+				}
+			} catch (Exception e) {
+				map.put("msg", "json转换异常");
+				String resultJson = JacksonMapper.beanToJson(map);
+				return resultJson;
+			}
+		}else{
+			map.put("msg", "json为空");
+			String resultJson = JacksonMapper.beanToJson(map);
+			return resultJson;
+		}
+    }
+	
+	
 	
 	
 	@RequestMapping(value="/toPage",method={RequestMethod.GET})
