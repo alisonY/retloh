@@ -209,12 +209,13 @@
 	        {field:'citizenNumber',title:'身份证号',width:150,align:"center"},
 	        {field:'operationDoctor',title:'操作医生',width:120,align:"center"},
 	        {field:'diagnosticDoctor',title:'诊断医生',width:120,align:"center"},
-	        {field:'pdfexportFilepath',title:'pdf报告',width:120,align:"center",
+	        {field:'pdfexportFilepath',title:'PDF报告',width:120,align:"center",
 				formatter:function(value, row, index){
 					var path = row.pdfexportFilepath;
-					console.info(path);
 					if (! !path){
-						var str = '<a href="#" name="pdf" class="easyui-linkbutton" onclick="downPdf('+"'"+row.pdfexportFilepath+"'"+')" ></a>';  
+						var directUrl = "${rootPath}${BasePath}"+path;
+						var str = '<a href="#" name="pdfDown" class="easyui-linkbutton" onclick="downPdf('+"'"+row.pdfexportFilepath+"'"+')" ></a>'+
+								  '<a href="#" name="pdfView" class="easyui-linkbutton" onclick="viewPdf('+"'"+directUrl+"'"+')" ></a>';
 						return str;  
 					}
 				}
@@ -226,7 +227,8 @@
 					width:function(){return document.body.clientWidth;},
 					height:function(){return document.body.clientHeight;},
 				});
-				$("a[name='pdf']").linkbutton({text:'PDF报告',plain:true,iconCls:'icon-down'});
+				$("a[name='pdfDown']").linkbutton({text:'下载',plain:true,iconCls:'icon-down'});
+				$("a[name='pdfView']").linkbutton({text:'预览',plain:true,iconCls:'icon-more'});
 		    } 
 		});
 	}
@@ -311,7 +313,10 @@
 
 	function downPdf(path){
 		window.open("${rootPath}${BasePath}/down/file.do?filePath="+path);
-	}	
+	}
+	function viewPdf(path){
+		window.open(path);
+	}		
 	
 	
 	function getSelected(){  
