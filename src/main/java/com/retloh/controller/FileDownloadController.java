@@ -28,14 +28,9 @@ public class FileDownloadController {
 	 */
 	@RequestMapping(value = "/file", method = RequestMethod.GET, headers = "content-type=" + MediaType.APPLICATION_OCTET_STREAM_VALUE)
 	public void downlog(HttpServletRequest request, HttpServletResponse response, String filePath) { 
-		//压缩后的文件
-		String zipFile=SysConstant.FILE_TMP_FOLDER+System.currentTimeMillis()+".zip";
-		String fileName=filePath.substring(filePath.lastIndexOf("-")+1);
-		//File fOut=new File(filePath.replace("-", SysConstant.FILE_STEP));
-		//ZIPUtil.zip(fOut,zipFile,fileName);
-		
 		String filename = filePath.substring(filePath.lastIndexOf("/")+1, filePath.length());
 		response.setHeader("Content-disposition", "attachment; filename="+filename);
+		filename = SysConstant.FILE_STORE_FOLDER+filename;
 		try {
 			FileUtil.fileToStream(response.getOutputStream(), filePath);
 		} catch (IOException e) { 

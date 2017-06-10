@@ -11,4 +11,7 @@ public class SysConstant {
 	public static final String FILE_TMP_FOLDER = FILE_STEP + "data" + FILE_STEP;
 	/** 日志文件目录 */
 	public static final String LOGGER_FOLDER = FILE_STEP + "opt" + FILE_STEP;
+	
+	/** 生成文件的临时目录: "/data" */
+	public static final String FILE_STORE_FOLDER = FILE_STEP + "data";
 }
