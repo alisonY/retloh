@@ -32,6 +32,7 @@ public class FileDownloadController {
 		response.setHeader("Content-disposition", "attachment; filename="+filename);
 		filename = SysConstant.FILE_STORE_FOLDER+filename;
 		try {
+			LOGGER.error("下载文件URL：{}",filename);
 			FileUtil.fileToStream(response.getOutputStream(), filePath);
 		} catch (IOException e) { 
 			LOGGER.error("下载文件异常：{}",e.getMessage());
