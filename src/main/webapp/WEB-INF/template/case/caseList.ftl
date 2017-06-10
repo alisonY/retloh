@@ -212,7 +212,7 @@
 	        {field:'pdfexportFilepath',title:'pdf报告',width:120,align:"center",
 				formatter:function(value, row, index){
 					var path = row.pdfexportFilepath
-					if (! !path)
+					if (! !path){
 						var str = '<a href="#" name="opera" class="easyui-linkbutton" onclick="downPdf('+"'"+row.pdfexportFilepath+"'"+')" ></a>';  
 						return str;  
 					}
