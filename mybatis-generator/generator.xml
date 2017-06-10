@@ -8,9 +8,9 @@
 		</commentGenerator>
 		<jdbcConnection 
 			driverClass="com.mysql.jdbc.Driver" 
-			connectionURL="jdbc:mysql://172.104.78.181:19217/retloh?useUnicode=true&amp;characterEncoding=utf-8" 
+			connectionURL="jdbc:mysql://27.0.0.1:3306/retloh?useUnicode=true&amp;characterEncoding=utf-8" 
 			userId="root" 
-			password="Holter_2017"
+			password="root"
 		>
 		</jdbcConnection>
 		<javaTypeResolver>
