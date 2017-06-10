@@ -208,7 +208,16 @@
 	        {field:'age',title:'年龄',width:120,align:"center"},
 	        {field:'citizenNumber',title:'身份证号',width:150,align:"center"},
 	        {field:'operationDoctor',title:'操作医生',width:120,align:"center"},
-	        {field:'diagnosticDoctor',title:'诊断医生',width:120,align:"center"}
+	        {field:'diagnosticDoctor',title:'诊断医生',width:120,align:"center"},
+	        {field:'pdfexportFilepath',title:'pdf报告',width:120,align:"center",
+				formatter:function(value, row, index){
+					var path = row.pdfexportFilepath
+					if (! !path)
+						var str = '<a href="#" name="opera" class="easyui-linkbutton" onclick="downPdf('+"'"+row.pdfexportFilepath+"'"+')" ></a>';  
+						return str;  
+					}
+				}
+	        }
 	        ]],
 			onLoadSuccess:function(data){
 		        //调整表格宽高
@@ -297,6 +306,11 @@
 			}
 		},'json');		
 	}
+
+	function downPdf(path){
+		window.open("${rootPath}${BasePath}/down/file.do?filePath="+path);
+	}	
+	
 	
 	function getSelected(){  
         var selected = $('#caseInfo').datagrid('getSelected');
