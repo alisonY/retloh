@@ -27,10 +27,13 @@ public class FileDownloadController {
 	 * /data/opt/
 	 */
 	@RequestMapping(value = "/file", method = RequestMethod.GET, headers = "content-type=" + MediaType.APPLICATION_OCTET_STREAM_VALUE)
-	public void downlog(HttpServletRequest request, HttpServletResponse response, String filePath) { 
+	public void downlog(HttpServletRequest request, HttpServletResponse response, String filePath) {
+		
 		String filename = filePath.substring(filePath.lastIndexOf("/")+1, filePath.length());
+		
 		response.setHeader("Content-disposition", "attachment; filename="+filename);
-		filename = SysConstant.FILE_STORE_FOLDER+filename;
+		
+		filePath = SysConstant.FILE_STORE_FOLDER+filePath;
 		try {
 			LOGGER.error("下载文件URL：{}",filename);
 			FileUtil.fileToStream(response.getOutputStream(), filePath);
