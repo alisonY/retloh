@@ -19,13 +19,11 @@ import com.retloh.utils.FileUtil;
 @RequestMapping("/down")
 public class FileDownloadController {
 	
-	private static final Logger LOGGER     = LoggerFactory.getLogger(CaseInfoController.class);
+	private static final Logger LOGGER     = LoggerFactory.getLogger(FileDownloadController.class);
 	
 	/**
 	 * 下载压缩后的 log文件 
-	 * 
 	 * @return JSON数据
-	 * 
 	 * /data/opt/
 	 */
 	@RequestMapping(value = "/file", method = RequestMethod.GET, headers = "content-type=" + MediaType.APPLICATION_OCTET_STREAM_VALUE)
@@ -40,7 +38,7 @@ public class FileDownloadController {
 		try {
 			FileUtil.fileToStream(response.getOutputStream(), filePath);
 		} catch (IOException e) { 
-			LOGGER.error(e.getMessage());
+			LOGGER.error("下载文件异常：{}",e.getMessage());
 		}
 	}
 

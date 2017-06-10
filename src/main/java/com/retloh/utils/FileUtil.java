@@ -21,7 +21,7 @@ import com.retloh.controller.CaseInfoController;
  */
 public class FileUtil {
 
-    private static final Logger LOGGER     = LoggerFactory.getLogger(CaseInfoController.class);
+    private static final Logger LOGGER     = LoggerFactory.getLogger(FileUtil.class);
 
     private static final int K=1024;
     public FileUtil() {
