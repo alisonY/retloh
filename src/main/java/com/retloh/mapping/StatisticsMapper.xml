@@ -7,7 +7,7 @@
     <result column="data_id" property="dataId" jdbcType="VARCHAR" />
     <result column="data_type" property="dataType" jdbcType="BIT" />
     <result column="action" property="action" jdbcType="BIT" />
-    <result column="operation_time" property="operationTime" jdbcType="BIT" />
+    <result column="operation_time" property="operationTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -106,7 +106,7 @@
       data_type, action, operation_time
       )
     values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{dataId,jdbcType=VARCHAR}, 
-      #{dataType,jdbcType=BIT}, #{action,jdbcType=BIT}, #{operationTime,jdbcType=BIT}
+      #{dataType,jdbcType=BIT}, #{action,jdbcType=BIT}, #{operationTime,jdbcType=TIMESTAMP}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.retloh.model.Statistics" >
@@ -148,7 +148,7 @@
         #{action,jdbcType=BIT},
       </if>
       <if test="operationTime != null" >
-        #{operationTime,jdbcType=BIT},
+        #{operationTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -177,7 +177,7 @@
         action = #{record.action,jdbcType=BIT},
       </if>
       <if test="record.operationTime != null" >
-        operation_time = #{record.operationTime,jdbcType=BIT},
+        operation_time = #{record.operationTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -191,7 +191,7 @@
       data_id = #{record.dataId,jdbcType=VARCHAR},
       data_type = #{record.dataType,jdbcType=BIT},
       action = #{record.action,jdbcType=BIT},
-      operation_time = #{record.operationTime,jdbcType=BIT}
+      operation_time = #{record.operationTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -212,7 +212,7 @@
         action = #{action,jdbcType=BIT},
       </if>
       <if test="operationTime != null" >
-        operation_time = #{operationTime,jdbcType=BIT},
+        operation_time = #{operationTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
@@ -223,7 +223,7 @@
       data_id = #{dataId,jdbcType=VARCHAR},
       data_type = #{dataType,jdbcType=BIT},
       action = #{action,jdbcType=BIT},
-      operation_time = #{operationTime,jdbcType=BIT}
+      operation_time = #{operationTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>

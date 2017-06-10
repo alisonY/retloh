@@ -1,9 +1,11 @@
 package com.retloh.model;
 
+import java.util.Date;
+
 public class CaseInfo {
     private String id;
 
-    private Integer serialNumber;
+    private String serialNumber;
 
     private String name;
 
@@ -13,9 +15,9 @@ public class CaseInfo {
 
     private String sex;
 
-    private Integer clinicNumber;
+    private String clinicNumber;
 
-    private Integer bedNumber;
+    private String bedNumber;
 
     private Integer recordYear;
 
@@ -33,7 +35,7 @@ public class CaseInfo {
 
     private String department;
 
-    private Integer hospitalNumber;
+    private String hospitalNumber;
 
     private String hospitalName;
 
@@ -41,7 +43,7 @@ public class CaseInfo {
 
     private String hospitalAddress;
 
-    private Integer hospitalPhonenum;
+    private String hospitalPhonenum;
 
     private Integer hospitalFax;
 
@@ -55,7 +57,7 @@ public class CaseInfo {
 
     private Integer sumHours;
 
-    private Integer pacemakerParameter;
+    private String pacemakerParameter;
 
     private Integer offset;
 
@@ -69,7 +71,11 @@ public class CaseInfo {
 
     private String caseTag;
 
-    private Integer holterLoadDate;
+    private Date holterLoadDate;
+
+    private Date createTime;
+
+    private Date updateTime;
 
     private String handwrittenConclusion;
 
@@ -87,12 +93,12 @@ public class CaseInfo {
         this.id = id == null ? null : id.trim();
     }
 
-    public Integer getSerialNumber() {
+    public String getSerialNumber() {
         return serialNumber;
     }
 
-    public void setSerialNumber(Integer serialNumber) {
-        this.serialNumber = serialNumber;
+    public void setSerialNumber(String serialNumber) {
+        this.serialNumber = serialNumber == null ? null : serialNumber.trim();
     }
 
     public String getName() {
@@ -127,20 +133,20 @@ public class CaseInfo {
         this.sex = sex == null ? null : sex.trim();
     }
 
-    public Integer getClinicNumber() {
+    public String getClinicNumber() {
         return clinicNumber;
     }
 
-    public void setClinicNumber(Integer clinicNumber) {
-        this.clinicNumber = clinicNumber;
+    public void setClinicNumber(String clinicNumber) {
+        this.clinicNumber = clinicNumber == null ? null : clinicNumber.trim();
     }
 
-    public Integer getBedNumber() {
+    public String getBedNumber() {
         return bedNumber;
     }
 
-    public void setBedNumber(Integer bedNumber) {
-        this.bedNumber = bedNumber;
+    public void setBedNumber(String bedNumber) {
+        this.bedNumber = bedNumber == null ? null : bedNumber.trim();
     }
 
     public Integer getRecordYear() {
@@ -207,12 +213,12 @@ public class CaseInfo {
         this.department = department == null ? null : department.trim();
     }
 
-    public Integer getHospitalNumber() {
+    public String getHospitalNumber() {
         return hospitalNumber;
     }
 
-    public void setHospitalNumber(Integer hospitalNumber) {
-        this.hospitalNumber = hospitalNumber;
+    public void setHospitalNumber(String hospitalNumber) {
+        this.hospitalNumber = hospitalNumber == null ? null : hospitalNumber.trim();
     }
 
     public String getHospitalName() {
@@ -239,12 +245,12 @@ public class CaseInfo {
         this.hospitalAddress = hospitalAddress == null ? null : hospitalAddress.trim();
     }
 
-    public Integer getHospitalPhonenum() {
+    public String getHospitalPhonenum() {
         return hospitalPhonenum;
     }
 
-    public void setHospitalPhonenum(Integer hospitalPhonenum) {
-        this.hospitalPhonenum = hospitalPhonenum;
+    public void setHospitalPhonenum(String hospitalPhonenum) {
+        this.hospitalPhonenum = hospitalPhonenum == null ? null : hospitalPhonenum.trim();
     }
 
     public Integer getHospitalFax() {
@@ -295,12 +301,12 @@ public class CaseInfo {
         this.sumHours = sumHours;
     }
 
-    public Integer getPacemakerParameter() {
+    public String getPacemakerParameter() {
         return pacemakerParameter;
     }
 
-    public void setPacemakerParameter(Integer pacemakerParameter) {
-        this.pacemakerParameter = pacemakerParameter;
+    public void setPacemakerParameter(String pacemakerParameter) {
+        this.pacemakerParameter = pacemakerParameter == null ? null : pacemakerParameter.trim();
     }
 
     public Integer getOffset() {
@@ -351,12 +357,28 @@ public class CaseInfo {
         this.caseTag = caseTag == null ? null : caseTag.trim();
     }
 
-    public Integer getHolterLoadDate() {
+    public Date getHolterLoadDate() {
         return holterLoadDate;
     }
 
-    public void setHolterLoadDate(Integer holterLoadDate) {
+    public void setHolterLoadDate(Date holterLoadDate) {
         this.holterLoadDate = holterLoadDate;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
     }
 
     public String getHandwrittenConclusion() {

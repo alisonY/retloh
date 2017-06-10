@@ -1,5 +1,7 @@
 package com.retloh.model;
 
+import java.util.Date;
+
 public class Statistics {
     private String id;
 
@@ -11,7 +13,7 @@ public class Statistics {
 
     private Boolean action;
 
-    private Boolean operationTime;
+    private Date operationTime;
 
     public String getId() {
         return id;
@@ -53,11 +55,11 @@ public class Statistics {
         this.action = action;
     }
 
-    public Boolean getOperationTime() {
+    public Date getOperationTime() {
         return operationTime;
     }
 
-    public void setOperationTime(Boolean operationTime) {
+    public void setOperationTime(Date operationTime) {
         this.operationTime = operationTime;
     }
 }

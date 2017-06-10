@@ -183,14 +183,29 @@
 			columns:[[
 			{field:'ck',checkbox:true},
 	        {field:'id',title:'id',width:120,align:"center"},
+	        {field:'status',title:'状态',width:120,align:"center",
+	        	formatter:function(val,rec){
+	        		if (val==0)
+	        			{return '待上传数据包';}
+	        		if (val==1)
+	        			{return '已上传待分析';}
+	        		if (val==2)
+	        			{return '待分析下载中';}
+	        		if (val==3)
+	        			{return '已下载待分析';}
+	        		if (val==4)
+	        			{return '已分析回传中';}
+	        		if (val==5)
+	        			{return '已回传';}
+	        	}
+	        },
 	        {field:'name',title:'姓名',width:120,align:"center"},
-	        {field:'operationDoctor',title:'操作医生',width:120,align:"center"},
-	        {field:'diagnosticDoctor',title:'诊断医生',width:120,align:"center"},
 	        {field:'serialNumber',title:'编号',width:120,align:"center"},
-	        {field:'holterLoadDate',title:'回放时间',width:120,align:"center"},
 	        {field:'sex',title:'性别',width:120,align:"center"},
 	        {field:'age',title:'年龄',width:120,align:"center"},
-	        {field:'serialNumber',title:'身份证号',width:120,align:"center"}
+	        {field:'citizenNumber',title:'身份证号',width:120,align:"center"},
+	        {field:'operationDoctor',title:'操作医生',width:120,align:"center"},
+	        {field:'diagnosticDoctor',title:'诊断医生',width:120,align:"center"}
 	        ]],
 			onLoadSuccess:function(data){
 		        //调整表格宽高

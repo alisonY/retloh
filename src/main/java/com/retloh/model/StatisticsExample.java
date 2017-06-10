@@ -1,6 +1,7 @@
 package com.retloh.model;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class StatisticsExample {
@@ -444,52 +445,52 @@ public class StatisticsExample {
             return (Criteria) this;
         }
 
-        public Criteria andOperationTimeEqualTo(Boolean value) {
+        public Criteria andOperationTimeEqualTo(Date value) {
             addCriterion("operation_time =", value, "operationTime");
             return (Criteria) this;
         }
 
-        public Criteria andOperationTimeNotEqualTo(Boolean value) {
+        public Criteria andOperationTimeNotEqualTo(Date value) {
             addCriterion("operation_time <>", value, "operationTime");
             return (Criteria) this;
         }
 
-        public Criteria andOperationTimeGreaterThan(Boolean value) {
+        public Criteria andOperationTimeGreaterThan(Date value) {
             addCriterion("operation_time >", value, "operationTime");
             return (Criteria) this;
         }
 
-        public Criteria andOperationTimeGreaterThanOrEqualTo(Boolean value) {
+        public Criteria andOperationTimeGreaterThanOrEqualTo(Date value) {
             addCriterion("operation_time >=", value, "operationTime");
             return (Criteria) this;
         }
 
-        public Criteria andOperationTimeLessThan(Boolean value) {
+        public Criteria andOperationTimeLessThan(Date value) {
             addCriterion("operation_time <", value, "operationTime");
             return (Criteria) this;
         }
 
-        public Criteria andOperationTimeLessThanOrEqualTo(Boolean value) {
+        public Criteria andOperationTimeLessThanOrEqualTo(Date value) {
             addCriterion("operation_time <=", value, "operationTime");
             return (Criteria) this;
         }
 
-        public Criteria andOperationTimeIn(List<Boolean> values) {
+        public Criteria andOperationTimeIn(List<Date> values) {
             addCriterion("operation_time in", values, "operationTime");
             return (Criteria) this;
         }
 
-        public Criteria andOperationTimeNotIn(List<Boolean> values) {
+        public Criteria andOperationTimeNotIn(List<Date> values) {
             addCriterion("operation_time not in", values, "operationTime");
             return (Criteria) this;
         }
 
-        public Criteria andOperationTimeBetween(Boolean value1, Boolean value2) {
+        public Criteria andOperationTimeBetween(Date value1, Date value2) {
             addCriterion("operation_time between", value1, value2, "operationTime");
             return (Criteria) this;
         }
 
-        public Criteria andOperationTimeNotBetween(Boolean value1, Boolean value2) {
+        public Criteria andOperationTimeNotBetween(Date value1, Date value2) {
             addCriterion("operation_time not between", value1, value2, "operationTime");
             return (Criteria) this;
         }
