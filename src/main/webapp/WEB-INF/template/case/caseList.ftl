@@ -78,6 +78,9 @@
 			        </div>
 			        <div data-options="region:'center'" style="padding:20px">
 			        		<div style="margin-bottom:20px">
+								<input class="easyui-textbox" name="citizenNumber" style="width:100%" data-options="label:'身份证号:',required:true">
+							</div>
+			        		<div style="margin-bottom:20px">
 								<input class="easyui-textbox" name="holterLoadDate" style="width:100%;" data-options="label:'回放时间:'">
 							</div>
 			        		<div style="margin-bottom:20px">
@@ -183,7 +186,7 @@
 			columns:[[
 			{field:'ck',checkbox:true},
 	        {field:'id',title:'id',width:120,align:"center"},
-	        {field:'status',title:'状态',width:120,align:"center",
+	        {field:'status',title:'状态',width:100,align:"center",
 	        	formatter:function(val,rec){
 	        		if (val==0)
 	        			{return '待上传数据包';}
@@ -203,7 +206,7 @@
 	        {field:'serialNumber',title:'编号',width:120,align:"center"},
 	        {field:'sex',title:'性别',width:120,align:"center"},
 	        {field:'age',title:'年龄',width:120,align:"center"},
-	        {field:'citizenNumber',title:'身份证号',width:120,align:"center"},
+	        {field:'citizenNumber',title:'身份证号',width:150,align:"center"},
 	        {field:'operationDoctor',title:'操作医生',width:120,align:"center"},
 	        {field:'diagnosticDoctor',title:'诊断医生',width:120,align:"center"}
 	        ]],

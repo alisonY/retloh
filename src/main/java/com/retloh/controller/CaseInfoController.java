@@ -1,13 +1,10 @@
 package com.retloh.controller;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.StringUtils;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +23,6 @@ import com.retloh.utils.JacksonUtils;
 @Controller
 @RequestMapping("/case")
 public class CaseInfoController {
-	
 	
 	private static final Logger LOGGER     = LoggerFactory.getLogger(CaseInfoController.class);
 	/*
@@ -149,5 +145,4 @@ public class CaseInfoController {
 		String resultJson = JacksonMapper.beanToJson(map);
 		return resultJson;
     }
-	
 }
