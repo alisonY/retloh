@@ -213,7 +213,7 @@
 				formatter:function(value, row, index){
 					var path = row.pdfexportFilepath;
 					if (! !path){
-						var directUrl = "${rootPath}${BasePath}"+path;
+						var directUrl = "${rootPath}${BasePath}"+"data/"+path;
 						var str = '<a href="#" name="pdfDown" class="easyui-linkbutton" onclick="downPdf('+"'"+row.pdfexportFilepath+"'"+')" ></a>'+
 								  '<a href="#" name="pdfView" class="easyui-linkbutton" onclick="viewPdf('+"'"+directUrl+"'"+')" ></a>';
 						return str;  
