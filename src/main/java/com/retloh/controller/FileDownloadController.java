@@ -34,12 +34,12 @@ public class FileDownloadController {
 		//File fOut=new File(filePath.replace("-", SysConstant.FILE_STEP));
 		//ZIPUtil.zip(fOut,zipFile,fileName);
 		
-		response.setHeader("Content-disposition", "attachment; filename=log.zip");
+		String filename = filePath.substring(filePath.lastIndexOf("/")+1, filePath.length());
+		response.setHeader("Content-disposition", "attachment; filename="+filename);
 		try {
 			FileUtil.fileToStream(response.getOutputStream(), filePath);
 		} catch (IOException e) { 
 			LOGGER.error("下载文件异常：{}",e.getMessage());
 		}
 	}
-
 }

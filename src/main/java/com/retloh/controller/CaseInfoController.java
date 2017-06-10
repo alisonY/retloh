@@ -127,6 +127,7 @@ public class CaseInfoController {
 					info.setId(UUID.randomUUID().toString());
 					info.setCreateTime(new Date());
 					info.setUpdateTime(new Date());
+					info.setStatus(0);
 					int flag = caseInfoServices.insert(info);
 					if(flag>0){
 						map.put("status", true);
