@@ -1525,52 +1525,62 @@ public class CaseInfoExample {
             return (Criteria) this;
         }
 
-        public Criteria andHospitalFaxEqualTo(Integer value) {
+        public Criteria andHospitalFaxEqualTo(String value) {
             addCriterion("hospital_fax =", value, "hospitalFax");
             return (Criteria) this;
         }
 
-        public Criteria andHospitalFaxNotEqualTo(Integer value) {
+        public Criteria andHospitalFaxNotEqualTo(String value) {
             addCriterion("hospital_fax <>", value, "hospitalFax");
             return (Criteria) this;
         }
 
-        public Criteria andHospitalFaxGreaterThan(Integer value) {
+        public Criteria andHospitalFaxGreaterThan(String value) {
             addCriterion("hospital_fax >", value, "hospitalFax");
             return (Criteria) this;
         }
 
-        public Criteria andHospitalFaxGreaterThanOrEqualTo(Integer value) {
+        public Criteria andHospitalFaxGreaterThanOrEqualTo(String value) {
             addCriterion("hospital_fax >=", value, "hospitalFax");
             return (Criteria) this;
         }
 
-        public Criteria andHospitalFaxLessThan(Integer value) {
+        public Criteria andHospitalFaxLessThan(String value) {
             addCriterion("hospital_fax <", value, "hospitalFax");
             return (Criteria) this;
         }
 
-        public Criteria andHospitalFaxLessThanOrEqualTo(Integer value) {
+        public Criteria andHospitalFaxLessThanOrEqualTo(String value) {
             addCriterion("hospital_fax <=", value, "hospitalFax");
             return (Criteria) this;
         }
 
-        public Criteria andHospitalFaxIn(List<Integer> values) {
+        public Criteria andHospitalFaxLike(String value) {
+            addCriterion("hospital_fax like", value, "hospitalFax");
+            return (Criteria) this;
+        }
+
+        public Criteria andHospitalFaxNotLike(String value) {
+            addCriterion("hospital_fax not like", value, "hospitalFax");
+            return (Criteria) this;
+        }
+
+        public Criteria andHospitalFaxIn(List<String> values) {
             addCriterion("hospital_fax in", values, "hospitalFax");
             return (Criteria) this;
         }
 
-        public Criteria andHospitalFaxNotIn(List<Integer> values) {
+        public Criteria andHospitalFaxNotIn(List<String> values) {
             addCriterion("hospital_fax not in", values, "hospitalFax");
             return (Criteria) this;
         }
 
-        public Criteria andHospitalFaxBetween(Integer value1, Integer value2) {
+        public Criteria andHospitalFaxBetween(String value1, String value2) {
             addCriterion("hospital_fax between", value1, value2, "hospitalFax");
             return (Criteria) this;
         }
 
-        public Criteria andHospitalFaxNotBetween(Integer value1, Integer value2) {
+        public Criteria andHospitalFaxNotBetween(String value1, String value2) {
             addCriterion("hospital_fax not between", value1, value2, "hospitalFax");
             return (Criteria) this;
         }

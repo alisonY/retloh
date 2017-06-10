@@ -45,7 +45,7 @@ public class CaseInfo {
 
     private String hospitalPhonenum;
 
-    private Integer hospitalFax;
+    private String hospitalFax;
 
     private Integer patientYear;
 
@@ -253,12 +253,12 @@ public class CaseInfo {
         this.hospitalPhonenum = hospitalPhonenum == null ? null : hospitalPhonenum.trim();
     }
 
-    public Integer getHospitalFax() {
+    public String getHospitalFax() {
         return hospitalFax;
     }
 
-    public void setHospitalFax(Integer hospitalFax) {
-        this.hospitalFax = hospitalFax;
+    public void setHospitalFax(String hospitalFax) {
+        this.hospitalFax = hospitalFax == null ? null : hospitalFax.trim();
     }
 
     public Integer getPatientYear() {

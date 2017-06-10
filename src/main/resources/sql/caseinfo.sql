@@ -55,7 +55,7 @@ CREATE TABLE `caseinfo` (
   `default_hospital_name` varchar(150) DEFAULT NULL COMMENT '默认医院名称',
   `hospital_address` varchar(150) DEFAULT NULL COMMENT '医院地址',
   `hospital_phonenum` varchar(20) DEFAULT '0' COMMENT '医院电话',
-  `hospital_fax` int(15) DEFAULT '0' COMMENT '医院传真',
+  `hospital_fax` varchar(20) DEFAULT '0' COMMENT '医院传真',
   `patient_year` int(11) DEFAULT '0' COMMENT '患者年',
   `patient_month` int(11) DEFAULT '0' COMMENT '患者月',
   `patient_day` int(11) DEFAULT '0' COMMENT '患者日',

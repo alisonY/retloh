@@ -23,7 +23,7 @@
     <result column="default_hospital_name" property="defaultHospitalName" jdbcType="VARCHAR" />
     <result column="hospital_address" property="hospitalAddress" jdbcType="VARCHAR" />
     <result column="hospital_phonenum" property="hospitalPhonenum" jdbcType="VARCHAR" />
-    <result column="hospital_fax" property="hospitalFax" jdbcType="INTEGER" />
+    <result column="hospital_fax" property="hospitalFax" jdbcType="VARCHAR" />
     <result column="patient_year" property="patientYear" jdbcType="INTEGER" />
     <result column="patient_month" property="patientMonth" jdbcType="INTEGER" />
     <result column="patient_day" property="patientDay" jdbcType="INTEGER" />
@@ -164,7 +164,7 @@
       #{operationDoctor,jdbcType=VARCHAR}, #{diagnosticDoctor,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
       #{department,jdbcType=VARCHAR}, #{hospitalNumber,jdbcType=VARCHAR}, #{hospitalName,jdbcType=VARCHAR}, 
       #{defaultHospitalName,jdbcType=VARCHAR}, #{hospitalAddress,jdbcType=VARCHAR}, #{hospitalPhonenum,jdbcType=VARCHAR}, 
-      #{hospitalFax,jdbcType=INTEGER}, #{patientYear,jdbcType=INTEGER}, #{patientMonth,jdbcType=INTEGER}, 
+      #{hospitalFax,jdbcType=VARCHAR}, #{patientYear,jdbcType=INTEGER}, #{patientMonth,jdbcType=INTEGER}, 
       #{patientDay,jdbcType=INTEGER}, #{daolianshu,jdbcType=INTEGER}, #{sumHours,jdbcType=INTEGER}, 
       #{pacemakerParameter,jdbcType=VARCHAR}, #{offset,jdbcType=INTEGER}, #{suggest,jdbcType=VARCHAR}, 
       #{conclusion,jdbcType=VARCHAR}, #{yongyaoshuoming,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}, 
@@ -364,7 +364,7 @@
         #{hospitalPhonenum,jdbcType=VARCHAR},
       </if>
       <if test="hospitalFax != null" >
-        #{hospitalFax,jdbcType=INTEGER},
+        #{hospitalFax,jdbcType=VARCHAR},
       </if>
       <if test="patientYear != null" >
         #{patientYear,jdbcType=INTEGER},
@@ -498,7 +498,7 @@
         hospital_phonenum = #{record.hospitalPhonenum,jdbcType=VARCHAR},
       </if>
       <if test="record.hospitalFax != null" >
-        hospital_fax = #{record.hospitalFax,jdbcType=INTEGER},
+        hospital_fax = #{record.hospitalFax,jdbcType=VARCHAR},
       </if>
       <if test="record.patientYear != null" >
         patient_year = #{record.patientYear,jdbcType=INTEGER},
@@ -585,7 +585,7 @@
       default_hospital_name = #{record.defaultHospitalName,jdbcType=VARCHAR},
       hospital_address = #{record.hospitalAddress,jdbcType=VARCHAR},
       hospital_phonenum = #{record.hospitalPhonenum,jdbcType=VARCHAR},
-      hospital_fax = #{record.hospitalFax,jdbcType=INTEGER},
+      hospital_fax = #{record.hospitalFax,jdbcType=VARCHAR},
       patient_year = #{record.patientYear,jdbcType=INTEGER},
       patient_month = #{record.patientMonth,jdbcType=INTEGER},
       patient_day = #{record.patientDay,jdbcType=INTEGER},
@@ -673,7 +673,7 @@
         hospital_phonenum = #{hospitalPhonenum,jdbcType=VARCHAR},
       </if>
       <if test="hospitalFax != null" >
-        hospital_fax = #{hospitalFax,jdbcType=INTEGER},
+        hospital_fax = #{hospitalFax,jdbcType=VARCHAR},
       </if>
       <if test="patientYear != null" >
         patient_year = #{patientYear,jdbcType=INTEGER},
@@ -757,7 +757,7 @@
       default_hospital_name = #{defaultHospitalName,jdbcType=VARCHAR},
       hospital_address = #{hospitalAddress,jdbcType=VARCHAR},
       hospital_phonenum = #{hospitalPhonenum,jdbcType=VARCHAR},
-      hospital_fax = #{hospitalFax,jdbcType=INTEGER},
+      hospital_fax = #{hospitalFax,jdbcType=VARCHAR},
       patient_year = #{patientYear,jdbcType=INTEGER},
       patient_month = #{patientMonth,jdbcType=INTEGER},
       patient_day = #{patientDay,jdbcType=INTEGER},
