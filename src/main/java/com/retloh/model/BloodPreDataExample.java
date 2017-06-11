@@ -175,73 +175,73 @@ public class BloodPreDataExample {
             return (Criteria) this;
         }
 
-        public Criteria andPatientIdIsNull() {
-            addCriterion("patient_id is null");
+        public Criteria andIntervalIdIsNull() {
+            addCriterion("interval_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andPatientIdIsNotNull() {
-            addCriterion("patient_id is not null");
+        public Criteria andIntervalIdIsNotNull() {
+            addCriterion("interval_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andPatientIdEqualTo(String value) {
-            addCriterion("patient_id =", value, "patientId");
+        public Criteria andIntervalIdEqualTo(String value) {
+            addCriterion("interval_id =", value, "intervalId");
             return (Criteria) this;
         }
 
-        public Criteria andPatientIdNotEqualTo(String value) {
-            addCriterion("patient_id <>", value, "patientId");
+        public Criteria andIntervalIdNotEqualTo(String value) {
+            addCriterion("interval_id <>", value, "intervalId");
             return (Criteria) this;
         }
 
-        public Criteria andPatientIdGreaterThan(String value) {
-            addCriterion("patient_id >", value, "patientId");
+        public Criteria andIntervalIdGreaterThan(String value) {
+            addCriterion("interval_id >", value, "intervalId");
             return (Criteria) this;
         }
 
-        public Criteria andPatientIdGreaterThanOrEqualTo(String value) {
-            addCriterion("patient_id >=", value, "patientId");
+        public Criteria andIntervalIdGreaterThanOrEqualTo(String value) {
+            addCriterion("interval_id >=", value, "intervalId");
             return (Criteria) this;
         }
 
-        public Criteria andPatientIdLessThan(String value) {
-            addCriterion("patient_id <", value, "patientId");
+        public Criteria andIntervalIdLessThan(String value) {
+            addCriterion("interval_id <", value, "intervalId");
             return (Criteria) this;
         }
 
-        public Criteria andPatientIdLessThanOrEqualTo(String value) {
-            addCriterion("patient_id <=", value, "patientId");
+        public Criteria andIntervalIdLessThanOrEqualTo(String value) {
+            addCriterion("interval_id <=", value, "intervalId");
             return (Criteria) this;
         }
 
-        public Criteria andPatientIdLike(String value) {
-            addCriterion("patient_id like", value, "patientId");
+        public Criteria andIntervalIdLike(String value) {
+            addCriterion("interval_id like", value, "intervalId");
             return (Criteria) this;
         }
 
-        public Criteria andPatientIdNotLike(String value) {
-            addCriterion("patient_id not like", value, "patientId");
+        public Criteria andIntervalIdNotLike(String value) {
+            addCriterion("interval_id not like", value, "intervalId");
             return (Criteria) this;
         }
 
-        public Criteria andPatientIdIn(List<String> values) {
-            addCriterion("patient_id in", values, "patientId");
+        public Criteria andIntervalIdIn(List<String> values) {
+            addCriterion("interval_id in", values, "intervalId");
             return (Criteria) this;
         }
 
-        public Criteria andPatientIdNotIn(List<String> values) {
-            addCriterion("patient_id not in", values, "patientId");
+        public Criteria andIntervalIdNotIn(List<String> values) {
+            addCriterion("interval_id not in", values, "intervalId");
             return (Criteria) this;
         }
 
-        public Criteria andPatientIdBetween(String value1, String value2) {
-            addCriterion("patient_id between", value1, value2, "patientId");
+        public Criteria andIntervalIdBetween(String value1, String value2) {
+            addCriterion("interval_id between", value1, value2, "intervalId");
             return (Criteria) this;
         }
 
-        public Criteria andPatientIdNotBetween(String value1, String value2) {
-            addCriterion("patient_id not between", value1, value2, "patientId");
+        public Criteria andIntervalIdNotBetween(String value1, String value2) {
+            addCriterion("interval_id not between", value1, value2, "intervalId");
             return (Criteria) this;
         }
 

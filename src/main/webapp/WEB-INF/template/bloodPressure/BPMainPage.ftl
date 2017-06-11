@@ -37,7 +37,7 @@
 
 
 	function datagrid(toolbar){
-		var urls = "";
+		var urls = "${rootPath}${BasePath}/bp/info/getList.do";
 		$('#bpInfo').datagrid({
 			rownumbers:true,
 			pagination:true,

@@ -175,73 +175,73 @@ public class BloodPreIntervalExample {
             return (Criteria) this;
         }
 
-        public Criteria andPatientIdIsNull() {
-            addCriterion("patient_id is null");
+        public Criteria andInfoIdIsNull() {
+            addCriterion("info_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andPatientIdIsNotNull() {
-            addCriterion("patient_id is not null");
+        public Criteria andInfoIdIsNotNull() {
+            addCriterion("info_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andPatientIdEqualTo(String value) {
-            addCriterion("patient_id =", value, "patientId");
+        public Criteria andInfoIdEqualTo(String value) {
+            addCriterion("info_id =", value, "infoId");
             return (Criteria) this;
         }
 
-        public Criteria andPatientIdNotEqualTo(String value) {
-            addCriterion("patient_id <>", value, "patientId");
+        public Criteria andInfoIdNotEqualTo(String value) {
+            addCriterion("info_id <>", value, "infoId");
             return (Criteria) this;
         }
 
-        public Criteria andPatientIdGreaterThan(String value) {
-            addCriterion("patient_id >", value, "patientId");
+        public Criteria andInfoIdGreaterThan(String value) {
+            addCriterion("info_id >", value, "infoId");
             return (Criteria) this;
         }
 
-        public Criteria andPatientIdGreaterThanOrEqualTo(String value) {
-            addCriterion("patient_id >=", value, "patientId");
+        public Criteria andInfoIdGreaterThanOrEqualTo(String value) {
+            addCriterion("info_id >=", value, "infoId");
             return (Criteria) this;
         }
 
-        public Criteria andPatientIdLessThan(String value) {
-            addCriterion("patient_id <", value, "patientId");
+        public Criteria andInfoIdLessThan(String value) {
+            addCriterion("info_id <", value, "infoId");
             return (Criteria) this;
         }
 
-        public Criteria andPatientIdLessThanOrEqualTo(String value) {
-            addCriterion("patient_id <=", value, "patientId");
+        public Criteria andInfoIdLessThanOrEqualTo(String value) {
+            addCriterion("info_id <=", value, "infoId");
             return (Criteria) this;
         }
 
-        public Criteria andPatientIdLike(String value) {
-            addCriterion("patient_id like", value, "patientId");
+        public Criteria andInfoIdLike(String value) {
+            addCriterion("info_id like", value, "infoId");
             return (Criteria) this;
         }
 
-        public Criteria andPatientIdNotLike(String value) {
-            addCriterion("patient_id not like", value, "patientId");
+        public Criteria andInfoIdNotLike(String value) {
+            addCriterion("info_id not like", value, "infoId");
             return (Criteria) this;
         }
 
-        public Criteria andPatientIdIn(List<String> values) {
-            addCriterion("patient_id in", values, "patientId");
+        public Criteria andInfoIdIn(List<String> values) {
+            addCriterion("info_id in", values, "infoId");
             return (Criteria) this;
         }
 
-        public Criteria andPatientIdNotIn(List<String> values) {
-            addCriterion("patient_id not in", values, "patientId");
+        public Criteria andInfoIdNotIn(List<String> values) {
+            addCriterion("info_id not in", values, "infoId");
             return (Criteria) this;
         }
 
-        public Criteria andPatientIdBetween(String value1, String value2) {
-            addCriterion("patient_id between", value1, value2, "patientId");
+        public Criteria andInfoIdBetween(String value1, String value2) {
+            addCriterion("info_id between", value1, value2, "infoId");
             return (Criteria) this;
         }
 
-        public Criteria andPatientIdNotBetween(String value1, String value2) {
-            addCriterion("patient_id not between", value1, value2, "patientId");
+        public Criteria andInfoIdNotBetween(String value1, String value2) {
+            addCriterion("info_id not between", value1, value2, "infoId");
             return (Criteria) this;
         }
 
@@ -435,52 +435,52 @@ public class BloodPreIntervalExample {
             return (Criteria) this;
         }
 
-        public Criteria andDayIntervalEqualTo(Date value) {
+        public Criteria andDayIntervalEqualTo(Integer value) {
             addCriterion("day_interval =", value, "dayInterval");
             return (Criteria) this;
         }
 
-        public Criteria andDayIntervalNotEqualTo(Date value) {
+        public Criteria andDayIntervalNotEqualTo(Integer value) {
             addCriterion("day_interval <>", value, "dayInterval");
             return (Criteria) this;
         }
 
-        public Criteria andDayIntervalGreaterThan(Date value) {
+        public Criteria andDayIntervalGreaterThan(Integer value) {
             addCriterion("day_interval >", value, "dayInterval");
             return (Criteria) this;
         }
 
-        public Criteria andDayIntervalGreaterThanOrEqualTo(Date value) {
+        public Criteria andDayIntervalGreaterThanOrEqualTo(Integer value) {
             addCriterion("day_interval >=", value, "dayInterval");
             return (Criteria) this;
         }
 
-        public Criteria andDayIntervalLessThan(Date value) {
+        public Criteria andDayIntervalLessThan(Integer value) {
             addCriterion("day_interval <", value, "dayInterval");
             return (Criteria) this;
         }
 
-        public Criteria andDayIntervalLessThanOrEqualTo(Date value) {
+        public Criteria andDayIntervalLessThanOrEqualTo(Integer value) {
             addCriterion("day_interval <=", value, "dayInterval");
             return (Criteria) this;
         }
 
-        public Criteria andDayIntervalIn(List<Date> values) {
+        public Criteria andDayIntervalIn(List<Integer> values) {
             addCriterion("day_interval in", values, "dayInterval");
             return (Criteria) this;
         }
 
-        public Criteria andDayIntervalNotIn(List<Date> values) {
+        public Criteria andDayIntervalNotIn(List<Integer> values) {
             addCriterion("day_interval not in", values, "dayInterval");
             return (Criteria) this;
         }
 
-        public Criteria andDayIntervalBetween(Date value1, Date value2) {
+        public Criteria andDayIntervalBetween(Integer value1, Integer value2) {
             addCriterion("day_interval between", value1, value2, "dayInterval");
             return (Criteria) this;
         }
 
-        public Criteria andDayIntervalNotBetween(Date value1, Date value2) {
+        public Criteria andDayIntervalNotBetween(Integer value1, Integer value2) {
             addCriterion("day_interval not between", value1, value2, "dayInterval");
             return (Criteria) this;
         }
@@ -555,52 +555,52 @@ public class BloodPreIntervalExample {
             return (Criteria) this;
         }
 
-        public Criteria andNightIntervalEqualTo(Date value) {
+        public Criteria andNightIntervalEqualTo(Integer value) {
             addCriterion("night_interval =", value, "nightInterval");
             return (Criteria) this;
         }
 
-        public Criteria andNightIntervalNotEqualTo(Date value) {
+        public Criteria andNightIntervalNotEqualTo(Integer value) {
             addCriterion("night_interval <>", value, "nightInterval");
             return (Criteria) this;
         }
 
-        public Criteria andNightIntervalGreaterThan(Date value) {
+        public Criteria andNightIntervalGreaterThan(Integer value) {
             addCriterion("night_interval >", value, "nightInterval");
             return (Criteria) this;
         }
 
-        public Criteria andNightIntervalGreaterThanOrEqualTo(Date value) {
+        public Criteria andNightIntervalGreaterThanOrEqualTo(Integer value) {
             addCriterion("night_interval >=", value, "nightInterval");
             return (Criteria) this;
         }
 
-        public Criteria andNightIntervalLessThan(Date value) {
+        public Criteria andNightIntervalLessThan(Integer value) {
             addCriterion("night_interval <", value, "nightInterval");
             return (Criteria) this;
         }
 
-        public Criteria andNightIntervalLessThanOrEqualTo(Date value) {
+        public Criteria andNightIntervalLessThanOrEqualTo(Integer value) {
             addCriterion("night_interval <=", value, "nightInterval");
             return (Criteria) this;
         }
 
-        public Criteria andNightIntervalIn(List<Date> values) {
+        public Criteria andNightIntervalIn(List<Integer> values) {
             addCriterion("night_interval in", values, "nightInterval");
             return (Criteria) this;
         }
 
-        public Criteria andNightIntervalNotIn(List<Date> values) {
+        public Criteria andNightIntervalNotIn(List<Integer> values) {
             addCriterion("night_interval not in", values, "nightInterval");
             return (Criteria) this;
         }
 
-        public Criteria andNightIntervalBetween(Date value1, Date value2) {
+        public Criteria andNightIntervalBetween(Integer value1, Integer value2) {
             addCriterion("night_interval between", value1, value2, "nightInterval");
             return (Criteria) this;
         }
 
-        public Criteria andNightIntervalNotBetween(Date value1, Date value2) {
+        public Criteria andNightIntervalNotBetween(Integer value1, Integer value2) {
             addCriterion("night_interval not between", value1, value2, "nightInterval");
             return (Criteria) this;
         }

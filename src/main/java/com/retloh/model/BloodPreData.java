@@ -5,7 +5,7 @@ import java.util.Date;
 public class BloodPreData {
     private String id;
 
-    private String patientId;
+    private String intervalId;
 
     private Integer count;
 
@@ -27,12 +27,12 @@ public class BloodPreData {
         this.id = id == null ? null : id.trim();
     }
 
-    public String getPatientId() {
-        return patientId;
+    public String getIntervalId() {
+        return intervalId;
     }
 
-    public void setPatientId(String patientId) {
-        this.patientId = patientId == null ? null : patientId.trim();
+    public void setIntervalId(String intervalId) {
+        this.intervalId = intervalId == null ? null : intervalId.trim();
     }
 
     public Integer getCount() {

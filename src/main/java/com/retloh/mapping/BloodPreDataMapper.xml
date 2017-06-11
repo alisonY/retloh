@@ -3,7 +3,7 @@
 <mapper namespace="com.retloh.dao.BloodPreDataMapper" >
   <resultMap id="BaseResultMap" type="com.retloh.model.BloodPreData" >
     <id column="id" property="id" jdbcType="VARCHAR" />
-    <result column="patient_id" property="patientId" jdbcType="VARCHAR" />
+    <result column="interval_id" property="intervalId" jdbcType="VARCHAR" />
     <result column="count" property="count" jdbcType="INTEGER" />
     <result column="systole" property="systole" jdbcType="INTEGER" />
     <result column="diastole" property="diastole" jdbcType="INTEGER" />
@@ -70,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, patient_id, count, systole, diastole, hr, data_no, caiji_date
+    id, interval_id, count, systole, diastole, hr, data_no, caiji_date
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.retloh.model.BloodPreDataExample" >
     select
@@ -104,10 +104,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.retloh.model.BloodPreData" >
-    insert into blood_pressure_data (id, patient_id, count, 
+    insert into blood_pressure_data (id, interval_id, count, 
       systole, diastole, hr, 
       data_no, caiji_date)
-    values (#{id,jdbcType=VARCHAR}, #{patientId,jdbcType=VARCHAR}, #{count,jdbcType=INTEGER}, 
+    values (#{id,jdbcType=VARCHAR}, #{intervalId,jdbcType=VARCHAR}, #{count,jdbcType=INTEGER}, 
       #{systole,jdbcType=INTEGER}, #{diastole,jdbcType=INTEGER}, #{hr,jdbcType=INTEGER}, 
       #{dataNo,jdbcType=INTEGER}, #{caijiDate,jdbcType=TIMESTAMP})
   </insert>
@@ -117,8 +117,8 @@
       <if test="id != null" >
         id,
       </if>
-      <if test="patientId != null" >
-        patient_id,
+      <if test="intervalId != null" >
+        interval_id,
       </if>
       <if test="count != null" >
         count,
@@ -143,8 +143,8 @@
       <if test="id != null" >
         #{id,jdbcType=VARCHAR},
       </if>
-      <if test="patientId != null" >
-        #{patientId,jdbcType=VARCHAR},
+      <if test="intervalId != null" >
+        #{intervalId,jdbcType=VARCHAR},
       </if>
       <if test="count != null" >
         #{count,jdbcType=INTEGER},
@@ -178,8 +178,8 @@
       <if test="record.id != null" >
         id = #{record.id,jdbcType=VARCHAR},
       </if>
-      <if test="record.patientId != null" >
-        patient_id = #{record.patientId,jdbcType=VARCHAR},
+      <if test="record.intervalId != null" >
+        interval_id = #{record.intervalId,jdbcType=VARCHAR},
       </if>
       <if test="record.count != null" >
         count = #{record.count,jdbcType=INTEGER},
@@ -207,7 +207,7 @@
   <update id="updateByExample" parameterType="map" >
     update blood_pressure_data
     set id = #{record.id,jdbcType=VARCHAR},
-      patient_id = #{record.patientId,jdbcType=VARCHAR},
+      interval_id = #{record.intervalId,jdbcType=VARCHAR},
       count = #{record.count,jdbcType=INTEGER},
       systole = #{record.systole,jdbcType=INTEGER},
       diastole = #{record.diastole,jdbcType=INTEGER},
@@ -221,8 +221,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.retloh.model.BloodPreData" >
     update blood_pressure_data
     <set >
-      <if test="patientId != null" >
-        patient_id = #{patientId,jdbcType=VARCHAR},
+      <if test="intervalId != null" >
+        interval_id = #{intervalId,jdbcType=VARCHAR},
       </if>
       <if test="count != null" >
         count = #{count,jdbcType=INTEGER},
@@ -247,7 +247,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.retloh.model.BloodPreData" >
     update blood_pressure_data
-    set patient_id = #{patientId,jdbcType=VARCHAR},
+    set interval_id = #{intervalId,jdbcType=VARCHAR},
       count = #{count,jdbcType=INTEGER},
       systole = #{systole,jdbcType=INTEGER},
       diastole = #{diastole,jdbcType=INTEGER},

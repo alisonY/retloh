@@ -5,7 +5,7 @@ import java.util.Date;
 public class BloodPreInterval {
     private String id;
 
-    private String patientId;
+    private String infoId;
 
     private Integer count;
 
@@ -13,11 +13,11 @@ public class BloodPreInterval {
 
     private Date dayStartTime;
 
-    private Date dayInterval;
+    private Integer dayInterval;
 
     private Date nightStartTime;
 
-    private Date nightInterval;
+    private Integer nightInterval;
 
     private Integer totalCount;
 
@@ -33,12 +33,12 @@ public class BloodPreInterval {
         this.id = id == null ? null : id.trim();
     }
 
-    public String getPatientId() {
-        return patientId;
+    public String getInfoId() {
+        return infoId;
     }
 
-    public void setPatientId(String patientId) {
-        this.patientId = patientId == null ? null : patientId.trim();
+    public void setInfoId(String infoId) {
+        this.infoId = infoId == null ? null : infoId.trim();
     }
 
     public Integer getCount() {
@@ -65,11 +65,11 @@ public class BloodPreInterval {
         this.dayStartTime = dayStartTime;
     }
 
-    public Date getDayInterval() {
+    public Integer getDayInterval() {
         return dayInterval;
     }
 
-    public void setDayInterval(Date dayInterval) {
+    public void setDayInterval(Integer dayInterval) {
         this.dayInterval = dayInterval;
     }
 
@@ -81,11 +81,11 @@ public class BloodPreInterval {
         this.nightStartTime = nightStartTime;
     }
 
-    public Date getNightInterval() {
+    public Integer getNightInterval() {
         return nightInterval;
     }
 
-    public void setNightInterval(Date nightInterval) {
+    public void setNightInterval(Integer nightInterval) {
         this.nightInterval = nightInterval;
     }
 

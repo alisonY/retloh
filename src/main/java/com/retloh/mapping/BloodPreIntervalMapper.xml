@@ -3,13 +3,13 @@
 <mapper namespace="com.retloh.dao.BloodPreIntervalMapper" >
   <resultMap id="BaseResultMap" type="com.retloh.model.BloodPreInterval" >
     <id column="id" property="id" jdbcType="VARCHAR" />
-    <result column="patient_id" property="patientId" jdbcType="VARCHAR" />
+    <result column="info_id" property="infoId" jdbcType="VARCHAR" />
     <result column="count" property="count" jdbcType="INTEGER" />
     <result column="start_date" property="startDate" jdbcType="TIMESTAMP" />
     <result column="day_start_time" property="dayStartTime" jdbcType="TIMESTAMP" />
-    <result column="day_interval" property="dayInterval" jdbcType="TIMESTAMP" />
+    <result column="day_interval" property="dayInterval" jdbcType="INTEGER" />
     <result column="night_start_time" property="nightStartTime" jdbcType="TIMESTAMP" />
-    <result column="night_interval" property="nightInterval" jdbcType="TIMESTAMP" />
+    <result column="night_interval" property="nightInterval" jdbcType="INTEGER" />
     <result column="total_count" property="totalCount" jdbcType="INTEGER" />
     <result column="error_count" property="errorCount" jdbcType="INTEGER" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
@@ -73,8 +73,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, patient_id, count, start_date, day_start_time, day_interval, night_start_time, 
-    night_interval, total_count, error_count, remark
+    id, info_id, count, start_date, day_start_time, day_interval, night_start_time, night_interval, 
+    total_count, error_count, remark
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.retloh.model.BloodPreIntervalExample" >
     select
@@ -108,13 +108,13 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.retloh.model.BloodPreInterval" >
-    insert into blood_pressure_interval (id, patient_id, count, 
+    insert into blood_pressure_interval (id, info_id, count, 
       start_date, day_start_time, day_interval, 
       night_start_time, night_interval, total_count, 
       error_count, remark)
-    values (#{id,jdbcType=VARCHAR}, #{patientId,jdbcType=VARCHAR}, #{count,jdbcType=INTEGER}, 
-      #{startDate,jdbcType=TIMESTAMP}, #{dayStartTime,jdbcType=TIMESTAMP}, #{dayInterval,jdbcType=TIMESTAMP}, 
-      #{nightStartTime,jdbcType=TIMESTAMP}, #{nightInterval,jdbcType=TIMESTAMP}, #{totalCount,jdbcType=INTEGER}, 
+    values (#{id,jdbcType=VARCHAR}, #{infoId,jdbcType=VARCHAR}, #{count,jdbcType=INTEGER}, 
+      #{startDate,jdbcType=TIMESTAMP}, #{dayStartTime,jdbcType=TIMESTAMP}, #{dayInterval,jdbcType=INTEGER}, 
+      #{nightStartTime,jdbcType=TIMESTAMP}, #{nightInterval,jdbcType=INTEGER}, #{totalCount,jdbcType=INTEGER}, 
       #{errorCount,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.retloh.model.BloodPreInterval" >
@@ -123,8 +123,8 @@
       <if test="id != null" >
         id,
       </if>
-      <if test="patientId != null" >
-        patient_id,
+      <if test="infoId != null" >
+        info_id,
       </if>
       <if test="count != null" >
         count,
@@ -158,8 +158,8 @@
       <if test="id != null" >
         #{id,jdbcType=VARCHAR},
       </if>
-      <if test="patientId != null" >
-        #{patientId,jdbcType=VARCHAR},
+      <if test="infoId != null" >
+        #{infoId,jdbcType=VARCHAR},
       </if>
       <if test="count != null" >
         #{count,jdbcType=INTEGER},
@@ -171,13 +171,13 @@
         #{dayStartTime,jdbcType=TIMESTAMP},
       </if>
       <if test="dayInterval != null" >
-        #{dayInterval,jdbcType=TIMESTAMP},
+        #{dayInterval,jdbcType=INTEGER},
       </if>
       <if test="nightStartTime != null" >
         #{nightStartTime,jdbcType=TIMESTAMP},
       </if>
       <if test="nightInterval != null" >
-        #{nightInterval,jdbcType=TIMESTAMP},
+        #{nightInterval,jdbcType=INTEGER},
       </if>
       <if test="totalCount != null" >
         #{totalCount,jdbcType=INTEGER},
@@ -202,8 +202,8 @@
       <if test="record.id != null" >
         id = #{record.id,jdbcType=VARCHAR},
       </if>
-      <if test="record.patientId != null" >
-        patient_id = #{record.patientId,jdbcType=VARCHAR},
+      <if test="record.infoId != null" >
+        info_id = #{record.infoId,jdbcType=VARCHAR},
       </if>
       <if test="record.count != null" >
         count = #{record.count,jdbcType=INTEGER},
@@ -215,13 +215,13 @@
         day_start_time = #{record.dayStartTime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.dayInterval != null" >
-        day_interval = #{record.dayInterval,jdbcType=TIMESTAMP},
+        day_interval = #{record.dayInterval,jdbcType=INTEGER},
       </if>
       <if test="record.nightStartTime != null" >
         night_start_time = #{record.nightStartTime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.nightInterval != null" >
-        night_interval = #{record.nightInterval,jdbcType=TIMESTAMP},
+        night_interval = #{record.nightInterval,jdbcType=INTEGER},
       </if>
       <if test="record.totalCount != null" >
         total_count = #{record.totalCount,jdbcType=INTEGER},
@@ -240,13 +240,13 @@
   <update id="updateByExample" parameterType="map" >
     update blood_pressure_interval
     set id = #{record.id,jdbcType=VARCHAR},
-      patient_id = #{record.patientId,jdbcType=VARCHAR},
+      info_id = #{record.infoId,jdbcType=VARCHAR},
       count = #{record.count,jdbcType=INTEGER},
       start_date = #{record.startDate,jdbcType=TIMESTAMP},
       day_start_time = #{record.dayStartTime,jdbcType=TIMESTAMP},
-      day_interval = #{record.dayInterval,jdbcType=TIMESTAMP},
+      day_interval = #{record.dayInterval,jdbcType=INTEGER},
       night_start_time = #{record.nightStartTime,jdbcType=TIMESTAMP},
-      night_interval = #{record.nightInterval,jdbcType=TIMESTAMP},
+      night_interval = #{record.nightInterval,jdbcType=INTEGER},
       total_count = #{record.totalCount,jdbcType=INTEGER},
       error_count = #{record.errorCount,jdbcType=INTEGER},
       remark = #{record.remark,jdbcType=VARCHAR}
@@ -257,8 +257,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.retloh.model.BloodPreInterval" >
     update blood_pressure_interval
     <set >
-      <if test="patientId != null" >
-        patient_id = #{patientId,jdbcType=VARCHAR},
+      <if test="infoId != null" >
+        info_id = #{infoId,jdbcType=VARCHAR},
       </if>
       <if test="count != null" >
         count = #{count,jdbcType=INTEGER},
@@ -270,13 +270,13 @@
         day_start_time = #{dayStartTime,jdbcType=TIMESTAMP},
       </if>
       <if test="dayInterval != null" >
-        day_interval = #{dayInterval,jdbcType=TIMESTAMP},
+        day_interval = #{dayInterval,jdbcType=INTEGER},
       </if>
       <if test="nightStartTime != null" >
         night_start_time = #{nightStartTime,jdbcType=TIMESTAMP},
       </if>
       <if test="nightInterval != null" >
-        night_interval = #{nightInterval,jdbcType=TIMESTAMP},
+        night_interval = #{nightInterval,jdbcType=INTEGER},
       </if>
       <if test="totalCount != null" >
         total_count = #{totalCount,jdbcType=INTEGER},
@@ -292,13 +292,13 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.retloh.model.BloodPreInterval" >
     update blood_pressure_interval
-    set patient_id = #{patientId,jdbcType=VARCHAR},
+    set info_id = #{infoId,jdbcType=VARCHAR},
       count = #{count,jdbcType=INTEGER},
       start_date = #{startDate,jdbcType=TIMESTAMP},
       day_start_time = #{dayStartTime,jdbcType=TIMESTAMP},
-      day_interval = #{dayInterval,jdbcType=TIMESTAMP},
+      day_interval = #{dayInterval,jdbcType=INTEGER},
       night_start_time = #{nightStartTime,jdbcType=TIMESTAMP},
-      night_interval = #{nightInterval,jdbcType=TIMESTAMP},
+      night_interval = #{nightInterval,jdbcType=INTEGER},
       total_count = #{totalCount,jdbcType=INTEGER},
       error_count = #{errorCount,jdbcType=INTEGER},
       remark = #{remark,jdbcType=VARCHAR}
