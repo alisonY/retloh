@@ -47,15 +47,47 @@
 			pagePosition:'bottom',//bottom,top,both
 			url:urls,
 			columns:[[
-	        {field:'id',title:'id',width:120,align:"center"},
-	        {field:'name',title:'姓名',width:120,align:"center"},
-	        {field:'serialNumber',title:'编号',width:120,align:"center"},
-	        {field:'sex',title:'性别',width:120,align:"center"},
-	        {field:'age',title:'年龄',width:120,align:"center"},
-	        {field:'citizenNumber',title:'身份证号',width:150,align:"center"}
+			{field:'id',title:'id',width:10,align:"center"},
+	        {field:'patientId',title:'患者ID',width:60,align:"center",
+				 formatter:function(value,row,index){
+     				return showValueAndTitle(value,row,index);
+     			}
+     		},
+	        {field:'birthday',title:'生日',width:120,align:"center",
+				 formatter:function(value,row,index){
+     				return showValueAndTitle(value,row,index);
+     			}
+     		},
+	        {field:'weight',title:'体重',width:35,align:"center"},
+	        {field:'height',title:'身高',width:35,align:"center"},
+	        {field:'bedNo',title:'床位号',width:45,align:"center",
+				 formatter:function(value,row,index){
+     				return showValueAndTitle(value,row,index);
+     			}
+     		},
+	        {field:'code',title:'编号',width:60,align:"center"},
+	        {field:'telephpne',title:'电话',width:80,align:"center",
+				 formatter:function(value,row,index){
+     				return showValueAndTitle(value,row,index);
+     			}
+     		},
+	        {field:'socialNum',title:'社保号',width:80,align:"center",
+				 formatter:function(value,row,index){
+     				return showValueAndTitle(value,row,index);
+     			}
+     		},
+	        {field:'idCard',title:'身份证号',width:120,align:"center",
+				 formatter:function(value,row,index){
+     				return showValueAndTitle(value,row,index);
+     			}
+     		},
+	        {field:'boomNo',title:'病房号',width:40,align:"center",
+				 formatter:function(value,row,index){
+     				return showValueAndTitle(value,row,index);
+     			}
+     		}
 	        ]],
 			onLoadSuccess:function(data){
-		        //调整表格宽高
 		        $('#bpInfo').datagrid('resize', {
 					width:function(){return document.body.clientWidth;},
 					height:function(){return document.body.clientHeight;},
