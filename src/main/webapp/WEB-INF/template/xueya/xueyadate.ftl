@@ -58,7 +58,7 @@
 	}); 
 
 	function datagrid(toolbar){
-		var urls = "${rootPath}${BasePath}/case/getInfo.do";
+		var urls = "${rootPath}${BasePath}/xueya/date/getInfo.do";
 		$('#caseInfo').datagrid({
 			rownumbers:true,
 			pagination:true,
