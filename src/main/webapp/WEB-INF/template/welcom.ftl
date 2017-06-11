@@ -9,7 +9,7 @@
     <div class="easyui-layout" style="width:100%;height:850px;">
         <div data-options="region:'north'" style="height:80px">
         	<div style="float:left"><img src="${rootPath}${BasePath}/images/logo_01.jpg" /></div>
-        	<div style="float:left;margin-left:32%;text-align:center;line-height:45px;"> <span style="color:#009FCC;"><h1>远程医疗后台管理系统</h1></span> </div>
+        	<div style="float:left;margin-left:32%;text-align:center;line-height:45px;"> <span style="color:#009FCC;}"><h1 style="letter-spacing:2.5px">远程医疗后台管理系统</h1></span> </div>
         </div>
         <div data-options="region:'center'"  style="padding:5px">
             <div class="easyui-layout" data-options="fit:true">
