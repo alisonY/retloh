@@ -16,6 +16,10 @@
                 <div data-options="region:'north',split:true" title="菜单" style="height:70px">
 					<div class="easyui-panel" data-options="fit:true" style="padding:5px;">
 					
+						<a href="javascript:void(0);" class="easyui-linkbutton"  data-options="iconCls:'icon-edit'" onclick="javascript:addPanel('详情统计','${rootPath}${BasePath}/statistics/toPage.do');">
+		                    	详情统计
+		                </a>
+					
 						<a href="javascript:void(0);" class="easyui-linkbutton"  data-options="iconCls:'icon-edit'" onclick="javascript:addPanel('用户管理','${rootPath}${BasePath}/user/toPage.do');">
 		                    	用户管理
 		                </a>
