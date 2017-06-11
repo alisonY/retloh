@@ -4,7 +4,7 @@
 	<title>病例信息</title>
 	<#include "commonHead.ftl" />
 </head>
-<body>
+<body style="padding: 0px 0px 0px 0px;">
     <table id="caseInfo" style="width:100%;height:auto" > </table>
 	<!--对话框-->
 	<div id="dlg" class="easyui-dialog" title="病例信息" style="width:800px;height:600px;padding:10px"

@@ -21,6 +21,11 @@ public class BloodPressureController {
 	
 	private static final Logger LOGGER     = LoggerFactory.getLogger(BloodPressureController.class);
 	
+	@RequestMapping(value="/info/toPage",method={RequestMethod.GET})
+	public String toPage2(HttpServletRequest request) throws IOException {
+		return "/bloodPressure/BPMainPage";
+	}
+	
 	@RequestMapping(value="/data/toPage",method={RequestMethod.GET})
     public String toPage(HttpServletRequest request) throws IOException {
     	return "/xueya/xueyadata";
@@ -31,9 +36,5 @@ public class BloodPressureController {
     	return "/xueya/xueyadate";
     }
 	
-	@RequestMapping(value="/info/toPage",method={RequestMethod.GET})
-    public String toPage2(HttpServletRequest request) throws IOException {
-    	return "/xueya/xueyainfo";
-    }
 	
 }

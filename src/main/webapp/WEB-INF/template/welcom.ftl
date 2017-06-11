@@ -5,15 +5,15 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">  
 	<#include "commonHead.ftl" />
 </head>  
-	<body>  
-    <div class="easyui-layout" style="width:100%;height:850px;">
+	<body style="padding: 0px 0px 0px 0px; ">  
+    <div class="easyui-layout" style="width:100%;height:960px;">
         <div data-options="region:'north'" style="height:80px">
         	<div style="float:left"><img src="${rootPath}${BasePath}/images/logo_01.jpg" /></div>
         	<div style="float:left;margin-left:32%;text-align:center;line-height:45px;"> <span style="color:#009FCC;}"><h1 style="letter-spacing:2.5px">远程医疗后台管理系统</h1></span> </div>
         </div>
         <div data-options="region:'center'"  style="padding:5px">
             <div class="easyui-layout" data-options="fit:true">
-                <div data-options="region:'north',split:true" title="菜单" style="height:70px">
+                <div data-options="region:'north',split:true" title="" style="height:45px">
 					<div class="easyui-panel" data-options="fit:true" style="padding:5px;">
 					
 						<a href="javascript:void(0);" class="easyui-linkbutton"  data-options="iconCls:'icon-edit'" onclick="javascript:addPanel('详情统计','${rootPath}${BasePath}/statistics/toPage.do');">
@@ -40,6 +40,11 @@
 		                    	患者信息
 		                </a>
 		                
+		                
+		                <a href="javascript:void(0);" class="easyui-linkbutton"  data-options="iconCls:'icon-edit'" onclick="javascript:addPanel('患者信息','${rootPath}${BasePath}/bp/info/toPage.do');">
+		                    	血压REWORK
+		                </a>
+		                
 					</div>
                </div>
                 <div data-options="region:'center'">
@@ -52,7 +57,8 @@
         </div>
         
         <div data-options="region:'south',split:true" style="height:50px;text-align:center;line-height:35px;">
-        	Copyright&copy;  2017，北京先锋众诚医疗设备有限公司
+        	Copyright&copy;  2017，北京先锋众诚医疗设备有限公司 系统最佳分辨率920*1080
+        	
         </div>
     </div>
 	</body>

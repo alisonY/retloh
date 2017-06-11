@@ -4,7 +4,7 @@
 	<title>用户管理</title>
 	<#include "commonHead.ftl" />
 </head>
-<body>
+<body style="padding: 0px 0px 0px 0px;">
     <table id="userInfo" style="width:100%;height:auto" ></table>
     
 	<!--对话框-->
