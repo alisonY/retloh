@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.retloh.dao.XueyaDateMapper" >
+  <resultMap id="BaseResultMap" type="com.retloh.model.XueyaDate" >
+    <id column="patient_id" property="patientId" jdbcType="VARCHAR" />
+    <result column="count" property="count" jdbcType="INTEGER" />
+    <result column="start_date" property="startDate" jdbcType="TIMESTAMP" />
+    <result column="day_start_time" property="dayStartTime" jdbcType="TIMESTAMP" />
+    <result column="day_interval" property="dayInterval" jdbcType="TIMESTAMP" />
+    <result column="night_start_time" property="nightStartTime" jdbcType="TIMESTAMP" />
+    <result column="night_interval" property="nightInterval" jdbcType="TIMESTAMP" />
+    <result column="total_count" property="totalCount" jdbcType="INTEGER" />
+    <result column="error_count" property="errorCount" jdbcType="INTEGER" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    patient_id, count, start_date, day_start_time, day_interval, night_start_time, night_interval, 
+    total_count, error_count, remark
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.retloh.model.XueyaDateExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from xueyadate
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from xueyadate
+    where patient_id = #{patientId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from xueyadate
+    where patient_id = #{patientId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.retloh.model.XueyaDateExample" >
+    delete from xueyadate
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.retloh.model.XueyaDate" >
+    insert into xueyadate (patient_id, count, start_date, 
+      day_start_time, day_interval, night_start_time, 
+      night_interval, total_count, error_count, 
+      remark)
+    values (#{patientId,jdbcType=VARCHAR}, #{count,jdbcType=INTEGER}, #{startDate,jdbcType=TIMESTAMP}, 
+      #{dayStartTime,jdbcType=TIMESTAMP}, #{dayInterval,jdbcType=TIMESTAMP}, #{nightStartTime,jdbcType=TIMESTAMP}, 
+      #{nightInterval,jdbcType=TIMESTAMP}, #{totalCount,jdbcType=INTEGER}, #{errorCount,jdbcType=INTEGER}, 
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.retloh.model.XueyaDate" >
+    insert into xueyadate
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="patientId != null" >
+        patient_id,
+      </if>
+      <if test="count != null" >
+        count,
+      </if>
+      <if test="startDate != null" >
+        start_date,
+      </if>
+      <if test="dayStartTime != null" >
+        day_start_time,
+      </if>
+      <if test="dayInterval != null" >
+        day_interval,
+      </if>
+      <if test="nightStartTime != null" >
+        night_start_time,
+      </if>
+      <if test="nightInterval != null" >
+        night_interval,
+      </if>
+      <if test="totalCount != null" >
+        total_count,
+      </if>
+      <if test="errorCount != null" >
+        error_count,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="patientId != null" >
+        #{patientId,jdbcType=VARCHAR},
+      </if>
+      <if test="count != null" >
+        #{count,jdbcType=INTEGER},
+      </if>
+      <if test="startDate != null" >
+        #{startDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dayStartTime != null" >
+        #{dayStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dayInterval != null" >
+        #{dayInterval,jdbcType=TIMESTAMP},
+      </if>
+      <if test="nightStartTime != null" >
+        #{nightStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="nightInterval != null" >
+        #{nightInterval,jdbcType=TIMESTAMP},
+      </if>
+      <if test="totalCount != null" >
+        #{totalCount,jdbcType=INTEGER},
+      </if>
+      <if test="errorCount != null" >
+        #{errorCount,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.retloh.model.XueyaDateExample" resultType="java.lang.Integer" >
+    select count(*) from xueyadate
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update xueyadate
+    <set >
+      <if test="record.patientId != null" >
+        patient_id = #{record.patientId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.count != null" >
+        count = #{record.count,jdbcType=INTEGER},
+      </if>
+      <if test="record.startDate != null" >
+        start_date = #{record.startDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.dayStartTime != null" >
+        day_start_time = #{record.dayStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.dayInterval != null" >
+        day_interval = #{record.dayInterval,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.nightStartTime != null" >
+        night_start_time = #{record.nightStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.nightInterval != null" >
+        night_interval = #{record.nightInterval,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.totalCount != null" >
+        total_count = #{record.totalCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.errorCount != null" >
+        error_count = #{record.errorCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update xueyadate
+    set patient_id = #{record.patientId,jdbcType=VARCHAR},
+      count = #{record.count,jdbcType=INTEGER},
+      start_date = #{record.startDate,jdbcType=TIMESTAMP},
+      day_start_time = #{record.dayStartTime,jdbcType=TIMESTAMP},
+      day_interval = #{record.dayInterval,jdbcType=TIMESTAMP},
+      night_start_time = #{record.nightStartTime,jdbcType=TIMESTAMP},
+      night_interval = #{record.nightInterval,jdbcType=TIMESTAMP},
+      total_count = #{record.totalCount,jdbcType=INTEGER},
+      error_count = #{record.errorCount,jdbcType=INTEGER},
+      remark = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.retloh.model.XueyaDate" >
+    update xueyadate
+    <set >
+      <if test="count != null" >
+        count = #{count,jdbcType=INTEGER},
+      </if>
+      <if test="startDate != null" >
+        start_date = #{startDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dayStartTime != null" >
+        day_start_time = #{dayStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dayInterval != null" >
+        day_interval = #{dayInterval,jdbcType=TIMESTAMP},
+      </if>
+      <if test="nightStartTime != null" >
+        night_start_time = #{nightStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="nightInterval != null" >
+        night_interval = #{nightInterval,jdbcType=TIMESTAMP},
+      </if>
+      <if test="totalCount != null" >
+        total_count = #{totalCount,jdbcType=INTEGER},
+      </if>
+      <if test="errorCount != null" >
+        error_count = #{errorCount,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where patient_id = #{patientId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.retloh.model.XueyaDate" >
+    update xueyadate
+    set count = #{count,jdbcType=INTEGER},
+      start_date = #{startDate,jdbcType=TIMESTAMP},
+      day_start_time = #{dayStartTime,jdbcType=TIMESTAMP},
+      day_interval = #{dayInterval,jdbcType=TIMESTAMP},
+      night_start_time = #{nightStartTime,jdbcType=TIMESTAMP},
+      night_interval = #{nightInterval,jdbcType=TIMESTAMP},
+      total_count = #{totalCount,jdbcType=INTEGER},
+      error_count = #{errorCount,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR}
+    where patient_id = #{patientId,jdbcType=VARCHAR}
+  </update>
+</mapper>
