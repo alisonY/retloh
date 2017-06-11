@@ -20,5 +20,5 @@ CREATE TABLE `xueyainfo` (
   `social_num` varchar(30) DEFAULT NULL COMMENT '社保号',
   `reserve1` varchar(30) DEFAULT NULL COMMENT '保留字段1',
   `reserve2` varchar(30) DEFAULT NULL COMMENT '保留字段2',
-  PRIMARY KEY (`patient_id`),
+  PRIMARY KEY (`patient_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

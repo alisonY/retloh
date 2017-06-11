@@ -11,5 +11,5 @@ CREATE TABLE `xueyadate` (
   `total_count` int(32) DEFAULT NULL COMMENT '总测量次数',
   `error_count` int(32) DEFAULT NULL COMMENT '错误数据次数',
   `remark` varchar(64) DEFAULT NULL COMMENT '备注',
-  PRIMARY KEY (`patient_id`),
+  PRIMARY KEY (`patient_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

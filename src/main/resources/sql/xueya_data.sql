@@ -8,5 +8,5 @@ CREATE TABLE `xueyadata` (
   `hr` int(32) DEFAULT NULL COMMENT '心率',
   `data_no` int(32) DEFAULT NULL COMMENT '24小时中第几次测量',
   `caiji_date` datetime DEFAULT NULL COMMENT '时间',
-  PRIMARY KEY (`patient_id`),
+  PRIMARY KEY (`patient_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
