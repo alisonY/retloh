@@ -12,7 +12,7 @@
         : <input class="easyui-datebox" style="width:110px">
                 身份证：<input class="easyui-textbox"  style="width:150px;height:28px">
         <a href="#" class="easyui-linkbutton" iconCls="icon-search"onclick="getSelected()" >查询</a>
-			<span class="datagrid-btn-separator" style="vertical-align: middle;display:inline-block;float:none"></span><!--分隔符-->
+		<!--分隔符--><span class="datagrid-btn-separator" style="vertical-align: middle;display:inline-block;float:none"></span>
         <a href="#" class="easyui-linkbutton" iconCls="icon-man" onclick="viewRow()" >详情</a>
         <a href="#" class="easyui-linkbutton" iconCls="icon-remove" onclick="delRow()" >删除</a>
         <a href="#" class="easyui-linkbutton" iconCls="icon-edit" onclick="editRow()" >编辑</a>

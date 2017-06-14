@@ -27,22 +27,9 @@
 						<a href="javascript:void(0);" class="easyui-linkbutton"  data-options="iconCls:'icon-edit'" onclick="javascript:addPanel('病例信息','${rootPath}${BasePath}/case/toPage.do');">
 		                    	病例信息
 		                </a>
-		                
-		                <a href="javascript:void(0);" class="easyui-linkbutton"  data-options="iconCls:'icon-edit'" onclick="javascript:addPanel('血压指标','${rootPath}${BasePath}/xueya/data/toPage.do');">
-		                    	血压指标
-		                </a>
-		                
-		                <a href="javascript:void(0);" class="easyui-linkbutton"  data-options="iconCls:'icon-edit'" onclick="javascript:addPanel('血压测量','${rootPath}${BasePath}/xueya/date/toPage.do');">
-		                    	血压测量
-		                </a>
-		                
-		                <a href="javascript:void(0);" class="easyui-linkbutton"  data-options="iconCls:'icon-edit'" onclick="javascript:addPanel('患者信息','${rootPath}${BasePath}/xueya/info/toPage.do');">
-		                    	患者信息
-		                </a>
-		                
-		                
+		                		                
 		                <a href="javascript:void(0);" class="easyui-linkbutton"  data-options="iconCls:'icon-edit'" onclick="javascript:addPanel('患者信息','${rootPath}${BasePath}/bp/info/toPage.do');">
-		                    	血压REWORK
+		                    	血压信息
 		                </a>
 		                
 					</div>
