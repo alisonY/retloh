@@ -7,6 +7,14 @@
 <body style="padding: 0px 0px 0px 0px;">
     <div class="easyui-layout" style="width:100%;height:850px;">
         <div data-options="region:'west',split:true,iconCls:'icon-filter'" title="病例信息" style="width:800px;">
+        	<!--查询条件-->
+            <div id="tb" style="padding:2px 5px;">
+		        Date From: <input class="easyui-datebox" style="width:110px">
+		        To: <input class="easyui-datebox" style="width:110px">
+		                身份证：<input class="easyui-textbox"  style="width:150px;height:28px">
+		        <a href="#" class="easyui-linkbutton" iconCls="icon-search">查询</a>
+		        <a href="#" class="easyui-linkbutton" iconCls="icon-man" onclick="viewRow()" >时间段</a>
+		    </div>
             <table id="bpInfo" style="width:100%;height:auto" > </table>
         </div>
         <div data-options="region:'center',title:'时间段',iconCls:'icon-ok'">
@@ -17,37 +25,21 @@
 </body>
 <script type="text/javascript">
 	$(document).ready(function(){
-	
-		var toolbar = [{
-	        text:'详情',
-	        iconCls:'icon-man',
-	        handler:function(){
-	        viewRow();
-	        }
-	    },'-',{
-	        text:'查询',
-	        iconCls:'icon-search',
-	        handler:function(){
-	        getSelected();
-	        }
-	    }];
-	
-		datagrid(toolbar);
+		datagrid();
 	}); 
 
 
-	function datagrid(toolbar){
+	function datagrid(){
 		var urls = "${rootPath}${BasePath}/bp/info/getList.do";
 		$('#bpInfo').datagrid({
-			rownumbers:true,
 			pagination:true,
 			fitColumns:true,
-			toolbar:toolbar,
     		singleSelect: true, 
 			pagePosition:'bottom',//bottom,top,both
 			url:urls,
+			toolbar:"#tb",
 			columns:[[
-			{field:'id',title:'id',width:10,align:"center"},
+			/*{field:'id',title:'id',width:10,align:"center"},*/
 	        {field:'patientId',title:'患者ID',width:60,align:"center",
 				 formatter:function(value,row,index){
      				return showValueAndTitle(value,row,index);
@@ -95,5 +87,22 @@
 		    } 
 		});
 	}
+	function viewRow(){
+		var id = getSelected();
+		if(!id){
+			return;
+		}
+		console.info(id);
+	}
+	function getSelected(){  
+        var selected = $('#bpInfo').datagrid('getSelected');
+        var id = "";
+        if (selected){
+            id = selected.id;
+        }else{
+        	$.messager.show({title:'提示',msg:'没有选择病例信息行。'});
+        }
+        return id;
+    }
 </script>
 </html>

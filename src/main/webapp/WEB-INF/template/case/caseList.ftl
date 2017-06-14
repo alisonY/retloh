@@ -7,6 +7,16 @@
 <body style="padding: 0px 0px 0px 0px;">
     <table id="caseInfo" style="width:100%;height:auto" > </table>
 	<!--对话框-->
+	<div id="tb" style="padding:2px 5px;">
+               上传时间 : <input class="easyui-datebox" style="width:110px">
+        : <input class="easyui-datebox" style="width:110px">
+                身份证：<input class="easyui-textbox"  style="width:150px;height:28px">
+        <a href="#" class="easyui-linkbutton" iconCls="icon-search"onclick="getSelected()" >查询</a>
+			<span class="datagrid-btn-separator" style="vertical-align: middle;display:inline-block;float:none"></span><!--分隔符-->
+        <a href="#" class="easyui-linkbutton" iconCls="icon-man" onclick="viewRow()" >详情</a>
+        <a href="#" class="easyui-linkbutton" iconCls="icon-remove" onclick="delRow()" >删除</a>
+        <a href="#" class="easyui-linkbutton" iconCls="icon-edit" onclick="editRow()" >编辑</a>
+    </div>
 	<div id="dlg" class="easyui-dialog" title="病例信息" style="width:800px;height:600px;padding:10px"
 		data-options="
 			closed:'true',
@@ -170,16 +180,16 @@
 	        }
 	    }];
 	
-		datagrid(toolbar);
+		datagrid();
 	}); 
 
-	function datagrid(toolbar){
+	function datagrid(){
 		var urls = "${rootPath}${BasePath}/case/getInfo.do";
 		$('#caseInfo').datagrid({
 			rownumbers:true,
 			pagination:true,
 			fitColumns:true,
-			toolbar:toolbar,
+			toolbar:"#tb",
     		singleSelect: true, 
 			pagePosition:'bottom',//bottom,top,both
 			url:urls,
