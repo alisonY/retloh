@@ -18,7 +18,7 @@
 		    </div>
             <table id="bpInfo" style="width:100%;height:auto" > </table>
         </div>
-        <div data-options="region:'center',title:'时间段',iconCls:'icon-ok'">
+        <div data-options="region:'center',title:'时间段',iconCls:'icon-man'">
         	<table id="bpInterval" style="width:100%;height:auto" > </table>
         </div>
         <div data-options="region:'east',split:true,iconCls:'icon-more'" title="详情" style="width:400px;">
@@ -100,7 +100,7 @@
 	        }
 	    	},'-',{
 	        text:'查看详情',
-	        iconCls:'icon-search',
+	        iconCls:'icon-more',
 	        handler:function(){
 	        viewDetail();
 	        }
