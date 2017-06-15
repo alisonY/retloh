@@ -48,11 +48,8 @@
      				return showValueAndTitle(value,row,index);
      			}
      		},
-	        {field:'birthday',title:'生日',width:125,align:"center",
-				 formatter:function(value,row,index){
-     				return showValueAndTitle(value,row,index);
-     			}
-     		},
+     		{field:'firstName',title:'姓',width:30,align:"center"},
+	        {field:'surName',title:'名',width:30,align:"center"},
 	        {field:'weight',title:'体重',width:35,align:"center"},
 	        {field:'height',title:'身高',width:35,align:"center"},
 	        {field:'bedNo',title:'床位号',width:45,align:"center",
@@ -72,6 +69,11 @@
      			}
      		},
 	        {field:'idCard',title:'身份证号',width:120,align:"center",
+				 formatter:function(value,row,index){
+     				return showValueAndTitle(value,row,index);
+     			}
+     		},
+	        {field:'birthday',title:'生日',width:125,align:"center",
 				 formatter:function(value,row,index){
      				return showValueAndTitle(value,row,index);
      			}
