@@ -138,13 +138,13 @@ public class FtpService extends DefaultFtplet{
 	public FtpletResult onDownloadEnd(FtpSession session, FtpRequest request) throws FtpException, IOException {
 		// TODO Auto-generated method stub
 		
-		User user = session.getUser();
+		/*User user = session.getUser();
 	    //File workingDir = workingDir(session);
 	    String fileName = request.getArgument();
 	    FtpUser ftpuser= new FtpUser();
 	    ftpuser=(FtpUser) user;
 	    ftpuser.setStatus(1);
-	    ftpuserMapper.updateByPrimaryKey(ftpuser);
+	    ftpuserMapper.updateByPrimaryKey(ftpuser);*/
 		
 		return super.onDownloadEnd(session, request);
 	}
@@ -206,7 +206,7 @@ public class FtpService extends DefaultFtplet{
 	@Override
 	public FtpletResult onUploadEnd(FtpSession session, FtpRequest request) throws FtpException, IOException {
 		// TODO Auto-generated method stub
-		User user = session.getUser();
+		/*User user = session.getUser();
 	    //File workingDir = workingDir(session);
 	    String fileName = request.getArgument();
 	    String filepath=session.getFileSystemView().getWorkingDirectory().getAbsolutePath()+"/"+fileName;
@@ -218,7 +218,7 @@ public class FtpService extends DefaultFtplet{
 	    }else{
 	    	ftpuser.setFilepath(filepath);
 	    }
-	    ftpuserMapper.updateByPrimaryKey(ftpuser);
+	    ftpuserMapper.updateByPrimaryKey(ftpuser);*/
 	    
 		return super.onUploadEnd(session, request);
 	}
