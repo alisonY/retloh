@@ -32,6 +32,10 @@
 		                    	血压信息
 		                </a>
 		                
+		                <a href="javascript:void(0);" class="easyui-linkbutton"  data-options="iconCls:'icon-edit'" onclick="javascript:addPanel('项目信息','${rootPath}${BasePath}/common/toPage.do');">
+		                    	项目信息
+		                </a>
+		                
 					</div>
                </div>
                 <div data-options="region:'center'">
