@@ -17,6 +17,10 @@ public class TUser {
 
     private Integer userType;
 
+    private Integer groupid;
+
+    private String groupDesc;
+
     private Date updateTime;
 
     private Date createTime;
@@ -77,6 +81,22 @@ public class TUser {
 
     public void setUserType(Integer userType) {
         this.userType = userType;
+    }
+
+    public Integer getGroupid() {
+        return groupid;
+    }
+
+    public void setGroupid(Integer groupid) {
+        this.groupid = groupid;
+    }
+
+    public String getGroupDesc() {
+        return groupDesc;
+    }
+
+    public void setGroupDesc(String groupDesc) {
+        this.groupDesc = groupDesc == null ? null : groupDesc.trim();
     }
 
     public Date getUpdateTime() {

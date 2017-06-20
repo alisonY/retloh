@@ -575,6 +575,136 @@ public class TUserExample {
             return (Criteria) this;
         }
 
+        public Criteria andGroupidIsNull() {
+            addCriterion("groupid is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupidIsNotNull() {
+            addCriterion("groupid is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupidEqualTo(Integer value) {
+            addCriterion("groupid =", value, "groupid");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupidNotEqualTo(Integer value) {
+            addCriterion("groupid <>", value, "groupid");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupidGreaterThan(Integer value) {
+            addCriterion("groupid >", value, "groupid");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupidGreaterThanOrEqualTo(Integer value) {
+            addCriterion("groupid >=", value, "groupid");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupidLessThan(Integer value) {
+            addCriterion("groupid <", value, "groupid");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupidLessThanOrEqualTo(Integer value) {
+            addCriterion("groupid <=", value, "groupid");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupidIn(List<Integer> values) {
+            addCriterion("groupid in", values, "groupid");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupidNotIn(List<Integer> values) {
+            addCriterion("groupid not in", values, "groupid");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupidBetween(Integer value1, Integer value2) {
+            addCriterion("groupid between", value1, value2, "groupid");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupidNotBetween(Integer value1, Integer value2) {
+            addCriterion("groupid not between", value1, value2, "groupid");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupDescIsNull() {
+            addCriterion("group_desc is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupDescIsNotNull() {
+            addCriterion("group_desc is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupDescEqualTo(String value) {
+            addCriterion("group_desc =", value, "groupDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupDescNotEqualTo(String value) {
+            addCriterion("group_desc <>", value, "groupDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupDescGreaterThan(String value) {
+            addCriterion("group_desc >", value, "groupDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupDescGreaterThanOrEqualTo(String value) {
+            addCriterion("group_desc >=", value, "groupDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupDescLessThan(String value) {
+            addCriterion("group_desc <", value, "groupDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupDescLessThanOrEqualTo(String value) {
+            addCriterion("group_desc <=", value, "groupDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupDescLike(String value) {
+            addCriterion("group_desc like", value, "groupDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupDescNotLike(String value) {
+            addCriterion("group_desc not like", value, "groupDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupDescIn(List<String> values) {
+            addCriterion("group_desc in", values, "groupDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupDescNotIn(List<String> values) {
+            addCriterion("group_desc not in", values, "groupDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupDescBetween(String value1, String value2) {
+            addCriterion("group_desc between", value1, value2, "groupDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupDescNotBetween(String value1, String value2) {
+            addCriterion("group_desc not between", value1, value2, "groupDesc");
+            return (Criteria) this;
+        }
+
         public Criteria andUpdateTimeIsNull() {
             addCriterion("update_time is null");
             return (Criteria) this;
