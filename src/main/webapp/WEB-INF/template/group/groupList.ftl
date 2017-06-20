@@ -34,9 +34,10 @@
 			{field:'ck',checkbox:true},
 	        {field:'id',title:'id',width:120,align:"center"},
 	        {field:'description',title:'描述',width:120,align:"center"},
+	        {field:'operatorId',title:'操作人ID',width:120,align:"center"},
 	        {field:'operator',title:'操作人',width:120,align:"center"},
-	        {field:'uptateTime',title:'修改事件',width:120,align:"center"},
-	        {field:'createTime',title:'添加证号',width:150,align:"center"}
+	        {field:'uptateTime',title:'修改时间',width:120,align:"center"},
+	        {field:'createTime',title:'添加时间',width:150,align:"center"}
 	        ]],
 			onLoadSuccess:function(data){
 		        //调整表格宽高

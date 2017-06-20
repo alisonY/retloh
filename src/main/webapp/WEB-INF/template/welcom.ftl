@@ -24,12 +24,17 @@
                     			<!--顶部按钮框 左侧-->
 				                <div data-options="region:'west'" style="width:90%">
 					                <div class="easyui-panel" data-options="fit:true" style="padding:5px;">
-										<a href="javascript:void(0);" class="easyui-linkbutton"  data-options="iconCls:'icon-edit'" onclick="javascript:addPanel('详情统计','${rootPath}${BasePath}/statistics/toPage.do');">
+					                	<a href="javascript:void(0);" class="easyui-linkbutton"  data-options="iconCls:'icon-more'" onclick="javascript:addPanel('详情统计','${rootPath}${BasePath}/statistics/toPage.do');">
 						                    	详情统计
 						                </a>
-										<a href="javascript:void(0);" class="easyui-linkbutton"  data-options="iconCls:'icon-edit'" onclick="javascript:addPanel('用户管理','${rootPath}${BasePath}/user/toPage.do');">
+						                <span class="datagrid-btn-separator" style="vertical-align: middle;display:inline-block;float:none"></span>
+										<a href="javascript:void(0);" class="easyui-linkbutton"  data-options="iconCls:'icon-man'" onclick="javascript:addPanel('用户组管理','${rootPath}${BasePath}/group/toPage.do');">
+						                    	用户组管理
+						                </a>
+										<a href="javascript:void(0);" class="easyui-linkbutton"  data-options="iconCls:'icon-man'" onclick="javascript:addPanel('用户管理','${rootPath}${BasePath}/user/toPage.do');">
 						                    	用户管理
 						                </a>
+						                <span class="datagrid-btn-separator" style="vertical-align: middle;display:inline-block;float:none"></span>
 										<a href="javascript:void(0);" class="easyui-linkbutton"  data-options="iconCls:'icon-edit'" onclick="javascript:addPanel('病例信息','${rootPath}${BasePath}/case/toPage.do');">
 						                    	病例信息
 						                </a>
