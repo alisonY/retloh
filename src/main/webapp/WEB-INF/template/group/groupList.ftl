@@ -21,7 +21,6 @@
 	}); 
 
 	function datagrid(){
-		/group/toPage.do
 		var urls = "${rootPath}${BasePath}/group/getInfo.do";
 		$('#groupInfo').datagrid({
 			rownumbers:true,
@@ -34,11 +33,10 @@
 			columns:[[
 			{field:'ck',checkbox:true},
 	        {field:'id',title:'id',width:120,align:"center"},
-	        {field:'desc',title:'姓名',width:120,align:"center"},
-	        {field:'operatorId',title:'编号',width:120,align:"center"},
-	        {field:'operator',title:'性别',width:120,align:"center"},
-	        {field:'uptateTime',title:'年龄',width:120,align:"center"},
-	        {field:'createTime',title:'身份证号',width:150,align:"center"}
+	        {field:'description',title:'描述',width:120,align:"center"},
+	        {field:'operator',title:'操作人',width:120,align:"center"},
+	        {field:'uptateTime',title:'修改事件',width:120,align:"center"},
+	        {field:'createTime',title:'添加证号',width:150,align:"center"}
 	        ]],
 			onLoadSuccess:function(data){
 		        //调整表格宽高

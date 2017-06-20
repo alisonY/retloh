@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.retloh.dao.GroupMapper" >
-  <resultMap id="BaseResultMap" type="com.retloh.model.Group" >
+<mapper namespace="com.retloh.dao.UserGroupMapper" >
+  <resultMap id="BaseResultMap" type="com.retloh.model.UserGroup" >
     <id column="id" property="id" jdbcType="VARCHAR" />
-    <result column="desc" property="desc" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
     <result column="operator_id" property="operatorId" jdbcType="VARCHAR" />
     <result column="operator" property="operator" jdbcType="VARCHAR" />
     <result column="uptate_time" property="uptateTime" jdbcType="TIMESTAMP" />
@@ -69,16 +69,16 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, desc, operator_id, operator, uptate_time, create_time, is_deleted
+    id, description, operator_id, operator, uptate_time, create_time, is_deleted
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.retloh.model.GroupExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.retloh.model.UserGroupExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     'true' as QUERYID,
     <include refid="Base_Column_List" />
-    from group
+    from user_group
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -89,35 +89,35 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
-    from group
+    from user_group
     where id = #{id,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
-    delete from group
+    delete from user_group
     where id = #{id,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.retloh.model.GroupExample" >
-    delete from group
+  <delete id="deleteByExample" parameterType="com.retloh.model.UserGroupExample" >
+    delete from user_group
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.retloh.model.Group" >
-    insert into group (id, desc, operator_id, 
+  <insert id="insert" parameterType="com.retloh.model.UserGroup" >
+    insert into user_group (id, description, operator_id, 
       operator, uptate_time, create_time, 
       is_deleted)
-    values (#{id,jdbcType=VARCHAR}, #{desc,jdbcType=VARCHAR}, #{operatorId,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{operatorId,jdbcType=VARCHAR}, 
       #{operator,jdbcType=VARCHAR}, #{uptateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, 
       #{isDeleted,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.retloh.model.Group" >
-    insert into group
+  <insert id="insertSelective" parameterType="com.retloh.model.UserGroup" >
+    insert into user_group
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
       </if>
-      <if test="desc != null" >
-        desc,
+      <if test="description != null" >
+        description,
       </if>
       <if test="operatorId != null" >
         operator_id,
@@ -139,8 +139,8 @@
       <if test="id != null" >
         #{id,jdbcType=VARCHAR},
       </if>
-      <if test="desc != null" >
-        #{desc,jdbcType=VARCHAR},
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
       </if>
       <if test="operatorId != null" >
         #{operatorId,jdbcType=VARCHAR},
@@ -159,20 +159,20 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.retloh.model.GroupExample" resultType="java.lang.Integer" >
-    select count(*) from group
+  <select id="countByExample" parameterType="com.retloh.model.UserGroupExample" resultType="java.lang.Integer" >
+    select count(*) from user_group
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update group
+    update user_group
     <set >
       <if test="record.id != null" >
         id = #{record.id,jdbcType=VARCHAR},
       </if>
-      <if test="record.desc != null" >
-        desc = #{record.desc,jdbcType=VARCHAR},
+      <if test="record.description != null" >
+        description = #{record.description,jdbcType=VARCHAR},
       </if>
       <if test="record.operatorId != null" >
         operator_id = #{record.operatorId,jdbcType=VARCHAR},
@@ -195,9 +195,9 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update group
+    update user_group
     set id = #{record.id,jdbcType=VARCHAR},
-      desc = #{record.desc,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR},
       operator_id = #{record.operatorId,jdbcType=VARCHAR},
       operator = #{record.operator,jdbcType=VARCHAR},
       uptate_time = #{record.uptateTime,jdbcType=TIMESTAMP},
@@ -207,11 +207,11 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.retloh.model.Group" >
-    update group
+  <update id="updateByPrimaryKeySelective" parameterType="com.retloh.model.UserGroup" >
+    update user_group
     <set >
-      <if test="desc != null" >
-        desc = #{desc,jdbcType=VARCHAR},
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
       </if>
       <if test="operatorId != null" >
         operator_id = #{operatorId,jdbcType=VARCHAR},
@@ -231,9 +231,9 @@
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.retloh.model.Group" >
-    update group
-    set desc = #{desc,jdbcType=VARCHAR},
+  <update id="updateByPrimaryKey" parameterType="com.retloh.model.UserGroup" >
+    update user_group
+    set description = #{description,jdbcType=VARCHAR},
       operator_id = #{operatorId,jdbcType=VARCHAR},
       operator = #{operator,jdbcType=VARCHAR},
       uptate_time = #{uptateTime,jdbcType=TIMESTAMP},

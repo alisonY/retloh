@@ -1,8 +1,8 @@
 #group 表
 
-CREATE TABLE `group` (
+CREATE TABLE `user_group` (
   `id` varchar(64) NOT NULL COMMENT '主键ID',
-  `desc` varchar(64) NOT NULL COMMENT '组描述ID',
+  `description` varchar(64) NOT NULL COMMENT '组描述ID',
   `operator_id` varchar(64) DEFAULT '1' COMMENT '操作人ID',
   `operator` varchar(128) DEFAULT '1' COMMENT '操作人名称',
   `uptate_time` datetime DEFAULT NULL COMMENT '更新时间',
