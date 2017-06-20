@@ -1,0 +1,489 @@
+@media screen and (max-width: 1920px) {
+    .Sybg {
+        background:url(../images/login-bg-nb.jpg) center 0 no-repeat;
+        background-size: 100% 100%;
+        width: 100%;
+        height: 100%;
+        background-attachment: fixed;
+    }
+    .Login {
+        width: 488px;
+        position: absolute;
+        left: 50%;
+        margin-left: -244px;
+        top: 40%;
+        margin-top: -210px;
+    }
+    .Login img {
+        display: block;
+        margin: 14px auto;
+    }
+    .Login .entry {
+        width: 340px;
+        background: #fff;
+        border-radius: 10px;
+        margin-top: 20px;
+        position: relative;
+        margin: auto;
+    }
+    .Login input {
+        height: 60px;
+        width: 340px;
+        font: normal 16px/60px "Microsoft Yahei";
+        color: #242625;
+        text-indent: 40px;
+        border: none;
+    }
+    .Login .ipt-name {
+        background: url(../images/phone.png) no-repeat 15px center;
+        border-bottom: 1px solid #f7f7f7;
+    }
+    .Login .ipt-lock {
+        background: url(../images/pd.png) no-repeat 15px center;
+        border-bottom: 1px solid #f7f7f7;
+    }
+    .Login .ipt-test {
+        background: url(../images/gou.png) no-repeat 15px center;
+    }
+    .Login .entry p.error-use {
+        position: absolute;
+        left: 355px;
+        top: 15px;
+        width: 90px;
+        height: 30px;
+        background: #ff6c00;
+        font: normal 14px/30px "Microsoft Yahei";
+        color: #fff;
+        text-align: center;
+        border-radius: 4px;
+        -webkit-border-radius: 4px;
+        display: none;
+    }
+    .Login .entry p.error-psd {
+        position: absolute;
+        left: 355px;
+        top: 75px;
+        width: 90px;
+        height: 30px;
+        background: #ff6c00;
+        font: normal 14px/30px "Microsoft Yahei";
+        color: #fff;
+        text-align: center;
+        border-radius: 4px;
+        -webkit-border-radius: 4px;
+        display: none;
+    }
+    p.error-num {
+        position: absolute;
+        left: 355px;
+        top: 135px;
+        width: 90px;
+        height: 30px;
+        background: #ff6c00;
+        font: normal 14px/30px "Microsoft Yahei";
+        color: #fff;
+        text-align: center;
+        border-radius: 4px;
+        -webkit-border-radius: 4px;
+        display: none;
+    }
+    .Login .entry .test-num {
+        position: absolute;
+        left: 220px;
+        top: 122px;
+        display: block;
+    }
+    .Login a.login-btn {
+        display: block;
+        height: 55px;
+        width: 340px;
+        background: #00a2e5;
+        border-radius: 10px;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        font: normal 16px/55px "Microsoft Yahei";
+        color: #fff;
+        text-align: center;
+        margin: 14px auto;
+    }
+    .Login .tips {
+        display: block;
+        width: 340px;
+        height: 55px;
+        background: #b2e5f6;
+        color: #09668d;
+        font: normal 16px/55px "Microsoft Yahei";
+        text-align: center;
+        border-radius: 10px;
+        -webkit-border-radius: 10px;
+        margin: auto;
+    }
+}
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    .Sybg {
+        background:url(../images/login-bg-nb.jpg) center 0 no-repeat;
+        background-size: 100% 100%;
+        width: 100%;
+        height: 100%;
+        background-attachment: fixed;
+    }
+    .Login {
+        width: 488px;
+        position: absolute;
+        left: 50%;
+        margin-left: -244px;
+        top: 40%;
+        margin-top: -210px;
+    }
+    .Login img {
+        display: block;
+        margin: 14px auto;
+    }
+    .Login .entry {
+        width: 340px;
+        background: #fff;
+        border-radius: 10px;
+        margin-top: 20px;
+        position: relative;
+        margin: auto;
+    }
+    .Login input {
+        height: 60px;
+        width: 340px;
+        font: normal 16px/60px "Microsoft Yahei";
+        color: #242625;
+        text-indent: 40px;
+        border: none;
+    }
+    .Login .ipt-name {
+        background: url(../images/phone.png) no-repeat 15px center;
+        border-bottom: 1px solid #f7f7f7;
+    }
+    .Login .ipt-lock {
+        background: url(../images/pd.png) no-repeat 15px center;
+        border-bottom: 1px solid #f7f7f7;
+    }
+    .Login .ipt-test {
+        background: url(../images/gou.png) no-repeat 15px center;
+    }
+    .Login .entry p.error-use {
+        position: absolute;
+        left: 355px;
+        top: 15px;
+        width: 90px;
+        height: 30px;
+        background: #ff6c00;
+        font: normal 14px/30px "Microsoft Yahei";
+        color: #fff;
+        text-align: center;
+        border-radius: 4px;
+        -webkit-border-radius: 4px;
+        display: none;
+    }
+    .Login .entry p.error-psd {
+        position: absolute;
+        left: 355px;
+        top: 75px;
+        width: 90px;
+        height: 30px;
+        background: #ff6c00;
+        font: normal 14px/30px "Microsoft Yahei";
+        color: #fff;
+        text-align: center;
+        border-radius: 4px;
+        -webkit-border-radius: 4px;
+        display: none;
+    }
+    p.error-num {
+        position: absolute;
+        left: 355px;
+        top: 135px;
+        width: 90px;
+        height: 30px;
+        background: #ff6c00;
+        font: normal 14px/30px "Microsoft Yahei";
+        color: #fff;
+        text-align: center;
+        border-radius: 4px;
+        -webkit-border-radius: 4px;
+        display: none;
+    }
+    .Login .entry .test-num {
+        position: absolute;
+        left: 220px;
+        top: 122px;
+        display: block;
+    }
+    .Login a.login-btn {
+        display: block;
+        height: 55px;
+        width: 340px;
+        background: #00a2e5;
+        border-radius: 10px;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        font: normal 16px/55px "Microsoft Yahei";
+        color: #fff;
+        text-align: center;
+        margin: 14px auto;
+    }
+    .Login .tips {
+        display: block;
+        width: 340px;
+        height: 55px;
+        background: #b2e5f6;
+        color: #09668d;
+        font: normal 16px/55px "Microsoft Yahei";
+        text-align: center;
+        border-radius: 10px;
+        -webkit-border-radius: 10px;
+        margin: auto;
+    }
+}
+@media screen and (max-width: 768px) and (min-width: 435px) {
+    .Sybg {
+        background:url(../images/login-bg-snb.jpg) center 0 no-repeat;
+        background-size: 100% 100%;
+        width: 100%;
+        height: 100%;
+        background-attachment: fixed;
+    }
+    .Login {
+        width: 100%;
+        position: absolute;
+        left: 50%;
+        margin-left: -50%;
+        top: 40%;
+        margin-top: -210px;
+    }
+    .Login img {
+        display: block;
+        margin: 15px auto;
+        margin-bottom: 35px;
+    }
+    .Login .entry {
+        width: 51%;
+        background: #fff;
+        border-radius: 10px;
+        margin-top: 20px;
+        position: relative;
+        margin: auto;
+    }
+    .Login input {
+        height: 45px;
+        width: 100%;
+        font: normal 16px/60px "Microsoft Yahei";
+        color: #242625;
+        text-indent: 40px;
+        border: none;
+    }
+    .Login .ipt-name {
+        background: url(../images/phone.png) no-repeat 15px center;
+        border-bottom: 1px solid #f7f7f7;
+    }
+    .Login .ipt-lock {
+        background: url(../images/pd.png) no-repeat 15px center;
+        border-bottom: 1px solid #f7f7f7;
+    }
+    .Login .ipt-test {
+        background: url(../images/gou.png) no-repeat 15px center;
+        width: 177px;
+    }
+    .Login .entry p.error-use {
+        position: absolute;
+        left: 355px;
+        top: 15px;
+        width: 90px;
+        height: 30px;
+        background: #ff6c00;
+        font: normal 14px/30px "Microsoft Yahei";
+        color: #fff;
+        text-align: center;
+        border-radius: 4px;
+        -webkit-border-radius: 4px;
+        display: none;
+    }
+    .Login .entry p.error-psd {
+        position: absolute;
+        left: 355px;
+        top: 75px;
+        width: 90px;
+        height: 30px;
+        background: #ff6c00;
+        font: normal 14px/30px "Microsoft Yahei";
+        color: #fff;
+        text-align: center;
+        border-radius: 4px;
+        -webkit-border-radius: 4px;
+        display: none;
+    }
+    p.error-num {
+        position: absolute;
+        left: 355px;
+        top: 135px;
+        width: 90px;
+        height: 30px;
+        background: #ff6c00;
+        font: normal 14px/30px "Microsoft Yahei";
+        color: #fff;
+        text-align: center;
+        border-radius: 4px;
+        -webkit-border-radius: 4px;
+        display: none;
+    }
+    .Login .entry .test-num {
+        position: absolute;
+        left: 76%;
+        top: 83px;
+        display: block;
+        width: 21%;
+    }
+    .Login a.login-btn {
+        display: block;
+        height: 60px;
+        width: 51%;
+        background: #00a2e5;
+        border-radius: 10px;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        font: normal 16px/55px "Microsoft Yahei";
+        color: #fff;
+        text-align: center;
+        margin: 14px auto;
+    }
+    .Login .tips {
+        display: block;
+        width: 51%;
+        height: 55px;
+        background: #b2e5f6;
+        color: #09668d;
+        font: normal 16px/55px "Microsoft Yahei";
+        text-align: center;
+        border-radius: 10px;
+        -webkit-border-radius: 10px;
+        margin: auto;z
+    }
+}
+@media screen and (max-width: 435px) and (min-width: 300px){
+    .Sybg {
+        background:url(../images/login-bg-snb.jpg) center 0 no-repeat;
+        background-size: 100% 100%;
+        width: 100%;
+        height: 100%;
+        background-attachment: fixed;
+    }
+    .Login {
+        width: 100%;
+        position: absolute;
+        left: 50%;
+        margin-left: -50%;
+        top: 40%;
+        margin-top: -210px;
+    }
+    .Login img {
+        display: block;
+        margin: 14px auto;
+        margin-bottom: 36px;
+    }
+    .Login .entry {
+        width: 302px;
+        background: #fff;
+        border-radius: 10px;
+        margin-top: 20px;
+        position: relative;
+        margin: auto;
+    }
+    .Login input {
+        height: 60px;
+        width: 302px;
+        font: normal 16px/60px "Microsoft Yahei";
+        color: #242625;
+        text-indent: 40px;
+        border: none;
+    }
+    .Login .ipt-name {
+        background: url(../images/phone.png) no-repeat 15px center;
+        border-bottom: 1px solid #f7f7f7;
+    }
+    .Login .ipt-lock {
+        background: url(../images/pd.png) no-repeat 15px center;
+        border-bottom: 1px solid #f7f7f7;
+    }
+    .Login .ipt-test {
+        background: url(../images/gou.png) no-repeat 15px center;
+        width: 177px;
+    }
+    .Login .entry p.error-use {
+        position: absolute;
+        left: 355px;
+        top: 15px;
+        width: 90px;
+        height: 30px;
+        background: #ff6c00;
+        font: normal 14px/30px "Microsoft Yahei";
+        color: #fff;
+        text-align: center;
+        border-radius: 4px;
+        -webkit-border-radius: 4px;
+        display: none;
+    }
+    .Login .entry p.error-psd {
+        position: absolute;
+        left: 355px;
+        top: 75px;
+        width: 90px;
+        height: 30px;
+        background: #ff6c00;
+        font: normal 14px/30px "Microsoft Yahei";
+        color: #fff;
+        text-align: center;
+        border-radius: 4px;
+        -webkit-border-radius: 4px;
+        display: none;
+    }
+    p.error-num {
+        position: absolute;
+        left: 355px;
+        top: 135px;
+        width: 90px;
+        height: 30px;
+        background: #ff6c00;
+        font: normal 14px/30px "Microsoft Yahei";
+        color: #fff;
+        text-align: center;
+        border-radius: 4px;
+        -webkit-border-radius: 4px;
+        display: none;
+    }
+    .Login .entry .test-num {
+        position: absolute;
+        left: 192px;
+        top: 122px;
+        display: block;
+    }
+    .Login a.login-btn {
+        display: block;
+        height: 55px;
+        width: 302px;
+        background: #00a2e5;
+        border-radius: 10px;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        font: normal 16px/55px "Microsoft Yahei";
+        color: #fff;
+        text-align: center;
+        margin: 14px auto;
+    }
+    .Login .tips {
+        display: block;
+        width: 302px;
+        height: 55px;
+        background: #b2e5f6;
+        color: #09668d;
+        font: normal 16px/55px "Microsoft Yahei";
+        text-align: center;
+        border-radius: 10px;
+        -webkit-border-radius: 10px;
+        margin: auto;
+    }
+}
