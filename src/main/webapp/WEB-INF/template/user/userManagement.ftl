@@ -34,6 +34,12 @@
 				<input class="easyui-textbox" name="userRank" style="width:100%;" data-options="label:'等级:'">
 			</div>
 			<div style="margin-bottom:20px">
+				<input class="easyui-textbox" name="groupid" style="width:100%;" data-options="label:'组id:'">
+			</div>
+			<div style="margin-bottom:20px">
+				<input class="easyui-textbox" name="groupDesc" style="width:100%;" data-options="label:'组描述:'">
+			</div>
+			<div style="margin-bottom:20px">
 				<select class="easyui-combobox" name="userType"  data-options="label:'类型:'" style="width:100%">
 					<option value="2">分析端</option>
 					<option value="1">采集端</option>
@@ -100,6 +106,8 @@
 	        {field:'userName',title:'用户名',width:120,align:"center"},
 	        {field:'department',title:'部门',width:120,align:"center"},
 	        {field:'userRank',title:'等级',width:120,align:"center"},
+	        {field:'groupid',title:'组Id',width:120,align:"center"},
+	        {field:'groupDesc',title:'组描述',width:120,align:"center"},
 	        {field:'userType',title:'类型',width:120,align:"center"},
 	        {field:'updateTime',title:'修改时间',width:120,align:"center"},
 	        {field:'createTime',title:'创建时间',width:120,align:"center"},
