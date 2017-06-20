@@ -15,5 +15,13 @@
 		<p><input type="submit" id="submit" value="登陆" onclick= "$('form').submit();" ></p>
 	</form>
 </div>
+<script>
+document.onkeydown = function(e){
+	var ev = document.all ? window.event : e;
+	if(ev.keyCode==13) {
+		$("form").click();
+	}
+};
+</script>
 </body>
 </html>
