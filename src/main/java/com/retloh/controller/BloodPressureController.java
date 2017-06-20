@@ -72,17 +72,4 @@ public class BloodPressureController {
 		String resultJson = JacksonUtils.getInstance().obj2Json(resultList);
 		return resultJson;
 	}
-	
-	
-	@RequestMapping(value="/data/toPage",method={RequestMethod.GET})
-    public String toPage(HttpServletRequest request) throws IOException {
-    	return "/xueya/xueyadata";
-    }
-	
-	@RequestMapping(value="/date/toPage",method={RequestMethod.GET})
-    public String toPage1(HttpServletRequest request) throws IOException {
-    	return "/xueya/xueyadate";
-    }
-	
-	
 }

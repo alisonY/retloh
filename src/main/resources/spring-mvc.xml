@@ -72,6 +72,7 @@
 			<mvc:mapping path="/down/**"/>
 			<mvc:mapping path="/statistics/**"/>
 			<mvc:mapping path="/user/**"/>
+			<mvc:mapping path="/group/**"/>
 			<bean class="com.retloh.framework.interceptor.UserLogininAuthorizationInterceptor"/>
 		</mvc:interceptor>
 	</mvc:interceptors>
