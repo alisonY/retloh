@@ -325,52 +325,52 @@ public class StatisticsExample {
             return (Criteria) this;
         }
 
-        public Criteria andDataTypeEqualTo(Boolean value) {
+        public Criteria andDataTypeEqualTo(Integer value) {
             addCriterion("data_type =", value, "dataType");
             return (Criteria) this;
         }
 
-        public Criteria andDataTypeNotEqualTo(Boolean value) {
+        public Criteria andDataTypeNotEqualTo(Integer value) {
             addCriterion("data_type <>", value, "dataType");
             return (Criteria) this;
         }
 
-        public Criteria andDataTypeGreaterThan(Boolean value) {
+        public Criteria andDataTypeGreaterThan(Integer value) {
             addCriterion("data_type >", value, "dataType");
             return (Criteria) this;
         }
 
-        public Criteria andDataTypeGreaterThanOrEqualTo(Boolean value) {
+        public Criteria andDataTypeGreaterThanOrEqualTo(Integer value) {
             addCriterion("data_type >=", value, "dataType");
             return (Criteria) this;
         }
 
-        public Criteria andDataTypeLessThan(Boolean value) {
+        public Criteria andDataTypeLessThan(Integer value) {
             addCriterion("data_type <", value, "dataType");
             return (Criteria) this;
         }
 
-        public Criteria andDataTypeLessThanOrEqualTo(Boolean value) {
+        public Criteria andDataTypeLessThanOrEqualTo(Integer value) {
             addCriterion("data_type <=", value, "dataType");
             return (Criteria) this;
         }
 
-        public Criteria andDataTypeIn(List<Boolean> values) {
+        public Criteria andDataTypeIn(List<Integer> values) {
             addCriterion("data_type in", values, "dataType");
             return (Criteria) this;
         }
 
-        public Criteria andDataTypeNotIn(List<Boolean> values) {
+        public Criteria andDataTypeNotIn(List<Integer> values) {
             addCriterion("data_type not in", values, "dataType");
             return (Criteria) this;
         }
 
-        public Criteria andDataTypeBetween(Boolean value1, Boolean value2) {
+        public Criteria andDataTypeBetween(Integer value1, Integer value2) {
             addCriterion("data_type between", value1, value2, "dataType");
             return (Criteria) this;
         }
 
-        public Criteria andDataTypeNotBetween(Boolean value1, Boolean value2) {
+        public Criteria andDataTypeNotBetween(Integer value1, Integer value2) {
             addCriterion("data_type not between", value1, value2, "dataType");
             return (Criteria) this;
         }
@@ -385,52 +385,52 @@ public class StatisticsExample {
             return (Criteria) this;
         }
 
-        public Criteria andActionEqualTo(Boolean value) {
+        public Criteria andActionEqualTo(Integer value) {
             addCriterion("action =", value, "action");
             return (Criteria) this;
         }
 
-        public Criteria andActionNotEqualTo(Boolean value) {
+        public Criteria andActionNotEqualTo(Integer value) {
             addCriterion("action <>", value, "action");
             return (Criteria) this;
         }
 
-        public Criteria andActionGreaterThan(Boolean value) {
+        public Criteria andActionGreaterThan(Integer value) {
             addCriterion("action >", value, "action");
             return (Criteria) this;
         }
 
-        public Criteria andActionGreaterThanOrEqualTo(Boolean value) {
+        public Criteria andActionGreaterThanOrEqualTo(Integer value) {
             addCriterion("action >=", value, "action");
             return (Criteria) this;
         }
 
-        public Criteria andActionLessThan(Boolean value) {
+        public Criteria andActionLessThan(Integer value) {
             addCriterion("action <", value, "action");
             return (Criteria) this;
         }
 
-        public Criteria andActionLessThanOrEqualTo(Boolean value) {
+        public Criteria andActionLessThanOrEqualTo(Integer value) {
             addCriterion("action <=", value, "action");
             return (Criteria) this;
         }
 
-        public Criteria andActionIn(List<Boolean> values) {
+        public Criteria andActionIn(List<Integer> values) {
             addCriterion("action in", values, "action");
             return (Criteria) this;
         }
 
-        public Criteria andActionNotIn(List<Boolean> values) {
+        public Criteria andActionNotIn(List<Integer> values) {
             addCriterion("action not in", values, "action");
             return (Criteria) this;
         }
 
-        public Criteria andActionBetween(Boolean value1, Boolean value2) {
+        public Criteria andActionBetween(Integer value1, Integer value2) {
             addCriterion("action between", value1, value2, "action");
             return (Criteria) this;
         }
 
-        public Criteria andActionNotBetween(Boolean value1, Boolean value2) {
+        public Criteria andActionNotBetween(Integer value1, Integer value2) {
             addCriterion("action not between", value1, value2, "action");
             return (Criteria) this;
         }

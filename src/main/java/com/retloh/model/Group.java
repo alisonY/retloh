@@ -15,7 +15,7 @@ public class Group {
 
     private Date createTime;
 
-    private Boolean idDeleted;
+    private Integer isDeleted;
 
     public String getId() {
         return id;
@@ -65,11 +65,11 @@ public class Group {
         this.createTime = createTime;
     }
 
-    public Boolean getIdDeleted() {
-        return idDeleted;
+    public Integer getIsDeleted() {
+        return isDeleted;
     }
 
-    public void setIdDeleted(Boolean idDeleted) {
-        this.idDeleted = idDeleted;
+    public void setIsDeleted(Integer isDeleted) {
+        this.isDeleted = isDeleted;
     }
 }

@@ -56,6 +56,7 @@ public class GroupServiceImpl implements GroupService{
 
 	public List<Group> getGroupInfo(Group record, PageQuery pageQuery) {
 		GroupExample example = new GroupExample();
+		example.createCriteria().andIsDeletedEqualTo(0);
 		PageHelper.startPage(pageQuery.getPage(), pageQuery.getRows());
 		return groupMapper.selectByExample(example);
 	}

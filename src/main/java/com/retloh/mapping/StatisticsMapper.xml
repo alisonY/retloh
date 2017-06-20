@@ -5,8 +5,8 @@
     <id column="id" property="id" jdbcType="VARCHAR" />
     <result column="user_id" property="userId" jdbcType="VARCHAR" />
     <result column="data_id" property="dataId" jdbcType="VARCHAR" />
-    <result column="data_type" property="dataType" jdbcType="BIT" />
-    <result column="action" property="action" jdbcType="BIT" />
+    <result column="data_type" property="dataType" jdbcType="INTEGER" />
+    <result column="action" property="action" jdbcType="INTEGER" />
     <result column="operation_time" property="operationTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -106,7 +106,7 @@
       data_type, action, operation_time
       )
     values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{dataId,jdbcType=VARCHAR}, 
-      #{dataType,jdbcType=BIT}, #{action,jdbcType=BIT}, #{operationTime,jdbcType=TIMESTAMP}
+      #{dataType,jdbcType=INTEGER}, #{action,jdbcType=INTEGER}, #{operationTime,jdbcType=TIMESTAMP}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.retloh.model.Statistics" >
@@ -142,10 +142,10 @@
         #{dataId,jdbcType=VARCHAR},
       </if>
       <if test="dataType != null" >
-        #{dataType,jdbcType=BIT},
+        #{dataType,jdbcType=INTEGER},
       </if>
       <if test="action != null" >
-        #{action,jdbcType=BIT},
+        #{action,jdbcType=INTEGER},
       </if>
       <if test="operationTime != null" >
         #{operationTime,jdbcType=TIMESTAMP},
@@ -171,10 +171,10 @@
         data_id = #{record.dataId,jdbcType=VARCHAR},
       </if>
       <if test="record.dataType != null" >
-        data_type = #{record.dataType,jdbcType=BIT},
+        data_type = #{record.dataType,jdbcType=INTEGER},
       </if>
       <if test="record.action != null" >
-        action = #{record.action,jdbcType=BIT},
+        action = #{record.action,jdbcType=INTEGER},
       </if>
       <if test="record.operationTime != null" >
         operation_time = #{record.operationTime,jdbcType=TIMESTAMP},
@@ -189,8 +189,8 @@
     set id = #{record.id,jdbcType=VARCHAR},
       user_id = #{record.userId,jdbcType=VARCHAR},
       data_id = #{record.dataId,jdbcType=VARCHAR},
-      data_type = #{record.dataType,jdbcType=BIT},
-      action = #{record.action,jdbcType=BIT},
+      data_type = #{record.dataType,jdbcType=INTEGER},
+      action = #{record.action,jdbcType=INTEGER},
       operation_time = #{record.operationTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -206,10 +206,10 @@
         data_id = #{dataId,jdbcType=VARCHAR},
       </if>
       <if test="dataType != null" >
-        data_type = #{dataType,jdbcType=BIT},
+        data_type = #{dataType,jdbcType=INTEGER},
       </if>
       <if test="action != null" >
-        action = #{action,jdbcType=BIT},
+        action = #{action,jdbcType=INTEGER},
       </if>
       <if test="operationTime != null" >
         operation_time = #{operationTime,jdbcType=TIMESTAMP},
@@ -221,8 +221,8 @@
     update statistics
     set user_id = #{userId,jdbcType=VARCHAR},
       data_id = #{dataId,jdbcType=VARCHAR},
-      data_type = #{dataType,jdbcType=BIT},
-      action = #{action,jdbcType=BIT},
+      data_type = #{dataType,jdbcType=INTEGER},
+      action = #{action,jdbcType=INTEGER},
       operation_time = #{operationTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>

@@ -9,9 +9,9 @@ public class Statistics {
 
     private String dataId;
 
-    private Boolean dataType;
+    private Integer dataType;
 
-    private Boolean action;
+    private Integer action;
 
     private Date operationTime;
 
@@ -39,19 +39,19 @@ public class Statistics {
         this.dataId = dataId == null ? null : dataId.trim();
     }
 
-    public Boolean getDataType() {
+    public Integer getDataType() {
         return dataType;
     }
 
-    public void setDataType(Boolean dataType) {
+    public void setDataType(Integer dataType) {
         this.dataType = dataType;
     }
 
-    public Boolean getAction() {
+    public Integer getAction() {
         return action;
     }
 
-    public void setAction(Boolean action) {
+    public void setAction(Integer action) {
         this.action = action;
     }
 

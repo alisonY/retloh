@@ -505,63 +505,63 @@ public class GroupExample {
             return (Criteria) this;
         }
 
-        public Criteria andIdDeletedIsNull() {
-            addCriterion("id_deleted is null");
+        public Criteria andIsDeletedIsNull() {
+            addCriterion("is_deleted is null");
             return (Criteria) this;
         }
 
-        public Criteria andIdDeletedIsNotNull() {
-            addCriterion("id_deleted is not null");
+        public Criteria andIsDeletedIsNotNull() {
+            addCriterion("is_deleted is not null");
             return (Criteria) this;
         }
 
-        public Criteria andIdDeletedEqualTo(Boolean value) {
-            addCriterion("id_deleted =", value, "idDeleted");
+        public Criteria andIsDeletedEqualTo(Integer value) {
+            addCriterion("is_deleted =", value, "isDeleted");
             return (Criteria) this;
         }
 
-        public Criteria andIdDeletedNotEqualTo(Boolean value) {
-            addCriterion("id_deleted <>", value, "idDeleted");
+        public Criteria andIsDeletedNotEqualTo(Integer value) {
+            addCriterion("is_deleted <>", value, "isDeleted");
             return (Criteria) this;
         }
 
-        public Criteria andIdDeletedGreaterThan(Boolean value) {
-            addCriterion("id_deleted >", value, "idDeleted");
+        public Criteria andIsDeletedGreaterThan(Integer value) {
+            addCriterion("is_deleted >", value, "isDeleted");
             return (Criteria) this;
         }
 
-        public Criteria andIdDeletedGreaterThanOrEqualTo(Boolean value) {
-            addCriterion("id_deleted >=", value, "idDeleted");
+        public Criteria andIsDeletedGreaterThanOrEqualTo(Integer value) {
+            addCriterion("is_deleted >=", value, "isDeleted");
             return (Criteria) this;
         }
 
-        public Criteria andIdDeletedLessThan(Boolean value) {
-            addCriterion("id_deleted <", value, "idDeleted");
+        public Criteria andIsDeletedLessThan(Integer value) {
+            addCriterion("is_deleted <", value, "isDeleted");
             return (Criteria) this;
         }
 
-        public Criteria andIdDeletedLessThanOrEqualTo(Boolean value) {
-            addCriterion("id_deleted <=", value, "idDeleted");
+        public Criteria andIsDeletedLessThanOrEqualTo(Integer value) {
+            addCriterion("is_deleted <=", value, "isDeleted");
             return (Criteria) this;
         }
 
-        public Criteria andIdDeletedIn(List<Boolean> values) {
-            addCriterion("id_deleted in", values, "idDeleted");
+        public Criteria andIsDeletedIn(List<Integer> values) {
+            addCriterion("is_deleted in", values, "isDeleted");
             return (Criteria) this;
         }
 
-        public Criteria andIdDeletedNotIn(List<Boolean> values) {
-            addCriterion("id_deleted not in", values, "idDeleted");
+        public Criteria andIsDeletedNotIn(List<Integer> values) {
+            addCriterion("is_deleted not in", values, "isDeleted");
             return (Criteria) this;
         }
 
-        public Criteria andIdDeletedBetween(Boolean value1, Boolean value2) {
-            addCriterion("id_deleted between", value1, value2, "idDeleted");
+        public Criteria andIsDeletedBetween(Integer value1, Integer value2) {
+            addCriterion("is_deleted between", value1, value2, "isDeleted");
             return (Criteria) this;
         }
 
-        public Criteria andIdDeletedNotBetween(Boolean value1, Boolean value2) {
-            addCriterion("id_deleted not between", value1, value2, "idDeleted");
+        public Criteria andIsDeletedNotBetween(Integer value1, Integer value2) {
+            addCriterion("is_deleted not between", value1, value2, "isDeleted");
             return (Criteria) this;
         }
     }
