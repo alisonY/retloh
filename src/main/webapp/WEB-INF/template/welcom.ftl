@@ -7,36 +7,52 @@
 </head>  
 	<body style="padding: 0px 0px 0px 0px; ">  
     <div class="easyui-layout" style="width:100%;height:960px;">
+    <!--
+    -->
         <div data-options="region:'north'" style="height:80px">
         	<div style="float:left"><img src="${rootPath}${BasePath}/images/logo_01.jpg" /></div>
         	<div style="float:left;margin-left:32%;text-align:center;line-height:45px;"> <span style="color:#009FCC;}"><h1 style="letter-spacing:2.5px">远程医疗后台管理系统</h1></span> </div>
         </div>
         <div data-options="region:'center'"  style="padding:5px">
             <div class="easyui-layout" data-options="fit:true">
+            
+            	<!--顶部按钮框-->
                 <div data-options="region:'north',split:true" title="" style="height:45px">
-					<div class="easyui-panel" data-options="fit:true" style="padding:5px;">
-					
-						<a href="javascript:void(0);" class="easyui-linkbutton"  data-options="iconCls:'icon-edit'" onclick="javascript:addPanel('详情统计','${rootPath}${BasePath}/statistics/toPage.do');">
-		                    	详情统计
-		                </a>
-					
-						<a href="javascript:void(0);" class="easyui-linkbutton"  data-options="iconCls:'icon-edit'" onclick="javascript:addPanel('用户管理','${rootPath}${BasePath}/user/toPage.do');">
-		                    	用户管理
-		                </a>
-		                
-						<a href="javascript:void(0);" class="easyui-linkbutton"  data-options="iconCls:'icon-edit'" onclick="javascript:addPanel('病例信息','${rootPath}${BasePath}/case/toPage.do');">
-		                    	病例信息
-		                </a>
-		                		                
-		                <a href="javascript:void(0);" class="easyui-linkbutton"  data-options="iconCls:'icon-edit'" onclick="javascript:addPanel('患者信息','${rootPath}${BasePath}/bp/info/toPage.do');">
-		                    	血压信息
-		                </a>
-		                
-		                <a href="javascript:void(0);" class="easyui-linkbutton"  data-options="iconCls:'icon-edit'" onclick="javascript:addPanel('项目信息','${rootPath}${BasePath}/common/toPage.do');">
-		                    	项目信息
-		                </a>
-		                
-					</div>
+                
+                		<!--顶部按钮框 分区-->
+                    	<div class="easyui-layout" data-options="fit:true">
+                    			<!--顶部按钮框 左侧-->
+				                <div data-options="region:'west'" style="width:90%">
+					                <div class="easyui-panel" data-options="fit:true" style="padding:5px;">
+										<a href="javascript:void(0);" class="easyui-linkbutton"  data-options="iconCls:'icon-edit'" onclick="javascript:addPanel('详情统计','${rootPath}${BasePath}/statistics/toPage.do');">
+						                    	详情统计
+						                </a>
+										<a href="javascript:void(0);" class="easyui-linkbutton"  data-options="iconCls:'icon-edit'" onclick="javascript:addPanel('用户管理','${rootPath}${BasePath}/user/toPage.do');">
+						                    	用户管理
+						                </a>
+										<a href="javascript:void(0);" class="easyui-linkbutton"  data-options="iconCls:'icon-edit'" onclick="javascript:addPanel('病例信息','${rootPath}${BasePath}/case/toPage.do');">
+						                    	病例信息
+						                </a>
+						                <a href="javascript:void(0);" class="easyui-linkbutton"  data-options="iconCls:'icon-edit'" onclick="javascript:addPanel('患者信息','${rootPath}${BasePath}/bp/info/toPage.do');">
+						                    	血压信息
+						                </a>
+						                <a href="javascript:void(0);" class="easyui-linkbutton"  data-options="iconCls:'icon-edit'" onclick="javascript:addPanel('项目信息','${rootPath}${BasePath}/common/toPage.do');">
+						                    	项目信息
+						                </a>
+									</div>
+				           		</div>
+			                
+								<!--顶部按钮框 右侧-->
+			                	<div data-options="region:'center'">
+				                	<div class="easyui-panel" data-options="fit:true" style="padding:5px;">
+										<a href="${rootPath}${BasePath}/auth/logout.do" class="easyui-linkbutton"  data-options="iconCls:'icon-undo'" >
+						                    	退出登录
+						                </a>
+									</div>
+			                	</div>
+			                	
+		            	</div>
+		            	
                </div>
                 <div data-options="region:'center'">
             		<div id="tabs" class="easyui-tabs"  fit="true" border="false" style="background-image:url('${rootPath}${BasePath}/images/timg.jpeg');background-repeat:no-repeat;background-position:center">

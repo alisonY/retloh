@@ -57,6 +57,7 @@
 
 	
 <!-- 	
+	 -->
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/**"/>
@@ -65,10 +66,15 @@
 		<mvc:interceptor>
 			<mvc:mapping path="/main/**"/>
 			<mvc:mapping path="/muser/**"/>
+			<mvc:mapping path="/bp/**"/>
+			<mvc:mapping path="/case/**"/>
+			<mvc:mapping path="/common/**"/>
+			<mvc:mapping path="/down/**"/>
+			<mvc:mapping path="/statistics/**"/>
+			<mvc:mapping path="/user/**"/>
 			<bean class="com.retloh.framework.interceptor.UserLogininAuthorizationInterceptor"/>
 		</mvc:interceptor>
 	</mvc:interceptors>
-	 -->
 
 
 
