@@ -9,9 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.retloh.model.Group;
 import com.retloh.model.PageQuery;
+import com.retloh.model.UserGroup;
 import com.retloh.model.commonVo.MyPageInfo;
 import com.retloh.service.GroupService;
 import com.retloh.utils.JacksonUtils;
@@ -35,8 +34,8 @@ public class GroupController {
 	
 	@RequestMapping(value="/getInfo",method={RequestMethod.POST})
     @ResponseBody
-    public String getGroupInfo(HttpServletRequest request,Group record,PageQuery pageQuery) throws IOException {
-	    MyPageInfo<Group> resultList = new MyPageInfo<Group>(groupService.getGroupInfo(record, pageQuery));;
+    public String getGroupInfo(HttpServletRequest request,UserGroup record,PageQuery pageQuery) throws IOException {
+	    MyPageInfo<UserGroup> resultList = new MyPageInfo<UserGroup>(groupService.getGroupInfo(record, pageQuery));;
 	    String resultJson = JacksonUtils.getInstance().obj2Json(resultList);
     	return resultJson;
     }

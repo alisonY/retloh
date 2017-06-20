@@ -2,22 +2,22 @@ package com.retloh.service;
 
 import java.util.List;
 
-import com.retloh.model.Group;
 import com.retloh.model.PageQuery;
+import com.retloh.model.UserGroup;
 
 public interface GroupService {
 
     int deleteByPrimaryKey(String id);
 
-    int insert(Group record);
+    int insert(UserGroup record);
 
-    int insertSelective(Group record);
+    int insertSelective(UserGroup record);
 
-    Group selectByPrimaryKey(String id);
+    UserGroup selectByPrimaryKey(String id);
 
-    int updateByPrimaryKeySelective(Group record);
+    int updateByPrimaryKeySelective(UserGroup record);
 
-    int updateByPrimaryKey(Group record);
+    int updateByPrimaryKey(UserGroup record);
     
-    List<Group> getGroupInfo(Group record,PageQuery pageQuery);
+    List<UserGroup> getGroupInfo(UserGroup record,PageQuery pageQuery);
 }

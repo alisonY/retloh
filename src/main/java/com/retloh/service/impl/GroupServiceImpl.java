@@ -1,14 +1,12 @@
 package com.retloh.service.impl;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.github.pagehelper.PageHelper;
-import com.retloh.dao.GroupMapper;
-import com.retloh.model.Group;
-import com.retloh.model.GroupExample;
+import com.retloh.model.UserGroup;
+import com.retloh.model.UserGroupExample;
+import com.retloh.dao.UserGroupMapper;
 import com.retloh.model.PageQuery;
 import com.retloh.service.GroupService;
 
@@ -16,8 +14,8 @@ import com.retloh.service.GroupService;
 public class GroupServiceImpl implements GroupService{
 	
 	@Autowired
-	private GroupMapper groupMapper;
-
+	private UserGroupMapper UserGroupMapper;
+	
 	@Override
 	public int deleteByPrimaryKey(String id) {
 		// TODO Auto-generated method stub
@@ -25,40 +23,41 @@ public class GroupServiceImpl implements GroupService{
 	}
 
 	@Override
-	public int insert(Group record) {
+	public int insert(UserGroup record) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public int insertSelective(Group record) {
+	public int insertSelective(UserGroup record) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public Group selectByPrimaryKey(String id) {
+	public UserGroup selectByPrimaryKey(String id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public int updateByPrimaryKeySelective(Group record) {
+	public int updateByPrimaryKeySelective(UserGroup record) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public int updateByPrimaryKey(Group record) {
+	public int updateByPrimaryKey(UserGroup record) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	public List<Group> getGroupInfo(Group record, PageQuery pageQuery) {
-		GroupExample example = new GroupExample();
+	public List<UserGroup> getGroupInfo(UserGroup record, PageQuery pageQuery) {
+		UserGroupExample example = new UserGroupExample();
 		example.createCriteria().andIsDeletedEqualTo(0);
+		example.setOrderByClause("uptate_time");
 		PageHelper.startPage(pageQuery.getPage(), pageQuery.getRows());
-		return groupMapper.selectByExample(example);
+		return UserGroupMapper.selectByExample(example);
 	}
 
 }

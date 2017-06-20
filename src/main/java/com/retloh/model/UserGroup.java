@@ -2,10 +2,10 @@ package com.retloh.model;
 
 import java.util.Date;
 
-public class Group {
+public class UserGroup {
     private String id;
 
-    private String desc;
+    private String description;
 
     private String operatorId;
 
@@ -25,12 +25,12 @@ public class Group {
         this.id = id == null ? null : id.trim();
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc == null ? null : desc.trim();
+    public void setDescription(String description) {
+        this.description = description == null ? null : description.trim();
     }
 
     public String getOperatorId() {
