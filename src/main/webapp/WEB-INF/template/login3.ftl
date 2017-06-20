@@ -16,11 +16,11 @@
 <!--Head Ends-->
 <!--Body-->
 <body class="Sybg" style="height: 566px;width: 100%;overflow: hidden;">
-<form>
+<form id='loginForm' method="post"  action="login.do">
     <div class="Login">
-        <img style="max-width:650px" src="${rootPath}${BasePath}/images/logo_text.png">
+        <img style="max-width:550px" src="${rootPath}${BasePath}/images/logo_text.png">
         <div class="entry">
-            <input type="text" name="username" maxlength="20" placeholder="请输入您的用户名" class="ipt-name" onblur="needimgcode(this.value);">
+            <input type="text" name="loginName" maxlength="20" placeholder="请输入您的用户名" class="ipt-name">
             <input type="password" name="password" style="border-bottom: none;" maxlength="20" placeholder="请输入密码" class="ipt-lock">
         </div>
         <a href="javascript:;" class="login-btn">登录</a>
@@ -58,47 +58,7 @@
             $('.tips').html('请输入密码');
             return false;
         }
-        $.ajax({
-            url : 'login.do', // 请求url
-            type : "post", // 提交方式
-            dataType : "json", // 数据类型
-            data : $("form").serialize(),// 参数序列化
-            beforeSend:function(){
-                $(".login-btn").text('登录中...');
-                $(".login-btn").attr("disabled", true);
-            },
-            success : function(data) { // 提交成功的回调函数
-                $(".login-btn").removeAttr('disabled');
-                // 成功删除后刷新页面
-                if (data.status == 'n') {
-                    /*$(".login-btn").text('登录');
-                    if (data.info == 'code' || data.info == '验证码不正确！') {
-                        codes = 'code';
-                        $("#code").show();
-                        $("#imgCheck").show();
-                        if (data.info == '验证码不正确！') {
-                            $('.tips').html(data.info);
-                        } else {
-                            data.info = '请输入验证码';
-                        }
-
-                    }
-                    $("#imgCheck").click();
-                    $('.tips').show();
-                    $('.tips').html(data.info);*/
-                } else {
-                    $(".login-btn").text('跳转中...');
-                    $('.tips').css('display', 'none');
-                    window.location.href='/home/index/';
-                }
-            },
-            error : function(){
-                $(".login-btn").text('登录');
-                $(".login-btn").removeAttr('disabled');
-                $('.tips').show();
-                $('.tips').html("服务器繁忙,请重试!");
-            }
-        });
+        $("#loginForm").submit();
     }
     document.onkeydown = function(e){
         var ev = document.all ? window.event : e;
