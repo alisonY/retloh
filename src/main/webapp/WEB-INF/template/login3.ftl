@@ -39,11 +39,6 @@
             pageHeight();
         });
 
-        $("#imgCheck").click(function(){
-            var randomRZ = Math.random();
-            $("#imgCheck").attr("src", $("#imgCheck").attr("src") + "?rz=" + randomRZ);
-        });
-
     });
 
     $(".login-btn").click(function(){
@@ -76,7 +71,7 @@
                 $(".login-btn").removeAttr('disabled');
                 // 成功删除后刷新页面
                 if (data.status == 'n') {
-                    $(".login-btn").text('登录');
+                    /*$(".login-btn").text('登录');
                     if (data.info == 'code' || data.info == '验证码不正确！') {
                         codes = 'code';
                         $("#code").show();
@@ -90,7 +85,7 @@
                     }
                     $("#imgCheck").click();
                     $('.tips').show();
-                    $('.tips').html(data.info);
+                    $('.tips').html(data.info);*/
                 } else {
                     $(".login-btn").text('跳转中...');
                     $('.tips').css('display', 'none');
@@ -102,22 +97,6 @@
                 $(".login-btn").removeAttr('disabled');
                 $('.tips').show();
                 $('.tips').html("服务器繁忙,请重试!");
-            }
-        });
-    }
-    //判断是否需要验证码
-    function needimgcode(mastername) {
-        $.get('/login/needimgcode/'+mastername+'/', function(ret){
-            if (ret == 'yes') {
-                codes = 'yes';
-                $('.ipt-test').show();
-                $('#imgCheck').show();
-            }
-            else
-            {
-                $('.ipt-test').hide();
-                $('#imgCheck').hide();
-                $('.tips').hide();
             }
         });
     }
