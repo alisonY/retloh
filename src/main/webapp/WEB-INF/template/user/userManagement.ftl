@@ -34,10 +34,10 @@
 				<input class="easyui-textbox" name="userRank" style="width:100%;" data-options="label:'等级:'">
 			</div>
 			<div style="margin-bottom:20px">
-				<input class="easyui-textbox" name="groupid" style="width:100%;" data-options="label:'组id:'">
+				<input class="easyui-textbox" name="groupid" style="width:100%;" data-options="label:'组id:',required:true">
 			</div>
 			<div style="margin-bottom:20px">
-				<input class="easyui-textbox" name="groupDesc" style="width:100%;" data-options="label:'组描述:'">
+				<input class="easyui-textbox" name="groupDesc" style="width:100%;" data-options="label:'组描述:',required:true">
 			</div>
 			<div style="margin-bottom:20px">
 				<select class="easyui-combobox" name="userType"  data-options="label:'类型:'" style="width:100%">
