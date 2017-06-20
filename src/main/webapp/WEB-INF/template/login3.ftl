@@ -22,8 +22,6 @@
         <div class="entry">
             <input type="text" name="username" maxlength="20" placeholder="请输入您的用户名" class="ipt-name" onblur="needimgcode(this.value);">
             <input type="password" name="password" style="border-bottom: none;" maxlength="20" placeholder="请输入密码" class="ipt-lock">
-            <input type="text" style="width:177px;display: none;" maxlength="10" placeholder="请输入右侧验证码" class="ipt-test" id="code" name="code">
-            <a class="test-num"><img style="cursor:pointer;width: 100%;margin-bottom: 0;display: none;" id="imgCheck" src="/imgcode/" alt="看不清，换一张" class="vm log-pl10"></a>
         </div>
         <a href="javascript:;" class="login-btn">登录</a>
         <span class="pro tips" style="display: none;"></span>
@@ -65,16 +63,6 @@
             $('.tips').html('请输入密码');
             return false;
         }
-        if (codes != '')
-        {
-            if ($('.ipt-test').val() == '')
-            {
-                $('.tips').show();
-                $('.tips').html('请输入验证码');
-                return false;
-            }
-        }
-
         $.ajax({
             url : 'login.do', // 请求url
             type : "post", // 提交方式
