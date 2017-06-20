@@ -18,7 +18,7 @@
 <body class="Sybg" style="height: 566px;width: 100%;overflow: hidden;">
 <form>
     <div class="Login">
-        <img src="/images/contp-ai.png">
+        <img style="max-width:650px" src="${rootPath}${BasePath}/images/logo_text.png">
         <div class="entry">
             <input type="text" name="username" maxlength="20" placeholder="请输入您的用户名" class="ipt-name" onblur="needimgcode(this.value);">
             <input type="password" name="password" style="border-bottom: none;" maxlength="20" placeholder="请输入密码" class="ipt-lock">
