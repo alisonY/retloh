@@ -24,8 +24,7 @@ public class GroupServiceImpl implements GroupService{
 
 	@Override
 	public int insert(UserGroup record) {
-		// TODO Auto-generated method stub
-		return 0;
+		return UserGroupMapper.insert(record);
 	}
 
 	@Override
@@ -42,20 +41,18 @@ public class GroupServiceImpl implements GroupService{
 
 	@Override
 	public int updateByPrimaryKeySelective(UserGroup record) {
-		// TODO Auto-generated method stub
-		return 0;
+		return UserGroupMapper.updateByPrimaryKeySelective(record);
 	}
 
 	@Override
 	public int updateByPrimaryKey(UserGroup record) {
-		// TODO Auto-generated method stub
-		return 0;
+		return UserGroupMapper.updateByPrimaryKey(record);
 	}
 
 	public List<UserGroup> getGroupInfo(UserGroup record, PageQuery pageQuery) {
 		UserGroupExample example = new UserGroupExample();
 		example.createCriteria().andIsDeletedEqualTo(0);
-		example.setOrderByClause("uptate_time");
+		example.setOrderByClause("uptate_time DESC");
 		PageHelper.startPage(pageQuery.getPage(), pageQuery.getRows());
 		return UserGroupMapper.selectByExample(example);
 	}

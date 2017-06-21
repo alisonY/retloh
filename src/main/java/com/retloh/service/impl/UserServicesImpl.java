@@ -67,6 +67,7 @@ public class UserServicesImpl implements UserServices {
 	public List<TUser> getUserInfo(TUser tuser, PageQuery pageQuery) {
 		// TODO Auto-generated method stub
 		TUserExample userexample =new TUserExample();
+		userexample.setOrderByClause("create_time DESC");
 		
 		PageHelper.startPage(pageQuery.getPage(), pageQuery.getRows());
 		

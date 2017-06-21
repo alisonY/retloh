@@ -35,6 +35,7 @@ public class CaseInfoServicesImpl implements CaseInfoServices{
 
 	public List<CaseInfo> getCaseInfo(CaseInfo caseinfo, PageQuery query) {
 		CaseInfoExample example = new CaseInfoExample();
+		example.setOrderByClause("create_time DESC");
 /*		long count = PageHelper.count(new ISelect() {
 			@Override
 			public void doSelect() {
