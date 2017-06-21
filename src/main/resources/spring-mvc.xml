@@ -129,5 +129,46 @@
 			<value>4096</value>
 		</property>
 	</bean>
+	
+	<!-- 石英计划   未启用-->
+	
+	<!-- For times when you just need to invoke a method on a specific object -->
+    <!--<bean id="simpleJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="myBean" />
+        <property name="targetMethod" value="printMessage" />
+    </bean>-->
+	
+	<!-- For times when you need more complex processing, passing data to the scheduled job -->
+	<!--<bean name="complexJobDetail"    class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+    	<property name="jobClass" value="com.retloh.quartz.ScheduledJob" />
+    	<property name="durability" value="true" />
+	</bean>-->
+	
+	<!-- Run the job every 2 seconds with initial delay of 1 second -->
+    <!--<bean id="simpleTrigger"  class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+        <property name="jobDetail" ref="simpleJobDetail" />
+        <property name="startDelay" value="1000" />
+        <property name="repeatInterval" value="2000" />
+    </bean>-->
+	
+	<!-- Run the job every 5 seconds only on Weekends -->
+    <!--<bean id="cronTrigger"  class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="complexJobDetail" />
+        <property name="cronExpression" value="0/5 * * ? * SAT-SUN" />
+    </bean>-->
+ 
+    <!-- Scheduler factory bean to glue together jobDetails and triggers to Configure Quartz Scheduler -->
+    <!--<bean  id="myScheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="jobDetails">
+            <list>
+                <ref bean="complexJobDetail" />
+            </list>
+        </property>
+        <property name="triggers">
+            <list>
+                <ref bean="cronTrigger" />
+            </list>
+        </property>
+    </bean>-->
 
 </beans>
