@@ -6,20 +6,16 @@
 </head>
 <body>
     <table id="common" style="width:100%;height:auto" > </table>
-	<!--对话框-->
-	<div id="dlg" class="easyui-dialog" title="项目信息" style="width:800px;height:600px;padding:10px"
-		data-options="
-			closed:'true',
-			modal:'true',
-			iconCls:'icon-edit',
-			buttons: '#dlg-buttons'
-		">
-
-		<form id="caseForm" method="post">
-			    <div id="infoLayout" style="width:770px;height:500px;">
-			    </div>
-		</form>
+	
+	<div id="dlg" class="easyui-dialog" title="项目详情" data-options="iconCls:'icon-save'" style="width:60%;height:400px;padding:10px"
+		data-options="closed:'true',modal:'true',iconCls:'icon-edit',buttons: '#dlg-buttons'">
+		
+		<table id="pg" style="width:100%;height:auto">
+		</table>
+		
 	</div>
+	
+	
 	<div id="dlg-buttons">
 		<a href="javascript:void(0)" id="saveBtn" class="easyui-linkbutton" onclick="formSubmit()">保存</a>
 		<a href="javascript:void(0)" id="editBtn" class="easyui-linkbutton" onclick="javascript:$('#dlg').dialog('close')">关闭</a>
@@ -62,7 +58,7 @@
 		$('#common').datagrid({
 			rownumbers:true,
 			pagination:true,
-			fitColumns:true,
+			fitColumns:false,
 			toolbar:toolbar,
     		singleSelect: true, 
 			pagePosition:'bottom',//bottom,top,both
@@ -110,7 +106,7 @@
 		$.messager.confirm('警告','即将删除这条病历记录',function(b){
 			if(b){ 
 				var data={id:id};		    						
-				var url = "${rootPath}${BasePath}/case/delInfo.do";
+				var url = "${rootPath}${BasePath}/common/delInfo.do";
 				$.post(url,data,function(result){
 				if(result.status>0){
 					$.messager.show({title:'提示',msg:result.msg,timeout:2000});
@@ -124,12 +120,12 @@
 		});
 	}
 	function viewRow(){
-		loadData("病例查看","view");
+		loadData("详情查看","view");
 	}
 	
 	
 	function editRow(id){
-		loadData("病例编辑","edit");
+		loadData("详情编辑","edit");
 	}
 	
 	function formSubmit(){
@@ -162,7 +158,6 @@
 		$('#infoLayout').layout();
 		$('#dlg').dialog({title: title});
 		$('#dlg').dialog('open');
-		$("#caseForm").form('clear');
 		if(type == "edit"){
 			//设置保存按钮不可编辑
 			$("#saveBtn").linkbutton("enable");
@@ -171,10 +166,12 @@
 			$("#saveBtn").linkbutton("disable");
 		}
 		var data={id:id};		    						
-		var url = "${rootPath}${BasePath}/case/viewInfo.do";
+		var url = "${rootPath}${BasePath}/common/viewInfo.do";
 		$.post(url,data,function(result){
 			if(result.status){
-				$('#caseForm').form('load', result.msg);
+				var jsonstr = '{"total":1,"rows":[{"id":"M000005","name":"检测设备","sortid":3,"valid":"1","handler":"系统管理员"}]}';  
+				var data = $.parseJSON(jsonstr);    
+				$('#pg').datagrid('loadData', data); //将数据绑定到datagrid 
 			}else{
 				$.messager.show({title:'提示',msg:result.msg});
 			}

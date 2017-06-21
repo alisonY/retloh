@@ -60,4 +60,10 @@ public class CommonServicesImpl implements CommonServices {
 		return commonmapper.selectByExample(example);
 	}
 
+	@Override
+	public String getInfoById(String id) {
+		// TODO Auto-generated method stub
+		return commonmapper.selectByPrimaryKey(id).getInfo();
+	}
+
 }

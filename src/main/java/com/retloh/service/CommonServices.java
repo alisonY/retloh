@@ -20,5 +20,7 @@ public interface CommonServices {
     int updateByPrimaryKey(Common record);
 
 	List<Common> getDataList(Common record, PageQuery pageQuery);
+	
+	String getInfoById(String id);
 
 }
