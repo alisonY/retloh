@@ -3,6 +3,7 @@
 <mapper namespace="com.retloh.dao.CaseInfoMapper" >
   <resultMap id="BaseResultMap" type="com.retloh.model.CaseInfo" >
     <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="group_id" property="groupId" jdbcType="VARCHAR" />
     <result column="serial_number" property="serialNumber" jdbcType="VARCHAR" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="citizen_number" property="citizenNumber" jdbcType="VARCHAR" />
@@ -103,9 +104,9 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, serial_number, name, citizen_number, age, sex, clinic_number, bed_number, record_year, 
-    record_mounth, record_day, record_minutes, operation_doctor, diagnostic_doctor, status, 
-    department, hospital_number, hospital_name, default_hospital_name, hospital_address, 
+    id, group_id, serial_number, name, citizen_number, age, sex, clinic_number, bed_number, 
+    record_year, record_mounth, record_day, record_minutes, operation_doctor, diagnostic_doctor, 
+    status, department, hospital_number, hospital_name, default_hospital_name, hospital_address, 
     hospital_phonenum, hospital_fax, patient_year, patient_month, patient_day, daolianshu, 
     sum_hours, pacemaker_parameter, offset, suggest, conclusion, yongyaoshuoming, note, 
     case_tag, holter_load_date, create_time, update_time, handwritten_conclusion, pdfexport_filePath, 
@@ -143,40 +144,45 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.retloh.model.CaseInfo" >
-    insert into caseinfo (id, serial_number, name, 
-      citizen_number, age, sex, 
-      clinic_number, bed_number, record_year, 
-      record_mounth, record_day, record_minutes, 
-      operation_doctor, diagnostic_doctor, status, 
-      department, hospital_number, hospital_name, 
-      default_hospital_name, hospital_address, hospital_phonenum, 
-      hospital_fax, patient_year, patient_month, 
-      patient_day, daolianshu, sum_hours, 
-      pacemaker_parameter, offset, suggest, 
-      conclusion, yongyaoshuoming, note, 
-      case_tag, holter_load_date, create_time, 
-      update_time, handwritten_conclusion, pdfexport_filePath, 
-      original_filePath, analyzed_filePath)
-    values (#{id,jdbcType=VARCHAR}, #{serialNumber,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
-      #{citizenNumber,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, #{sex,jdbcType=VARCHAR}, 
-      #{clinicNumber,jdbcType=VARCHAR}, #{bedNumber,jdbcType=VARCHAR}, #{recordYear,jdbcType=INTEGER}, 
-      #{recordMounth,jdbcType=INTEGER}, #{recordDay,jdbcType=INTEGER}, #{recordMinutes,jdbcType=INTEGER}, 
-      #{operationDoctor,jdbcType=VARCHAR}, #{diagnosticDoctor,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
-      #{department,jdbcType=VARCHAR}, #{hospitalNumber,jdbcType=VARCHAR}, #{hospitalName,jdbcType=VARCHAR}, 
-      #{defaultHospitalName,jdbcType=VARCHAR}, #{hospitalAddress,jdbcType=VARCHAR}, #{hospitalPhonenum,jdbcType=VARCHAR}, 
-      #{hospitalFax,jdbcType=VARCHAR}, #{patientYear,jdbcType=INTEGER}, #{patientMonth,jdbcType=INTEGER}, 
-      #{patientDay,jdbcType=INTEGER}, #{daolianshu,jdbcType=INTEGER}, #{sumHours,jdbcType=INTEGER}, 
-      #{pacemakerParameter,jdbcType=VARCHAR}, #{offset,jdbcType=INTEGER}, #{suggest,jdbcType=VARCHAR}, 
-      #{conclusion,jdbcType=VARCHAR}, #{yongyaoshuoming,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}, 
-      #{caseTag,jdbcType=VARCHAR}, #{holterLoadDate,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updateTime,jdbcType=TIMESTAMP}, #{handwrittenConclusion,jdbcType=VARCHAR}, #{pdfexportFilepath,jdbcType=VARCHAR}, 
-      #{originalFilepath,jdbcType=VARCHAR}, #{analyzedFilepath,jdbcType=VARCHAR})
+    insert into caseinfo (id, group_id, serial_number, 
+      name, citizen_number, age, 
+      sex, clinic_number, bed_number, 
+      record_year, record_mounth, record_day, 
+      record_minutes, operation_doctor, diagnostic_doctor, 
+      status, department, hospital_number, 
+      hospital_name, default_hospital_name, hospital_address, 
+      hospital_phonenum, hospital_fax, patient_year, 
+      patient_month, patient_day, daolianshu, 
+      sum_hours, pacemaker_parameter, offset, 
+      suggest, conclusion, yongyaoshuoming, 
+      note, case_tag, holter_load_date, 
+      create_time, update_time, handwritten_conclusion, 
+      pdfexport_filePath, original_filePath, analyzed_filePath
+      )
+    values (#{id,jdbcType=VARCHAR}, #{groupId,jdbcType=VARCHAR}, #{serialNumber,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{citizenNumber,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, 
+      #{sex,jdbcType=VARCHAR}, #{clinicNumber,jdbcType=VARCHAR}, #{bedNumber,jdbcType=VARCHAR}, 
+      #{recordYear,jdbcType=INTEGER}, #{recordMounth,jdbcType=INTEGER}, #{recordDay,jdbcType=INTEGER}, 
+      #{recordMinutes,jdbcType=INTEGER}, #{operationDoctor,jdbcType=VARCHAR}, #{diagnosticDoctor,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER}, #{department,jdbcType=VARCHAR}, #{hospitalNumber,jdbcType=VARCHAR}, 
+      #{hospitalName,jdbcType=VARCHAR}, #{defaultHospitalName,jdbcType=VARCHAR}, #{hospitalAddress,jdbcType=VARCHAR}, 
+      #{hospitalPhonenum,jdbcType=VARCHAR}, #{hospitalFax,jdbcType=VARCHAR}, #{patientYear,jdbcType=INTEGER}, 
+      #{patientMonth,jdbcType=INTEGER}, #{patientDay,jdbcType=INTEGER}, #{daolianshu,jdbcType=INTEGER}, 
+      #{sumHours,jdbcType=INTEGER}, #{pacemakerParameter,jdbcType=VARCHAR}, #{offset,jdbcType=INTEGER}, 
+      #{suggest,jdbcType=VARCHAR}, #{conclusion,jdbcType=VARCHAR}, #{yongyaoshuoming,jdbcType=VARCHAR}, 
+      #{note,jdbcType=VARCHAR}, #{caseTag,jdbcType=VARCHAR}, #{holterLoadDate,jdbcType=TIMESTAMP}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{handwrittenConclusion,jdbcType=VARCHAR}, 
+      #{pdfexportFilepath,jdbcType=VARCHAR}, #{originalFilepath,jdbcType=VARCHAR}, #{analyzedFilepath,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.retloh.model.CaseInfo" >
     insert into caseinfo
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
+      </if>
+      <if test="groupId != null" >
+        group_id,
       </if>
       <if test="serialNumber != null" >
         serial_number,
@@ -302,6 +308,9 @@
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="groupId != null" >
+        #{groupId,jdbcType=VARCHAR},
       </if>
       <if test="serialNumber != null" >
         #{serialNumber,jdbcType=VARCHAR},
@@ -437,6 +446,9 @@
       <if test="record.id != null" >
         id = #{record.id,jdbcType=VARCHAR},
       </if>
+      <if test="record.groupId != null" >
+        group_id = #{record.groupId,jdbcType=VARCHAR},
+      </if>
       <if test="record.serialNumber != null" >
         serial_number = #{record.serialNumber,jdbcType=VARCHAR},
       </if>
@@ -565,6 +577,7 @@
   <update id="updateByExample" parameterType="map" >
     update caseinfo
     set id = #{record.id,jdbcType=VARCHAR},
+      group_id = #{record.groupId,jdbcType=VARCHAR},
       serial_number = #{record.serialNumber,jdbcType=VARCHAR},
       name = #{record.name,jdbcType=VARCHAR},
       citizen_number = #{record.citizenNumber,jdbcType=VARCHAR},
@@ -612,6 +625,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.retloh.model.CaseInfo" >
     update caseinfo
     <set >
+      <if test="groupId != null" >
+        group_id = #{groupId,jdbcType=VARCHAR},
+      </if>
       <if test="serialNumber != null" >
         serial_number = #{serialNumber,jdbcType=VARCHAR},
       </if>
@@ -737,7 +753,8 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.retloh.model.CaseInfo" >
     update caseinfo
-    set serial_number = #{serialNumber,jdbcType=VARCHAR},
+    set group_id = #{groupId,jdbcType=VARCHAR},
+      serial_number = #{serialNumber,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},
       citizen_number = #{citizenNumber,jdbcType=VARCHAR},
       age = #{age,jdbcType=INTEGER},

@@ -35,6 +35,7 @@ HolterLoadDate 回放时间
 
 CREATE TABLE `caseinfo` (
   `id` varchar(64) NOT NULL COMMENT '主键ID',
+  `group_id` varchar(64) NOT NULL COMMENT '分组ID',
   `serial_number` varchar(20) DEFAULT '0' COMMENT '序列号*',
   `name` varchar(20) NOT NULL COMMENT '姓名',
   `citizen_number` varchar(20) DEFAULT NULL COMMENT '身份证号',

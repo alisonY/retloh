@@ -118,23 +118,43 @@ public class CommonController {
 	@RequestMapping(value="/viewInfo",method={RequestMethod.POST})
     @ResponseBody
     public String viewInfo(HttpServletRequest request,String id){
-		Map<String,Object> map = new HashMap<String, Object>();
-		map.put("status",false);
+		
+		StringBuffer sb = new StringBuffer();
 		if(StringUtils.isNotBlank(id)){
 			String info = commonServices.getInfoById(id);
 			if(info!=null){
 				String[] fields = info.split("#");
-				map.put("status",true);
-				map.put("msg", fields);
+				sb.append("{\"status\":true,");
+				sb.append("\"msg\":"+jsonSpliter(fields));
 			}else{
-				map.put("msg", "查无此结果");
+				sb.append("{\"status\":false,");
+				sb.append("\"msg\":\"查无此结果\"");
 			}
 		}else{
-			map.put("msg","操作失败，请重试_"+id);
+			sb.append("{\"status\":false,");
+			sb.append("\"msg\":\"操作失败，请重试\"");
 		}
-		String resultJson = JacksonMapper.beanToJson(map);
-		return resultJson;
+		sb.append("}");
+		return sb.toString();
     }
+	
+	
+	private String jsonSpliter(String[] fields){
+		StringBuffer sb = new StringBuffer();
+		sb.append("{\"rows\":[");
+		for(int x = 0;x<fields.length;x++){
+			String row = fields[x];
+			String[] splited = row.split(":");
+			sb.append("{\"name\":\""+splited[0]);
+			sb.append("\",\"value\":\""+splited[1]);
+			sb.append("\"}");
+			if(x != fields.length-1){
+				sb.append(",");
+			}
+		}
+		sb.append("]}");
+		return sb.toString();
+	}
 	
 	
 

@@ -5,6 +5,8 @@ import java.util.Date;
 public class CaseInfo {
     private String id;
 
+    private String groupId;
+
     private String serialNumber;
 
     private String name;
@@ -91,6 +93,14 @@ public class CaseInfo {
 
     public void setId(String id) {
         this.id = id == null ? null : id.trim();
+    }
+
+    public String getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(String groupId) {
+        this.groupId = groupId == null ? null : groupId.trim();
     }
 
     public String getSerialNumber() {
