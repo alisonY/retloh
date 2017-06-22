@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.retloh.model.CaseInfo;
 import com.retloh.model.Common;
 import com.retloh.model.PageQuery;
 import com.retloh.model.commonVo.MyPageInfo;
@@ -38,7 +37,7 @@ public class CommonController {
 	private static final Logger LOGGER     = LoggerFactory.getLogger(CommonController.class);
 	
 	
-	@RequestMapping(value="/postcaseT",method={RequestMethod.POST})
+	@RequestMapping(value="/postcommon",method={RequestMethod.POST})
     @ResponseBody
     public String postcaseT(HttpServletRequest request,String commonJson){
 		
