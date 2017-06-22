@@ -7,8 +7,8 @@
 <body>
     <table id="common" style="width:100%;height:auto" > </table>
 	
-	<div id="dlg" class="easyui-dialog" title="项目详情" data-options="closed:'true',modal:'true',iconCls:'icon-edit',buttons: '#dlg-buttons'" style="width:60%;height:400px;padding:10px">
-		<table id="pg" style="width:100%;height:auto"></table>
+	<div id="dlg" class="easyui-dialog" title="项目详情" data-options="closed:'true',modal:'true',iconCls:'icon-edit',buttons: '#dlg-buttons'" style="width:30%;height:400px;padding:10px">
+		<table id="pg" class="easyui-propertygrid" style="width:100%;height:auto" data-options=""></table>
 	</div>
 	
 	
@@ -165,9 +165,18 @@
 		var url = "${rootPath}${BasePath}/common/viewInfo.do";
 		$.post(url,data,function(result){
 			if(result.status){
-				var jsonstr = '{"total":1,"rows":[{"id":"M000005","name":"检测设备","sortid":3,"valid":"1","handler":"系统管理员"}]}';  
-				var data = $.parseJSON(jsonstr);    
-				$('#pg').datagrid('loadData', data); //将数据绑定到datagrid 
+				console.info(result.msg);
+			
+				$('#pg').propertygrid(
+				{
+					method:'get',
+					showGroup:false,
+					showHeader:false,
+					scrollbarSize:0
+		        });
+		         $('#pg').propertygrid('loadData', result.msg);
+			
+			
 			}else{
 				$.messager.show({title:'提示',msg:result.msg});
 			}
