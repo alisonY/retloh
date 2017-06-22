@@ -6,19 +6,22 @@ import java.util.List;
 import org.quartz.CronScheduleBuilder;
 import org.quartz.JobBuilder;
 import org.quartz.JobDetail;
+import org.quartz.JobExecutionContext;
+import org.quartz.JobExecutionException;
 import org.quartz.Scheduler;
 import org.quartz.TriggerKey;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.scheduling.quartz.QuartzJobBean;
 
-public class SchedulerJob {
+public class SchedulerJob extends QuartzJobBean{
 
 	// schedulerFactoryBean 由spring创建注入
-	ApplicationContext ctx = new ClassPathXmlApplicationContext("spring-mvc.xml");
+	/*ApplicationContext ctx = new ClassPathXmlApplicationContext("spring-mvc.xml");
 
 	Scheduler scheduler = (Scheduler) ctx.getBean("myScheduler");
 	// 这里获取任务信息数据
-	/*List<ScheduledJob> jobList = new ArrayList<ScheduledJob>();
+	List<ScheduledJob> jobList = new ArrayList<ScheduledJob>();
 	 * for (ScheduledJob job : jobList) {
 	 * 
 	 * TriggerKey triggerKey = TriggerKey.triggerKey("", "");
@@ -47,4 +50,19 @@ public class SchedulerJob {
 	 * 
 	 * //按新的trigger重新设置job执行 scheduler.rescheduleJob(triggerKey, trigger); } }
 	 */
+
+	private UpdateStatusJob updateStatusjob;
+	@Override
+	protected void executeInternal(JobExecutionContext arg0) throws JobExecutionException {
+		// TODO Auto-generated method stub
+		updateStatusjob.updateStatus();
+	}
+	
+	public UpdateStatusJob getUpdateStatusjob() {
+		return updateStatusjob;
+	}
+
+	public void setUpdateStatusjob(UpdateStatusJob updateStatusjob) {
+		this.updateStatusjob = updateStatusjob;
+	}
 }
