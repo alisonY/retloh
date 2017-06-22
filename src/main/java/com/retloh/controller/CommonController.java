@@ -39,7 +39,7 @@ public class CommonController {
 	
 	@RequestMapping(value="/postcommon",method={RequestMethod.POST})
     @ResponseBody
-    public String postcaseT(HttpServletRequest request,String commonJson){
+    public String postcaseT(HttpServletRequest request){
 		
 		String line = null;
 		StringBuilder sb = new StringBuilder();
@@ -58,16 +58,12 @@ public class CommonController {
 		}
         String jsonstr = sb.toString();
         
-        if(StringUtils.isBlank(commonJson) || StringUtils.isNotBlank(commonJson)){
-        	commonJson = jsonstr;
-        }
-        
-		LOGGER.error("receive json:"+commonJson);
+		LOGGER.error("receive json:"+jsonstr);
 
-		if(StringUtils.isNotBlank(commonJson)){
+		if(StringUtils.isNotBlank(jsonstr)){
 			Common info = new Common();
 			try {
-				info = JacksonMapper.jsonToBean(commonJson, Common.class);
+				info = JacksonMapper.jsonToBean(jsonstr, Common.class);
 				if(info!=null){
 					info.setId(UUID.randomUUID().toString());
 					int flag = commonServices.insert(info);
