@@ -66,6 +66,8 @@ public class CommonController {
 				info = JacksonMapper.jsonToBean(jsonstr, Common.class);
 				if(info!=null){
 					info.setId(UUID.randomUUID().toString());
+					info.setUpTime(new Date());
+					info.setDownTime(new Date());
 					int flag = commonServices.insert(info);
 					if(flag>0){
 						map.put("status", true);
