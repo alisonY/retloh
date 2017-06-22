@@ -7,12 +7,8 @@
 <body>
     <table id="common" style="width:100%;height:auto" > </table>
 	
-	<div id="dlg" class="easyui-dialog" title="项目详情" data-options="iconCls:'icon-save'" style="width:60%;height:400px;padding:10px"
-		data-options="closed:'true',modal:'true',iconCls:'icon-edit',buttons: '#dlg-buttons'">
-		
-		<table id="pg" style="width:100%;height:auto">
-		</table>
-		
+	<div id="dlg" class="easyui-dialog" title="项目详情" data-options="closed:'true',modal:'true',iconCls:'icon-edit',buttons: '#dlg-buttons'" style="width:60%;height:400px;padding:10px">
+		<table id="pg" style="width:100%;height:auto"></table>
 	</div>
 	
 	
@@ -187,7 +183,7 @@
 	
 	
 	function getSelected(){  
-        var selected = $('#caseInfo').datagrid('getSelected');
+        var selected = $('#common').datagrid('getSelected');
         var id = "";
         if (selected){  
             id = selected.id;
