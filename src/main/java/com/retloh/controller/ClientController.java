@@ -59,7 +59,7 @@ public class ClientController extends ClientBaseController {
         			modelMap.put("statu", true);
         			modelMap.put("token", token);
     			}else{
-    				modelMap.put("errorInfo", "this account is not only available at pc client.");
+    				modelMap.put("errorInfo", "this account is only available at pc client.");
     			}
     		}else{
     			modelMap.put("errorInfo", "Authentication failed,here is some message.");
