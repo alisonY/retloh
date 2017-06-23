@@ -41,7 +41,8 @@ public class ClientController extends ClientBaseController {
     		TUser temp = userServices.getUserInfoBy(loginName, password);
     		modelMap.put("statu", false);
     		if(temp!=null){
-    			String jsonStr = JacksonMapper.beanToJson(temp);
+    			//String jsonStr = JacksonMapper.beanToJson(temp);
+    			String jsonStr = JacksonUtils.getInstance().obj2Json(temp);
     			String cacheKey = CacheConstant.CLIENT_SESSION_CACHE + request.getSession().getId();
     			String token = CommonUtil.md5(cacheKey);//token 根据当前用户cacheKey经过MD5编码后生成
     			LocalCacheUtil.getInstance().putLocalCache(token, temp, CacheConstant.CLIENT_LOGOUT_TIMES);
@@ -65,6 +66,7 @@ public class ClientController extends ClientBaseController {
 		if(tUser==null){
 			maps.put("msg", "请求异常");
 		}else{
+			String currentGroupId = tUser.getGroupId();
 			maps.put("msg", tUser.getLoginName());
 		}
 		return JacksonUtils.getInstance().obj2Json(maps);

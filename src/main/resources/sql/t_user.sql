@@ -8,7 +8,7 @@ CREATE TABLE `t_user` (
   `department` varchar(64) DEFAULT NULL COMMENT '部门',
   `user_rank` int(32) DEFAULT NULL COMMENT '等级',
   `user_type` int(32) DEFAULT NULL COMMENT '类型',
-  `groupid`  int(32) DEFAULT NULL COMMENT '组',
+  `group_id` varchar(64) NOT NULL COMMENT '分组ID',
   `group_desc`  varchar(64) DEFAULT NULL COMMENT '组描述',
   `update_time` datetime DEFAULT NULL COMMENT '修改时间',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',

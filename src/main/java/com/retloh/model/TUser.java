@@ -17,7 +17,7 @@ public class TUser {
 
     private Integer userType;
 
-    private Integer groupid;
+    private String groupId;
 
     private String groupDesc;
 
@@ -83,12 +83,12 @@ public class TUser {
         this.userType = userType;
     }
 
-    public Integer getGroupid() {
-        return groupid;
+    public String getGroupId() {
+        return groupId;
     }
 
-    public void setGroupid(Integer groupid) {
-        this.groupid = groupid;
+    public void setGroupId(String groupId) {
+        this.groupId = groupId == null ? null : groupId.trim();
     }
 
     public String getGroupDesc() {
