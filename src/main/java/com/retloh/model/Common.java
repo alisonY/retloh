@@ -5,6 +5,8 @@ import java.util.Date;
 public class Common {
     private String id;
 
+    private String groupId;
+
     private String num;
 
     private String patName;
@@ -49,6 +51,10 @@ public class Common {
 
     private String analysedFile;
 
+    private Date createTime;
+
+    private Date updateTime;
+
     private String info;
 
     private String param0;
@@ -77,6 +83,14 @@ public class Common {
 
     public void setId(String id) {
         this.id = id == null ? null : id.trim();
+    }
+
+    public String getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(String groupId) {
+        this.groupId = groupId == null ? null : groupId.trim();
     }
 
     public String getNum() {
@@ -253,6 +267,22 @@ public class Common {
 
     public void setAnalysedFile(String analysedFile) {
         this.analysedFile = analysedFile == null ? null : analysedFile.trim();
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
     }
 
     public String getInfo() {
