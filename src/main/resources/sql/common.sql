@@ -27,6 +27,7 @@ CREATE TABLE `common` (
 	`analysed_file` varchar(100) DEFAULT NULL COMMENT '分析生成的文件id或路径',
 	`create_time` datetime DEFAULT NULL COMMENT '数据添加时间',
 	`update_time` datetime DEFAULT NULL COMMENT '数据修改时间',
+	`status` int(11) DEFAULT '0' COMMENT '0=待上传数据包，1=已上传待分析，2=待分析下载中，3=已被下载，4=已被分析回传中，5=已回传报告',
 	`info` varchar(2048) DEFAULT NULL COMMENT '其他所有相关信息#号隔开',
 	`param0` varchar(64) DEFAULT NULL COMMENT '预留字段',
 	`param1` varchar(64) DEFAULT NULL COMMENT '预留字段',

@@ -2,6 +2,7 @@ package com.retloh.service.impl;
 
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -64,6 +65,23 @@ public class CommonServicesImpl implements CommonServices {
 	public String getInfoById(String id) {
 		// TODO Auto-generated method stub
 		return commonmapper.selectByPrimaryKey(id).getInfo();
+	}
+
+	@Override
+	public List<Common> getDataListForClient(Common record, PageQuery pageQuery) {
+		CommonExample example = new CommonExample();
+		example.createCriteria().andPgTypeEqualTo(record.getPgType());
+		if(StringUtils.isNotBlank(record.getUpId())){
+			example.createCriteria().andUpIdEqualTo(record.getUpId());
+		}
+		if(StringUtils.isNotBlank(record.getGroupId())){
+			example.createCriteria().andGroupIdEqualTo(record.getGroupId());
+		}
+		if(record.getStatus()!=null){
+			example.createCriteria().andStatusEqualTo(record.getStatus());
+		}
+		PageHelper.startPage(pageQuery.getPage(), pageQuery.getRows());
+		return commonmapper.selectByExample(example);
 	}
 
 }

@@ -21,6 +21,8 @@ public interface CommonServices {
 
 	List<Common> getDataList(Common record, PageQuery pageQuery);
 	
+	List<Common> getDataListForClient(Common record, PageQuery pageQuery);
+	
 	String getInfoById(String id);
 
 }

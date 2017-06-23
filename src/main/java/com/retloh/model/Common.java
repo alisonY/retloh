@@ -55,6 +55,8 @@ public class Common {
 
     private Date updateTime;
 
+    private Integer status;
+
     private String info;
 
     private String param0;
@@ -283,6 +285,14 @@ public class Common {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     public String getInfo() {

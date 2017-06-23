@@ -2,6 +2,7 @@ package com.retloh.controller;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +21,7 @@ import com.retloh.framework.cache.LocalCacheUtil;
 import com.retloh.model.Common;
 import com.retloh.model.PageQuery;
 import com.retloh.model.TUser;
+import com.retloh.service.CommonServices;
 import com.retloh.service.UserServices;
 import com.retloh.utils.CommonUtil;
 import com.retloh.utils.JacksonMapper;
@@ -33,6 +35,9 @@ public class ClientController extends ClientBaseController {
     
     @Autowired
     private UserServices userServices;
+    
+    @Autowired
+    private CommonServices commonServices; 
 	
     @RequestMapping(value="/login",method={RequestMethod.POST})
     @ResponseBody
@@ -41,14 +46,21 @@ public class ClientController extends ClientBaseController {
     		TUser temp = userServices.getUserInfoBy(loginName, password);
     		modelMap.put("statu", false);
     		if(temp!=null){
-    			//String jsonStr = JacksonMapper.beanToJson(temp);
-    			String jsonStr = JacksonUtils.getInstance().obj2Json(temp);
-    			String cacheKey = CacheConstant.CLIENT_SESSION_CACHE + request.getSession().getId();
-    			String token = CommonUtil.md5(cacheKey);//token 根据当前用户cacheKey经过MD5编码后生成
-    			LocalCacheUtil.getInstance().putLocalCache(token, temp, CacheConstant.CLIENT_LOGOUT_TIMES);
-    			LOGGER.error("client Authentication is success,query result is jsonStr={},cacheKey={}", jsonStr, cacheKey);
-    			modelMap.put("statu", true);
-    			modelMap.put("token", token);
+    			/*
+	  			  `user_rank` '等级, -1:都可以登录, 0:可以登录WEB端界面; 1：不可登录WEB端,客户端账号;',
+	  			*/
+    			if(temp.getUserRank() != 0){
+        			//String jsonStr = JacksonMapper.beanToJson(temp);
+        			String jsonStr = JacksonUtils.getInstance().obj2Json(temp);
+        			String cacheKey = CacheConstant.CLIENT_SESSION_CACHE + request.getSession().getId();
+        			String token = CommonUtil.md5(cacheKey);//token 根据当前用户cacheKey经过MD5编码后生成
+        			LocalCacheUtil.getInstance().putLocalCache(token, temp, CacheConstant.CLIENT_LOGOUT_TIMES);
+        			LOGGER.error("client Authentication is success,query result is jsonStr={},cacheKey={}", jsonStr, cacheKey);
+        			modelMap.put("statu", true);
+        			modelMap.put("token", token);
+    			}else{
+    				modelMap.put("errorInfo", "this account is not only available at pc client.");
+    			}
     		}else{
     			modelMap.put("errorInfo", "Authentication failed,here is some message.");
     			LOGGER.error("client Authentication is failed,query result is loginName={},password={}", loginName, password);
@@ -56,7 +68,6 @@ public class ClientController extends ClientBaseController {
     	}
     	return JacksonMapper.beanToJson(modelMap);
     }
-    
     
 	@RequestMapping(value="/getCommonList",method={RequestMethod.POST})
     @ResponseBody
@@ -66,8 +77,30 @@ public class ClientController extends ClientBaseController {
 		if(tUser==null){
 			maps.put("msg", "请求异常");
 		}else{
+			/*
+			 * `user_rank` '等级, -1:都可以登录, 0:可以登录WEB端界面; 1：不可登录WEB端,客户端账号;',
+			 * `user_type` '类型 0:管理员,1:采集端(上传端);2:分析端(下载端)',
+			 */
+			/*
+			 * 状态
+			 * 0=待上传数据包，1=已上传待分析，2=待分析下载中，3=已被下载，4=已被分析回传中，5=已回传报告
+			 */
 			String currentGroupId = tUser.getGroupId();
-			maps.put("msg", tUser.getLoginName());
+			common.setGroupId(currentGroupId);//只能看到自己分组内的
+			common.setPgType(common.getPgType());
+			if(tUser.getUserType() == 1){//1:采集端(上传端);
+				common.setUpId(tUser.getId());//采集端 部分情况 都是只能看到自己上传的.
+			}
+			if(tUser.getUserType() == 2){//2:分析端(下载端);
+				if(common.getStatus() == 1){//取待分析的
+					
+				}
+				if(common.getStatus() == 5){//取已分析的
+					common.setUpId(tUser.getId());//只能看到自己分析上传的的
+				}
+			}
+			List<Common> resultList = commonServices.getDataList(common, pageQuery);
+			maps.put("msg", resultList);
 		}
 		return JacksonUtils.getInstance().obj2Json(maps);
     }
