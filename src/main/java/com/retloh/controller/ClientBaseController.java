@@ -9,7 +9,7 @@ import com.retloh.model.TUser;
 public class ClientBaseController {
 	
     protected TUser getAccountInfo(HttpServletRequest request) {
-    	String token = request.getParameter("token");
+    	String token = request.getHeader("token");
     	TUser tUser = null;
     	if(StringUtils.isNotBlank(token)){
     		tUser = (TUser)LocalCacheUtil.getInstance().getLocalCache(token);

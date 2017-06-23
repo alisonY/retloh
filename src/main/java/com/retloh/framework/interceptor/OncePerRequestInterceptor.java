@@ -3,15 +3,10 @@ package com.retloh.framework.interceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.ModelAndView;
 import com.retloh.framework.CacheConstant;
 import com.retloh.framework.context.UserContextHolder;
 import com.retloh.model.TUser;
-import com.retloh.service.UserServices;
-
 
 /**
  * 每一次请求拦截器
@@ -58,7 +53,7 @@ public class OncePerRequestInterceptor extends AbstractHandlerInterceptor {
 	 * @return String
 	 */
 	private String getUserInfoCacheKey(HttpServletRequest request) {
-		return CacheConstant.USER_SESSION_CACHE + request.getSession().getId();		
+		return CacheConstant.USER_SESSION_CACHE + request.getSession().getId();
 	}
 	
 }
