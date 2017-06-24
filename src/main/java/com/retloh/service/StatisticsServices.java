@@ -21,6 +21,6 @@ public interface StatisticsServices {
 
 	List<Statistics> getDataList(Statistics statistics, PageQuery pageQuery);
 	
-	List<Statistics> getData(Statistics statistics);
+	List<Statistics> getData();
 	
 }
