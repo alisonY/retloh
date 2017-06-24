@@ -17,6 +17,7 @@ import com.retloh.framework.cache.LocalCacheUtil;
 import com.retloh.model.TUser;
 import com.retloh.service.UserServices;
 import com.retloh.utils.JacksonMapper;
+import com.retloh.utils.JacksonUtils;
 
 @Controller
 @RequestMapping("/auth")
@@ -47,13 +48,20 @@ public class LoginController {
     	if(StringUtils.isNotBlank(loginName) && StringUtils.isNotBlank(password)){
     		TUser temp = userServices.getUserInfoBy(loginName, password);
     		if(temp!=null){
-    			String jsonStr = JacksonMapper.beanToJson(temp);
+    			/*
+	  			  `user_rank` '等级, -1:都可以登录, 0:可以登录WEB端界面; 1：不可登录WEB端,客户端账号;',
+	  			*/
+    			String jsonStr = JacksonUtils.getInstance().obj2Json(temp);
     			String cacheKey = CacheConstant.USER_SESSION_CACHE + request.getSession().getId();
-    			LOGGER.error("login action is success,quert result is jsonStr={},cacheKey={}", jsonStr, cacheKey);
-    			//PUT TO CACHE
-    			LocalCacheUtil.getInstance().putLocalCache(cacheKey, temp, CacheConstant.USER_LOGOUT_TIMES);
-    			mv.setViewName("redirect:/main/welcome.do");
-    			return mv;  
+	  			if(temp.getUserRank()  == -1 || temp.getUserRank()  == 0){
+	    			LOGGER.error("login action is success,query result is jsonStr={},cacheKey={}", jsonStr, cacheKey);
+	    			//PUT TO CACHE
+	    			LocalCacheUtil.getInstance().putLocalCache(cacheKey, temp, CacheConstant.USER_LOGOUT_TIMES);
+	    			mv.setViewName("redirect:/main/welcome.do");
+	    			return mv;  
+	  			}else{
+	  				LOGGER.error("account is only available at pc client.,query result is jsonStr={},cacheKey={}", jsonStr, cacheKey);
+	  			}
     		}
     	}
 		modelMap.put("i", Math.random());

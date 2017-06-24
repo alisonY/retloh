@@ -9,7 +9,7 @@
     <result column="department" property="department" jdbcType="VARCHAR" />
     <result column="user_rank" property="userRank" jdbcType="INTEGER" />
     <result column="user_type" property="userType" jdbcType="INTEGER" />
-    <result column="groupid" property="groupid" jdbcType="INTEGER" />
+    <result column="group_id" property="groupId" jdbcType="VARCHAR" />
     <result column="group_desc" property="groupDesc" jdbcType="VARCHAR" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
@@ -74,8 +74,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, login_name, password, user_name, department, user_rank, user_type, groupid, group_desc, 
-    update_time, create_time, operator
+    id, login_name, password, user_name, department, user_rank, user_type, group_id, 
+    group_desc, update_time, create_time, operator
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.retloh.model.TUserExample" >
     select
@@ -111,12 +111,12 @@
   <insert id="insert" parameterType="com.retloh.model.TUser" >
     insert into t_user (id, login_name, password, 
       user_name, department, user_rank, 
-      user_type, groupid, group_desc, 
+      user_type, group_id, group_desc, 
       update_time, create_time, operator
       )
     values (#{id,jdbcType=VARCHAR}, #{loginName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{userName,jdbcType=VARCHAR}, #{department,jdbcType=VARCHAR}, #{userRank,jdbcType=INTEGER}, 
-      #{userType,jdbcType=INTEGER}, #{groupid,jdbcType=INTEGER}, #{groupDesc,jdbcType=VARCHAR}, 
+      #{userType,jdbcType=INTEGER}, #{groupId,jdbcType=VARCHAR}, #{groupDesc,jdbcType=VARCHAR}, 
       #{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, #{operator,jdbcType=VARCHAR}
       )
   </insert>
@@ -144,8 +144,8 @@
       <if test="userType != null" >
         user_type,
       </if>
-      <if test="groupid != null" >
-        groupid,
+      <if test="groupId != null" >
+        group_id,
       </if>
       <if test="groupDesc != null" >
         group_desc,
@@ -182,8 +182,8 @@
       <if test="userType != null" >
         #{userType,jdbcType=INTEGER},
       </if>
-      <if test="groupid != null" >
-        #{groupid,jdbcType=INTEGER},
+      <if test="groupId != null" >
+        #{groupId,jdbcType=VARCHAR},
       </if>
       <if test="groupDesc != null" >
         #{groupDesc,jdbcType=VARCHAR},
@@ -229,8 +229,8 @@
       <if test="record.userType != null" >
         user_type = #{record.userType,jdbcType=INTEGER},
       </if>
-      <if test="record.groupid != null" >
-        groupid = #{record.groupid,jdbcType=INTEGER},
+      <if test="record.groupId != null" >
+        group_id = #{record.groupId,jdbcType=VARCHAR},
       </if>
       <if test="record.groupDesc != null" >
         group_desc = #{record.groupDesc,jdbcType=VARCHAR},
@@ -258,7 +258,7 @@
       department = #{record.department,jdbcType=VARCHAR},
       user_rank = #{record.userRank,jdbcType=INTEGER},
       user_type = #{record.userType,jdbcType=INTEGER},
-      groupid = #{record.groupid,jdbcType=INTEGER},
+      group_id = #{record.groupId,jdbcType=VARCHAR},
       group_desc = #{record.groupDesc,jdbcType=VARCHAR},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
@@ -288,8 +288,8 @@
       <if test="userType != null" >
         user_type = #{userType,jdbcType=INTEGER},
       </if>
-      <if test="groupid != null" >
-        groupid = #{groupid,jdbcType=INTEGER},
+      <if test="groupId != null" >
+        group_id = #{groupId,jdbcType=VARCHAR},
       </if>
       <if test="groupDesc != null" >
         group_desc = #{groupDesc,jdbcType=VARCHAR},
@@ -314,7 +314,7 @@
       department = #{department,jdbcType=VARCHAR},
       user_rank = #{userRank,jdbcType=INTEGER},
       user_type = #{userType,jdbcType=INTEGER},
-      groupid = #{groupid,jdbcType=INTEGER},
+      group_id = #{groupId,jdbcType=VARCHAR},
       group_desc = #{groupDesc,jdbcType=VARCHAR},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       create_time = #{createTime,jdbcType=TIMESTAMP},
