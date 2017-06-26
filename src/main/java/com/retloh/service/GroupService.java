@@ -20,4 +20,6 @@ public interface GroupService {
     int updateByPrimaryKey(UserGroup record);
     
     List<UserGroup> getGroupInfo(UserGroup record,PageQuery pageQuery);
+    
+    List<UserGroup> getAllGroupInfo();
 }

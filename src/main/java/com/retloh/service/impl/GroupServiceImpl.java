@@ -57,4 +57,10 @@ public class GroupServiceImpl implements GroupService{
 		return UserGroupMapper.selectByExample(example);
 	}
 
+	public List<UserGroup> getAllGroupInfo() {
+		UserGroupExample example = new UserGroupExample();
+		example.createCriteria().andIsDeletedEqualTo(0);
+		return UserGroupMapper.selectByExample(example);
+	}
+
 }
