@@ -69,6 +69,9 @@ public class ClientController extends ClientBaseController {
     	return JacksonMapper.beanToJson(modelMap);
     }
     
+    /**
+     * 必传参数 status
+     */
 	@RequestMapping(value="/getCommonList",method={RequestMethod.POST})
     @ResponseBody
     public String getCommonList(HttpServletRequest request, Common common,PageQuery pageQuery) throws IOException {
