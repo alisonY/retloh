@@ -76,34 +76,41 @@ public class ClientController extends ClientBaseController {
     @ResponseBody
     public String getCommonList(HttpServletRequest request, Common common,PageQuery pageQuery) throws IOException {
 		Map<String,Object> maps = new HashMap<String,Object>();
+		maps.put("status", 0);
 		TUser tUser = getAccountInfo(request);
-		if(tUser==null){
-			maps.put("msg", "请求异常");
+		if(StringUtils.isBlank(common.getPgType()) || common.getStatus() == null){
+			maps.put("msg", "pgType和status参数必传");
 		}else{
-			/*
-			 * `user_rank` '等级, -1:都可以登录, 0:可以登录WEB端界面; 1：不可登录WEB端,客户端账号;',
-			 * `user_type` '类型 0:管理员,1:采集端(上传端);2:分析端(下载端)',
-			 */
-			/*
-			 * 状态
-			 * 0=待上传数据包，1=已上传待分析，2=待分析下载中，3=已被下载，4=已被分析回传中，5=已回传报告
-			 */
-			String currentGroupId = tUser.getGroupId();
-			common.setGroupId(currentGroupId);//只能看到自己分组内的
-			common.setPgType(common.getPgType());
-			if(tUser.getUserType() == 1){//1:采集端(上传端);
-				common.setUpId(tUser.getId());//采集端 部分情况 都是只能看到自己上传的.
-			}
-			if(tUser.getUserType() == 2){//2:分析端(下载端);
-				if(common.getStatus() == 1){//取待分析的
-					
+			if(tUser==null){
+				maps.put("status", -1);
+				maps.put("msg", "login is required");
+			}else{
+				/*
+				 * `user_rank` '等级, -1:都可以登录, 0:可以登录WEB端界面; 1：不可登录WEB端,客户端账号;',
+				 * `user_type` '类型 0:管理员,1:采集端(上传端);2:分析端(下载端)',
+				 */
+				/*
+				 * 状态
+				 * 0=待上传数据包，1=已上传待分析，2=待分析下载中，3=已被下载，4=已被分析回传中，5=已回传报告
+				 */
+				String currentGroupId = tUser.getGroupId();
+				common.setGroupId(currentGroupId);//只能看到自己分组内的
+				common.setPgType(common.getPgType());
+				if(tUser.getUserType() == 1){//1:采集端(上传端);
+					common.setUpId(tUser.getId());//采集端 部分情况 都是只能看到自己上传的.
 				}
-				if(common.getStatus() == 5){//取已分析的
-					common.setUpId(tUser.getId());//只能看到自己分析上传的的
+				if(tUser.getUserType() == 2){//2:分析端(下载端);
+					if(common.getStatus() == 1){//取待分析的
+						
+					}
+					if(common.getStatus() == 5){//取已分析的
+						common.setUpId(tUser.getId());//只能看到自己分析上传的的
+					}
 				}
-			}
-			List<Common> resultList = commonServices.getDataListForClient(common, pageQuery);
-			maps.put("msg", resultList);
+				List<Common> resultList = commonServices.getDataListForClient(common, pageQuery);
+				maps.put("status", 1);
+				maps.put("msg", resultList);
+			}			
 		}
 		return JacksonUtils.getInstance().obj2Json(maps);
     }
