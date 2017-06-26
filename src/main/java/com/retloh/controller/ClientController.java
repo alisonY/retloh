@@ -99,7 +99,7 @@ public class ClientController extends ClientBaseController {
 					common.setUpId(tUser.getId());//只能看到自己分析上传的的
 				}
 			}
-			List<Common> resultList = commonServices.getDataList(common, pageQuery);
+			List<Common> resultList = commonServices.getDataListForClient(common, pageQuery);
 			maps.put("msg", resultList);
 		}
 		return JacksonUtils.getInstance().obj2Json(maps);
