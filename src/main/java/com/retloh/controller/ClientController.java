@@ -70,7 +70,7 @@ public class ClientController extends ClientBaseController {
     }
     
     /**
-     * 必传参数 status
+     * 必传参数 status pgType
      */
 	@RequestMapping(value="/getCommonList",method={RequestMethod.POST})
     @ResponseBody
