@@ -37,13 +37,6 @@ public class UserServicesImpl implements UserServices {
 	}
 
 	@Override
-	public List<TUser> getAll() {
-		// TODO Auto-generated method stub
-		LOGGER.error("get all {} ", new Date());
-		return tUserMapper.getAll();
-	}
-
-	@Override
 	public TUser selectByPrimaryKey(String id) {
 		// TODO Auto-generated method stub
 		return tUserMapper.selectByPrimaryKey(id);

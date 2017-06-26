@@ -62,19 +62,28 @@
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/**"/>
+			<mvc:exclude-mapping path="/client/**"/>
 			<bean class="com.retloh.framework.interceptor.OncePerRequestInterceptor"/>
 		</mvc:interceptor>
+		
+		<mvc:interceptor>
+			<mvc:mapping path="/client/**"/>
+			<bean class="com.retloh.framework.interceptor.ClientRequestInterceptor"/>
+		</mvc:interceptor>
+		
 		<mvc:interceptor>
 			<mvc:mapping path="/main/**"/>
 			<mvc:mapping path="/muser/**"/>
 			<mvc:mapping path="/bp/**"/>
 			<mvc:mapping path="/case/**"/>
-			<!--测试放点水
-			<mvc:mapping path="/common/**"/>-->
 			<mvc:mapping path="/down/**"/>
 			<mvc:mapping path="/statistics/**"/>
 			<mvc:mapping path="/user/**"/>
 			<mvc:mapping path="/group/**"/>
+			<!--测试放点水
+			<mvc:mapping path="/common/**"/>
+			<mvc:exclude-mapping path="/common/**"/>
+			-->
 			<bean class="com.retloh.framework.interceptor.UserLogininAuthorizationInterceptor"/>
 		</mvc:interceptor>
 	</mvc:interceptors>

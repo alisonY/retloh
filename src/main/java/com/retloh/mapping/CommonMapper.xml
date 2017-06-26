@@ -3,6 +3,7 @@
 <mapper namespace="com.retloh.dao.CommonMapper" >
   <resultMap id="BaseResultMap" type="com.retloh.model.Common" >
     <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="group_id" property="groupId" jdbcType="VARCHAR" />
     <result column="num" property="num" jdbcType="VARCHAR" />
     <result column="pat_name" property="patName" jdbcType="VARCHAR" />
     <result column="sex" property="sex" jdbcType="VARCHAR" />
@@ -25,6 +26,9 @@
     <result column="conclusion" property="conclusion" jdbcType="VARCHAR" />
     <result column="report_id" property="reportId" jdbcType="VARCHAR" />
     <result column="analysed_file" property="analysedFile" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="INTEGER" />
     <result column="info" property="info" jdbcType="VARCHAR" />
     <result column="param0" property="param0" jdbcType="VARCHAR" />
     <result column="param1" property="param1" jdbcType="VARCHAR" />
@@ -96,10 +100,10 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, num, pat_name, sex, age, tell, id_card, social_id, hs_name, pat_no, area_id, 
-    pg_type, up_id, up_name, ana_id, ana_name, up_time, down_time, net_flag, special, 
-    conclusion, report_id, analysed_file, info, param0, param1, param2, param3, param4, 
-    param5, param6, param7, param8, param9
+    id, group_id, num, pat_name, sex, age, tell, id_card, social_id, hs_name, pat_no, 
+    area_id, pg_type, up_id, up_name, ana_id, ana_name, up_time, down_time, net_flag, 
+    special, conclusion, report_id, analysed_file, create_time, update_time, status, 
+    info, param0, param1, param2, param3, param4, param5, param6, param7, param8, param9
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.retloh.model.CommonExample" >
     select
@@ -133,36 +137,41 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.retloh.model.Common" >
-    insert into common (id, num, pat_name, 
-      sex, age, tell, id_card, 
-      social_id, hs_name, pat_no, 
-      area_id, pg_type, up_id, 
-      up_name, ana_id, ana_name, 
-      up_time, down_time, net_flag, 
-      special, conclusion, report_id, 
-      analysed_file, info, param0, 
-      param1, param2, param3, 
-      param4, param5, param6, 
-      param7, param8, param9
-      )
-    values (#{id,jdbcType=VARCHAR}, #{num,jdbcType=VARCHAR}, #{patName,jdbcType=VARCHAR}, 
-      #{sex,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, #{tell,jdbcType=VARCHAR}, #{idCard,jdbcType=VARCHAR}, 
-      #{socialId,jdbcType=VARCHAR}, #{hsName,jdbcType=VARCHAR}, #{patNo,jdbcType=VARCHAR}, 
-      #{areaId,jdbcType=VARCHAR}, #{pgType,jdbcType=VARCHAR}, #{upId,jdbcType=VARCHAR}, 
-      #{upName,jdbcType=VARCHAR}, #{anaId,jdbcType=VARCHAR}, #{anaName,jdbcType=VARCHAR}, 
-      #{upTime,jdbcType=TIMESTAMP}, #{downTime,jdbcType=TIMESTAMP}, #{netFlag,jdbcType=INTEGER}, 
-      #{special,jdbcType=VARCHAR}, #{conclusion,jdbcType=VARCHAR}, #{reportId,jdbcType=VARCHAR}, 
-      #{analysedFile,jdbcType=VARCHAR}, #{info,jdbcType=VARCHAR}, #{param0,jdbcType=VARCHAR}, 
-      #{param1,jdbcType=VARCHAR}, #{param2,jdbcType=VARCHAR}, #{param3,jdbcType=VARCHAR}, 
-      #{param4,jdbcType=VARCHAR}, #{param5,jdbcType=VARCHAR}, #{param6,jdbcType=VARCHAR}, 
-      #{param7,jdbcType=VARCHAR}, #{param8,jdbcType=VARCHAR}, #{param9,jdbcType=VARCHAR}
-      )
+    insert into common (id, group_id, num, 
+      pat_name, sex, age, 
+      tell, id_card, social_id, 
+      hs_name, pat_no, area_id, 
+      pg_type, up_id, up_name, 
+      ana_id, ana_name, up_time, 
+      down_time, net_flag, special, 
+      conclusion, report_id, analysed_file, 
+      create_time, update_time, status, 
+      info, param0, param1, 
+      param2, param3, param4, 
+      param5, param6, param7, 
+      param8, param9)
+    values (#{id,jdbcType=VARCHAR}, #{groupId,jdbcType=VARCHAR}, #{num,jdbcType=VARCHAR}, 
+      #{patName,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, 
+      #{tell,jdbcType=VARCHAR}, #{idCard,jdbcType=VARCHAR}, #{socialId,jdbcType=VARCHAR}, 
+      #{hsName,jdbcType=VARCHAR}, #{patNo,jdbcType=VARCHAR}, #{areaId,jdbcType=VARCHAR}, 
+      #{pgType,jdbcType=VARCHAR}, #{upId,jdbcType=VARCHAR}, #{upName,jdbcType=VARCHAR}, 
+      #{anaId,jdbcType=VARCHAR}, #{anaName,jdbcType=VARCHAR}, #{upTime,jdbcType=TIMESTAMP}, 
+      #{downTime,jdbcType=TIMESTAMP}, #{netFlag,jdbcType=INTEGER}, #{special,jdbcType=VARCHAR}, 
+      #{conclusion,jdbcType=VARCHAR}, #{reportId,jdbcType=VARCHAR}, #{analysedFile,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, 
+      #{info,jdbcType=VARCHAR}, #{param0,jdbcType=VARCHAR}, #{param1,jdbcType=VARCHAR}, 
+      #{param2,jdbcType=VARCHAR}, #{param3,jdbcType=VARCHAR}, #{param4,jdbcType=VARCHAR}, 
+      #{param5,jdbcType=VARCHAR}, #{param6,jdbcType=VARCHAR}, #{param7,jdbcType=VARCHAR}, 
+      #{param8,jdbcType=VARCHAR}, #{param9,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.retloh.model.Common" >
     insert into common
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
+      </if>
+      <if test="groupId != null" >
+        group_id,
       </if>
       <if test="num != null" >
         num,
@@ -230,6 +239,15 @@
       <if test="analysedFile != null" >
         analysed_file,
       </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
       <if test="info != null" >
         info,
       </if>
@@ -267,6 +285,9 @@
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="groupId != null" >
+        #{groupId,jdbcType=VARCHAR},
       </if>
       <if test="num != null" >
         #{num,jdbcType=VARCHAR},
@@ -334,6 +355,15 @@
       <if test="analysedFile != null" >
         #{analysedFile,jdbcType=VARCHAR},
       </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
       <if test="info != null" >
         #{info,jdbcType=VARCHAR},
       </if>
@@ -380,6 +410,9 @@
     <set >
       <if test="record.id != null" >
         id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupId != null" >
+        group_id = #{record.groupId,jdbcType=VARCHAR},
       </if>
       <if test="record.num != null" >
         num = #{record.num,jdbcType=VARCHAR},
@@ -447,6 +480,15 @@
       <if test="record.analysedFile != null" >
         analysed_file = #{record.analysedFile,jdbcType=VARCHAR},
       </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
       <if test="record.info != null" >
         info = #{record.info,jdbcType=VARCHAR},
       </if>
@@ -488,6 +530,7 @@
   <update id="updateByExample" parameterType="map" >
     update common
     set id = #{record.id,jdbcType=VARCHAR},
+      group_id = #{record.groupId,jdbcType=VARCHAR},
       num = #{record.num,jdbcType=VARCHAR},
       pat_name = #{record.patName,jdbcType=VARCHAR},
       sex = #{record.sex,jdbcType=VARCHAR},
@@ -510,6 +553,9 @@
       conclusion = #{record.conclusion,jdbcType=VARCHAR},
       report_id = #{record.reportId,jdbcType=VARCHAR},
       analysed_file = #{record.analysedFile,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      status = #{record.status,jdbcType=INTEGER},
       info = #{record.info,jdbcType=VARCHAR},
       param0 = #{record.param0,jdbcType=VARCHAR},
       param1 = #{record.param1,jdbcType=VARCHAR},
@@ -528,6 +574,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.retloh.model.Common" >
     update common
     <set >
+      <if test="groupId != null" >
+        group_id = #{groupId,jdbcType=VARCHAR},
+      </if>
       <if test="num != null" >
         num = #{num,jdbcType=VARCHAR},
       </if>
@@ -594,6 +643,15 @@
       <if test="analysedFile != null" >
         analysed_file = #{analysedFile,jdbcType=VARCHAR},
       </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
       <if test="info != null" >
         info = #{info,jdbcType=VARCHAR},
       </if>
@@ -632,7 +690,8 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.retloh.model.Common" >
     update common
-    set num = #{num,jdbcType=VARCHAR},
+    set group_id = #{groupId,jdbcType=VARCHAR},
+      num = #{num,jdbcType=VARCHAR},
       pat_name = #{patName,jdbcType=VARCHAR},
       sex = #{sex,jdbcType=VARCHAR},
       age = #{age,jdbcType=INTEGER},
@@ -654,6 +713,9 @@
       conclusion = #{conclusion,jdbcType=VARCHAR},
       report_id = #{reportId,jdbcType=VARCHAR},
       analysed_file = #{analysedFile,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
       info = #{info,jdbcType=VARCHAR},
       param0 = #{param0,jdbcType=VARCHAR},
       param1 = #{param1,jdbcType=VARCHAR},

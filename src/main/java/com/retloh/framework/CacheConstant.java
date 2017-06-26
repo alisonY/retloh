@@ -39,4 +39,9 @@ public class CacheConstant {
 	 * 客户端登录数据缓存前缀
 	 */
 	public static final String CLIENT_SESSION_CACHE = CACHE_PREFIX + "CLIENT_SESSION_CACHE_";
+	
+    /**
+     * 无操作时登出时间，30分钟未操作登出
+     */
+    public static final int CLIENT_LOGOUT_TIMES = 7200;
 }

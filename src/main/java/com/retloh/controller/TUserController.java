@@ -63,29 +63,6 @@ public class TUserController {
 		return resultJson2;
 	}
 
-	@RequestMapping(value = "/getJson", method = { RequestMethod.GET })
-	@ResponseBody
-	public String getFirstPage(HttpServletRequest request) {
-		List<TUser> list = userservices.getAll();
-		String json = JacksonUtils.getInstance().obj2Json(list);
-		LOGGER.info("info");
-		LOGGER.debug("debug");
-		LOGGER.warn("warn");
-		LOGGER.trace("trace");
-		LOGGER.error("error");
-		return json;
-	}
-
-	@RequestMapping(value = "/listUser")
-	public ModelAndView listUser(HttpServletRequest request, ModelMap modelMap) {
-		ModelAndView mav = new ModelAndView();
-		List<TUser> list = userservices.getAll();
-		modelMap.put("User", list);
-		mav.addAllObjects(modelMap);
-		mav.setViewName("listUser");
-		return mav;
-	}
-
 	@RequestMapping(value = "/addUserPage")
 	public ModelAndView addUserPage(TUser user) {
 		return new ModelAndView("addUser");

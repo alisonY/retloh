@@ -9,8 +9,6 @@ public interface UserServices {
 
 	TUser getUserInfoBy(String loginName, String password);
 
-	List<TUser> getAll();
-
 	TUser selectByPrimaryKey(String id);
 
 	int insert(TUser muser);
