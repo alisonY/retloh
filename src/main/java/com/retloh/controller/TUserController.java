@@ -3,6 +3,7 @@ package com.retloh.controller;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -26,7 +27,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.retloh.model.FtpUser;
 import com.retloh.model.PageQuery;
 import com.retloh.model.TUser;
+import com.retloh.model.UserGroup;
 import com.retloh.model.commonVo.MyPageInfo;
+import com.retloh.service.GroupService;
 import com.retloh.service.UserServices;
 import com.retloh.service.impl.FtpServerUserManagerImpl;
 import com.retloh.utils.JacksonMapper;
@@ -40,6 +43,8 @@ public class TUserController {
 	private UserServices userservices;
 	@Autowired
 	private FtpServerUserManagerImpl ftpserver;
+	@Autowired
+	private GroupService groupService;
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(TUserController.class);
 
@@ -51,15 +56,8 @@ public class TUserController {
 	@RequestMapping(value = "/getInfo", method = { RequestMethod.POST })
 	@ResponseBody
 	public String getCaseInfo(HttpServletRequest request, TUser tuser, PageQuery pageQuery) throws IOException {
-
 		MyPageInfo<TUser> resultList = new MyPageInfo<TUser>(userservices.getUserInfo(tuser, pageQuery));
-		long l1 = System.currentTimeMillis();
-		String resultJson = JacksonMapper.beanToJson(resultList);
-		long l2 = System.currentTimeMillis();
 		String resultJson2 = JacksonUtils.getInstance().obj2Json(resultList);
-		long l3 = System.currentTimeMillis();
-		LOGGER.error(String.valueOf(l2 - l1));
-		LOGGER.error(String.valueOf(l3 - l2));
 		return resultJson2;
 	}
 
@@ -197,5 +195,25 @@ public class TUserController {
 		String resultJson = JacksonMapper.beanToJson(map);
 		return resultJson;
 	}
+	
+	
+	@RequestMapping(value = "/allGroup", method = { RequestMethod.GET })
+	@ResponseBody
+	public String allGroup() {
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<UserGroup> groupList = groupService.getAllGroupInfo();
+		List<UserGroup> newList_1 = new ArrayList<UserGroup>();
+		for(UserGroup temp : groupList){
+			temp.setId(temp.getId());
+			temp.setDescription(temp.getDescription());
+			newList_1.add(temp);
+		}
+		
+		String resultJson1 = JacksonUtils.getInstance().obj2Json(newList_1);
+		String resultJson2 = JacksonMapper.beanToJson(newList_1);
+		return resultJson1+resultJson2;
+	}
+	
+	
 
 }
