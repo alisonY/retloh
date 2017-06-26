@@ -608,6 +608,20 @@ public class DateUtils {
         return result;
     }
     
+    /**
+	 * 获取day天前的日期
+	 * @param day
+	 * @return
+	 */
+	public static Date getDateBefore(int day) {
+		Date date=new Date();
+        Calendar now = Calendar.getInstance();  
+        now.setTime(date);  
+        now.set(Calendar.DATE, now.get(Calendar.DATE) - day);
+        //SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        //return sdf.format(now.getTime());
+        return now.getTime();
+    }
     
     public static void main(String[] args) {
         System.out.println(getCurrentYear());

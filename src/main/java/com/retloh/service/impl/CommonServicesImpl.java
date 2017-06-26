@@ -1,5 +1,6 @@
 package com.retloh.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -12,6 +13,7 @@ import com.retloh.model.Common;
 import com.retloh.model.CommonExample;
 import com.retloh.model.PageQuery;
 import com.retloh.service.CommonServices;
+import com.retloh.utils.DateUtils;
 
 @Service
 public class CommonServicesImpl implements CommonServices {
@@ -81,6 +83,13 @@ public class CommonServicesImpl implements CommonServices {
 			example.createCriteria().andStatusEqualTo(record.getStatus());
 		}
 		PageHelper.startPage(pageQuery.getPage(), pageQuery.getRows());
+		return commonmapper.selectByExample(example);
+	}
+
+	@Override
+	public List<Common> getData() {
+		CommonExample example = new CommonExample();
+		example.createCriteria().andStatusEqualTo(3).andDownTimeNotBetween(new Date(), DateUtils.getDateBefore(2));
 		return commonmapper.selectByExample(example);
 	}
 
