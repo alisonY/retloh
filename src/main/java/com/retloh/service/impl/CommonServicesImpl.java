@@ -82,6 +82,12 @@ public class CommonServicesImpl implements CommonServices {
 		if(record.getStatus()!=null){
 			example.createCriteria().andStatusEqualTo(record.getStatus());
 		}
+		if(pageQuery.getPage() == null){
+			pageQuery.setPage(1);
+		}
+		if(pageQuery.getRows() == null){
+			pageQuery.setRows(20);
+		}
 		PageHelper.startPage(pageQuery.getPage(), pageQuery.getRows());
 		return commonmapper.selectByExample(example);
 	}
