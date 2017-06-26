@@ -156,7 +156,7 @@
     <logger name="com.retloh.utils" level="ERROR" addtivity="false">
         <appender-ref ref="UTILS" />
     </logger>
-    
+        
     <!--   
         默认的日志主线程<root>  
         定义输出日志的级别.DEBUG级别  
@@ -178,5 +178,6 @@
     <root>
         <level value="ALL" /><!-- info级别 输出到控制台 控制台 output 文件 -->
         <appender-ref ref="STDOUT" />
+        <appender-ref ref="ALL" />
     </root>
 </configuration>
