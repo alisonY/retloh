@@ -126,16 +126,6 @@ public class TUserController {
 		return resultJson;
 	}
 
-	@RequestMapping(value = "/updateUserPage")
-	public ModelAndView updateUserUI(String id, HttpServletRequest request, ModelMap modelMap) {
-		TUser user = userservices.selectByPrimaryKey(id);
-		modelMap.put("user", user);
-		ModelAndView mav = new ModelAndView();
-		mav.addAllObjects(modelMap);
-		mav.setViewName("updateUser");
-		return mav;
-	}
-
 	@RequestMapping(value = "/updateUserAction",method = { RequestMethod.POST })
 	@ResponseBody
 	public String updateUser(HttpServletRequest request,TUser user) {
@@ -193,6 +183,24 @@ public class TUserController {
 		}
 		map.put("status", result);
 		String resultJson = JacksonMapper.beanToJson(map);
+		return resultJson;
+	}
+	
+	
+	
+	
+	/**
+	 * USED
+	 * 
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value = "/getUserInfo", method = { RequestMethod.POST })
+	@ResponseBody
+	public String getUserInfo(String id) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		TUser tUser =userservices.selectByPrimaryKey(id);
+		String resultJson = JacksonUtils.getInstance().obj2Json(tUser);
 		return resultJson;
 	}
 	

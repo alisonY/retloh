@@ -28,22 +28,28 @@
 				<input class="easyui-textbox" name="userName" style="width:100%" data-options="label:'用户名:',required:true">
 			</div>
 			<div style="margin-bottom:20px">
-				<input class="easyui-textbox" name="department" style="width:100%;" data-options="label:'部门:'">
-			</div>
-			<div style="margin-bottom:20px">
-				<input class="easyui-textbox" name="userRank" style="width:100%;" data-options="label:'等级:'">
-			</div>
-			<div style="margin-bottom:20px">
 				<input class="easyui-textbox" name="groupid" style="width:100%;" data-options="label:'组id:',required:true">
 			</div>
 			<div style="margin-bottom:20px">
 				<input class="easyui-textbox" name="groupDesc" style="width:100%;" data-options="label:'组描述:',required:true">
 			</div>
 			<div style="margin-bottom:20px">
-				<select class="easyui-combobox" name="userType"  data-options="label:'类型:'" style="width:100%">
-					<option value="2">分析端</option>
+				<select id="cc" class="easyui-combobox" name="group_id"  data-options="label:'分组:'" style="width:100%">
+				
+				</select>
+			</div>
+			<div style="margin-bottom:20px">
+				<select class="easyui-combobox" name="userType"  data-options="label:'类型:',panelHeight:'auto'" style="width:100%">
 					<option value="1">采集端</option>
+					<option value="2">分析端</option>
 					<option value="0">管理员</option>
+				</select>
+			</div>
+			<div style="margin-bottom:20px">
+				<select class="easyui-combobox" name="userRank"  data-options="label:'可登陆端:',panelHeight:'auto'" style="width:100%">
+					<option value="1">客户端</option>
+					<option value="0">PC端</option>
+					<option value="-1">PC&&客户端</option>
 				</select>
 			</div>
 		</form>

@@ -44,7 +44,7 @@ public class ClientController extends ClientBaseController {
     public String login(String loginName,String password,HttpServletRequest request,ModelMap modelMap) {
     	if(StringUtils.isNotBlank(loginName) && StringUtils.isNotBlank(password)){
     		TUser temp = userServices.getUserInfoBy(loginName, password);
-    		modelMap.put("statu", false);
+    		modelMap.put("status", false);
     		if(temp!=null){
     			/*
 	  			  `user_rank` '等级, -1:都可以登录, 0:可以登录WEB端界面; 1：不可登录WEB端,客户端账号;',
@@ -56,7 +56,7 @@ public class ClientController extends ClientBaseController {
         			String token = CommonUtil.md5(cacheKey);//token 根据当前用户cacheKey经过MD5编码后生成
         			LocalCacheUtil.getInstance().putLocalCache(token, temp, CacheConstant.CLIENT_LOGOUT_TIMES);
         			LOGGER.error("client Authentication is success,query result is jsonStr={},cacheKey={}", jsonStr, cacheKey);
-        			modelMap.put("statu", true);
+        			modelMap.put("status", true);
         			modelMap.put("token", token);
     			}else{
     				modelMap.put("errorInfo", "this account is only available at pc client.");
