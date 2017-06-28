@@ -150,15 +150,16 @@ public class TUserController {
 	 */
 	public String updateUser(HttpServletRequest request,TUser user) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// 设置日期格式
-		Date date = null;
-		try {
-			date = df.parse(df.format(new Date()));// new Date()为获取当前系统时间
-		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+		user.setUpdateTime(new Date());
+		
+		UserGroup userGroup = groupService.selectByPrimaryKey(user.getGroupId());
+		if(userGroup == null){
+			map.put("msg", "失败，不存在所选分组");
+			String resultJson = JacksonMapper.beanToJson(map);
+			return resultJson;
 		}
-		user.setUpdateTime(date);
+		userGroup.getDescription();
+		
 		
 		FtpUser ftpuser =ftpserver.selectByPrimaryKey(user.getId());
 		ftpuser.setName(user.getLoginName());

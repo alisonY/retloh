@@ -8,7 +8,7 @@
     <table id="userInfo" style="width:100%;height:auto" ></table>
     
 	<!--对话框-->
-	<div id="dlg" class="easyui-dialog" title="添加用户" style="width:400px;height:500px;padding:10px"
+	<div id="dlg" class="easyui-dialog" title="添加用户" style="width:400px;height:440px;padding:10px"
 		data-options="
 			closed:'true',
 			modal:'true',
@@ -19,7 +19,7 @@
 		<form id="userForm" method="post">
 			<input type="hidden" id="userid" name="id" value="" />
 			<div style="margin-bottom:20px">
-				<input class="easyui-textbox" name="loginName" style="width:100%" data-options="label:'登录账号:',required:true">
+				<input id="loginName" class="easyui-textbox" name="loginName" style="width:100%" data-options="label:'登录账号:',required:true">
 			</div>
 			<div style="margin-bottom:20px">
 				<input class="easyui-textbox" name="password" style="width:100%" data-options="label:'密码:',required:true">
@@ -31,7 +31,7 @@
 				<input class="easyui-textbox" name="department" style="width:100%;" data-options="label:'部门:',required:true">
 			</div>
 			<div style="margin-bottom:20px">
-	            <input id="groupIdSele" class="easyui-combobox" name="groupId" style="width:100%;" data-options="
+	            <input id="groupIdSele" class="easyui-combobox" editable="false" name="groupId" style="width:100%;" data-options="
 	            		url:'${rootPath}${BasePath}/user/allGroup.do',
 	                    valueField: 'id',
 	                    textField: 'text',
@@ -41,14 +41,14 @@
 	                    ">
 			</div>
 			<div style="margin-bottom:20px">
-				<select id="selUserType" class="easyui-combobox" name="userType"  data-options="label:'类型:',panelHeight:'auto'" style="width:100%">
+				<select id="selUserType" class="easyui-combobox" name="userType" editable="false" data-options="label:'类型:',panelHeight:'auto'" style="width:100%" editable="false">
 					<option value="1">采集端</option>
 					<option value="2">分析端</option>
 					<option value="0">管理员</option>
 				</select>
 			</div>
 			<div style="margin-bottom:20px">
-				<select id="selUserRank" class="easyui-combobox" name="userRank"  data-options="label:'可登陆端:',panelHeight:'auto'" style="width:100%">
+				<select id="selUserRank" class="easyui-combobox" name="userRank"  data-options="label:'可登陆端:',panelHeight:'auto'" style="width:100%" editable="false">
 					<option value="1">客户端</option>
 					<option value="0">PC端</option>
 					<option value="-1">PC&&客户端</option>
@@ -190,6 +190,7 @@
 						$('#userInfo').datagrid('reload');
 						$('#dlg').dialog('close');
 						$("#dlg").form('clear');
+						$('#loginName').textbox('textbox').attr('readonly',false); 
 					}else{
 						$.messager.show({title:'提示',msg:result.msg});
 					}
@@ -225,6 +226,7 @@
 					            userName:jsonT.userName,
 					            department:jsonT.department,
 					        });
+					        $('#loginName').textbox('textbox').attr('readonly',true); 
 					        $('#selUserType').combobox('select', jsonT.userType);
 							$('#selUserRank').combobox('select', jsonT.userRank);
 							$('#groupIdSele').combobox('select', jsonT.groupId);
