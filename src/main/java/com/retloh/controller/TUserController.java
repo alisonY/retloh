@@ -222,6 +222,7 @@ public class TUserController {
 		if(StringUtils.isNotBlank(id)){
 			TUser tUser =userservices.selectByPrimaryKey(id);
 			if(tUser!=null){
+				map.put("status", true);
 				map.put("msg", JacksonUtils.getInstance().obj2Json(tUser));
 			}else{
 				map.put("msg", "无此用户");

@@ -156,9 +156,10 @@
 		if(!id){
 			return;
 		}
+		$("#dlg").form('clear');
 		$('#dlg').dialog({title: "编辑用户"});
 		$('#dlg').dialog('open');
-		loadLocal()
+		loadLocal(id)
 	}
 	function viewRow(id){
 		alert(id);
@@ -188,6 +189,7 @@
 						$.messager.show({title:'提示',msg:result.msg,timeout:2000});
 						$('#userInfo').datagrid('reload');
 						$('#dlg').dialog('close');
+						$("#dlg").form('clear');
 					}else{
 						$.messager.show({title:'提示',msg:result.msg});
 					}
@@ -208,32 +210,30 @@
     }
     
     function loadLocal(id){
+    	console.info(id);
 		var data={id:id};
-		var url = "${rootPath}${BasePath}/user/deleteUser.do";
+		var url = "${rootPath}${BasePath}/user/getUserInfo.do";
 		$.post(url,data,function(result){
-					if(result.status>0){
-						$.messager.show({title:'提示',msg:result.msg,timeout:2000});
-						$('#dlg').form('load',result.msg);
+			console.info(result);
+					if(result.status){
+						var jsonT = $.parseJSON(result.msg);
+						
+					        $('#dlg').form('load',{
+					        	id:jsonT.id,
+					            loginName:jsonT.loginName,
+					            password:jsonT.password,
+					            userName:jsonT.userName,
+					            department:jsonT.department,
+					        });
+					        $('#selUserType').combobox('select', jsonT.userType);
+							$('#selUserRank').combobox('select', jsonT.userRank);
+							$('#groupIdSele').combobox('select', jsonT.groupId);
+							
 					}else{
 						$.messager.show({title:'提示',msg:result.msg});
 					}
 		
 		},'json');
-    	
-    	/*
-        $('#dlg').form('load',{
-        	id:selected.id,
-            loginName:selected.loginName,
-            password:selected.password,
-            userName:selected.userName,
-            department:selected.department,
-            userRank:selected.userRank,
-            userType:selected.userType
-        });
-        */
-        
-        
-        
      }
      
 </script>
