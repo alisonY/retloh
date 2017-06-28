@@ -14,6 +14,8 @@ public interface UserServices {
 	int insert(TUser muser);
 
 	int update(TUser muser);
+	
+	int updateByExample(TUser muser);
 
 	int delete(String id);
 	

@@ -112,9 +112,25 @@
 	        {field:'password',title:'密码',width:120,align:"center"},
 	        {field:'userName',title:'用户名',width:120,align:"center"},
 	        {field:'department',title:'部门',width:120,align:"center"},
-	        {field:'userRank',title:'等级',width:120,align:"center"},
+	        {field:'userRank',title:'可登陆端',width:120,align:"center",
+	        	formatter:function(val,rec){
+	        		if (val==-1)
+	        			{return 'PC&&客户端';}
+	        		if (val==0)
+	        			{return 'PC端';}
+	        		if (val==1)
+	        			{return '客户端';}
+	        	}},
 	        {field:'groupDesc',title:'组描述',width:120,align:"center"},
-	        {field:'userType',title:'类型',width:120,align:"center"},
+	        {field:'userType',title:'类型',width:120,align:"center",
+	        	formatter:function(val,rec){
+	        		if (val==0)
+	        			{return '管理员';}
+	        		if (val==1)
+	        			{return '采集端';}
+	        		if (val==2)
+	        			{return '分析端';}
+	        	}},
 	        {field:'updateTime',title:'修改时间',width:120,align:"center"},
 	        {field:'createTime',title:'创建时间',width:120,align:"center"},
 	        {field:'operator',title:'操作人',width:120,align:"center"},
