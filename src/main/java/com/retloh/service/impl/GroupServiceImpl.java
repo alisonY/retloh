@@ -33,10 +33,8 @@ public class GroupServiceImpl implements GroupService{
 		return 0;
 	}
 
-	@Override
 	public UserGroup selectByPrimaryKey(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		return UserGroupMapper.selectByPrimaryKey(id);
 	}
 
 	@Override

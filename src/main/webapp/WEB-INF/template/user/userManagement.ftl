@@ -172,17 +172,10 @@
 		$('#selUserRank').combobox('select', 1);
 		*/
 	}
+	
+	
 	function formSubmit() {
-		var selected = $('#userInfo').datagrid('getSelected');
-        var id = "";
-        if (selected){  
-            id = selected.id;
-        }
-		if(!id){
-			var url='${rootPath}${BasePath}/user/addUserAction.do';
-		}else{
-			var url='${rootPath}${BasePath}/user/updateUserAction.do';
-		}
+		var url='${rootPath}${BasePath}/user/userInfoOpt.do';
 	    $('#userForm').form('submit', 
 			{
 				url: url,
@@ -194,6 +187,7 @@
 					if(result.status>0){
 						$.messager.show({title:'提示',msg:result.msg,timeout:2000});
 						$('#userInfo').datagrid('reload');
+						$('#dlg').dialog('close');
 					}else{
 						$.messager.show({title:'提示',msg:result.msg});
 					}
@@ -213,8 +207,20 @@
         return id;
     }
     
-    function loadLocal(){
-    	var selected = $('#userInfo').datagrid('getSelected');
+    function loadLocal(id){
+		var data={id:id};
+		var url = "${rootPath}${BasePath}/user/deleteUser.do";
+		$.post(url,data,function(result){
+					if(result.status>0){
+						$.messager.show({title:'提示',msg:result.msg,timeout:2000});
+						$('#dlg').form('load',result.msg);
+					}else{
+						$.messager.show({title:'提示',msg:result.msg});
+					}
+		
+		},'json');
+    	
+    	/*
         $('#dlg').form('load',{
         	id:selected.id,
             loginName:selected.loginName,
@@ -224,6 +230,10 @@
             userRank:selected.userRank,
             userType:selected.userType
         });
+        */
+        
+        
+        
      }
      
 </script>

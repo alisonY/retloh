@@ -69,12 +69,7 @@ public class TUserController {
 
 	/**
 	 * USED
-	 * 
-	 * @param id
-	 * @return
 	 */
-	@RequestMapping(value = "/addUserAction", method = { RequestMethod.POST })
-	@ResponseBody
 	public String addUserAction(HttpServletRequest request, TUser user) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		TUser  tUser = UserContextHolder.getUserInfoVo();
@@ -101,6 +96,11 @@ public class TUserController {
 		}
 		
 		UserGroup userGroup = groupService.selectByPrimaryKey(user.getGroupId());
+		if(userGroup == null){
+			map.put("msg", "失败，不存在所选分组");
+			String resultJson = JacksonMapper.beanToJson(map);
+			return resultJson;
+		}
 		userGroup.getDescription();
 		
 		String id = UUID.randomUUID().toString();
@@ -144,8 +144,10 @@ public class TUserController {
 		return resultJson;
 	}
 
-	@RequestMapping(value = "/updateUserAction",method = { RequestMethod.POST })
-	@ResponseBody
+	
+	/**
+	 * USED
+	 */
 	public String updateUser(HttpServletRequest request,TUser user) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// 设置日期格式
@@ -206,7 +208,6 @@ public class TUserController {
 	
 	
 	
-	
 	/**
 	 * USED
 	 * 
@@ -247,4 +248,17 @@ public class TUserController {
 		String resultJson = JacksonUtils.getInstance().obj2Json(mapList);
 		return resultJson;
 	}
+	
+	
+	@RequestMapping(value = "/userInfoOpt", method = { RequestMethod.POST })
+	@ResponseBody
+	public String userInfoOpt(HttpServletRequest request,TUser user) {
+		if(StringUtils.isBlank(user.getId())){//INSERT
+			return addUserAction(request, user);
+		}else{//UPDATE
+			return updateUser(request, user);
+		}
+	}
+	
+	
 }
