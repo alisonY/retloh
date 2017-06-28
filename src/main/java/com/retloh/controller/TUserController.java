@@ -152,10 +152,11 @@ public class TUserController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		FtpUser ftpuser =ftpserver.selectByPrimaryKey(user.getId());
-		ftpuser.setName(user.getLoginName());
-		ftpuser.setPassword(user.getPassword());
-		ftpserver.updateByPrimaryKey(ftpuser);
-		
+		if (ftpuser != null) {
+			ftpuser.setName(user.getLoginName());
+			ftpuser.setPassword(user.getPassword());
+			ftpserver.updateByPrimaryKey(ftpuser);
+		}
 		
 		UserGroup userGroup = groupService.selectByPrimaryKey(user.getGroupId());
 		if(userGroup == null){
