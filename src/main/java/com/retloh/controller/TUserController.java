@@ -150,7 +150,12 @@ public class TUserController {
 	 */
 	public String updateUser(HttpServletRequest request,TUser user) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		user.setUpdateTime(new Date());
+		
+		FtpUser ftpuser =ftpserver.selectByPrimaryKey(user.getId());
+		ftpuser.setName(user.getLoginName());
+		ftpuser.setPassword(user.getPassword());
+		ftpserver.updateByPrimaryKey(ftpuser);
+		
 		
 		UserGroup userGroup = groupService.selectByPrimaryKey(user.getGroupId());
 		if(userGroup == null){
@@ -158,15 +163,11 @@ public class TUserController {
 			String resultJson = JacksonMapper.beanToJson(map);
 			return resultJson;
 		}
-		userGroup.getDescription();
 		
+		user.setUpdateTime(new Date());
+		user.setGroupDesc(userGroup.getDescription());
 		
-		FtpUser ftpuser =ftpserver.selectByPrimaryKey(user.getId());
-		ftpuser.setName(user.getLoginName());
-		ftpuser.setPassword(user.getPassword());
-		ftpserver.updateByPrimaryKey(ftpuser);
-		
-		int result=userservices.update(user);
+		int result=userservices.updateByExample(user);
 		if (result > 0) {
 			map.put("msg", "更新成功");
 		} else {
