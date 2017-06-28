@@ -168,6 +168,14 @@ public class TUserController {
 		user.setUpdateTime(new Date());
 		user.setGroupDesc(userGroup.getDescription());
 		
+		TUser  tUser = UserContextHolder.getUserInfoVo();
+		if(tUser == null ){
+			map.put("msg", "更新失败");
+			String resultJson = JacksonMapper.beanToJson(map);
+			return resultJson;
+		}
+		user.setOperator(tUser.getLoginName());
+		
 		int result=userservices.updateByExample(user);
 		if (result > 0) {
 			map.put("msg", "更新成功");
