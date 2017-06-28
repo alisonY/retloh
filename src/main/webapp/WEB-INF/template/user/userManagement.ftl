@@ -8,7 +8,7 @@
     <table id="userInfo" style="width:100%;height:auto" ></table>
     
 	<!--对话框-->
-	<div id="dlg" class="easyui-dialog" title="添加用户" style="width:400px;height:400px;padding:10px"
+	<div id="dlg" class="easyui-dialog" title="添加用户" style="width:400px;height:500px;padding:10px"
 		data-options="
 			closed:'true',
 			modal:'true',
@@ -28,25 +28,27 @@
 				<input class="easyui-textbox" name="userName" style="width:100%" data-options="label:'用户名:',required:true">
 			</div>
 			<div style="margin-bottom:20px">
-				<input class="easyui-textbox" name="groupid" style="width:100%;" data-options="label:'组id:',required:true">
+				<input class="easyui-textbox" name="department" style="width:100%;" data-options="label:'部门:',required:true">
 			</div>
 			<div style="margin-bottom:20px">
-				<input class="easyui-textbox" name="groupDesc" style="width:100%;" data-options="label:'组描述:',required:true">
+	            <input id="groupIdSele" class="easyui-combobox" name="groupId" style="width:100%;" data-options="
+	            		url:'${rootPath}${BasePath}/user/allGroup.do',
+	                    valueField: 'id',
+	                    textField: 'text',
+	                    label: '分组:',
+	                    labelPosition: 'left',
+	                    panelHeight:'auto'
+	                    ">
 			</div>
 			<div style="margin-bottom:20px">
-				<select id="cc" class="easyui-combobox" name="group_id"  data-options="label:'分组:'" style="width:100%">
-				
-				</select>
-			</div>
-			<div style="margin-bottom:20px">
-				<select class="easyui-combobox" name="userType"  data-options="label:'类型:',panelHeight:'auto'" style="width:100%">
+				<select id="selUserType" class="easyui-combobox" name="userType"  data-options="label:'类型:',panelHeight:'auto'" style="width:100%">
 					<option value="1">采集端</option>
 					<option value="2">分析端</option>
 					<option value="0">管理员</option>
 				</select>
 			</div>
 			<div style="margin-bottom:20px">
-				<select class="easyui-combobox" name="userRank"  data-options="label:'可登陆端:',panelHeight:'auto'" style="width:100%">
+				<select id="selUserRank" class="easyui-combobox" name="userRank"  data-options="label:'可登陆端:',panelHeight:'auto'" style="width:100%">
 					<option value="1">客户端</option>
 					<option value="0">PC端</option>
 					<option value="-1">PC&&客户端</option>
@@ -55,8 +57,8 @@
 		</form>
 	</div>
 	<div id="dlg-buttons">
-		<a href="javascript:void(0)" class="easyui-linkbutton" onclick="formSubmit()">Save</a>
-		<a href="javascript:void(0)" class="easyui-linkbutton" onclick="javascript:$('#dlg').dialog('close')">Close</a>
+		<a href="javascript:void(0)" class="easyui-linkbutton" onclick="formSubmit()">保存</a>
+		<a href="javascript:void(0)" class="easyui-linkbutton" onclick="javascript:$('#dlg').dialog('close')">取消</a>
 	</div>
     
 </body>
@@ -88,7 +90,6 @@
 	        searchUser();
 	        }
 	    }];
-	    
 		datagrid(toolbar);
 	}); 
 
@@ -112,7 +113,6 @@
 	        {field:'userName',title:'用户名',width:120,align:"center"},
 	        {field:'department',title:'部门',width:120,align:"center"},
 	        {field:'userRank',title:'等级',width:120,align:"center"},
-	        {field:'groupid',title:'组Id',width:120,align:"center"},
 	        {field:'groupDesc',title:'组描述',width:120,align:"center"},
 	        {field:'userType',title:'类型',width:120,align:"center"},
 	        {field:'updateTime',title:'修改时间',width:120,align:"center"},
@@ -167,6 +167,10 @@
 		$('#dlg').form('clear');
 		$('#dlg').dialog({title: "添加用户"});
 		$('#dlg').dialog('open');
+		/*
+		$('#selUserType').combobox('select', 1);
+		$('#selUserRank').combobox('select', 1);
+		*/
 	}
 	function formSubmit() {
 		var selected = $('#userInfo').datagrid('getSelected');
@@ -221,5 +225,6 @@
             userType:selected.userType
         });
      }
+     
 </script>
 </html>

@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.retloh.framework.context.UserContextHolder;
 import com.retloh.model.FtpUser;
 import com.retloh.model.PageQuery;
 import com.retloh.model.TUser;
@@ -76,25 +77,42 @@ public class TUserController {
 	@ResponseBody
 	public String addUserAction(HttpServletRequest request, TUser user) {
 		Map<String, Object> map = new HashMap<String, Object>();
+		TUser  tUser = UserContextHolder.getUserInfoVo();
+		if(tUser == null ){
+			map.put("msg", "添加失败");
+			String resultJson = JacksonMapper.beanToJson(map);
+			return resultJson;
+		}
+		
+		if(StringUtils.isBlank(user.getGroupId())){
+			map.put("msg", "添加失败用户组未选择");
+			String resultJson = JacksonMapper.beanToJson(map);
+			return resultJson;
+		}
+		if(user.getUserRank() == null){
+			map.put("msg", "失败，可登陆端未选择");
+			String resultJson = JacksonMapper.beanToJson(map);
+			return resultJson;
+		}
+		if(user.getUserType() == null){
+			map.put("msg", "失败，账号类型未选择");
+			String resultJson = JacksonMapper.beanToJson(map);
+			return resultJson;
+		}
+		
+		UserGroup userGroup = groupService.selectByPrimaryKey(user.getGroupId());
+		userGroup.getDescription();
+		
 		String id = UUID.randomUUID().toString();
 		user.setId(id);
+		user.setOperator(tUser.getLoginName());
+		user.setCreateTime(new Date());
+		user.setUpdateTime(new Date());
+		user.setGroupDesc(userGroup.getDescription());
+		
 		int result = 0;
-
-		user.setOperator("admin");
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// 设置日期格式
-		Date date = null;
-		try {
-			date = df.parse(df.format(new Date()));// new Date()为获取当前系统时间
-		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-
-		user.setCreateTime(date);
-		user.setUpdateTime(date);
-
 		result = userservices.insert(user);
-
+		
 		FtpUser ftpuser = new FtpUser();
 		ftpuser.setId(user.getId());
 		ftpuser.setName(user.getUserName());
@@ -199,29 +217,34 @@ public class TUserController {
 	@ResponseBody
 	public String getUserInfo(String id) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		TUser tUser =userservices.selectByPrimaryKey(id);
-		String resultJson = JacksonUtils.getInstance().obj2Json(tUser);
-		return resultJson;
+		map.put("status", false);
+		if(StringUtils.isNotBlank(id)){
+			TUser tUser =userservices.selectByPrimaryKey(id);
+			if(tUser!=null){
+				map.put("msg", JacksonUtils.getInstance().obj2Json(tUser));
+			}else{
+				map.put("msg", "无此用户");
+			}
+		}else{
+			map.put("msg", "参数异常");
+		}
+		return JacksonUtils.getInstance().obj2Json(map);
 	}
 	
 	
-	@RequestMapping(value = "/allGroup", method = { RequestMethod.GET })
+	@RequestMapping(value = "/allGroup", method = { RequestMethod.POST })
 	@ResponseBody
 	public String allGroup() {
-		Map<String, Object> map = new HashMap<String, Object>();
 		List<UserGroup> groupList = groupService.getAllGroupInfo();
-		List<UserGroup> newList_1 = new ArrayList<UserGroup>();
-		for(UserGroup temp : groupList){
-			temp.setId(temp.getId());
-			temp.setDescription(temp.getDescription());
-			newList_1.add(temp);
-		}
-		
-		String resultJson1 = JacksonUtils.getInstance().obj2Json(newList_1);
-		String resultJson2 = JacksonMapper.beanToJson(newList_1);
-		return resultJson1+resultJson2;
-	}
-	
-	
+		List<Map<String, Object>> mapList = new ArrayList<Map<String, Object>>();
 
+		for(UserGroup temp : groupList){
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("id", temp.getId());
+			map.put("text", temp.getDescription());
+			mapList.add(map);
+		}
+		String resultJson = JacksonUtils.getInstance().obj2Json(mapList);
+		return resultJson;
+	}
 }
