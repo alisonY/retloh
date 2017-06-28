@@ -52,7 +52,7 @@ public class FtpServerUserManagerImpl implements UserManager {
 				return userselect;
 			}
 
-			if (userselect.getPassword().equals(string2MD5(password))) {
+			if (userselect.getPassword().equals(password)) {
 				return userselect;
 			} else {
 				throw new AuthenticationFailedException("Authentication failed");
@@ -86,6 +86,16 @@ public class FtpServerUserManagerImpl implements UserManager {
 		FtpUserExample example= new FtpUserExample();
 		example.createCriteria().andNameEqualTo(username);
 		ftpuserMapper.deleteByExample(example);
+	}
+	
+	public int updateByPrimaryKey(FtpUser user){
+		
+		return ftpuserMapper.updateByPrimaryKey(user);
+		
+	}
+	
+	public FtpUser selectByPrimaryKey(String id){
+		return ftpuserMapper.selectByPrimaryKey(id);
 	}
 
 	@Override

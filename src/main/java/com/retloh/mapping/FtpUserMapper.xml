@@ -116,7 +116,7 @@
       writePermission, status, pdfexport, 
       idletime, uploadrate, downloadrate, 
       maxloginnumber, maxloginperip)
-    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, MD5(#{password,jdbcType=VARCHAR}), 
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{homedirectory,jdbcType=VARCHAR}, #{filepath,jdbcType=VARCHAR}, #{enabled,jdbcType=BIT}, 
       #{writepermission,jdbcType=BIT}, #{status,jdbcType=INTEGER}, #{pdfexport,jdbcType=VARCHAR}, 
       #{idletime,jdbcType=INTEGER}, #{uploadrate,jdbcType=INTEGER}, #{downloadrate,jdbcType=INTEGER}, 
@@ -176,7 +176,7 @@
         #{name,jdbcType=VARCHAR},
       </if>
       <if test="password != null" >
-        MD5(#{password,jdbcType=VARCHAR}),
+        #{password,jdbcType=VARCHAR},
       </if>
       <if test="homedirectory != null" >
         #{homedirectory,jdbcType=VARCHAR},
@@ -229,7 +229,7 @@
         name = #{record.name,jdbcType=VARCHAR},
       </if>
       <if test="record.password != null" >
-        password = MD5(#{record.password,jdbcType=VARCHAR}),
+        password = #{record.password,jdbcType=VARCHAR},
       </if>
       <if test="record.homedirectory != null" >
         homeDirectory = #{record.homedirectory,jdbcType=VARCHAR},
@@ -273,7 +273,7 @@
     update holteruser
     set id = #{record.id,jdbcType=VARCHAR},
       name = #{record.name,jdbcType=VARCHAR},
-      password = MD5(#{record.password,jdbcType=VARCHAR}),
+      password = #{record.password,jdbcType=VARCHAR},
       homeDirectory = #{record.homedirectory,jdbcType=VARCHAR},
       filePath = #{record.filepath,jdbcType=VARCHAR},
       enabled = #{record.enabled,jdbcType=BIT},
@@ -296,7 +296,7 @@
         name = #{name,jdbcType=VARCHAR},
       </if>
       <if test="password != null" >
-        password = MD5(#{password,jdbcType=VARCHAR}),
+        password = #{password,jdbcType=VARCHAR},
       </if>
       <if test="homedirectory != null" >
         homeDirectory = #{homedirectory,jdbcType=VARCHAR},
@@ -337,7 +337,7 @@
   <update id="updateByPrimaryKey" parameterType="com.retloh.model.FtpUser" >
     update holteruser
     set name = #{name,jdbcType=VARCHAR},
-      password = MD5(#{password,jdbcType=VARCHAR}),
+      password = #{password,jdbcType=VARCHAR},
       homeDirectory = #{homedirectory,jdbcType=VARCHAR},
       filePath = #{filepath,jdbcType=VARCHAR},
       enabled = #{enabled,jdbcType=BIT},

@@ -115,7 +115,7 @@ public class TUserController {
 		
 		FtpUser ftpuser = new FtpUser();
 		ftpuser.setId(user.getId());
-		ftpuser.setName(user.getUserName());
+		ftpuser.setName(user.getLoginName());
 		ftpuser.setEnabled(true);
 		ftpuser.setHomedirectory("/data");
 		ftpuser.setPassword(user.getPassword());
@@ -159,6 +159,11 @@ public class TUserController {
 			e1.printStackTrace();
 		}
 		user.setUpdateTime(date);
+		
+		FtpUser ftpuser =ftpserver.selectByPrimaryKey(user.getId());
+		ftpuser.setName(user.getLoginName());
+		ftpuser.setPassword(user.getPassword());
+		ftpserver.updateByPrimaryKey(ftpuser);
 		
 		int result=userservices.update(user);
 		if (result > 0) {
