@@ -96,11 +96,12 @@
 		});
 	}
 	
-	function delRow(){
+	function delGroup(){
 		var id = getSelected();
 		if(!id){
 			return;
 		}
+		console.info(id);
 		$.messager.confirm('警告','即将删除这条病历记录',function(b){
 			if(b){ 
 				var data={id:id};		    						
@@ -153,5 +154,15 @@
 		$('#groupInfo').datagrid('rejectChanges');
 		$('#groupInfo').datagrid('unselectAll');
 	}
+	function getSelected(){  
+        var selected = $('#caseInfo').datagrid('getSelected');
+        var id = "";
+        if (selected){  
+            id = selected.id;
+        }else{
+        	$.messager.show({title:'提示',msg:'没有选择行。'});
+        }
+        return id;
+    }
 </script>
 </html>
