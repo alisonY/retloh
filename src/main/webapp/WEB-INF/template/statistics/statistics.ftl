@@ -5,8 +5,30 @@
 	<#include "commonHead.ftl" />
 </head>
 <body>
-	<div id="main" style="width: 600px;height:400px;float:left;margin-left:10%"></div>
-	<div id="main1" style="width: 600px;height:400px;float:left;margin-left:15%"></div>
+			<div class="easyui-layout" data-options="fit:true">
+			
+				<!--顶部按钮框-->
+				<div data-options="region:'north',split:true" title="" style="height:50px">
+					<!--顶部按钮框 右侧-->
+					<div data-options="region:'center'">
+						<div class="easyui-panel" data-options="fit:true" style="padding:5px;">
+						
+							<input class="easyui-textbox" label="采集端账号:" labelPosition="left" style="width:20%;height:30px">
+							<!--分隔符--><span class="datagrid-btn-separator" style="vertical-align: middle;display:inline-block;float:none"></span>
+							<input class="easyui-textbox" label="分析端账号:" labelPosition="left" style="width:20%;height:30px">
+							<!--分隔符--><span class="datagrid-btn-separator" style="vertical-align: middle;display:inline-block;float:none"></span>
+							<input class="easyui-datetimebox" label="起始时间" labelPosition="left" style="width:20%;height:30px">
+							<input class="easyui-datetimebox" label="结束时间" labelPosition="left" style="width:20%;height:30px">
+							<!--分隔符--><span class="datagrid-btn-separator" style="vertical-align: middle;display:inline-block;float:none"></span>
+							<a href="#" class="easyui-linkbutton" iconCls="icon-search" style="width:80px;height:30px">查询</a>
+						</div>
+					</div>
+			   </div>
+				<div data-options="region:'center'">
+					<div id="main" style="width: 600px;height:400px;float:left;margin-left:10%"></div>
+					<div id="main1" style="width: 600px;height:400px;float:left;margin-left:15%"></div>
+				</div>
+			</div>
 	<script type="text/javascript">
 		var myChart = echarts.init(document.getElementById('main'));
 		var myChart1 = echarts.init(document.getElementById('main1'));
