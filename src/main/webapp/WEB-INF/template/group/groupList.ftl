@@ -155,7 +155,7 @@
 		$('#groupInfo').datagrid('unselectAll');
 	}
 	function getSelected(){  
-        var selected = $('#caseInfo').datagrid('getSelected');
+        var selected = $('#groupInfo').datagrid('getSelected');
         var id = "";
         if (selected){  
             id = selected.id;
