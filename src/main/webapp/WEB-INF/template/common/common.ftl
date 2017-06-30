@@ -4,7 +4,7 @@
 	<title>项目信息</title>
 	<#include "commonHead.ftl" />
 </head>
-<body>
+<body style="padding: 0px 0px 0px 0px;">
     <table id="common" style="width:100%;height:auto" > </table>
 	
 	<div id="dlg" class="easyui-dialog" title="项目详情" data-options="closed:'true',modal:'true',iconCls:'icon-edit',buttons: '#dlg-buttons'" style="width:30%;height:400px;padding:10px">

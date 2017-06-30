@@ -26,7 +26,9 @@ import com.retloh.service.CommonServices;
 import com.retloh.utils.JacksonMapper;
 import com.retloh.utils.JacksonUtils;
 
-
+/**
+ * 通用信息管理
+ */
 @Controller
 @RequestMapping("/common")
 public class CommonController {
