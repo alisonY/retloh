@@ -102,7 +102,7 @@
 			return;
 		}
 		console.info(id);
-		$.messager.confirm('警告','即将删除这条病历记录',function(b){
+		$.messager.confirm('警告','即将删除这条分组记录',function(b){
 			if(b){ 
 				var data={id:id};		    						
 				var url = "${rootPath}${BasePath}/group/delGroup.do";

@@ -58,7 +58,7 @@ public class GroupController {
 			UserGroup userGroup = new UserGroup();
 			userGroup.setId(id);
 			userGroup.setIsDeleted(1);
-			result = groupService.updateByPrimaryKey(userGroup);
+			result = groupService.updateByPrimaryKeySelective(userGroup);
 			if(result>0){
 				map.put("msg","删除成功");
 			}else{
