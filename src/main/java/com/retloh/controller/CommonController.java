@@ -117,8 +117,48 @@ public class CommonController {
 
 	@RequestMapping(value = "/viewInfo", method = { RequestMethod.POST })
 	@ResponseBody
-	public String viewInfo(HttpServletRequest request, String id) {
-
+	public String viewInfo(HttpServletRequest request, String id,Integer type) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("status", false);
+		if(type !=null || StringUtils.isNotBlank(id)){
+			if(type == 0){//查看
+				String info = commonServices.getInfoById(id);
+				StringBuffer sb = new StringBuffer();
+				if (info != null) {
+					String[] fields = info.split("#");
+					sb.append("{\"status\":true,");
+					sb.append("\"msg\":" + jsonSpliter(fields));
+				} else {
+					sb.append("{\"status\":false,");
+					sb.append("\"msg\":\"查无此结果\"");
+				}
+				sb.append("}");
+				return sb.toString();
+			}
+			else if(type == 1){//修改
+				String info = commonServices.getInfoById(id);
+				map.put("status", false);
+				if (info != null) {
+					map.put("status", true);
+					map.put("msg", info);
+					String resultJson = JacksonMapper.beanToJson(map);
+					return resultJson;
+				}else{
+					map.put("msg", "查无此结果");
+					String resultJson = JacksonMapper.beanToJson(map);
+					return resultJson;
+				}
+			}else{
+				map.put("msg", "参数异常");
+			}
+		}else{
+			map.put("msg", "参数异常");
+		}
+		String resultJson = JacksonMapper.beanToJson(map);
+		return resultJson;
+		
+		/*
 		StringBuffer sb = new StringBuffer();
 		if (StringUtils.isNotBlank(id)) {
 			String info = commonServices.getInfoById(id);
@@ -136,6 +176,7 @@ public class CommonController {
 		}
 		sb.append("}");
 		return sb.toString();
+		*/
 	}
 
 	private String jsonSpliter(String[] fields) {

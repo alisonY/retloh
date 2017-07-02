@@ -6,56 +6,55 @@
 </head>
 <body style="padding: 0px 0px 0px 0px;">
     <table id="common" style="width:100%;height:auto" > </table>
-	
+    
+	<!--工具栏-->
+	<div id="tb" style="padding:2px 5px;">
+        		<a href="#" class="easyui-linkbutton" iconCls="icon-remove" onclick="delCommon()" >删除</a>
+		<!--分隔符--><span class="datagrid-btn-separator" style="vertical-align: middle;display:inline-block;float:none"></span>
+		        <a href="#" class="easyui-linkbutton" iconCls="icon-man" onclick="viewCommonInfo()" >查看INFO</a>
+		        <a href="#" class="easyui-linkbutton" iconCls="icon-edit" onclick="editCommonInfo()" >编辑INFO</a>
+		<!--分隔符--><span class="datagrid-btn-separator" style="vertical-align: middle;display:inline-block;float:none"></span>
+		        <a href="#" class="easyui-linkbutton" iconCls="icon-save" onclick="saveCommon()" >保存</a>
+        		<a href="#" class="easyui-linkbutton" iconCls="icon-redo" onclick="redoCommon()" >取消</a>
+		<!--分隔符--><span class="datagrid-btn-separator" style="vertical-align: middle;display:inline-block;float:none"></span>
+        <a href="#" class="easyui-linkbutton" iconCls="icon-search" onclick="SearchCommon()" >查询</a>
+    </div>
+    
 	<div id="dlg" class="easyui-dialog" title="项目详情" data-options="closed:'true',modal:'true',iconCls:'icon-edit',buttons: '#dlg-buttons'" style="width:30%;height:400px;padding:10px">
 		<table id="pg" class="easyui-propertygrid" style="width:100%;height:auto" data-options=""></table>
 	</div>
-	
-	
 	<div id="dlg-buttons">
-		<a href="javascript:void(0)" id="saveBtn" class="easyui-linkbutton" onclick="formSubmit()">保存</a>
 		<a href="javascript:void(0)" id="editBtn" class="easyui-linkbutton" onclick="javascript:$('#dlg').dialog('close')">关闭</a>
-	</div>  
+	</div>
+	
+	
+	
+	<div id="dlgEdit" class="easyui-dialog" title="info修改" data-options="closed:'true',modal:'true',iconCls:'icon-edit',buttons: '#dlgEdit-buttons'" style="width:30%;height:400px;padding:10px">
+		<input class="easyui-textbox" id="infoDetail" label="info信息:" labelPosition="top" multiline="true"  style="width:100%;height:100%">
+	</div>
+	<div id="dlgEdit-buttons">
+		<a href="javascript:void(0)" id="editBtn" class="easyui-linkbutton" onclick="javascript:$('#dlgEdit').dialog('close')">保存</a>
+		<a href="javascript:void(0)" id="editBtn" class="easyui-linkbutton" onclick="javascript:$('#dlgEdit').dialog('close')">关闭</a>
+	</div>
+	
+	
+	
+	
+
 </body>
 <script type="text/javascript">
 	$(document).ready(function(){
-	
-		var toolbar = [{
-	        text:'删除',
-	        iconCls:'icon-remove',
-	        handler:function(){
-	        delRow();
-	        }
-	    },'-',{
-	        text:'详情',
-	        iconCls:'icon-man',
-	        handler:function(){
-	        viewRow();
-	        }
-	    },'-',{
-	        text:'编辑',
-	        iconCls:'icon-edit',
-	        handler:function(){
-	        editRow();
-	        }
-	    },'-',{
-	        text:'查询',
-	        iconCls:'icon-search',
-	        handler:function(){
-	        getSelected();
-	        }
-	    }];
-	
 		datagrid(toolbar);
 	}); 
-
+	var editRow = undefined;//编辑的行
+	
 	function datagrid(toolbar){
 		var urls = "${rootPath}${BasePath}/common/getInfo.do";
 		$('#common').datagrid({
 			rownumbers:true,
 			pagination:true,
 			fitColumns:false,
-			toolbar:toolbar,
+			toolbar:"#tb",
     		singleSelect: true, 
 			pagePosition:'bottom',//bottom,top,both
 			url:urls,
@@ -63,15 +62,17 @@
 			{field:'ck',checkbox:true},
 	        {field:'id',title:'ID',width:120,align:"center"},
 	        {field:'num',title:'编号',width:120,align:"center"},
-	        {field:'patName',title:'患者姓名',width:120,align:"center"},
 	        {field:'sex',title:'性别',width:120,align:"center"},
-	        {field:'age',title:'年龄',width:120,align:"center"},
-	        {field:'tell',title:'电话',width:150,align:"center"},
-	        {field:'idCard',title:'身份证号码',width:120,align:"center"},
-	        {field:'socialId',title:'社保号',width:120,align:"center"},
-	        {field:'hsName',title:'医院名称',width:120,align:"center"},
-	        {field:'patNo',title:'门诊号',width:120,align:"center"},
-	        {field:'areaId',title:'区域编号',width:120,align:"center"},
+	        {field:'patName',title:'患者姓名',width:120,align:"center",editor:"textbox"},
+	        {field:'age',title:'年龄',width:120,align:"center",editor:"textbox"},
+	        {field:'tell',title:'电话',width:150,align:"center",editor:"textbox"},
+	        {field:'idCard',title:'身份证号码',width:120,align:"center",editor:"textbox"},
+	        {field:'socialId',title:'社保号',width:120,align:"center",editor:"textbox"},
+	        {field:'hsName',title:'医院名称',width:120,align:"center",editor:"textbox"},
+	        {field:'patNo',title:'门诊号',width:120,align:"center",editor:"textbox"},
+	        {field:'areaId',title:'区域编号',width:120,align:"center",editor:"textbox"},
+	        {field:'special',title:'病例特殊说明',width:120,align:"center",editor:"textbox"},
+	        {field:'conclusion',title:'结论特点',width:120,align:"center",editor:"textbox"},
 	        {field:'pgType',title:'项目类型',width:120,align:"center"},
 	        {field:'upId',title:'上传用户编号',width:120,align:"center"},
 	        {field:'upName',title:'上传大夫名称',width:120,align:"center"},
@@ -79,9 +80,23 @@
 	        {field:'anaName',title:'分析大夫名称',width:120,align:"center"},
 	        {field:'upTime',title:'上传时间',width:120,align:"center"},
 	        {field:'downTime',title:'分析端下载时间',width:120,align:"center"},
-	        {field:'netFlag',title:'当前数据状态',width:120,align:"center"},
-	        {field:'special',title:'病例特殊说明',width:120,align:"center"},
-	        {field:'conclusion',title:'结论特点',width:120,align:"center"},
+	        /*{field:'netFlag',title:'当前数据状态',width:120,align:"center"},*/
+	        {field:'status',title:'状态',width:100,align:"center",
+	        	formatter:function(val,rec){
+	        		if (val==0)
+	        			{return '待上传数据包';}
+	        		if (val==1)
+	        			{return '已上传待分析';}
+	        		if (val==2)
+	        			{return '待分析下载中';}
+	        		if (val==3)
+	        			{return '已下载待分析';}
+	        		if (val==4)
+	        			{return '已分析回传中';}
+	        		if (val==5)
+	        			{return '已回传';}
+	        	}
+	        },
 	        {field:'reportId',title:'报告文件',width:120,align:"center"},
 	        {field:'analysedFile',title:'当分析生成的文件',width:120,align:"center"}
 	        ]],
@@ -91,10 +106,29 @@
 					width:function(){return document.body.clientWidth;},
 					height:function(){return document.body.clientHeight;},
 				});
-		    } 
+		    },
+		    onAfterEdit:function(rowIndex, rowData, changes){//行索引，数据，原先的改变的数据
+			
+				var updated = $('#common').datagrid('getChanges','updated');
+				if(updated.length > 0){
+					//更新方法
+					console.info("UPDATE");
+					console.info(updated);
+				}
+
+			},onDblClickRow:function(rowIndex,rowData){//行的索引，行的数据
+				if(editRow != undefined){
+					$.messager.show({title:'提示',msg:'先 取消 或 保存 。'});
+					//$('#common').datagrid('endEdit',editRow);
+				}
+				if(editRow == undefined){
+					$('#common').datagrid('beginEdit',rowIndex);
+					editRow = rowIndex;
+				}
+			}
 		});
 	}
-	function delRow(){
+	function delCommon(){
 		var id = getSelected();
 		if(!id){
 			return;
@@ -106,7 +140,7 @@
 				$.post(url,data,function(result){
 				if(result.status>0){
 					$.messager.show({title:'提示',msg:result.msg,timeout:2000});
-					$('#caseInfo').datagrid('reload');
+					$('#common').datagrid('reload');
 				}else{
 					$.messager.show({title:'提示',msg:result.msg});
 				}
@@ -115,74 +149,71 @@
 			}
 		});
 	}
-	function viewRow(){
-		loadData("详情查看","view");
+	function viewCommonInfo(){
+		loadData("INFO详情查看",0);
 	}
 	
 	
-	function editRow(id){
-		loadData("详情编辑","edit");
+	function editCommonInfo(){
+		loadData("INFO详情编辑",1);
 	}
-	
-	function formSubmit(){
-	    $('#caseForm').form('submit', 
-			{
-				url: "${rootPath}${BasePath}/case/editInfo.do",
-				onSubmit: function() {
-					return $(this).form('enableValidation').form('validate');
-				},
-				success: function(result) {
-					result = $.parseJSON(result);
-					if(result.status>0){
-						$.messager.show({title:'提示',msg:result.msg,timeout:2000});
-						$('#dlg').dialog('close');
-						$('#caseInfo').datagrid('reload');
-					}else{
-						$.messager.show({title:'提示',msg:result.msg});
-					}
-				}
-			}
-		);
+	function saveCommon(){
+		$('#groupInfo').datagrid('endEdit',editRow);
 	}
-	
 	
 	function loadData(title,type){
 		var id = getSelected();
 		if(!id){
 			return;
 		}
-		$('#infoLayout').layout();
-		$('#dlg').dialog({title: title});
-		$('#dlg').dialog('open');
-		if(type == "edit"){
-			//设置保存按钮不可编辑
-			$("#saveBtn").linkbutton("enable");
-		}
-		if(type == "view"){
-			$("#saveBtn").linkbutton("disable");
-		}
-		var data={id:id};		    						
 		var url = "${rootPath}${BasePath}/common/viewInfo.do";
-		$.post(url,data,function(result){
-			if(result.status){
-				console.info(result.msg);
-			
-				$('#pg').propertygrid(
-				{
-					method:'get',
-					showGroup:false,
-					showHeader:false,
-					scrollbarSize:0
-		        });
-		         $('#pg').propertygrid('loadData', result.msg);
-			
-			
-			}else{
-				$.messager.show({title:'提示',msg:result.msg});
-			}
-		},'json');		
+		if(type == 1){
+			$('#infoDetail').textbox('setValue', '');
+			$('#dlgEdit').dialog({title: title});
+			$('#dlgEdit').dialog('open');
+			var data={id:id,type:type};		    						
+			$.post(url,data,function(result){
+				if(result.status){
+					console.info(result.msg);
+					$('#infoDetail').textbox('setValue', result.msg);
+				}else{
+					$.messager.show({title:'提示',msg:result.msg});
+				}
+			},'json');
+		}
+		if(type == 0){
+			$('#dlg').dialog({title: title});
+			$('#dlg').dialog('open');
+			var data={id:id,type:type};		    						
+			$.post(url,data,function(result){
+				if(result.status){
+					console.info(result.msg);
+				
+					$('#pg').propertygrid(
+					{
+						method:'get',
+						showGroup:false,
+						showHeader:false,
+						scrollbarSize:0
+			        });
+			         $('#pg').propertygrid('loadData', result.msg);
+				
+				
+				}else{
+					$.messager.show({title:'提示',msg:result.msg});
+				}
+			},'json');
+		}
+	
 	}
-
+	//取消
+	function redoCommon(){
+		editRow=undefined;
+		$('#common').datagrid('rejectChanges');
+		$('#common').datagrid('unselectAll');
+	}
+	
+	
 	function downPdf(path){
 		window.open("${rootPath}${BasePath}/down/file.do?filePath="+path);
 	}
