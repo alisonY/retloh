@@ -76,4 +76,16 @@ public class StatisticsServicesImpl implements StatisticsServices{
 		return statisticsMapper.selectByExample(example);
 	}
 
+	@Override
+	public List<Statistics> selectByExample(StatisticsExample example) {
+		// TODO Auto-generated method stub
+		return statisticsMapper.selectByExample(example);
+	}
+
+	@Override
+	public int countByExample(StatisticsExample example) {
+		// TODO Auto-generated method stub
+		return statisticsMapper.countByExample(example);
+	}
+
 }

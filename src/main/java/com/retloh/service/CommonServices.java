@@ -3,6 +3,7 @@ package com.retloh.service;
 import java.util.List;
 
 import com.retloh.model.Common;
+import com.retloh.model.CommonExample;
 import com.retloh.model.PageQuery;
 
 public interface CommonServices {
@@ -26,5 +27,7 @@ public interface CommonServices {
 	String getInfoById(String id);
 	
 	List<Common> getData();
+	
+	int countByExample(CommonExample example);
 
 }

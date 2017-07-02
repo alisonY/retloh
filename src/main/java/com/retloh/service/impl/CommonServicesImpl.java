@@ -99,4 +99,10 @@ public class CommonServicesImpl implements CommonServices {
 		return commonmapper.selectByExample(example);
 	}
 
+	@Override
+	public int countByExample(CommonExample example) {
+		// TODO Auto-generated method stub
+		return commonmapper.countByExample(example);
+	}
+
 }
