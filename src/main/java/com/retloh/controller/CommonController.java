@@ -32,55 +32,54 @@ import com.retloh.utils.JacksonUtils;
 @Controller
 @RequestMapping("/common")
 public class CommonController {
-	
+
 	@Autowired
-    private CommonServices commonServices;
-	
-	private static final Logger LOGGER     = LoggerFactory.getLogger(CommonController.class);
-	
-	
-	@RequestMapping(value="/postcommon",method={RequestMethod.POST})
-    @ResponseBody
-    public String postcaseT(HttpServletRequest request){
-		
+	private CommonServices commonServices;
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(CommonController.class);
+
+	@RequestMapping(value = "/postcommon", method = { RequestMethod.POST })
+	@ResponseBody
+	public String postcaseT(HttpServletRequest request) {
+
 		String line = null;
 		StringBuilder sb = new StringBuilder();
-		Map<String,Object> map = new HashMap<String, Object>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("status", false);
 
 		try {
 			BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream()));
-			while((line = br.readLine())!=null){
-			    sb.append(line);
+			while ((line = br.readLine()) != null) {
+				sb.append(line);
 			}
 		} catch (IOException e1) {
 			map.put("msg", "json转换异常");
 			String resultJson = JacksonMapper.beanToJson(map);
 			return resultJson;
 		}
-        String jsonstr = sb.toString();
-        
-		LOGGER.error("receive json:"+jsonstr);
+		String jsonstr = sb.toString();
 
-		if(StringUtils.isNotBlank(jsonstr)){
+		LOGGER.error("receive json:" + jsonstr);
+
+		if (StringUtils.isNotBlank(jsonstr)) {
 			Common info = new Common();
 			try {
 				info = JacksonMapper.jsonToBean(jsonstr, Common.class);
-				if(info!=null){
+				if (info != null) {
 					info.setId(UUID.randomUUID().toString());
 					info.setUpTime(new Date());
 					info.setDownTime(new Date());
 					int flag = commonServices.insert(info);
-					if(flag>0){
+					if (flag > 0) {
 						map.put("status", true);
 						String resultJson = JacksonMapper.beanToJson(map);
-						return resultJson; 
-					}else{
+						return resultJson;
+					} else {
 						map.put("msg", "写库失败");
 						String resultJson = JacksonMapper.beanToJson(map);
-						return resultJson; 
+						return resultJson;
 					}
-				}else{
+				} else {
 					map.put("msg", "参数异常");
 					String resultJson = JacksonMapper.beanToJson(map);
 					return resultJson;
@@ -90,74 +89,94 @@ public class CommonController {
 				String resultJson = JacksonMapper.beanToJson(map);
 				return resultJson;
 			}
-		}else{
+		} else {
 			map.put("msg", "json为空");
 			String resultJson = JacksonMapper.beanToJson(map);
 			return resultJson;
 		}
-    }
-	
-	
-	@RequestMapping(value="/toPage",method={RequestMethod.GET})
-    public String toPage(HttpServletRequest request) throws IOException {
-    	return "/common/common";
-    }
-	
-	@RequestMapping(value="/getInfo",method={RequestMethod.POST})
-    @ResponseBody
-    public String getCaseInfo(HttpServletRequest request,Common common,PageQuery pageQuery) throws IOException {
-	    MyPageInfo<Common> resultList = new MyPageInfo<Common>(commonServices.getDataList(common, pageQuery));
-	    long l1 = System.currentTimeMillis();
-	    String resultJson = JacksonMapper.beanToJson(resultList);
-	    long l2 = System.currentTimeMillis();
-	    String resultJson2 = JacksonUtils.getInstance().obj2Json(resultList);
-	    long l3 = System.currentTimeMillis();
-	    LOGGER.error(String.valueOf(l2-l1));
-	    LOGGER.error(String.valueOf(l3-l2));
-    	return resultJson2;
-    }
-	
-	@RequestMapping(value="/viewInfo",method={RequestMethod.POST})
-    @ResponseBody
-    public String viewInfo(HttpServletRequest request,String id){
-		
+	}
+
+	@RequestMapping(value = "/toPage", method = { RequestMethod.GET })
+	public String toPage(HttpServletRequest request) throws IOException {
+		return "/common/common";
+	}
+
+	@RequestMapping(value = "/getInfo", method = { RequestMethod.POST })
+	@ResponseBody
+	public String getCaseInfo(HttpServletRequest request, Common common, PageQuery pageQuery) throws IOException {
+		MyPageInfo<Common> resultList = new MyPageInfo<Common>(commonServices.getDataList(common, pageQuery));
+		long l1 = System.currentTimeMillis();
+		String resultJson = JacksonMapper.beanToJson(resultList);
+		long l2 = System.currentTimeMillis();
+		String resultJson2 = JacksonUtils.getInstance().obj2Json(resultList);
+		long l3 = System.currentTimeMillis();
+		LOGGER.error(String.valueOf(l2 - l1));
+		LOGGER.error(String.valueOf(l3 - l2));
+		return resultJson2;
+	}
+
+	@RequestMapping(value = "/viewInfo", method = { RequestMethod.POST })
+	@ResponseBody
+	public String viewInfo(HttpServletRequest request, String id) {
+
 		StringBuffer sb = new StringBuffer();
-		if(StringUtils.isNotBlank(id)){
+		if (StringUtils.isNotBlank(id)) {
 			String info = commonServices.getInfoById(id);
-			if(info!=null){
+			if (info != null) {
 				String[] fields = info.split("#");
 				sb.append("{\"status\":true,");
-				sb.append("\"msg\":"+jsonSpliter(fields));
-			}else{
+				sb.append("\"msg\":" + jsonSpliter(fields));
+			} else {
 				sb.append("{\"status\":false,");
 				sb.append("\"msg\":\"查无此结果\"");
 			}
-		}else{
+		} else {
 			sb.append("{\"status\":false,");
 			sb.append("\"msg\":\"操作失败，请重试\"");
 		}
 		sb.append("}");
 		return sb.toString();
-    }
-	
-	
-	private String jsonSpliter(String[] fields){
+	}
+
+	private String jsonSpliter(String[] fields) {
 		StringBuffer sb = new StringBuffer();
 		sb.append("{\"rows\":[");
-		for(int x = 0;x<fields.length;x++){
+		for (int x = 0; x < fields.length; x++) {
 			String row = fields[x];
 			String[] splited = row.split(":");
-			sb.append("{\"name\":\""+splited[0]);
-			sb.append("\",\"value\":\""+splited[1]);
+			sb.append("{\"name\":\"" + splited[0]);
+			sb.append("\",\"value\":\"" + splited[1]);
 			sb.append("\"}");
-			if(x != fields.length-1){
+			if (x != fields.length - 1) {
 				sb.append(",");
 			}
 		}
 		sb.append("]}");
 		return sb.toString();
 	}
-	
-	
+
+	@RequestMapping(value = "/release", method = { RequestMethod.POST })
+	@ResponseBody
+	public String releaseByid(HttpServletRequest request, String id) {
+		Common common = commonServices.selectByPrimaryKey(id);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("status", false);
+		int status = common.getStatus();
+		if (status == 3) {
+			common.setStatus(1);
+			int res = commonServices.updateByPrimaryKey(common);
+			if (res > 0) {
+				map.put("status", true);
+				map.put("msg", "成功释放");
+			} else {
+				map.put("msg", "释放失败");
+			}
+		} else {
+			map.put("msg", "无需释放!");
+		}
+
+		String resultJson = JacksonMapper.beanToJson(map);
+		return resultJson;
+	}
 
 }
