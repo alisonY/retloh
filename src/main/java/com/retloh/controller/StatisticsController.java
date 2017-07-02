@@ -1,6 +1,7 @@
 package com.retloh.controller;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.retloh.model.CommonExample;
 import com.retloh.model.Statistics;
 import com.retloh.model.StatisticsExample;
 import com.retloh.service.CommonServices;
@@ -42,15 +44,19 @@ public class StatisticsController {
 	
 	@RequestMapping(value="/count",method={RequestMethod.POST})
     public String countActionByUserName(HttpServletRequest request,String userid) throws IOException {
+		//有问题 TO-DO
+		
 		StatisticsExample example =new StatisticsExample();
-		example.createCriteria().andUserIdEqualTo(userid);
- 		List<Statistics> list_stat=stat_services.selectByExample(example);
+		//上传
+		example.createCriteria().andUserIdEqualTo(userid).andActionEqualTo(0);
+ 		int uploadnum=stat_services.countByExample(example);
+ 		//下载
+ 		example.createCriteria().andUserIdEqualTo(userid).andActionEqualTo(1);
+ 		int downloadnum=stat_services.countByExample(example);
  		
  		Map<String, Object> map = new HashMap<String, Object>();
- 		
- 		for(Statistics statistics:list_stat){
- 			
- 		}
+ 		map.put("uploadnum", uploadnum);
+ 		map.put("downloadnum", downloadnum);
 		
  		String resultJson = JacksonMapper.beanToJson(map);
 		return resultJson;
@@ -66,11 +72,37 @@ public class StatisticsController {
 	@RequestMapping(value="/countstatus",method={RequestMethod.GET})
 	@ResponseBody
     public String countStatus(HttpServletRequest request) throws IOException {
-		Map<String, Object> map = new HashMap<String, Object>();
+		//有点麻烦凑合吧 count(status) group by status
 		
+		Map<Integer, Object> map = new HashMap<Integer, Object>();
+		CommonExample commonexample =new CommonExample();
+		//0=待上传数据包，
+		commonexample.createCriteria().andStatusEqualTo(0);
+		int waitupload=commonservices.countByExample(commonexample);
+		map.put(0, waitupload);
+		//1=已上传待分析，
+		commonexample.createCriteria().andStatusEqualTo(1);
+		int waitanalysis=commonservices.countByExample(commonexample);
+		map.put(1, waitanalysis);
+		//2=待分析下载中，
+		commonexample.createCriteria().andStatusEqualTo(2);
+		int download=commonservices.countByExample(commonexample);
+		map.put(2, download);
+		//3=已被下载，
+		commonexample.createCriteria().andStatusEqualTo(3);
+		int downloaded=commonservices.countByExample(commonexample);
+		map.put(3, downloaded);
+		//4=已被分析回传中，
+		commonexample.createCriteria().andStatusEqualTo(4);
+		int waitreturn=commonservices.countByExample(commonexample);
+		map.put(4, waitreturn);
+		//5=已回传报告
+		commonexample.createCriteria().andStatusEqualTo(5);
+		int returned=commonservices.countByExample(commonexample);
+		map.put(5, returned);
 		
-		
-    	return "/statistics/statistics";
+		String resultJson = JacksonMapper.beanToJson(map);
+		return resultJson;
     }
 	
 	/**
@@ -81,8 +113,22 @@ public class StatisticsController {
 	 */
 	
 	@RequestMapping(value="/count",method={RequestMethod.GET})
-    public String countActionByDate(HttpServletRequest request) throws IOException {
-    	return "/statistics/statistics";
+    public String countActionByDate(HttpServletRequest request,String userid,Date starttime,Date  endtime) throws IOException {
+		StatisticsExample example =new StatisticsExample();
+		//上传
+		example.createCriteria().andUserIdEqualTo(userid).andActionEqualTo(0).andOperationTimeBetween(starttime, endtime);
+ 		int uploadnum=stat_services.countByExample(example);
+ 		
+ 		//下载
+ 		example.createCriteria().andUserIdEqualTo(userid).andActionEqualTo(1).andOperationTimeBetween(starttime, endtime);
+ 		int downloadnum=stat_services.countByExample(example);
+ 		
+ 		Map<String, Object> map = new HashMap<String, Object>();
+ 		map.put("uploadnum", uploadnum);
+ 		map.put("downloadnum", downloadnum);
+		
+ 		String resultJson = JacksonMapper.beanToJson(map);
+		return resultJson;
     }
 
 }
