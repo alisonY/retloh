@@ -157,26 +157,6 @@ public class CommonController {
 		}
 		String resultJson = JacksonMapper.beanToJson(map);
 		return resultJson;
-		
-		/*
-		StringBuffer sb = new StringBuffer();
-		if (StringUtils.isNotBlank(id)) {
-			String info = commonServices.getInfoById(id);
-			if (info != null) {
-				String[] fields = info.split("#");
-				sb.append("{\"status\":true,");
-				sb.append("\"msg\":" + jsonSpliter(fields));
-			} else {
-				sb.append("{\"status\":false,");
-				sb.append("\"msg\":\"查无此结果\"");
-			}
-		} else {
-			sb.append("{\"status\":false,");
-			sb.append("\"msg\":\"操作失败，请重试\"");
-		}
-		sb.append("}");
-		return sb.toString();
-		*/
 	}
 
 	private String jsonSpliter(String[] fields) {
@@ -214,6 +194,43 @@ public class CommonController {
 			}
 		} else {
 			map.put("msg", "无需释放!");
+		}
+
+		String resultJson = JacksonMapper.beanToJson(map);
+		return resultJson;
+	}
+	
+	
+	
+	@RequestMapping(value = "/saveCommonInfo", method = { RequestMethod.POST })
+	@ResponseBody
+	public String saveCommonInfo(HttpServletRequest request, String id,String editedInfo) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("status", false);
+		
+		boolean checkPass = true;
+		try {
+			String[] fields = editedInfo.split("#");
+			jsonSpliter(fields);
+		} catch (Exception e) {
+			checkPass = false;
+		}
+		Common common = new Common();
+		common.setId(id);
+		if(checkPass){
+			common.setInfo(editedInfo);
+		}else{
+			map.put("msg", "格式不合法");
+			String resultJson = JacksonMapper.beanToJson(map);
+			return resultJson;
+		}
+		common.setUpdateTime(new Date());
+		int res = commonServices.updateByPrimaryKeySelective(common);
+		if (res > 0) {
+			map.put("status", true);
+			map.put("msg", "修改成功");
+		} else {
+			map.put("msg", "修改失败");
 		}
 
 		String resultJson = JacksonMapper.beanToJson(map);

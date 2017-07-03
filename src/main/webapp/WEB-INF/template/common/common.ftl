@@ -30,10 +30,10 @@
 	
 	
 	<div id="dlgEdit" class="easyui-dialog" title="info修改" data-options="closed:'true',modal:'true',iconCls:'icon-edit',buttons: '#dlgEdit-buttons'" style="width:30%;height:400px;padding:10px">
-		<input class="easyui-textbox" id="infoDetail" label="info信息:" labelPosition="top" multiline="true"  style="width:100%;height:100%">
+		<input class="easyui-textbox" id="infoDetail" label="info信息:(exp：key1:value1#key2:value2#key3:value3)" labelPosition="top" multiline="true"  style="width:100%;height:100%">
 	</div>
 	<div id="dlgEdit-buttons">
-		<a href="javascript:void(0)" id="editBtn" class="easyui-linkbutton" onclick="javascript:$('#dlgEdit').dialog('close')">保存</a>
+		<a href="javascript:void(0)" id="editBtn" class="easyui-linkbutton" onclick="SaveCommonInfo()">保存</a>
 		<a href="javascript:void(0)" id="editBtn" class="easyui-linkbutton" onclick="javascript:$('#dlgEdit').dialog('close')">关闭</a>
 	</div>
 	
@@ -128,6 +128,12 @@
 			}
 		});
 	}
+	
+	
+	function saveCommon(){
+		$('#groupInfo').datagrid('endEdit',editRow);
+	}
+	
 	function delCommon(){
 		var id = getSelected();
 		if(!id){
@@ -149,18 +155,11 @@
 			}
 		});
 	}
+	
 	function viewCommonInfo(){
 		loadData("INFO详情查看",0);
 	}
-	
-	
-	function editCommonInfo(){
-		loadData("INFO详情编辑",1);
-	}
-	function saveCommon(){
-		$('#groupInfo').datagrid('endEdit',editRow);
-	}
-	
+
 	function loadData(title,type){
 		var id = getSelected();
 		if(!id){
@@ -206,11 +205,35 @@
 		}
 	
 	}
+	
+	
+
+	
 	//取消
 	function redoCommon(){
 		editRow=undefined;
 		$('#common').datagrid('rejectChanges');
 		$('#common').datagrid('unselectAll');
+	}
+	
+	
+	function editCommonInfo(){
+		loadData("INFO详情编辑",1);
+	}	
+	
+	function SaveCommonInfo(){
+		var editedInfo = $('#infoDetail').textbox('getValue');
+		var id = getSelected();
+		var url = "${rootPath}${BasePath}/common/saveCommonInfo.do";
+		var data={id:id,editedInfo:editedInfo};		    						
+		$.post(url,data,function(result){
+			if(result.status){
+				$.messager.show({title:'提示',msg:result.msg,timeout:2000});
+				$('#dlgEdit').dialog('close');
+			}else{
+				$.messager.show({title:'提示',msg:result.msg});
+			}
+		},'json');	
 	}
 	
 	
