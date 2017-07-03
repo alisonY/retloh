@@ -23,6 +23,7 @@ import com.retloh.model.Common;
 import com.retloh.model.PageQuery;
 import com.retloh.model.commonVo.MyPageInfo;
 import com.retloh.service.CommonServices;
+import com.retloh.utils.DateUtils;
 import com.retloh.utils.JacksonMapper;
 import com.retloh.utils.JacksonUtils;
 
@@ -104,14 +105,10 @@ public class CommonController {
 	@RequestMapping(value = "/getInfo", method = { RequestMethod.POST })
 	@ResponseBody
 	public String getCaseInfo(HttpServletRequest request, Common common, PageQuery pageQuery) throws IOException {
-		MyPageInfo<Common> resultList = new MyPageInfo<Common>(commonServices.getDataList(common, pageQuery));
-		long l1 = System.currentTimeMillis();
+		
+		MyPageInfo<Common> resultList = new MyPageInfo<Common>(commonServices.getDataList(common, pageQuery,request));
 		String resultJson = JacksonMapper.beanToJson(resultList);
-		long l2 = System.currentTimeMillis();
 		String resultJson2 = JacksonUtils.getInstance().obj2Json(resultList);
-		long l3 = System.currentTimeMillis();
-		LOGGER.error(String.valueOf(l2 - l1));
-		LOGGER.error(String.valueOf(l3 - l2));
 		return resultJson2;
 	}
 

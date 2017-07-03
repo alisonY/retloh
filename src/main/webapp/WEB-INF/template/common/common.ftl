@@ -9,15 +9,22 @@
     
 	<!--工具栏-->
 	<div id="tb" style="padding:2px 5px;">
-        		<a href="#" class="easyui-linkbutton" iconCls="icon-remove" onclick="delCommon()" >删除</a>
+		上传时间 : <input id="createTimeStart" class="easyui-datetimebox" style="width:150px">
+        : <input id="createTimeEnd" class="easyui-datetimebox" style="width:150px">
+                修改时间 : <input id="updateTimeStart" class="easyui-datetimebox" style="width:150px">
+        : <input id="updateTimeEnd" class="easyui-datetimebox" style="width:150px">
+                身份证号码：<input id="idCard" class="easyui-textbox"  style="width:200px;height:28px">
+                患者姓名：<input id="patName" class="easyui-textbox"  style="width:100px;height:28px">
+        <a href="#" class="easyui-linkbutton" iconCls="icon-search" onclick="datagrid()" >条件查询</a>
+        <a href="#" class="easyui-linkbutton" iconCls="icon-redo" onclick="resetParms()" >重置条件</a>
+        <!--分隔符--><span class="datagrid-btn-separator" style="vertical-align: middle;display:inline-block;float:none"></span>
+		<a href="#" class="easyui-linkbutton" iconCls="icon-down" onclick="redoCommon()" >取消行编辑</a>
+	    <a href="#" class="easyui-linkbutton" iconCls="icon-save" onclick="saveCommon()" >保存行编辑</a>
 		<!--分隔符--><span class="datagrid-btn-separator" style="vertical-align: middle;display:inline-block;float:none"></span>
-		        <a href="#" class="easyui-linkbutton" iconCls="icon-man" onclick="viewCommonInfo()" >查看INFO</a>
-		        <a href="#" class="easyui-linkbutton" iconCls="icon-edit" onclick="editCommonInfo()" >编辑INFO</a>
+        <a href="#" class="easyui-linkbutton" iconCls="icon-man" onclick="viewCommonInfo()" >查看INFO字段</a>
+        <a href="#" class="easyui-linkbutton" iconCls="icon-edit" onclick="editCommonInfo()" >编辑INFO字段</a>
 		<!--分隔符--><span class="datagrid-btn-separator" style="vertical-align: middle;display:inline-block;float:none"></span>
-		        <a href="#" class="easyui-linkbutton" iconCls="icon-save" onclick="saveCommon()" >保存</a>
-        		<a href="#" class="easyui-linkbutton" iconCls="icon-redo" onclick="redoCommon()" >取消</a>
-		<!--分隔符--><span class="datagrid-btn-separator" style="vertical-align: middle;display:inline-block;float:none"></span>
-        <a href="#" class="easyui-linkbutton" iconCls="icon-search" onclick="SearchCommon()" >查询</a>
+        <a href="#" class="easyui-linkbutton" iconCls="icon-remove" onclick="delCommon()" >删除</a>
     </div>
     
 	<div id="dlg" class="easyui-dialog" title="项目详情" data-options="closed:'true',modal:'true',iconCls:'icon-edit',buttons: '#dlg-buttons'" style="width:30%;height:400px;padding:10px">
@@ -44,13 +51,21 @@
 </body>
 <script type="text/javascript">
 	$(document).ready(function(){
-		datagrid(toolbar);
+		datagrid();
 	}); 
 	var editRow = undefined;//编辑的行
 	
-	function datagrid(toolbar){
+	function datagrid(){
 		var urls = "${rootPath}${BasePath}/common/getInfo.do";
 		$('#common').datagrid({
+			queryParams:{
+					"createTimeStart":$('#createTimeStart').datetimebox('getValue'),
+					"createTimeEnd":$('#createTimeEnd').datetimebox('getValue'),
+					"updateTimeStart":$('#updateTimeStart').datetimebox('getValue'),
+					"updateTimeEnd":$('#updateTimeEnd').datetimebox('getValue'),
+					"patName":$.trim($("#patName").textbox('getValue')),
+					"idCard":$.trim($("#idCard").textbox('getValue'))
+			},
 			rownumbers:true,
 			pagination:true,
 			fitColumns:false,
@@ -99,7 +114,7 @@
 	        },
 	        {field:'reportId',title:'报告文件',width:120,align:"center"},
 	        {field:'analysedFile',title:'当分析生成的文件',width:120,align:"center"},
-	        {field:'createTime',title:'添加时间',width:120,align:"center"},
+	        {field:'createTime',title:'上传时间',width:120,align:"center"},
 	        {field:'updateTime',title:'修改时间',width:120,align:"center"}
 	        ]],
 			onLoadSuccess:function(data){
@@ -148,6 +163,14 @@
 		});
 	}
 	
+	function resetParms(){
+		$('#createTimeStart').datetimebox('setValue','');
+		$('#createTimeEnd').datetimebox('setValue','');
+		$('#updateTimeStart').datetimebox('setValue','');
+		$('#updateTimeEnd').datetimebox('setValue','');
+		$("#patName").textbox('setValue','');
+		$("#idCard").textbox('setValue','');
+	}
 	
 	function saveCommon(){
 		$('#common').datagrid('endEdit',editRow);

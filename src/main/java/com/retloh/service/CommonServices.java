@@ -2,6 +2,8 @@ package com.retloh.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.retloh.model.Common;
 import com.retloh.model.CommonExample;
 import com.retloh.model.PageQuery;
@@ -21,6 +23,8 @@ public interface CommonServices {
     int updateByPrimaryKey(Common record);
 
 	List<Common> getDataList(Common record, PageQuery pageQuery);
+
+	List<Common> getDataList(Common record, PageQuery pageQuery,HttpServletRequest request);
 	
 	List<Common> getDataListForClient(Common record, PageQuery pageQuery);
 	
