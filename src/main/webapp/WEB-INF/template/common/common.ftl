@@ -64,8 +64,8 @@
 	        {field:'num',title:'编号',width:120,align:"center"},
 	        {field:'sex',title:'性别',width:120,align:"center"},
 	        {field:'patName',title:'患者姓名',width:120,align:"center",editor:"textbox"},
-	        {field:'age',title:'年龄',width:120,align:"center",editor:"textbox"},
-	        {field:'tell',title:'电话',width:150,align:"center",editor:"textbox"},
+	        {field:'age',title:'年龄',width:120,align:"center",editor:"numberbox"},
+	        {field:'tell',title:'电话',width:150,align:"center",editor:"numberbox"},
 	        {field:'idCard',title:'身份证号码',width:120,align:"center",editor:"textbox"},
 	        {field:'socialId',title:'社保号',width:120,align:"center",editor:"textbox"},
 	        {field:'hsName',title:'医院名称',width:120,align:"center",editor:"textbox"},
@@ -98,7 +98,9 @@
 	        	}
 	        },
 	        {field:'reportId',title:'报告文件',width:120,align:"center"},
-	        {field:'analysedFile',title:'当分析生成的文件',width:120,align:"center"}
+	        {field:'analysedFile',title:'当分析生成的文件',width:120,align:"center"},
+	        {field:'createTime',title:'添加时间',width:120,align:"center"},
+	        {field:'updateTime',title:'修改时间',width:120,align:"center"}
 	        ]],
 			onLoadSuccess:function(data){
 		        //调整表格宽高
@@ -112,8 +114,25 @@
 				var updated = $('#common').datagrid('getChanges','updated');
 				if(updated.length > 0){
 					//更新方法
-					console.info("UPDATE");
-					console.info(updated);
+					console.info(changes);
+					
+						$.messager.confirm('警告','即将保存这条记录',function(b){
+						if(b){
+							changes.id = rowData.id;
+							console.info(changes);
+							var url = "${rootPath}${BasePath}/common/saveCommon.do";
+							$.post(url,changes,function(result){
+							if(result.status>0){
+								$.messager.show({title:'提示',msg:result.msg,timeout:2000});
+								$('#common').datagrid('reload');
+							}else{
+								$.messager.show({title:'提示',msg:result.msg});
+							}
+							
+							},'json');
+							editRow=undefined;
+						}
+					});
 				}
 
 			},onDblClickRow:function(rowIndex,rowData){//行的索引，行的数据
@@ -131,7 +150,7 @@
 	
 	
 	function saveCommon(){
-		$('#groupInfo').datagrid('endEdit',editRow);
+		$('#common').datagrid('endEdit',editRow);
 	}
 	
 	function delCommon(){

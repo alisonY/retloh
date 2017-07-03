@@ -236,5 +236,24 @@ public class CommonController {
 		String resultJson = JacksonMapper.beanToJson(map);
 		return resultJson;
 	}
+	
+	
+	@RequestMapping(value = "/saveCommon", method = { RequestMethod.POST })
+	@ResponseBody
+	public String saveCommon(HttpServletRequest request,Common common) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("status", false);
+		common.setUpdateTime(new Date());
+		int res = commonServices.updateByPrimaryKeySelective(common);
+		if (res > 0) {
+			map.put("status", true);
+			map.put("msg", "修改成功");
+		} else {
+			map.put("msg", "修改失败");
+		}
+
+		String resultJson = JacksonMapper.beanToJson(map);
+		return resultJson;
+	}	
 
 }

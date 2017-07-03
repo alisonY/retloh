@@ -69,7 +69,7 @@
         </div>
         
         <div data-options="region:'south',split:true" style="height:50px;text-align:center;line-height:35px;">
-        	Copyright&copy;  2017，北京先锋众诚医疗设备有限公司 系统最佳分辨率920*1080
+        	Copyright&copy;  2017，北京先锋众诚医疗设备有限公司 系统最佳分辨率1920*1080
         	
         </div>
     </div>
