@@ -4,12 +4,34 @@
   <resultMap id="countInfo" type="java.util.Map">
    		<result column="user_id" property="userId" jdbcType="VARCHAR"/>
         <result column="action" property="action" jdbcType="INTEGER"/>
-        <result column="count(*)" property="count" jdbcType="INTEGER"/>
+        <result column="count" property="count" jdbcType="INTEGER"/>
+        <result column="user_name" property="userName" jdbcType="VARCHAR"/>
+        <result column="group_desc" property="groupDesc" jdbcType="VARCHAR"/>
+        <result column="user_type" property="userType" jdbcType="VARCHAR"/>
    </resultMap>
    
   <!-- 自定义查询 -->
   <select id="countByUserId"  resultMap="countInfo" >
-    select user_id,action,count(*) from statistics group by user_id,action
+    select count(*) count,stat.user_id user_id,stat.action action,user.user_name user_name,user.group_desc group_desc,user.user_type user_type from statistics stat,t_user user where stat.user_id=user.id 
+    <if test="collectionName != '' and analysisName != ''" >
+        and user.user_name = #{collectionName,jdbcType=VARCHAR} or user.user_name = #{analysisName,jdbcType=VARCHAR}
+     </if>
+     <if test="collectionName != '' and analysisName = ''" >
+        and user.user_name = #{collectionName,jdbcType=VARCHAR}
+     </if>
+     <if test="collectionName = '' and analysisName != ''" >
+        and user.user_name = #{analysisName,jdbcType=VARCHAR}
+     </if>
+     <if test="startTime != null and endTime!=null" >
+        and stat.operation_time between #{startTime,jdbcType=Date} and #{endTime,jdbcType=Date}
+     </if>
+     <if test="startTime != null and endTime =null" >
+        and stat.operation_time &gt;= #{startTime,jdbcType=Date}
+     </if>
+     <if test="startTime = null and endTime !=null" >
+        and stat.operation_time &lt;= #{endTime,jdbcType=Date}
+     </if>
+    group by stat.user_id,stat.action
   </select>
   
 </mapper>

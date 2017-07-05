@@ -20,11 +20,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.retloh.model.CommonExample;
 import com.retloh.model.PageQuery;
 import com.retloh.model.StatisticsExample;
+import com.retloh.model.TUser;
 import com.retloh.model.UserGroup;
 import com.retloh.model.commonVo.MyPageInfo;
 import com.retloh.service.CommonServices;
 import com.retloh.service.CountInfoServices;
 import com.retloh.service.StatisticsServices;
+import com.retloh.service.UserServices;
 import com.retloh.utils.JacksonMapper;
 import com.retloh.utils.JacksonUtils;
 
@@ -38,7 +40,8 @@ public class StatisticsController {
 	private CommonServices commonservices;
 	@Autowired
 	private CountInfoServices countInfoServices;
-	
+	@Autowired
+	private UserServices userServices;
 
 	@RequestMapping(value = "/toPage", method = { RequestMethod.GET })
 	public String toPage(HttpServletRequest request) throws IOException {
@@ -54,24 +57,29 @@ public class StatisticsController {
 	 */
 	@RequestMapping(value = "/getInfo", method = { RequestMethod.POST })
 	@ResponseBody
-	public String getInfo(HttpServletRequest request,PageQuery pageQuery) throws SQLException {
-		List<Map> res = countInfoServices.countByUserId(pageQuery);
-		Map<String, Object> map = new HashMap<String, Object>();
-		List<Map> result=new ArrayList<Map>();
-		for(Map res_map:res){
-			map.put("userId", res_map.get("userId"));
-			//TODO
-			map.put("group", "武警一組");
-			map.put("role", "管理员");
-			int action=(Integer) res_map.get("action");
-			if(action==1){
+	public String getInfo(HttpServletRequest request, PageQuery pageQuery) throws SQLException {
+		List<Map> res = countInfoServices.countByUserId(request, pageQuery);
+		List<Map> result = new ArrayList<Map>();
+		for (Map res_map : res) {
+			// TUser user = userServices.selectByPrimaryKey((String)
+			// res_map.get("userId"));
+			// if (user != null) {
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("userId", res_map.get("userName"));
+			// TODO
+			map.put("group", res_map.get("groupDesc"));
+			map.put("role", res_map.get("userType"));
+			int action = (Integer) res_map.get("action");
+			if (action == 1) {
 				map.put("collectionNum", res_map.get("count"));
-			}else if(action==2){
+			} else if (action == 2) {
 				map.put("analysisNum", res_map.get("count"));
 			}
+			result.add(map);
+			// }
+
 		}
-		result.add(map);
-		
+
 		MyPageInfo<Map> resultList = new MyPageInfo<Map>(result);
 		String resultJson = JacksonUtils.getInstance().obj2Json(resultList);
 		return resultJson;

@@ -512,7 +512,7 @@ public class DateUtils {
     public static Date stringToDate(String dateText,
                                     String format,
                                     boolean lenient) {
-        if (dateText == null) {
+        if (dateText == null || dateText=="") {
             return null;
         }
         DateFormat df = null;

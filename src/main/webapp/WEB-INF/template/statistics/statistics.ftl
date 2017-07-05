@@ -14,14 +14,14 @@
 					<div data-options="region:'center'">
 						<div class="easyui-panel" data-options="fit:true" style="padding:5px;">
 						
-							<input class="easyui-textbox" label="采集端账号:" labelPosition="left" style="width:20%;height:30px">
+							<input class="easyui-textbox" id="collectionName" label="采集端账号:" labelPosition="left" style="width:20%;height:30px">
 							<!--分隔符--><span class="datagrid-btn-separator" style="vertical-align: middle;display:inline-block;float:none"></span>
-							<input class="easyui-textbox" label="分析端账号:" labelPosition="left" style="width:20%;height:30px">
+							<input class="easyui-textbox" id="analysisName" label="分析端账号:" labelPosition="left" style="width:20%;height:30px">
 							<!--分隔符--><span class="datagrid-btn-separator" style="vertical-align: middle;display:inline-block;float:none"></span>
-							<input class="easyui-datetimebox" label="起始时间" labelPosition="left" style="width:20%;height:30px">
-							<input class="easyui-datetimebox" label="结束时间" labelPosition="left" style="width:20%;height:30px">
+							<input class="easyui-datetimebox" id="createTimeStart" label="起始时间" labelPosition="left" style="width:20%;height:30px">
+							<input class="easyui-datetimebox" id="createTimeEnd" label="结束时间" labelPosition="left" style="width:20%;height:30px">
 							<!--分隔符--><span class="datagrid-btn-separator" style="vertical-align: middle;display:inline-block;float:none"></span>
-							<a href="#" class="easyui-linkbutton" iconCls="icon-search" style="width:80px;height:30px">查询</a>
+							<a href="#" class="easyui-linkbutton" iconCls="icon-search" style="width:80px;height:30px" onclick="datagrid()">查询</a>
 						</div>
 					</div>
 			   </div>
@@ -53,6 +53,12 @@
 	function datagrid(){
 		var urls = "${rootPath}${BasePath}/statistics/getInfo.do";
 		$('#statisticsInfo').datagrid({
+			queryParams:{
+					"collectionName":$.trim($("#collectionName").textbox('getValue')),
+					"analysisName":$.trim($("#analysisName").textbox('getValue')),
+					"createTimeStart":$('#createTimeStart').datetimebox('getValue'),
+					"createTimeEnd":$('#createTimeEnd').datetimebox('getValue')
+			},	
 			rownumbers:true,
 			pagination:true,
 			fitColumns:true,
