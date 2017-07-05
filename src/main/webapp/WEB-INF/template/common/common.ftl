@@ -112,7 +112,16 @@
 	        			{return '已回传';}
 	        	}
 	        },
-	        {field:'reportId',title:'报告文件',width:120,align:"center"},
+	        {field:'reportId',title:'报告文件',width:120,align:"center",
+				formatter:function(value, row, index){
+					var path = row.pdfexportFilepath;
+					if (! !path){
+						var directUrl = "${rootPath}${BasePath}"+"/data"+path;
+						var str = '<a href="#" name="pdfDown" class="easyui-linkbutton" onclick="downPdf('+"'"+row.pdfexportFilepath+"'"+')" ></a>'+
+								  '<a href="#" name="pdfView" class="easyui-linkbutton" onclick="viewPdf('+"'"+directUrl+"'"+')" ></a>';
+						return str;  
+					}
+				}},
 	        {field:'analysedFile',title:'当分析生成的文件',width:120,align:"center"},
 	        {field:'createTime',title:'上传时间',width:120,align:"center"},
 	        {field:'updateTime',title:'修改时间',width:120,align:"center"}
@@ -123,6 +132,8 @@
 					width:function(){return document.body.clientWidth;},
 					height:function(){return document.body.clientHeight;},
 				});
+				$("a[name='pdfDown']").linkbutton({text:'下载',plain:true,iconCls:'icon-down'});
+				$("a[name='pdfView']").linkbutton({text:'预览',plain:true,iconCls:'icon-more'});
 		    },
 		    onAfterEdit:function(rowIndex, rowData, changes){//行索引，数据，原先的改变的数据
 			
@@ -297,5 +308,13 @@
         }
         return id;
     }
+
+
+	function downPdf(path){
+		window.open("${rootPath}${BasePath}/down/file.do?filePath="+path);
+	}
+	function viewPdf(path){
+		window.open(path);
+	}		
 </script>
 </html>

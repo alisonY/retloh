@@ -26,7 +26,7 @@ public interface CommonServices {
 
 	List<Common> getDataList(Common record, PageQuery pageQuery,HttpServletRequest request);
 	
-	List<Common> getDataListForClient(Common record, PageQuery pageQuery);
+	List<Common> getDataListForClient(Common record, List<String> idsList, PageQuery pageQuery);
 	
 	String getInfoById(String id);
 	

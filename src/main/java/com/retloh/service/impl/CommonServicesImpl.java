@@ -66,11 +66,7 @@ public class CommonServicesImpl implements CommonServices {
 		String createTimeEndStr =  request.getParameter("createTimeEnd");
 		String updateTimeStartStr =  request.getParameter("updateTimeStart");
 		String updateTimeEndStr =  request.getParameter("updateTimeEnd");
-		Date createTimeStart =  DateUtils.stringToDate(createTimeStartStr, DateUtils.DATETIMEPATTERN24H);
-		Date createTimeEnd =  DateUtils.stringToDate(createTimeEndStr, DateUtils.DATETIMEPATTERN24H);
-		Date updateTimeStart =  DateUtils.stringToDate(updateTimeStartStr, DateUtils.DATETIMEPATTERN24H);
-		Date updateTimeEnd =  DateUtils.stringToDate(updateTimeEndStr, DateUtils.DATETIMEPATTERN24H);
-		
+
 		
 		CommonExample example = new CommonExample();
 		CommonExample.Criteria criteria=example.createCriteria();  
@@ -81,6 +77,25 @@ public class CommonServicesImpl implements CommonServices {
 			criteria.andPatNameLike(record.getPatName());
 		}
 		
+		
+		Date createTimeStart = null;
+		if(StringUtils.isNotBlank(createTimeStartStr)){
+			createTimeStart =  DateUtils.stringToDate(createTimeStartStr, DateUtils.DATETIMEPATTERN24H);
+		}
+		
+		Date createTimeEnd = null;
+		if(StringUtils.isNotBlank(createTimeEndStr)){
+			createTimeEnd =  DateUtils.stringToDate(createTimeEndStr, DateUtils.DATETIMEPATTERN24H);
+		}
+		
+		Date updateTimeStart = null;
+		if(StringUtils.isNotBlank(updateTimeStartStr)){
+			updateTimeStart =  DateUtils.stringToDate(updateTimeStartStr, DateUtils.DATETIMEPATTERN24H);
+		}
+		Date updateTimeEnd = null;
+		if(StringUtils.isNotBlank(updateTimeEndStr)){
+			updateTimeEnd =  DateUtils.stringToDate(updateTimeEndStr, DateUtils.DATETIMEPATTERN24H);
+		}
 		
 		if(createTimeStart!=null && createTimeEnd!=null){
 			criteria.andCreateTimeBetween(createTimeStart, createTimeEnd);
@@ -109,7 +124,7 @@ public class CommonServicesImpl implements CommonServices {
 		return commonmapper.selectByPrimaryKey(id).getInfo();
 	}
 
-	public List<Common> getDataListForClient(Common record, PageQuery pageQuery) {
+	public List<Common> getDataListForClient(Common record,List<String> idsList,PageQuery pageQuery) {
 		CommonExample example = new CommonExample();
 		CommonExample.Criteria criteria = example.createCriteria();
 		criteria.andPgTypeEqualTo(record.getPgType());
@@ -121,6 +136,9 @@ public class CommonServicesImpl implements CommonServices {
 		}
 		if(record.getStatus()!=null){
 			criteria.andStatusEqualTo(record.getStatus());
+		}
+		if(idsList.size()>0){
+			criteria.andIdIn(idsList);
 		}
 		if(pageQuery.getPage() == null){
 			pageQuery.setPage(1);
