@@ -5,6 +5,7 @@
 	<#include "commonHead.ftl" />
 </head>
 <body>
+			<table id="statisticsInfo" style="width:100%;height:auto" > </table>
 			<div class="easyui-layout" data-options="fit:true">
 			
 				<!--顶部按钮框-->
@@ -24,11 +25,48 @@
 						</div>
 					</div>
 			   </div>
+			   
 				<div data-options="region:'center'">
 					<div id="main" style="width: 600px;height:400px;float:left;margin-left:10%"></div>
 					<div id="main1" style="width: 600px;height:400px;float:left;margin-left:15%"></div>
 				</div>
 			</div>
+			
+	<script type="text/javascript">
+	$(document).ready(function(){
+		datagrid();
+	}); 
+	function datagrid(){
+		var urls = "${rootPath}${BasePath}/statistics/getInfo.do";
+		$('#statisticsInfo').datagrid({
+			rownumbers:true,
+			pagination:true,
+			fitColumns:true,
+			toolbar:"#tb",
+    		singleSelect: true, 
+			pagePosition:'bottom',//bottom,top,both
+			url:urls,
+			columns:[[
+			{field:'ck',checkbox:true},
+	        {field:'userId',title:'用户名',width:120,align:"center"},
+	        {field:'group',title:'所属组',width:120,align:"center"},
+	        {field:'role',title:'角色',width:120,align:"center"},
+	        {field:'collectionNum',title:'采集量',width:120,align:"center"},
+	        {field:'analysisNum',title:'分析量',width:120,align:"center"}
+	        ]],
+			onLoadSuccess:function(data){
+		        //调整表格宽高
+		        $('#statisticsInfo').datagrid('resize', {
+					width:function(){return document.body.clientWidth;},
+					height:function(){return document.body.clientHeight;},
+				});
+		    }
+		});
+	}
+	
+	
+	</script>
+	<!--############### 图表 #####################-->
 	<script type="text/javascript">
 		var myChart = echarts.init(document.getElementById('main'));
 		var myChart1 = echarts.init(document.getElementById('main1'));
