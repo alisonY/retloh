@@ -26,8 +26,8 @@
 					</div>
 			   </div>
 			   <table style="width:100%;height:auto;" >
-			   <tr style="height:50px">
-			   </tr>
+			   	<tr style="height:50px">
+			  	</tr>
 			   	<tr>
 			   	 <th>
 			   		<div data-options="region:'center'">
