@@ -35,12 +35,13 @@
 						                    	用户管理
 						                </a>
 						                <span class="datagrid-btn-separator" style="vertical-align: middle;display:inline-block;float:none"></span>
-										<a href="javascript:void(0);" class="easyui-linkbutton"  data-options="iconCls:'icon-edit'" onclick="javascript:addPanel('病例信息','${rootPath}${BasePath}/case/toPage.do');">
+										<a href="javascript:void(0);" id="caseBtn" class="easyui-linkbutton"  data-options="iconCls:'icon-edit'" onclick="javascript:addPanel('病例信息','${rootPath}${BasePath}/case/toPage.do');">
 						                    	病例信息
 						                </a>
-						                <a href="javascript:void(0);" class="easyui-linkbutton"  data-options="iconCls:'icon-edit'" onclick="javascript:addPanel('患者信息','${rootPath}${BasePath}/bp/info/toPage.do');">
+						                <a href="javascript:void(0);" id="bpBtn" class="easyui-linkbutton"  data-options="iconCls:'icon-edit'" onclick="javascript:addPanel('患者信息','${rootPath}${BasePath}/bp/info/toPage.do');">
 						                    	血压信息
 						                </a>
+						                <span class="datagrid-btn-separator" style="vertical-align: middle;display:inline-block;float:none"></span>
 						                <a href="javascript:void(0);" class="easyui-linkbutton"  data-options="iconCls:'icon-edit'" onclick="javascript:addPanel('项目信息','${rootPath}${BasePath}/common/toPage.do');">
 						                    	项目信息
 						                </a>
@@ -77,6 +78,10 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
+	
+		$("#caseBtn").linkbutton("disable");
+		$("#bpBtn").linkbutton("disable");
+	
 		//center();
 	}); 
 
