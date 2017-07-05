@@ -1,6 +1,8 @@
 package com.retloh.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -74,7 +76,7 @@ public class ClientController extends ClientBaseController {
      */
 	@RequestMapping(value="/getCommonList",method={RequestMethod.POST})
     @ResponseBody
-    public String getCommonList(HttpServletRequest request, Common common,PageQuery pageQuery) throws IOException {
+    public String getCommonList(HttpServletRequest request, Common common,PageQuery pageQuery,String ids) throws IOException {
 		Map<String,Object> maps = new HashMap<String,Object>();
 		maps.put("status", 0);
 		TUser tUser = getAccountInfo(request);
@@ -104,14 +106,66 @@ public class ClientController extends ClientBaseController {
 						
 					}
 					if(common.getStatus() == 5){//取已分析的
-						common.setUpId(tUser.getId());//只能看到自己分析上传的的
+						//common.setUpId(tUser.getId());//只能看到自己分析上传的的
 					}
 				}
-				List<Common> resultList = commonServices.getDataListForClient(common, pageQuery);
+				List<String> idsList = new ArrayList<String>();
+				if(StringUtils.isNotBlank(ids)){
+					String[] id =  ids.split(",");
+					idsList= java.util.Arrays.asList(id);
+				}
+				List<Common> resultList = commonServices.getDataListForClient(common,idsList, pageQuery);
 				maps.put("status", 1);
 				maps.put("msg", resultList);
 			}			
 		}
 		return JacksonUtils.getInstance().obj2Json(maps);
     }
+	
+	public static void main(String[] args) {
+		String ids = "123,444,5453,2134";
+		String[] id =  ids.split(",");
+		List<String> list= java.util.Arrays.asList(id);
+		list.size();
+	}
+	
+	
+	/**
+	 * 释放病例
+	 * @param request
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value = "/release", method = { RequestMethod.POST })
+	@ResponseBody
+	public String releaseByid(HttpServletRequest request, String id) {
+		Common common = commonServices.selectByPrimaryKey(id);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("status", false);
+		
+		TUser tUser = getAccountInfo(request);
+		if(tUser==null){
+			map.put("msg", "login is required");
+		}else{
+			int status = common.getStatus();
+			if (status == 3) {
+				common.setStatus(1);
+				common.setUpdateTime(new Date());
+				int res = commonServices.updateByPrimaryKey(common);
+				if (res > 0) {
+					map.put("status", true);
+					map.put("msg", "成功释放");
+				} else {
+					map.put("msg", "释放失败");
+				}
+			} else {
+				map.put("msg", "无需释放!");
+			}
+		}
+		String resultJson = JacksonMapper.beanToJson(map);
+		return resultJson;
+	}
+	
+	
+	
 }

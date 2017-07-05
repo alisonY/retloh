@@ -124,7 +124,7 @@ public class CommonServicesImpl implements CommonServices {
 		return commonmapper.selectByPrimaryKey(id).getInfo();
 	}
 
-	public List<Common> getDataListForClient(Common record, PageQuery pageQuery) {
+	public List<Common> getDataListForClient(Common record,List<String> idsList,PageQuery pageQuery) {
 		CommonExample example = new CommonExample();
 		CommonExample.Criteria criteria = example.createCriteria();
 		criteria.andPgTypeEqualTo(record.getPgType());
@@ -136,6 +136,9 @@ public class CommonServicesImpl implements CommonServices {
 		}
 		if(record.getStatus()!=null){
 			criteria.andStatusEqualTo(record.getStatus());
+		}
+		if(idsList.size()>0){
+			criteria.andIdIn(idsList);
 		}
 		if(pageQuery.getPage() == null){
 			pageQuery.setPage(1);
