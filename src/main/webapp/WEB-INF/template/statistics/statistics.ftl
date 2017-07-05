@@ -5,7 +5,7 @@
 	<#include "commonHead.ftl" />
 </head>
 <body>
-			<table id="statisticsInfo" style="width:100%;height:auto" > </table>
+			
 			<div class="easyui-layout" data-options="fit:true">
 			
 				<!--顶部按钮框-->
@@ -25,11 +25,25 @@
 						</div>
 					</div>
 			   </div>
-			   
-				<div data-options="region:'center'">
-					<div id="main" style="width: 600px;height:400px;float:left;margin-left:10%"></div>
-					<div id="main1" style="width: 600px;height:400px;float:left;margin-left:15%"></div>
-				</div>
+			   <table style="width:100%;height:auto;" >
+			   <tr style="height:50px">
+			   </tr>
+			   	<tr>
+			   	 <th>
+			   		<div data-options="region:'center'">
+			   			<table id="statisticsInfo" style="width:100%;height:auto" > </table>
+			   		</div>
+			   	</th>
+			   	</tr>
+			   	<tr>
+			   	 <th>
+					<div data-options="region:'center'">
+						<div id="main" style="width: 600px;height:400px;float:left;margin-left:10%"></div>
+						<div id="main1" style="width: 600px;height:400px;float:left;margin-left:15%"></div>
+					</div>
+				 </th>
+				</tr>
+				</table>
 			</div>
 			
 	<script type="text/javascript">
@@ -51,8 +65,8 @@
 	        {field:'userId',title:'用户名',width:120,align:"center"},
 	        {field:'group',title:'所属组',width:120,align:"center"},
 	        {field:'role',title:'角色',width:120,align:"center"},
-	        {field:'collectionNum',title:'采集量',width:120,align:"center"},
-	        {field:'analysisNum',title:'分析量',width:120,align:"center"}
+	        {field:'collectionNum',title:'采集数',width:120,align:"center"},
+	        {field:'analysisNum',title:'分析数',width:120,align:"center"}
 	        ]],
 			onLoadSuccess:function(data){
 		        //调整表格宽高
