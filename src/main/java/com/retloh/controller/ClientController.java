@@ -1,11 +1,14 @@
 package com.retloh.controller;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -20,11 +23,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.retloh.framework.CacheConstant;
 import com.retloh.framework.cache.LocalCacheUtil;
+import com.retloh.model.CaseInfo;
 import com.retloh.model.Common;
 import com.retloh.model.PageQuery;
 import com.retloh.model.TUser;
 import com.retloh.service.CommonServices;
 import com.retloh.service.UserServices;
+import com.retloh.utils.ChangeCharset;
 import com.retloh.utils.CommonUtil;
 import com.retloh.utils.JacksonMapper;
 import com.retloh.utils.JacksonUtils;
@@ -166,6 +171,129 @@ public class ClientController extends ClientBaseController {
 		return resultJson;
 	}
 	
+
+	
+	
+	@RequestMapping(value = "/postcommon", method = { RequestMethod.POST })
+	@ResponseBody
+	public String postcommon(HttpServletRequest request) {
+		
+		String line = null;
+		StringBuilder sb = new StringBuilder();
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("status", false);
+		TUser tUser = getAccountInfo(request);
+		if(tUser==null){
+			map.put("status", -1);
+			map.put("msg", "login is required");
+			String resultJson = JacksonMapper.beanToJson(map);
+			return resultJson;
+		}else{
+			try {
+				BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream()));
+				while ((line = br.readLine()) != null) {
+					sb.append(line);
+				}
+			} catch (IOException e1) {
+				map.put("msg", "json转换异常");
+				String resultJson = JacksonMapper.beanToJson(map);
+				return resultJson;
+			}
+			String jsonstr = sb.toString();
+
+			LOGGER.error("receive json:" + jsonstr);
+
+			if (StringUtils.isNotBlank(jsonstr)) {
+				Common info = new Common();
+				try {
+					info = JacksonMapper.jsonToBean(jsonstr, Common.class);
+					if (info != null) {
+						info.setId(UUID.randomUUID().toString());
+						info.setUpTime(new Date());
+						info.setDownTime(new Date());
+						int flag = commonServices.insert(info);
+						if (flag > 0) {
+							map.put("status", true);
+							String resultJson = JacksonMapper.beanToJson(map);
+							return resultJson;
+						} else {
+							map.put("msg", "写库失败");
+							String resultJson = JacksonMapper.beanToJson(map);
+							return resultJson;
+						}
+					} else {
+						map.put("msg", "参数异常");
+						String resultJson = JacksonMapper.beanToJson(map);
+						return resultJson;
+					}
+				} catch (Exception e) {
+					map.put("msg", "json转换异常");
+					String resultJson = JacksonMapper.beanToJson(map);
+					return resultJson;
+				}
+			} else {
+				map.put("msg", "json为空");
+				String resultJson = JacksonMapper.beanToJson(map);
+				return resultJson;
+			}			
+		}
+	}
+	
+	
+	
+	@RequestMapping(value = "/postcommonJson", method = { RequestMethod.POST })
+	@ResponseBody
+	public String postcommonJson(HttpServletRequest request, String commonJson) {
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("status", false);
+		TUser tUser = getAccountInfo(request);
+		if(tUser==null || StringUtils.isBlank(commonJson)){
+			map.put("status", -1);
+			map.put("msg", "login is required");
+			String resultJson = JacksonMapper.beanToJson(map);
+			return resultJson;
+		}else{
+			if (StringUtils.isNotBlank(commonJson)) {
+				Common info = new Common();
+				try {
+					ChangeCharset test = new ChangeCharset();
+					String newCommonJson = test.toUTF_8(commonJson);
+					info = JacksonMapper.jsonToBean(newCommonJson, Common.class);
+					if (info != null) {
+						//info.setId(UUID.randomUUID().toString());
+						info.setUpTime(new Date());
+						info.setDownTime(new Date());
+						info.setStatus(0);
+						String currentGroupId = tUser.getGroupId();
+						info.setGroupId(currentGroupId);
+						int flag = commonServices.insert(info);
+						if (flag > 0) {
+							map.put("status", true);
+							String resultJson = JacksonMapper.beanToJson(map);
+							return resultJson;
+						} else {
+							map.put("msg", "写库失败");
+							String resultJson = JacksonMapper.beanToJson(map);
+							return resultJson;
+						}
+					} else {
+						map.put("msg", "参数异常");
+						String resultJson = JacksonMapper.beanToJson(map);
+						return resultJson;
+					}
+				} catch (Exception e) {
+					map.put("msg", "json转换异常");
+					String resultJson = JacksonMapper.beanToJson(map);
+					return resultJson;
+				}
+			} else {
+				map.put("msg", "json为空");
+				String resultJson = JacksonMapper.beanToJson(map);
+				return resultJson;
+			}	
+		}
+	}		
 	
 	
 }
