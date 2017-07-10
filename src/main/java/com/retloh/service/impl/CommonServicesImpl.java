@@ -114,7 +114,7 @@ public class CommonServicesImpl implements CommonServices {
 		}else if(updateTimeEnd!=null){
 			criteria.andUpdateTimeLessThanOrEqualTo(updateTimeEnd);
 		}
-		
+		example.setOrderByClause("create_time DESC");
 		
 		PageHelper.startPage(pageQuery.getPage(), pageQuery.getRows());
 		return commonmapper.selectByExample(example);
