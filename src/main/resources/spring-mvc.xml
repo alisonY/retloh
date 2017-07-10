@@ -80,8 +80,8 @@
 			<mvc:mapping path="/statistics/**"/>
 			<mvc:mapping path="/user/**"/>
 			<mvc:mapping path="/group/**"/>
-			<!--测试放点水
 			<mvc:mapping path="/common/**"/>
+			<!--测试放点水
 			<mvc:exclude-mapping path="/common/**"/>
 			-->
 			<bean class="com.retloh.framework.interceptor.UserLogininAuthorizationInterceptor"/>
