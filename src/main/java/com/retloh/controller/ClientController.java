@@ -249,7 +249,7 @@ public class ClientController extends ClientBaseController {
 	@RequestMapping(value = "/postcommonJson", method = { RequestMethod.POST })
 	@ResponseBody
 	public String postcommonJson(HttpServletRequest request, String commonJson) {
-		LOGGER.info("收到JSON："+commonJson);
+		LOGGER.debug("收到JSON："+commonJson);
 		Map<String, Object> map = new HashMap<String, Object>();
 		TUser tUser = getAccountInfo(request);
 		if(tUser==null || StringUtils.isBlank(commonJson)){
