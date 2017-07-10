@@ -3,6 +3,7 @@ package com.retloh.controller;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -305,6 +306,35 @@ public class ClientController extends ClientBaseController {
 			}	
 		}
 	}		
+
+	
+	
+	@RequestMapping(value = "/testj", method = { RequestMethod.POST })
+	@ResponseBody
+	public String testj(HttpServletRequest request, String json) {
+		LOGGER.error("收到JSON："+json);
+		ChangeCharset test = new ChangeCharset();
+		try {
+			String toGBK = test.toGBK(json);
+			String toASCII = test.toASCII(json);
+			String toISO_8859_1 = test.toISO_8859_1(json);
+			String toUTF_8 = test.toUTF_8(json);
+			String toUTF_16  = test.toUTF_16(json);
+			String toUTF_16BE  = test.toUTF_16BE(json);
+			String toUTF_16LE  = test.toUTF_16LE(json);
+			LOGGER.error("收到toGBK："+toGBK);
+			LOGGER.error("收到toASCII："+toASCII);
+			LOGGER.error("收到toISO_8859_1："+toISO_8859_1);
+			LOGGER.error("收到toUTF_8："+toUTF_8);
+			LOGGER.error("收到toUTF_16："+toUTF_16);
+			LOGGER.error("收到toUTF_16："+toUTF_16BE);
+			LOGGER.error("收到toUTF_16："+toUTF_16LE);
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return json;
+	}	
 	
 	
 }
