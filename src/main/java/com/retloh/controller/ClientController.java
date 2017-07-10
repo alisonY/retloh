@@ -127,12 +127,14 @@ public class ClientController extends ClientBaseController {
 		return JacksonUtils.getInstance().obj2Json(maps);
     }
 	
+	/*
 	public static void main(String[] args) {
 		String ids = "123,444,5453,2134";
 		String[] id =  ids.split(",");
 		List<String> list= java.util.Arrays.asList(id);
 		list.size();
 	}
+	*/
 	
 	
 	/**
@@ -247,6 +249,7 @@ public class ClientController extends ClientBaseController {
 	@RequestMapping(value = "/postcommonJson", method = { RequestMethod.POST })
 	@ResponseBody
 	public String postcommonJson(HttpServletRequest request, String commonJson) {
+		LOGGER.info("收到JSON："+commonJson);
 		Map<String, Object> map = new HashMap<String, Object>();
 		TUser tUser = getAccountInfo(request);
 		if(tUser==null || StringUtils.isBlank(commonJson)){

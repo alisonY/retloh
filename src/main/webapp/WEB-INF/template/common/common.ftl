@@ -75,8 +75,16 @@
 			url:urls,
 			columns:[[
 			{field:'ck',checkbox:true},
-	        {field:'id',title:'ID',width:120,align:"center"},
-	        {field:'num',title:'编号',width:120,align:"center"},
+	        {field:'id',title:'ID',width:120,align:"center",
+				 formatter:function(value,row,index){
+     				return showValueAndTitle(value,row,index);
+     			}
+     		},
+	        {field:'num',title:'编号',width:120,align:"center",
+				 formatter:function(value,row,index){
+     				return showValueAndTitle(value,row,index);
+     			}
+     		},
 	        {field:'sex',title:'性别',width:120,align:"center"},
 	        {field:'patName',title:'患者姓名',width:120,align:"center",editor:"textbox"},
 	        {field:'age',title:'年龄',width:120,align:"center",editor:"numberbox"},
@@ -86,10 +94,22 @@
 	        {field:'hsName',title:'医院名称',width:120,align:"center",editor:"textbox"},
 	        {field:'patNo',title:'门诊号',width:120,align:"center",editor:"textbox"},
 	        {field:'areaId',title:'区域编号',width:120,align:"center",editor:"textbox"},
-	        {field:'special',title:'病例特殊说明',width:120,align:"center",editor:"textbox"},
-	        {field:'conclusion',title:'结论特点',width:120,align:"center",editor:"textbox"},
+	        {field:'special',title:'病例特殊说明',width:120,align:"center",editor:"textbox",
+				 formatter:function(value,row,index){
+     				return showValueAndTitle(value,row,index);
+     			}
+     		},
+	        {field:'conclusion',title:'结论特点',width:120,align:"center",editor:"textbox",
+				 formatter:function(value,row,index){
+     				return showValueAndTitle(value,row,index);
+     			}
+     		},
 	        {field:'pgType',title:'项目类型',width:120,align:"center"},
-	        {field:'upId',title:'上传用户编号',width:120,align:"center"},
+	        {field:'upId',title:'上传用户编号',width:120,align:"center",
+				 formatter:function(value,row,index){
+     				return showValueAndTitle(value,row,index);
+     			}
+     		},
 	        {field:'upName',title:'上传大夫名称',width:120,align:"center"},
 	        {field:'anaId',title:'分析端编号',width:120,align:"center"},
 	        {field:'anaName',title:'分析大夫名称',width:120,align:"center"},
@@ -123,8 +143,16 @@
 					}
 				}},
 	        {field:'analysedFile',title:'当分析生成的文件',width:120,align:"center"},
-	        {field:'createTime',title:'上传时间',width:120,align:"center"},
-	        {field:'updateTime',title:'修改时间',width:120,align:"center"}
+	        {field:'createTime',title:'上传时间',width:120,align:"center",
+				 formatter:function(value,row,index){
+     				return showValueAndTitle(value,row,index);
+     			}
+     		},
+	        {field:'updateTime',title:'修改时间',width:120,align:"center",
+				 formatter:function(value,row,index){
+     				return showValueAndTitle(value,row,index);
+     			}
+     		}
 	        ]],
 			onLoadSuccess:function(data){
 		        //调整表格宽高
