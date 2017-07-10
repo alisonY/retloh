@@ -146,11 +146,12 @@ public class ClientController extends ClientBaseController {
 	public String releaseByid(HttpServletRequest request, String id) {
 		Common common = commonServices.selectByPrimaryKey(id);
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("status", false);
-		
 		TUser tUser = getAccountInfo(request);
 		if(tUser==null){
-			map.put("msg", "login is required");
+			map.put("status", -1);
+			map.put("msg", "未登录");
+			String resultJson = JacksonMapper.beanToJson(map);
+			return resultJson;
 		}else{
 			int status = common.getStatus();
 			if (status == 3) {
@@ -158,12 +159,14 @@ public class ClientController extends ClientBaseController {
 				common.setUpdateTime(new Date());
 				int res = commonServices.updateByPrimaryKey(common);
 				if (res > 0) {
-					map.put("status", true);
+					map.put("status", 1);
 					map.put("msg", "成功释放");
 				} else {
+					map.put("status", 0);
 					map.put("msg", "释放失败");
 				}
 			} else {
+				map.put("status", 0);
 				map.put("msg", "无需释放!");
 			}
 		}
@@ -244,13 +247,11 @@ public class ClientController extends ClientBaseController {
 	@RequestMapping(value = "/postcommonJson", method = { RequestMethod.POST })
 	@ResponseBody
 	public String postcommonJson(HttpServletRequest request, String commonJson) {
-
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("status", false);
 		TUser tUser = getAccountInfo(request);
 		if(tUser==null || StringUtils.isBlank(commonJson)){
 			map.put("status", -1);
-			map.put("msg", "login is required");
+			map.put("msg", "未登录");
 			String resultJson = JacksonMapper.beanToJson(map);
 			return resultJson;
 		}else{
@@ -259,7 +260,14 @@ public class ClientController extends ClientBaseController {
 				try {
 					ChangeCharset test = new ChangeCharset();
 					String newCommonJson = test.toUTF_8(commonJson);
-					info = JacksonMapper.jsonToBean(newCommonJson, Common.class);
+					try {
+						info = JacksonMapper.jsonToBean(newCommonJson, Common.class);
+					} catch (Exception e) {
+						map.put("status", 0);
+						map.put("msg", "参数异常");
+						String resultJson = JacksonMapper.beanToJson(map);
+						return resultJson;
+					}
 					if (info != null) {
 						//info.setId(UUID.randomUUID().toString());
 						info.setUpTime(new Date());
@@ -269,7 +277,7 @@ public class ClientController extends ClientBaseController {
 						info.setGroupId(currentGroupId);
 						int flag = commonServices.insert(info);
 						if (flag > 0) {
-							map.put("status", true);
+							map.put("status", 1);
 							String resultJson = JacksonMapper.beanToJson(map);
 							return resultJson;
 						} else {

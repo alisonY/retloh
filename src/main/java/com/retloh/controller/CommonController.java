@@ -197,7 +197,25 @@ public class CommonController {
 		return resultJson;
 	}
 	
-	
+	@RequestMapping(value="/delInfo",method={RequestMethod.POST})
+    @ResponseBody
+    public String delInfo(HttpServletRequest request,String id){
+		Map<String,Object> map = new HashMap<String, Object>();
+		int result = 0;
+		if(StringUtils.isNotBlank(id)){
+			result = commonServices.deleteByPrimaryKey(id);
+			if(result>0){
+				map.put("msg","删除成功");
+			}else{
+				map.put("msg","删除失败");
+			}
+		}else{
+			map.put("msg","操作失败，请重试_"+id);
+		}
+		map.put("status",result);
+		String resultJson = JacksonMapper.beanToJson(map);
+		return resultJson;
+    }	
 	
 	@RequestMapping(value = "/saveCommonInfo", method = { RequestMethod.POST })
 	@ResponseBody
