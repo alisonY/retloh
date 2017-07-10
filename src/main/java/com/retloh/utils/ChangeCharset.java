@@ -26,6 +26,9 @@ public class ChangeCharset {
   
     /** 中文超大字符集 */  
     public static final String GBK = "GBK";  
+    
+    public static final String GB2312 = "GB2312";  
+    
   
     /** 
      * 将字符编码转换成US-ASCII码 
@@ -74,6 +77,14 @@ public class ChangeCharset {
      */  
     public String toGBK(String str) throws UnsupportedEncodingException {  
         return this.changeCharset(str, GBK);  
+    }  
+    
+    
+    /** 
+     * 将字符编码转换成GBK码 
+     */  
+    public String toGB2312(String str) throws UnsupportedEncodingException {  
+        return this.changeCharset(str, GB2312);  
     }  
   
     /** 
