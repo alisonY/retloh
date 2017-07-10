@@ -31,6 +31,7 @@ public class CommonServicesImpl implements CommonServices {
 	@Override
 	public int insert(Common record) {
 		// TODO Auto-generated method stub
+		record.setCreateTime(new Date());
 		return commonmapper.insert(record);
 	}
 
