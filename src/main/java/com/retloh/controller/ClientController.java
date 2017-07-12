@@ -279,6 +279,8 @@ public class ClientController extends ClientBaseController {
 						info.setStatus(0);
 						String currentGroupId = tUser.getGroupId();
 						info.setGroupId(currentGroupId);
+						info.setUpId(tUser.getId());
+						info.setUpName(tUser.getLoginName());
 						int flag = commonServices.insert(info);
 						if (flag > 0) {
 							map.put("status", 1);
