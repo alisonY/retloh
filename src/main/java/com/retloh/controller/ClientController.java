@@ -202,10 +202,10 @@ public class ClientController extends ClientBaseController {
 			int res = commonServices.updateByPrimaryKey(common);
 			if (res > 0) {
 				map.put("status", 1);
-				map.put("msg", "成功释放");
+				map.put("msg", "修改成功");
 			} else {
 				map.put("status", 0);
-				map.put("msg", "释放失败");
+				map.put("msg", "修改失败");
 			}
 			String resultJson = JacksonMapper.beanToJson(map);
 			return resultJson;
