@@ -177,6 +177,42 @@ public class ClientController extends ClientBaseController {
 		return resultJson;
 	}
 	
+	
+	
+	/**
+	 * 释放病例
+	 * @param request
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value = "/updateStatus", method = { RequestMethod.POST })
+	@ResponseBody
+	public String releaseByid(HttpServletRequest request, String id,Integer status) {
+		Common common = commonServices.selectByPrimaryKey(id);
+		Map<String, Object> map = new HashMap<String, Object>();
+		TUser tUser = getAccountInfo(request);
+		if(tUser==null){
+			map.put("status", -1);
+			map.put("msg", "未登录");
+			String resultJson = JacksonMapper.beanToJson(map);
+			return resultJson;
+		}else{
+			common.setStatus(status);
+			common.setUpdateTime(new Date());
+			int res = commonServices.updateByPrimaryKey(common);
+			if (res > 0) {
+				map.put("status", 1);
+				map.put("msg", "成功释放");
+			} else {
+				map.put("status", 0);
+				map.put("msg", "释放失败");
+			}
+			String resultJson = JacksonMapper.beanToJson(map);
+			return resultJson;
+		}
+	}
+	
+	
 
 	
 	
