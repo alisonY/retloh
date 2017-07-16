@@ -127,32 +127,49 @@ public class StatisticsController {
 	public String countStatus(HttpServletRequest request) throws IOException {
 		// 有点麻烦凑合吧 count(status) group by status
 
-		Map<Integer, Object> map = new HashMap<Integer, Object>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		CommonExample commonexample = new CommonExample();
+		List<String> list_categories=new ArrayList<String>();
+		List<Integer> list_data=new ArrayList<Integer>();
+		
+		
 		// 0=待上传数据包，
 		commonexample.createCriteria().andStatusEqualTo(0);
 		int waitupload = commonservices.countByExample(commonexample);
-		map.put(0, waitupload);
+		list_categories.add("待上传");
+		list_data.add(waitupload);
+
 		// 1=已上传待分析，
 		commonexample.createCriteria().andStatusEqualTo(1);
 		int waitanalysis = commonservices.countByExample(commonexample);
-		map.put(1, waitanalysis);
+		list_categories.add("待分析");
+		list_data.add(waitanalysis);
+		
 		// 2=待分析下载中，
 		commonexample.createCriteria().andStatusEqualTo(2);
 		int download = commonservices.countByExample(commonexample);
-		map.put(2, download);
+		list_categories.add("下载中");
+		list_data.add(download);
 		// 3=已被下载，
 		commonexample.createCriteria().andStatusEqualTo(3);
 		int downloaded = commonservices.countByExample(commonexample);
-		map.put(3, downloaded);
+		list_categories.add("已下载");
+		list_data.add(downloaded);
+		
 		// 4=已被分析回传中，
 		commonexample.createCriteria().andStatusEqualTo(4);
 		int waitreturn = commonservices.countByExample(commonexample);
-		map.put(4, waitreturn);
+		list_categories.add("已分析");
+		list_data.add(waitreturn);
+		
 		// 5=已回传报告
 		commonexample.createCriteria().andStatusEqualTo(5);
 		int returned = commonservices.countByExample(commonexample);
-		map.put(5, returned);
+		list_categories.add("已回传");
+		list_data.add(returned);
+		
+		map.put("categories", list_categories);
+		map.put("data", list_data);
 
 		String resultJson = JacksonMapper.beanToJson(map);
 		return resultJson;

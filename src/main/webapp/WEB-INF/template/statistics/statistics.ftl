@@ -38,7 +38,7 @@
 			   	<tr>
 			   	 <th>
 					<div data-options="region:'center'">
-						<div id="main" style="width: 600px;height:400px;float:left;margin-left:10%"></div>
+						<!--<div id="main" style="width: 600px;height:400px;float:left;margin-left:10%"></div> -->
 						<div id="main1" style="width: 600px;height:400px;float:left;margin-left:15%"></div>
 					</div>
 				 </th>
@@ -88,8 +88,7 @@
 	</script>
 	<!--############### 图表 #####################-->
 	<script type="text/javascript">
-		var myChart = echarts.init(document.getElementById('main'));
-		var myChart1 = echarts.init(document.getElementById('main1'));
+		//var myChart = echarts.init(document.getElementById('main'));
 		var option = {
 		    title : {
 		        text: '上传与下载',
@@ -158,7 +157,11 @@
 		        }
 		    ]
 		};
-		var option1 = {
+		//myChart.setOption(option);
+		var myChart1 = echarts.init(document.getElementById('main1'));
+		$.get("${rootPath}${BasePath}/statistics/countstatus.do").done(function (data) {
+			data = $.parseJSON(data);
+		 	var option1 = {
             title: {
                 text: '概况'
             },
@@ -167,18 +170,20 @@
                 data:['数量']
             },
             xAxis: {
-                data: ["已上传","以下载","下载中","待分析","分析中","以分析","已回传"]
+                //data: ["已上传","以下载","下载中","待分析","分析中","以分析","已回传"]
+                data: data.categories
             },
             yAxis: {},
             series: [{
                 name: '数量',
                 type: 'bar',
-                data: [5, 20, 36, 10, 10, 20]
-            }]
-        };
+                //data: [5, 20, 36, 10, 10, 20]
+                data: data.data
+            	}]
+        	};
+		 	myChart1.setOption(option1);
+		 });
 		
-		myChart.setOption(option);
-		myChart1.setOption(option1);
 	</script>
 </body>
 </html>
