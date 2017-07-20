@@ -1,15 +1,10 @@
 package com.retloh.controller;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
-
 import javax.servlet.http.HttpServletRequest;
-
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +18,6 @@ import com.retloh.model.Common;
 import com.retloh.model.PageQuery;
 import com.retloh.model.commonVo.MyPageInfo;
 import com.retloh.service.CommonServices;
-import com.retloh.utils.DateUtils;
 import com.retloh.utils.JacksonMapper;
 import com.retloh.utils.JacksonUtils;
 
@@ -39,64 +33,6 @@ public class CommonController {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(CommonController.class);
 
-	@RequestMapping(value = "/postcommon", method = { RequestMethod.POST })
-	@ResponseBody
-	public String postcaseT(HttpServletRequest request) {
-
-		String line = null;
-		StringBuilder sb = new StringBuilder();
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("status", false);
-
-		try {
-			BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream()));
-			while ((line = br.readLine()) != null) {
-				sb.append(line);
-			}
-		} catch (IOException e1) {
-			map.put("msg", "json转换异常");
-			String resultJson = JacksonMapper.beanToJson(map);
-			return resultJson;
-		}
-		String jsonstr = sb.toString();
-
-		LOGGER.error("receive json:" + jsonstr);
-
-		if (StringUtils.isNotBlank(jsonstr)) {
-			Common info = new Common();
-			try {
-				info = JacksonMapper.jsonToBean(jsonstr, Common.class);
-				if (info != null) {
-					info.setId(UUID.randomUUID().toString());
-					info.setUpTime(new Date());
-					info.setDownTime(new Date());
-					int flag = commonServices.insert(info);
-					if (flag > 0) {
-						map.put("status", true);
-						String resultJson = JacksonMapper.beanToJson(map);
-						return resultJson;
-					} else {
-						map.put("msg", "写库失败");
-						String resultJson = JacksonMapper.beanToJson(map);
-						return resultJson;
-					}
-				} else {
-					map.put("msg", "参数异常");
-					String resultJson = JacksonMapper.beanToJson(map);
-					return resultJson;
-				}
-			} catch (Exception e) {
-				map.put("msg", "json转换异常");
-				String resultJson = JacksonMapper.beanToJson(map);
-				return resultJson;
-			}
-		} else {
-			map.put("msg", "json为空");
-			String resultJson = JacksonMapper.beanToJson(map);
-			return resultJson;
-		}
-	}
-
 	@RequestMapping(value = "/toPage", method = { RequestMethod.GET })
 	public String toPage(HttpServletRequest request) throws IOException {
 		return "/common/common";
@@ -107,7 +43,7 @@ public class CommonController {
 	public String getCaseInfo(HttpServletRequest request, Common common, PageQuery pageQuery) throws IOException {
 		
 		MyPageInfo<Common> resultList = new MyPageInfo<Common>(commonServices.getDataList(common, pageQuery,request));
-		String resultJson = JacksonMapper.beanToJson(resultList);
+		//String resultJson = JacksonMapper.beanToJson(resultList);
 		String resultJson2 = JacksonUtils.getInstance().obj2Json(resultList);
 		return resultJson2;
 	}
@@ -171,30 +107,6 @@ public class CommonController {
 		}
 		sb.append("]}");
 		return sb.toString();
-	}
-
-	@RequestMapping(value = "/release", method = { RequestMethod.POST })
-	@ResponseBody
-	public String releaseByid(HttpServletRequest request, String id) {
-		Common common = commonServices.selectByPrimaryKey(id);
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("status", false);
-		int status = common.getStatus();
-		if (status == 3) {
-			common.setStatus(1);
-			int res = commonServices.updateByPrimaryKey(common);
-			if (res > 0) {
-				map.put("status", true);
-				map.put("msg", "成功释放");
-			} else {
-				map.put("msg", "释放失败");
-			}
-		} else {
-			map.put("msg", "无需释放!");
-		}
-
-		String resultJson = JacksonMapper.beanToJson(map);
-		return resultJson;
 	}
 	
 	@RequestMapping(value="/delInfo",method={RequestMethod.POST})
