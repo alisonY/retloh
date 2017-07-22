@@ -44,4 +44,20 @@ public class CacheConstant {
      * 无操作时登出时间，30分钟未操作登出
      */
     public static final int CLIENT_LOGOUT_TIMES = 7200;
+    
+    /**
+     * 客户端下载前锁
+     */
+    public static final String CLIENT_BEFORE_UPLOAD_LOCK = CACHE_PREFIX + "CLIENT_BEFORE_UPLOAD_LOCK_";
+    
+    /**
+     * 客户端下载前锁 值
+     */
+    public static final String CLIENT_BEFORE_UPLOAD_LOCK_FLAG = "OK";
+    
+    
+    /**
+     * 无操作时登出时间，30分钟未操作登出
+     */
+    public static final int CLIENT_BEFORE_UPLOAD_LOCK_TIME = 30*60;
 }

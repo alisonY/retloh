@@ -69,8 +69,8 @@ public class ClientController extends ClientBaseController {
 					String token = CommonUtil.md5(cacheKey);// token
 															// 根据当前用户cacheKey经过MD5编码后生成
 					LocalCacheUtil.getInstance().putLocalCache(token, temp, CacheConstant.CLIENT_LOGOUT_TIMES);
-					LOGGER.error("client Authentication is success,query result is jsonStr={},cacheKey={}", jsonStr,
-							cacheKey);
+					LOGGER.error("client Authentication is success,query result is jsonStr={},cacheKey={},token={}", jsonStr,
+							cacheKey,token);
 					modelMap.put("status", true);
 					modelMap.put("token", token);
 				} else {
@@ -136,11 +136,41 @@ public class ClientController extends ClientBaseController {
 		return JacksonUtils.getInstance().obj2Json(maps);
 	}
 
-	/*
-	 * public static void main(String[] args) { String ids =
-	 * "123,444,5453,2134"; String[] id = ids.split(","); List<String> list=
-	 * java.util.Arrays.asList(id); list.size(); }
-	 */
+	
+	@RequestMapping(value = "/getInfoById", method = { RequestMethod.POST })
+	@ResponseBody
+	public String getInfoById(HttpServletRequest request, String id)
+			throws IOException {
+		Map<String, Object> maps = new HashMap<String, Object>();
+		maps.put("status", 0);
+		TUser tUser = getAccountInfo(request);
+		if (StringUtils.isBlank(id)) {
+			maps.put("msg", "id参数必传");
+		} else {
+			if (tUser == null) {
+				maps.put("status", -1);
+				maps.put("msg", "login is required");
+			} else {
+				String currentGroupId = tUser.getGroupId();
+				Common resultBean = commonServices.selectByPrimaryKey(id);
+				if(resultBean!=null){
+					String resultGroup = 	resultBean.getGroupId();
+					if(StringUtils.equals(currentGroupId, resultGroup)){
+						maps.put("status", 1);
+						maps.put("msg", resultBean);
+					}else{
+						maps.put("msg", "当前用户组不匹配");
+					}
+				}else{
+					maps.put("status", 0);
+					maps.put("msg", "没有结果");
+				}
+			}
+		}
+		return JacksonUtils.getInstance().obj2Json(maps);
+	}	
+	
+	
 
 	/**
 	 * 释放病例
@@ -192,8 +222,16 @@ public class ClientController extends ClientBaseController {
 	@RequestMapping(value = "/updateStatus", method = { RequestMethod.POST })
 	@ResponseBody
 	public String releaseByid(HttpServletRequest request, String id, Integer status) {
-		Common common = commonServices.selectByPrimaryKey(id);
 		Map<String, Object> map = new HashMap<String, Object>();
+		
+		if(StringUtils.isBlank(id) || status == null){
+			map.put("status", 0);
+			map.put("msg", "id或status必传");
+			String resultJson = JacksonMapper.beanToJson(map);
+			return resultJson;
+		}
+		
+		Common common = commonServices.selectByPrimaryKey(id);
 		TUser tUser = getAccountInfo(request);
 		// 统计表对象
 		Statistics statistics = new Statistics();
@@ -207,6 +245,10 @@ public class ClientController extends ClientBaseController {
 			common.setUpdateTime(new Date());
 			int res = commonServices.updateByPrimaryKey(common);
 			if (res > 0) {
+				
+				String lockKey = CacheConstant.CLIENT_BEFORE_UPLOAD_LOCK+id;
+				LocalCacheUtil.getInstance().delLocalCache(lockKey);
+				
 				map.put("status", 1);
 				map.put("msg", "修改成功");
 				int usertype = tUser.getUserType();
@@ -314,9 +356,12 @@ public class ClientController extends ClientBaseController {
 	@RequestMapping(value = "/postcommonJson", method = { RequestMethod.POST })
 	@ResponseBody
 	public String postcommonJson(HttpServletRequest request, String commonJson) {
-		LOGGER.debug("收到JSON：" + commonJson);
+		LOGGER.error("收到JSON：" + commonJson);
 		Map<String, Object> map = new HashMap<String, Object>();
+		String token = request.getHeader("token");
+		LOGGER.error("token：" + token);
 		TUser tUser = getAccountInfo(request);
+		LOGGER.error("tuser：" + JacksonMapper.beanToJson(tUser));
 		if (tUser == null || StringUtils.isBlank(commonJson)) {
 			map.put("status", -1);
 			map.put("msg", "未登录");
@@ -373,27 +418,53 @@ public class ClientController extends ClientBaseController {
 		}
 	}
 
-	@RequestMapping(value = "/testj", method = { RequestMethod.POST })
+	/**
+	 * 释放病例
+	 * 
+	 * @param request
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value = "/beforeDownload", method = { RequestMethod.POST })
 	@ResponseBody
-	public String testj(HttpServletRequest request, String json) {
-		LOGGER.error("收到JSON：" + json);
-		ChangeCharset test = new ChangeCharset();
-		try {
-			String toGBK = test.toGBK(json);
-			String toASCII = test.toASCII(json);
-			String toISO_8859_1 = test.toISO_8859_1(json);
-			String toUTF_8 = test.toUTF_8(json);
-			LOGGER.error("收到toGBK：" + toGBK);
-			LOGGER.error("收到toASCII：" + toASCII);
-			LOGGER.error("收到toISO_8859_1：" + toISO_8859_1);
-			LOGGER.error("收到toUTF_8：" + toUTF_8);
-			String toGB2312 = test.toGB2312(json);
-			LOGGER.error("收到toGB2312：" + toGB2312);
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public String beforeDownload(HttpServletRequest request, String id) {
+		Common common = new Common();
+		Map<String, Object> map = new HashMap<String, Object>();
+		TUser tUser = getAccountInfo(request);
+		if(StringUtils.isBlank(id)){
+			map.put("status", 0);
+			map.put("msg", "id必传");
+			String resultJson = JacksonMapper.beanToJson(map);
+			return resultJson;
 		}
-		return json;
+		if (tUser == null) {
+			map.put("status", -1);
+			map.put("msg", "未登录");
+			String resultJson = JacksonMapper.beanToJson(map);
+			return resultJson;
+		} else {
+			String lockKey = CacheConstant.CLIENT_BEFORE_UPLOAD_LOCK+id;
+			if(LocalCacheUtil.getInstance().getLocalCacheForString(lockKey) == null){
+				LOGGER.error("下载前锁检查,没有占用：lockKey{}",lockKey);
+				LocalCacheUtil.getInstance().putLocalCache(lockKey, CacheConstant.CLIENT_BEFORE_UPLOAD_LOCK_FLAG, CacheConstant.CLIENT_BEFORE_UPLOAD_LOCK_TIME);
+				common.setId(id);
+				common.setStatus(2);
+				common.setUpdateTime(new Date());
+				int res = commonServices.updateByPrimaryKeySelective(common);
+				if (res > 0) {
+					map.put("status", 0);
+					map.put("msg", "修改失败");
+				}
+				String resultJson = JacksonMapper.beanToJson(map);
+				return resultJson;
+			}else{
+				LOGGER.error("下载前锁检查,被占用：lockKey{}",lockKey);
+				map.put("status", 0);
+				map.put("msg", "已被下载");
+				String resultJson = JacksonMapper.beanToJson(map);
+				return resultJson;
+			}
+		}
 	}
 
 }
