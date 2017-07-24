@@ -130,6 +130,9 @@
 	        			{return '已分析回传中';}
 	        		if (val==5)
 	        			{return '已回传';}
+	        		else{
+	        			return val;
+	        			}
 	        	}
 	        },
 	        {field:'reportId',title:'报告文件',width:120,align:"center",
