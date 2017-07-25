@@ -257,7 +257,7 @@ public class ClientController extends ClientBaseController {
 					statistics.setId(UUID.randomUUID().toString());
 					statistics.setUserId(id);
 					statistics.setDataId(common.getId());
-					statistics.setDataType(common.getNetFlag());
+					statistics.setDataType(common.getPgType());
 					statistics.setAction(1);
 					statistics.setOperationTime(new Date());
 					int flag = statservices.insert(statistics);
@@ -266,16 +266,24 @@ public class ClientController extends ClientBaseController {
 					}
 				}
 				// 分析端
-				if (usertype == 2 && status == 5) {
+				if (usertype == 2 && status == 6) {
 					statistics.setId(UUID.randomUUID().toString());
 					statistics.setUserId(id);
 					statistics.setDataId(common.getId());
-					statistics.setDataType(common.getNetFlag());
+					statistics.setDataType(common.getPgType());
 					statistics.setAction(2);
 					statistics.setOperationTime(new Date());
-					int flag = statservices.insert(statistics);
-					if (flag < 0) {
-						LOGGER.error("日志统计失败:" + statistics.toString());
+					int flagSta = statservices.insert(statistics);
+					
+					Common record = new Common();
+					record.setId(id);
+					record.setAnaId(tUser.getId());
+					record.setAnaName(tUser.getLoginName());
+					int flagcom = commonServices.updateByPrimaryKeySelective(common);
+					
+					if (flagSta < 0 || flagcom <0) {
+						LOGGER.error("日志统计/添加分析端账号信息失败:" + statistics.toString());
+						
 					}
 				}
 

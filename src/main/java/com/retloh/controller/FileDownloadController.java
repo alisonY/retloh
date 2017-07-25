@@ -33,7 +33,10 @@ public class FileDownloadController {
 		
 		response.setHeader("Content-disposition", "attachment; filename="+filename);
 		
-		filePath = SysConstant.FILE_STORE_FOLDER+filePath;
+		String[] filetext = filePath.split(".");
+		
+		
+		filePath = SysConstant.FILE_STORE_FOLDER+filetext[0]+"/"+filePath;
 		try {
 			LOGGER.error("下载文件URL：{}",filename);
 			FileUtil.fileToStream(response.getOutputStream(), filePath);

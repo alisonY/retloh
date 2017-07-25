@@ -9,7 +9,7 @@ public class Statistics {
 
     private String dataId;
 
-    private Integer dataType;
+    private String dataType;
 
     private Integer action;
 
@@ -39,12 +39,12 @@ public class Statistics {
         this.dataId = dataId == null ? null : dataId.trim();
     }
 
-    public Integer getDataType() {
+    public String getDataType() {
         return dataType;
     }
 
-    public void setDataType(Integer dataType) {
-        this.dataType = dataType;
+    public void setDataType(String dataType) {
+        this.dataType = dataType == null ? null : dataType.trim();
     }
 
     public Integer getAction() {

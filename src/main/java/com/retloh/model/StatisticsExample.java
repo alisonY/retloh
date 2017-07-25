@@ -325,52 +325,62 @@ public class StatisticsExample {
             return (Criteria) this;
         }
 
-        public Criteria andDataTypeEqualTo(Integer value) {
+        public Criteria andDataTypeEqualTo(String value) {
             addCriterion("data_type =", value, "dataType");
             return (Criteria) this;
         }
 
-        public Criteria andDataTypeNotEqualTo(Integer value) {
+        public Criteria andDataTypeNotEqualTo(String value) {
             addCriterion("data_type <>", value, "dataType");
             return (Criteria) this;
         }
 
-        public Criteria andDataTypeGreaterThan(Integer value) {
+        public Criteria andDataTypeGreaterThan(String value) {
             addCriterion("data_type >", value, "dataType");
             return (Criteria) this;
         }
 
-        public Criteria andDataTypeGreaterThanOrEqualTo(Integer value) {
+        public Criteria andDataTypeGreaterThanOrEqualTo(String value) {
             addCriterion("data_type >=", value, "dataType");
             return (Criteria) this;
         }
 
-        public Criteria andDataTypeLessThan(Integer value) {
+        public Criteria andDataTypeLessThan(String value) {
             addCriterion("data_type <", value, "dataType");
             return (Criteria) this;
         }
 
-        public Criteria andDataTypeLessThanOrEqualTo(Integer value) {
+        public Criteria andDataTypeLessThanOrEqualTo(String value) {
             addCriterion("data_type <=", value, "dataType");
             return (Criteria) this;
         }
 
-        public Criteria andDataTypeIn(List<Integer> values) {
+        public Criteria andDataTypeLike(String value) {
+            addCriterion("data_type like", value, "dataType");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataTypeNotLike(String value) {
+            addCriterion("data_type not like", value, "dataType");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataTypeIn(List<String> values) {
             addCriterion("data_type in", values, "dataType");
             return (Criteria) this;
         }
 
-        public Criteria andDataTypeNotIn(List<Integer> values) {
+        public Criteria andDataTypeNotIn(List<String> values) {
             addCriterion("data_type not in", values, "dataType");
             return (Criteria) this;
         }
 
-        public Criteria andDataTypeBetween(Integer value1, Integer value2) {
+        public Criteria andDataTypeBetween(String value1, String value2) {
             addCriterion("data_type between", value1, value2, "dataType");
             return (Criteria) this;
         }
 
-        public Criteria andDataTypeNotBetween(Integer value1, Integer value2) {
+        public Criteria andDataTypeNotBetween(String value1, String value2) {
             addCriterion("data_type not between", value1, value2, "dataType");
             return (Criteria) this;
         }

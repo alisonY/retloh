@@ -77,6 +77,9 @@ public class CommonServicesImpl implements CommonServices {
 		if(StringUtils.isNotBlank(record.getPatName())){
 			criteria.andPatNameLike(record.getPatName());
 		}
+		if(StringUtils.isNotBlank(record.getPgType())){
+			criteria.andPgTypeEqualTo(record.getPgType());
+		}
 		
 		
 		Date createTimeStart = null;

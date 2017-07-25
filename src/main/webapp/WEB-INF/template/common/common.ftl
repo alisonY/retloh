@@ -10,21 +10,22 @@
 	<!--工具栏-->
 	<div id="tb" style="padding:2px 5px;">
 		上传时间 : <input id="createTimeStart" class="easyui-datetimebox" style="width:150px">
-        : <input id="createTimeEnd" class="easyui-datetimebox" style="width:150px">
+        : <input id="createTimeEnd" class="easyui-datetimebox" style="width:180px">
                 修改时间 : <input id="updateTimeStart" class="easyui-datetimebox" style="width:150px">
-        : <input id="updateTimeEnd" class="easyui-datetimebox" style="width:150px">
-                身份证号码：<input id="idCard" class="easyui-textbox"  style="width:200px;height:28px">
-                患者姓名：<input id="patName" class="easyui-textbox"  style="width:100px;height:28px">
+        : <input id="updateTimeEnd" class="easyui-datetimebox" style="width:180px">
+                身份证号码：<input id="idCard" class="easyui-textbox"  style="width:250px;height:28px">
+                患者姓名：<input id="patName" class="easyui-textbox"  style="width:150px;height:28px">
+                项目：<input id="pgType" class="easyui-textbox"  style="width:150px;height:28px">
         <a href="#" class="easyui-linkbutton" iconCls="icon-search" onclick="datagrid()" >条件查询</a>
         <a href="#" class="easyui-linkbutton" iconCls="icon-redo" onclick="resetParms()" >重置条件</a>
-        <!--分隔符--><span class="datagrid-btn-separator" style="vertical-align: middle;display:inline-block;float:none"></span>
+		<!--分隔符--><span class="datagrid-btn-separator" style="vertical-align: middle;display:inline-block;float:none"></span>
+        <a href="#" class="easyui-linkbutton" iconCls="icon-remove" onclick="delCommon()" >删除</a>
+        </br>
 		<a href="#" class="easyui-linkbutton" iconCls="icon-down" onclick="redoCommon()" >取消行编辑</a>
 	    <a href="#" class="easyui-linkbutton" iconCls="icon-save" onclick="saveCommon()" >保存行编辑</a>
 		<!--分隔符--><span class="datagrid-btn-separator" style="vertical-align: middle;display:inline-block;float:none"></span>
         <a href="#" class="easyui-linkbutton" iconCls="icon-man" onclick="viewCommonInfo()" >查看INFO字段</a>
         <a href="#" class="easyui-linkbutton" iconCls="icon-edit" onclick="editCommonInfo()" >编辑INFO字段</a>
-		<!--分隔符--><span class="datagrid-btn-separator" style="vertical-align: middle;display:inline-block;float:none"></span>
-        <a href="#" class="easyui-linkbutton" iconCls="icon-remove" onclick="delCommon()" >删除</a>
     </div>
     
 	<div id="dlg" class="easyui-dialog" title="项目详情" data-options="closed:'true',modal:'true',iconCls:'icon-edit',buttons: '#dlg-buttons'" style="width:30%;height:400px;padding:10px">
@@ -64,6 +65,7 @@
 					"updateTimeStart":$('#updateTimeStart').datetimebox('getValue'),
 					"updateTimeEnd":$('#updateTimeEnd').datetimebox('getValue'),
 					"patName":$.trim($("#patName").textbox('getValue')),
+					"pgType":$.trim($("#pgType").textbox('getValue')),
 					"idCard":$.trim($("#idCard").textbox('getValue'))
 			},
 			rownumbers:true,
@@ -116,7 +118,7 @@
 	        {field:'upTime',title:'上传时间',width:120,align:"center"},
 	        {field:'downTime',title:'分析端下载时间',width:120,align:"center"},
 	        /*{field:'netFlag',title:'当前数据状态',width:120,align:"center"},*/
-	        {field:'status',title:'状态',width:100,align:"center",
+	        {field:'status',title:'状态',width:140,align:"center",
 	        	formatter:function(val,rec){
 	        		if (val==0)
 	        			{return '待上传数据包';}
@@ -130,6 +132,12 @@
 	        			{return '已分析回传中';}
 	        		if (val==5)
 	        			{return '已回传';}
+	        		if (val==6)
+	        			{return '已回传报告';}
+	        		if (val==7)
+	        			{return '上传原始数据中';}
+	        		if (val==8)
+	        			{return '已回传报告和分析结果';}
 	        		else{
 	        			return val;
 	        			}
@@ -137,12 +145,14 @@
 	        },
 	        {field:'reportId',title:'报告文件',width:120,align:"center",
 				formatter:function(value, row, index){
-					var path = row.pdfexportFilepath;
+					var path = row.reportId;
 					if (! !path){
-						var directUrl = "${rootPath}${BasePath}"+"/data"+path;
-						var str = '<a href="#" name="pdfDown" class="easyui-linkbutton" onclick="downPdf('+"'"+row.pdfexportFilepath+"'"+')" ></a>'+
+						var directUrl = "${rootPath}${BasePath}"+"/data/"+row.id+"/"+row.reportId;
+						/*var str = '<a href="#" name="pdfDown" class="easyui-linkbutton" onclick="downPdf('+"'"+row.path+"/"+row.path+".pdf"+"'"+')" ></a>'+
 								  '<a href="#" name="pdfView" class="easyui-linkbutton" onclick="viewPdf('+"'"+directUrl+"'"+')" ></a>';
-						return str;  
+								  
+						return str;  */
+						return directUrl;
 					}
 				}},
 	        {field:'analysedFile',title:'当分析生成的文件',width:120,align:"center"},

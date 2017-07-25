@@ -5,7 +5,7 @@
     <id column="id" property="id" jdbcType="VARCHAR" />
     <result column="user_id" property="userId" jdbcType="VARCHAR" />
     <result column="data_id" property="dataId" jdbcType="VARCHAR" />
-    <result column="data_type" property="dataType" jdbcType="INTEGER" />
+    <result column="data_type" property="dataType" jdbcType="VARCHAR" />
     <result column="action" property="action" jdbcType="INTEGER" />
     <result column="operation_time" property="operationTime" jdbcType="TIMESTAMP" />
   </resultMap>
@@ -106,7 +106,7 @@
       data_type, action, operation_time
       )
     values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{dataId,jdbcType=VARCHAR}, 
-      #{dataType,jdbcType=INTEGER}, #{action,jdbcType=INTEGER}, #{operationTime,jdbcType=TIMESTAMP}
+      #{dataType,jdbcType=VARCHAR}, #{action,jdbcType=INTEGER}, #{operationTime,jdbcType=TIMESTAMP}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.retloh.model.Statistics" >
@@ -142,7 +142,7 @@
         #{dataId,jdbcType=VARCHAR},
       </if>
       <if test="dataType != null" >
-        #{dataType,jdbcType=INTEGER},
+        #{dataType,jdbcType=VARCHAR},
       </if>
       <if test="action != null" >
         #{action,jdbcType=INTEGER},
@@ -171,7 +171,7 @@
         data_id = #{record.dataId,jdbcType=VARCHAR},
       </if>
       <if test="record.dataType != null" >
-        data_type = #{record.dataType,jdbcType=INTEGER},
+        data_type = #{record.dataType,jdbcType=VARCHAR},
       </if>
       <if test="record.action != null" >
         action = #{record.action,jdbcType=INTEGER},
@@ -189,7 +189,7 @@
     set id = #{record.id,jdbcType=VARCHAR},
       user_id = #{record.userId,jdbcType=VARCHAR},
       data_id = #{record.dataId,jdbcType=VARCHAR},
-      data_type = #{record.dataType,jdbcType=INTEGER},
+      data_type = #{record.dataType,jdbcType=VARCHAR},
       action = #{record.action,jdbcType=INTEGER},
       operation_time = #{record.operationTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
@@ -206,7 +206,7 @@
         data_id = #{dataId,jdbcType=VARCHAR},
       </if>
       <if test="dataType != null" >
-        data_type = #{dataType,jdbcType=INTEGER},
+        data_type = #{dataType,jdbcType=VARCHAR},
       </if>
       <if test="action != null" >
         action = #{action,jdbcType=INTEGER},
@@ -221,7 +221,7 @@
     update statistics
     set user_id = #{userId,jdbcType=VARCHAR},
       data_id = #{dataId,jdbcType=VARCHAR},
-      data_type = #{dataType,jdbcType=INTEGER},
+      data_type = #{dataType,jdbcType=VARCHAR},
       action = #{action,jdbcType=INTEGER},
       operation_time = #{operationTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
