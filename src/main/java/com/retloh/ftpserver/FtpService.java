@@ -221,14 +221,15 @@ public class FtpService extends DefaultFtplet {
 		String workingDirectory = session.getFileSystemView().getWorkingDirectory().getAbsolutePath();
 
 		Verification verification = new Verification();
-		verification.setCommonid(fileName.split("\\/")[0]);
 		String osName = System.getProperties().getProperty("os.name");
 		verification.setFilename(fileName);
 		try {
 			String filepath = "";
 			if (osName.toLowerCase().contains("windows")) {
 				filepath = "C:/data" + workingDirectory + "/" + fileName;
+				verification.setCommonid(fileName.split("\\/")[0]);
 			} else {
+				verification.setCommonid(workingDirectory);
 				filepath = "/data" + workingDirectory + "/" + fileName;
 			}
 

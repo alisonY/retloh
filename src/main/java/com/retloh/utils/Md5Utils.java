@@ -17,16 +17,18 @@ import org.slf4j.LoggerFactory;
 import org.springframework.util.DigestUtils;
 
 public class Md5Utils {
-	private static final Logger LOGGER     = LoggerFactory.getLogger(Md5Utils.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(Md5Utils.class);
+	private static char[] hexChar = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
 
 	private Md5Utils() {
 
 	}
-	
+
 	/***
 	 * 
 	 * @param fileName
-	 * @param hashType "MD5"
+	 * @param hashType
+	 *            "MD5"
 	 * @return
 	 * @throws IOException
 	 * @throws NoSuchAlgorithmException
@@ -36,8 +38,8 @@ public class Md5Utils {
 
 		try {
 			long start = System.currentTimeMillis();
-			
-			File f = new File(fileName);			
+
+			File f = new File(fileName);
 			InputStream ins = new FileInputStream(f);
 
 			byte[] buffer = new byte[8192];
@@ -50,16 +52,25 @@ public class Md5Utils {
 
 			ins.close();
 			long end = System.currentTimeMillis();
-			LOGGER.debug("计算 {} md5sum 一共耗时:" + (end - start) + "毫秒",fileName);
-			
-			return DigestUtils.md5DigestAsHex(md5.digest());
-			
+			LOGGER.debug("计算 {} md5sum 一共耗时:" + (end - start) + "毫秒", fileName);
+
+			return toHexString(md5.digest());
+
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage());
-			LOGGER.error("get {} file md5sum error!",fileName);
+			LOGGER.error("get {} file md5sum error!", fileName);
 			return "";
 		}
-		
+
+	}
+
+	protected static String toHexString(byte[] b) {
+		StringBuilder sb = new StringBuilder(b.length * 2);
+		for (int i = 0; i < b.length; i++) {
+			sb.append(hexChar[(b[i] & 0xf0) >>> 4]);
+			sb.append(hexChar[b[i] & 0x0f]);
+		}
+		return sb.toString();
 	}
 
 	/*
@@ -94,10 +105,10 @@ public class Md5Utils {
 		// for(String name:names){
 		// System.out.println(name);
 		// }
-		System.out.println("===========os.name:"+System.getProperties().getProperty("os.name"));
+		System.out.println("===========os.name:" + System.getProperties().getProperty("os.name"));
 		long start = System.currentTimeMillis();
 		System.out.println("开始计算文件MD5值,请稍后...");
-		String fileName = "D:/EasyPR-master.zip";
+		String fileName = "D:/holter_test.tar";
 		//// String fileName = "E:\\SoTowerStudio-3.1.0.exe";
 		String hashType = "MD5";
 		String hash = getHash(fileName, hashType);
