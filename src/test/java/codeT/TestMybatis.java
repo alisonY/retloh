@@ -9,10 +9,9 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import com.retloh.model.MUser;
-import com.retloh.service.MUserService;
-
+import com.retloh.model.PageQuery;
+import com.retloh.model.TUser;
+import com.retloh.service.UserServices;
 import com.alibaba.fastjson.JSON;
 
 @RunWith(SpringJUnit4ClassRunner.class) // = extends SpringJUnit4ClassRunner
@@ -23,7 +22,7 @@ public class TestMybatis  extends AbstractJUnit4SpringContextTests {
 	private static final Logger logger = Logger.getLogger(TestMybatis.class);
 
 	@Autowired
-	private MUserService muserService;
+	private  UserServices userServices;
 
 	@Test
 	public void test0() {
@@ -32,45 +31,21 @@ public class TestMybatis  extends AbstractJUnit4SpringContextTests {
 	
 	@Test
 	public void test1() {
-		
-		List<MUser> list = muserService.getAll();
+		TUser tuser = new TUser();
+		PageQuery pageQuery = new PageQuery();
+		List<TUser> list = userServices.getUserInfo(tuser, pageQuery);
 		logger.info(JSON.toJSONStringWithDateFormat(list, "yyyy-MM-dd HH:mm:ss"));
 	}
 	
 	//@Test
 	public void test2() {
 	
-		MUser muser = new MUser();
-		muser.setId("0000");
-		muser.setName("aaaa");
-		muser.setAge(1234);
-		muser.setAddress("ABCD");
-		int i = muserService.insert(muser);
+		TUser tuser = new TUser();
+		tuser.setId("0000");
+		tuser.setLoginName("test");
+		tuser.setPassword("password");
+		int i = userServices.insert(tuser);
 		logger.info(JSON.toJSONStringWithDateFormat("add "+i, "yyyy-MM-dd HH:mm:ss"));
-	}
-	
-	//@Test
-	public void test3() {
-		
-		MUser muser = new MUser();
-		muser.setId("0000");
-		muser.setName("bbbb");
-		muser.setAge(1234);
-		muser.setAddress("ABCD");
-		int i = muserService.update(muser);
-		logger.info(JSON.toJSONStringWithDateFormat("update " +i, "yyyy-MM-dd HH:mm:ss"));
-	}
-	
-	//@Test
-	public void test4() {
-		
-		MUser muser = new MUser();
-		muser.setId("0000");
-		muser.setName("bbbb");
-		muser.setAge(1234);
-		muser.setAddress("ABCD");
-		int i = muserService.delete("0000");
-		logger.info(JSON.toJSONStringWithDateFormat("delete "+i, "yyyy-MM-dd HH:mm:ss"));
 	}
 	
 }
