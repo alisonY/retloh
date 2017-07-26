@@ -1,6 +1,5 @@
 package com.retloh.ftpserver;
 
-import java.io.File;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
@@ -19,7 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.retloh.dao.FtpUserMapper;
 import com.retloh.dao.VerificationMapper;
-import com.retloh.model.FtpUser;
 import com.retloh.model.Verification;
 import com.retloh.model.VerificationExample;
 import com.retloh.service.VerificationServices;
@@ -30,11 +28,9 @@ public class FtpService extends DefaultFtplet {
 	private static final Logger LOGGER = LoggerFactory.getLogger(FtpService.class);
 	@Autowired
 	private FtpUserMapper ftpuserMapper;
+	
 	@Autowired
-	private VerificationServices verificationServices;
-
-	@Autowired
-	private ThreadPool threadpool;
+	private VerificationMapper verificationServices;
 
 	@Override
 	public FtpletResult afterCommand(FtpSession session, FtpRequest request, FtpReply reply)

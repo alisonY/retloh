@@ -31,6 +31,54 @@ public class VerificationServicesImpl implements VerificationServices{
 		// TODO Auto-generated method stub
 		return verificationMapper.updateByPrimaryKeySelective(record);
 	}
+
+	@Override
+	public int countByExample(VerificationExample example) {
+		// TODO Auto-generated method stub
+		return verificationMapper.countByExample(example);
+	}
+
+	@Override
+	public int deleteByExample(VerificationExample example) {
+		// TODO Auto-generated method stub
+		return verificationMapper.deleteByExample(example);
+	}
+
+	@Override
+	public int deleteByPrimaryKey(Integer id) {
+		// TODO Auto-generated method stub
+		return verificationMapper.deleteByPrimaryKey(id);
+	}
+
+	@Override
+	public int insertSelective(Verification record) {
+		// TODO Auto-generated method stub
+		return verificationMapper.insertSelective(record);
+	}
+
+	@Override
+	public Verification selectByPrimaryKey(Integer id) {
+		// TODO Auto-generated method stub
+		return verificationMapper.selectByPrimaryKey(id);
+	}
+
+	@Override
+	public int updateByExampleSelective(Verification record, VerificationExample example) {
+		// TODO Auto-generated method stub
+		return verificationMapper.updateByExampleSelective(record, example);
+	}
+
+	@Override
+	public int updateByExample(Verification record, VerificationExample example) {
+		// TODO Auto-generated method stub
+		return verificationMapper.updateByExample(record, example);
+	}
+
+	@Override
+	public int updateByPrimaryKey(Verification record) {
+		// TODO Auto-generated method stub
+		return verificationMapper.updateByPrimaryKey(record);
+	}
 	
 	
 
