@@ -7,4 +7,4 @@ CREATE TABLE `verification` (
   `md5sum` varchar(33) NOT NULL COMMENT '文件md5值',
   PRIMARY KEY (`id`),
   KEY `IDX_id` (`id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='分组表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='文件完整性校验表';
