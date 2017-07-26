@@ -22,6 +22,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.retloh.framework.CacheConstant;
 import com.retloh.framework.cache.LocalCacheUtil;
 import com.retloh.model.CaseInfo;
@@ -29,9 +30,12 @@ import com.retloh.model.Common;
 import com.retloh.model.PageQuery;
 import com.retloh.model.Statistics;
 import com.retloh.model.TUser;
+import com.retloh.model.Verification;
+import com.retloh.model.VerificationExample;
 import com.retloh.service.CommonServices;
 import com.retloh.service.StatisticsServices;
 import com.retloh.service.UserServices;
+import com.retloh.service.VerificationServices;
 import com.retloh.utils.ChangeCharset;
 import com.retloh.utils.CommonUtil;
 import com.retloh.utils.JacksonMapper;
@@ -51,6 +55,9 @@ public class ClientController extends ClientBaseController {
 
 	@Autowired
 	private StatisticsServices statservices;
+	
+	@Autowired
+	private VerificationServices verificationServices;
 
 	@RequestMapping(value = "/login", method = { RequestMethod.POST })
 	@ResponseBody
@@ -211,6 +218,99 @@ public class ClientController extends ClientBaseController {
 		String resultJson = JacksonMapper.beanToJson(map);
 		return resultJson;
 	}
+	
+	/**
+	 * 获取某个病例的md5值
+	 * 
+	 * @param request
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value = "/getmd5sum", method = { RequestMethod.POST })
+	@ResponseBody
+	public String getMd5Sum(HttpServletRequest request, String filename) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		if(StringUtils.isBlank(filename)){
+			map.put("status", 0);
+			map.put("msg", "filename必传");
+			String resultJson = JacksonMapper.beanToJson(map);
+			return resultJson;
+		}
+		
+		TUser tUser = getAccountInfo(request);
+		if (tUser == null) {
+			map.put("status", -1);
+			map.put("msg", "未登录");
+			String resultJson = JacksonMapper.beanToJson(map);
+			return resultJson;
+		} else {
+			VerificationExample example =new VerificationExample();
+			example.createCriteria().andFilenameEqualTo(filename.trim());
+			List<Verification> verification = verificationServices.selectByExample(example);
+			
+			if (!verification.isEmpty()) {
+				map.put("status", 1);
+				map.put("md5sum", verification.get(0).getMd5sum());
+			} else {
+				map.put("status", 0);
+				map.put("msg", "查无此文件校验值");
+			}
+			String resultJson = JacksonMapper.beanToJson(map);
+			return resultJson;
+		}
+	}
+	
+	/**
+	 * 文件完整性校验
+	 * 
+	 * @param request
+	 * @param id
+	 * @return
+	 * @throws InterruptedException 
+	 */
+	@RequestMapping(value = "/md5check", method = { RequestMethod.POST })
+	@ResponseBody
+	public String md5Check(HttpServletRequest request, String filename, String md5sum) throws InterruptedException {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		if(StringUtils.isBlank(filename) || StringUtils.isBlank(md5sum)){
+			map.put("status", 0);
+			map.put("msg", "文件名或md5sum必传");
+			String resultJson = JacksonMapper.beanToJson(map);
+			return resultJson;
+		}
+		
+		TUser tUser = getAccountInfo(request);
+		if (tUser == null) {
+			map.put("status", -1);
+			map.put("msg", "未登录");
+			String resultJson = JacksonMapper.beanToJson(map);
+			return resultJson;
+		} else {
+			//等待5秒钟,防止md5值未计算好
+			Thread.sleep(5000);
+			
+			VerificationExample example =new VerificationExample();
+			example.createCriteria().andFilenameEqualTo(filename.trim());
+			List<Verification> verification = verificationServices.selectByExample(example);
+			if(!verification.isEmpty()){
+				if(verification.get(0).getMd5sum().equals(md5sum.trim().toLowerCase())){
+					map.put("status", 1);
+					map.put("msg", "校验成功");
+				}else{
+					map.put("status", 0);
+					map.put("msg", "md5值不一致,请重新上传!");
+				}
+			}else{
+				map.put("status", 0);
+				map.put("msg", "校验失败,请重新上传!");
+			}
+			String resultJson = JacksonMapper.beanToJson(map);
+			return resultJson;
+		}
+	}
+	
 
 	/**
 	 * 释放病例

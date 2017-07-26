@@ -2,6 +2,8 @@ package com.retloh.ftpserver;
 
 import java.io.File;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 import org.apache.ftpserver.ftplet.DefaultFtplet;
 import org.apache.ftpserver.ftplet.FtpException;
@@ -11,15 +13,28 @@ import org.apache.ftpserver.ftplet.FtpSession;
 import org.apache.ftpserver.ftplet.FtpletContext;
 import org.apache.ftpserver.ftplet.FtpletResult;
 import org.apache.ftpserver.ftplet.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.retloh.dao.FtpUserMapper;
+import com.retloh.dao.VerificationMapper;
 import com.retloh.model.FtpUser;
+import com.retloh.model.Verification;
+import com.retloh.model.VerificationExample;
+import com.retloh.service.VerificationServices;
+import com.retloh.utils.Md5Utils;
 
-public class FtpService extends DefaultFtplet{
+public class FtpService extends DefaultFtplet {
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(FtpService.class);
 	@Autowired
 	private FtpUserMapper ftpuserMapper;
-	
+	@Autowired
+	private VerificationServices verificationServices;
+
+	@Autowired
+	private ThreadPool threadpool;
 
 	@Override
 	public FtpletResult afterCommand(FtpSession session, FtpRequest request, FtpReply reply)
@@ -97,21 +112,21 @@ public class FtpService extends DefaultFtplet{
 		System.out.println("User connected to FtpServer");
 		System.out.println("User connected to FtpServer");
 		System.out.println("User connected to FtpServer");
-		
+
 		System.out.println("User connected to FtpServer");
 		System.out.println("User connected to FtpServer");
 		System.out.println("User connected to FtpServer");
 		System.out.println("User connected to FtpServer");
-		
+
 		System.out.println("User connected to FtpServer");
 		System.out.println("User connected to FtpServer");
 		System.out.println("User connected to FtpServer");
 		System.out.println("User connected to FtpServer");
-		
+
 		System.out.println("User connected to FtpServer");
 		System.out.println("User connected to FtpServer");
 		System.out.println("User connected to FtpServer");
-		
+
 		return super.onConnect(session);
 	}
 
@@ -137,15 +152,14 @@ public class FtpService extends DefaultFtplet{
 	@Override
 	public FtpletResult onDownloadEnd(FtpSession session, FtpRequest request) throws FtpException, IOException {
 		// TODO Auto-generated method stub
-		
-		/*User user = session.getUser();
-	    //File workingDir = workingDir(session);
-	    String fileName = request.getArgument();
-	    FtpUser ftpuser= new FtpUser();
-	    ftpuser=(FtpUser) user;
-	    ftpuser.setStatus(1);
-	    ftpuserMapper.updateByPrimaryKey(ftpuser);*/
-		
+
+		/*
+		 * User user = session.getUser(); //File workingDir =
+		 * workingDir(session); String fileName = request.getArgument(); FtpUser
+		 * ftpuser= new FtpUser(); ftpuser=(FtpUser) user; ftpuser.setStatus(1);
+		 * ftpuserMapper.updateByPrimaryKey(ftpuser);
+		 */
+
 		return super.onDownloadEnd(session, request);
 	}
 
@@ -206,20 +220,46 @@ public class FtpService extends DefaultFtplet{
 	@Override
 	public FtpletResult onUploadEnd(FtpSession session, FtpRequest request) throws FtpException, IOException {
 		// TODO Auto-generated method stub
-		/*User user = session.getUser();
-	    //File workingDir = workingDir(session);
-	    String fileName = request.getArgument();
-	    String filepath=session.getFileSystemView().getWorkingDirectory().getAbsolutePath()+"/"+fileName;
-	    FtpUser ftpuser= new FtpUser();
-	    ftpuser=(FtpUser) user;
-	    ftpuser.setStatus(0);
-	    if(fileName.toUpperCase().endsWith(".PDF")){
-	    	ftpuser.setPdfexport(filepath);
-	    }else{
-	    	ftpuser.setFilepath(filepath);
-	    }
-	    ftpuserMapper.updateByPrimaryKey(ftpuser);*/
-	    
+		String fileName = request.getArgument();
+		String homeDirectory = session.getFileSystemView().getHomeDirectory().getAbsolutePath();
+		String workingDirectory = session.getFileSystemView().getWorkingDirectory().getAbsolutePath();
+
+		Verification verification = new Verification();
+		verification.setCommonid(fileName.split("\\/")[0]);
+		String osName = System.getProperties().getProperty("os.name");
+		verification.setFilename(fileName);
+		try {
+			String filepath = "";
+			if (osName.toLowerCase().contains("windows")) {
+				filepath = "C:/data" + workingDirectory + "/" + fileName;
+			} else {
+				filepath = "/data" + workingDirectory + "/" + fileName;
+			}
+
+			verification.setMd5sum(Md5Utils.getHash(filepath, "MD5"));
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			// e.printStackTrace();
+			verification.setMd5sum("");
+		}
+
+		VerificationExample example = new VerificationExample();
+		example.createCriteria().andFilenameEqualTo(fileName);
+		List<Verification> verification_list = verificationServices.selectByExample(example);
+		if (verification_list.isEmpty()) {
+			int res = verificationServices.insert(verification);
+			if (res < 0) {
+				LOGGER.error("insert {} md5sum to table failed", verification.toString());
+			}
+		} else {
+			for (Verification veric : verification_list) {
+				veric.setMd5sum(verification.getMd5sum());
+				int res = verificationServices.updateByPrimaryKeySelective(veric);
+				if (res < 0) {
+					LOGGER.error("update {} md5sum to table failed", verification.toString());
+				}
+			}
+		}
 		return super.onUploadEnd(session, request);
 	}
 
@@ -227,9 +267,9 @@ public class FtpService extends DefaultFtplet{
 	public FtpletResult onUploadStart(FtpSession session, FtpRequest request) throws FtpException, IOException {
 		// TODO Auto-generated method stub
 		User user = session.getUser();
-	    //File workingDir = workingDir(session);
-	    String fileName = request.getArgument();
-	    
+		// File workingDir = workingDir(session);
+		String fileName = request.getArgument();
+
 		return super.onUploadStart(session, request);
 	}
 
@@ -244,7 +284,5 @@ public class FtpService extends DefaultFtplet{
 		// TODO Auto-generated method stub
 		return super.onUploadUniqueStart(session, request);
 	}
-	
-	
-	
+
 }
