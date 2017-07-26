@@ -234,8 +234,8 @@ public class FtpService extends DefaultFtplet {
 			 */
 
 			verification.setCommonid(workingDirectory.replaceAll("/", ""));
-			// filepath = "/data" + workingDirectory + "/" + fileName;
-			filepath = homeDirectory + "/" + workingDirectory + "/" + fileName;
+			filepath = "/data" + workingDirectory + "/" + fileName;
+			//filepath = homeDirectory + "/" + workingDirectory + "/" + fileName;
 
 			verification.setMd5sum(Md5Utils.getHash(filepath, "MD5"));
 		} catch (NoSuchAlgorithmException e) {
