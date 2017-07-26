@@ -28,7 +28,7 @@ public class FtpService extends DefaultFtplet {
 	private static final Logger LOGGER = LoggerFactory.getLogger(FtpService.class);
 	@Autowired
 	private FtpUserMapper ftpuserMapper;
-	
+
 	@Autowired
 	private VerificationMapper verificationServices;
 
@@ -225,13 +225,17 @@ public class FtpService extends DefaultFtplet {
 		verification.setFilename(fileName);
 		try {
 			String filepath = "";
-			if (osName.toLowerCase().contains("windows")) {
-				filepath = "C:/data" + workingDirectory + "/" + fileName;
-				verification.setCommonid(fileName.split("\\/")[0]);
-			} else {
-				verification.setCommonid(workingDirectory);
-				filepath = "/data" + workingDirectory + "/" + fileName;
-			}
+			/*
+			 * if (osName.toLowerCase().contains("windows")) { filepath =
+			 * "C:/data" + workingDirectory + "/" + fileName;
+			 * verification.setCommonid(fileName.split("/")[0]); } else {
+			 * verification.setCommonid(workingDirectory.replaceAll("/", ""));
+			 * filepath = "/data" + workingDirectory + "/" + fileName; }
+			 */
+
+			verification.setCommonid(workingDirectory.replaceAll("/", ""));
+			// filepath = "/data" + workingDirectory + "/" + fileName;
+			filepath = homeDirectory + "/" + workingDirectory + "/" + fileName;
 
 			verification.setMd5sum(Md5Utils.getHash(filepath, "MD5"));
 		} catch (NoSuchAlgorithmException e) {
@@ -241,7 +245,7 @@ public class FtpService extends DefaultFtplet {
 		}
 
 		VerificationExample example = new VerificationExample();
-		example.createCriteria().andFilenameEqualTo(fileName);
+		example.createCriteria().andFilenameEqualTo(fileName).andCommonidEqualTo(workingDirectory.replaceAll("/", ""));
 		List<Verification> verification_list = verificationServices.selectByExample(example);
 		if (verification_list.isEmpty()) {
 			int res = verificationServices.insert(verification);

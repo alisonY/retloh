@@ -228,12 +228,12 @@ public class ClientController extends ClientBaseController {
 	 */
 	@RequestMapping(value = "/getmd5sum", method = { RequestMethod.POST })
 	@ResponseBody
-	public String getMd5Sum(HttpServletRequest request, String filename) {
+	public String getMd5Sum(HttpServletRequest request, String id, String filename) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		if(StringUtils.isBlank(filename)){
+		if(StringUtils.isBlank(filename)||StringUtils.isBlank(id)){
 			map.put("status", 0);
-			map.put("msg", "filename必传");
+			map.put("msg", "id或filename必传");
 			String resultJson = JacksonMapper.beanToJson(map);
 			return resultJson;
 		}
@@ -246,7 +246,7 @@ public class ClientController extends ClientBaseController {
 			return resultJson;
 		} else {
 			VerificationExample example =new VerificationExample();
-			example.createCriteria().andFilenameEqualTo(filename.trim());
+			example.createCriteria().andFilenameEqualTo(filename.trim()).andCommonidEqualTo(id.trim());
 			List<Verification> verification = verificationServices.selectByExample(example);
 			
 			if (!verification.isEmpty()) {
@@ -271,12 +271,12 @@ public class ClientController extends ClientBaseController {
 	 */
 	@RequestMapping(value = "/md5check", method = { RequestMethod.POST })
 	@ResponseBody
-	public String md5Check(HttpServletRequest request, String filename, String md5sum) throws InterruptedException {
+	public String md5Check(HttpServletRequest request, String id,String filename, String md5sum) throws InterruptedException {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		if(StringUtils.isBlank(filename) || StringUtils.isBlank(md5sum)){
+		if(StringUtils.isBlank(filename) || StringUtils.isBlank(md5sum)|| StringUtils.isBlank(id)){
 			map.put("status", 0);
-			map.put("msg", "文件名或md5sum必传");
+			map.put("msg", "id或文件名或md5sum必传");
 			String resultJson = JacksonMapper.beanToJson(map);
 			return resultJson;
 		}
@@ -292,7 +292,7 @@ public class ClientController extends ClientBaseController {
 			Thread.sleep(5000);
 			
 			VerificationExample example =new VerificationExample();
-			example.createCriteria().andFilenameEqualTo(filename.trim());
+			example.createCriteria().andFilenameEqualTo(filename.trim()).andCommonidEqualTo(id.trim());
 			List<Verification> verification = verificationServices.selectByExample(example);
 			if(!verification.isEmpty()){
 				if(verification.get(0).getMd5sum().equals(md5sum.trim().toLowerCase())){
