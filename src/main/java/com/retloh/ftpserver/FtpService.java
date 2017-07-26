@@ -250,6 +250,7 @@ public class FtpService extends DefaultFtplet {
 			}
 		} else {
 			for (Verification veric : verification_list) {
+				veric.setCommonid(verification.getCommonid());
 				veric.setMd5sum(verification.getMd5sum());
 				int res = verificationServices.updateByPrimaryKeySelective(veric);
 				if (res < 0) {
