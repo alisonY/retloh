@@ -355,7 +355,7 @@ public class ClientController extends ClientBaseController {
 				// 采集端
 				if (usertype == 1 && status == 1) {
 					statistics.setId(UUID.randomUUID().toString());
-					statistics.setUserId(id);
+					statistics.setUserId(tUser.getId());
 					statistics.setDataId(common.getId());
 					statistics.setDataType(common.getPgType());
 					statistics.setAction(1);
@@ -368,7 +368,7 @@ public class ClientController extends ClientBaseController {
 				// 分析端
 				if (usertype == 2 && status == 6) {
 					statistics.setId(UUID.randomUUID().toString());
-					statistics.setUserId(id);
+					statistics.setUserId(tUser.getId());
 					statistics.setDataId(common.getId());
 					statistics.setDataType(common.getPgType());
 					statistics.setAction(2);
