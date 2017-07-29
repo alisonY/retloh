@@ -11,14 +11,16 @@ public interface UserServices {
 
 	TUser selectByPrimaryKey(String id);
 
-	int insert(TUser muser);
+	int insert(TUser tuser);
 
-	int update(TUser muser);
+	int update(TUser tuser);
 	
-	int updateByExample(TUser muser);
+	int updateByExample(TUser tuser);
 
 	int delete(String id);
 	
 	List<TUser> getUserInfo(TUser tuser,PageQuery pageQuery);
+	
+	int changePassword(TUser tuser);
 
 }

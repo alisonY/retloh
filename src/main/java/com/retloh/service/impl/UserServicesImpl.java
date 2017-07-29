@@ -74,4 +74,8 @@ public class UserServicesImpl implements UserServices {
 		return tUserMapper.updateByExampleSelective(tUser, userexample);
 	}
 
+	public int changePassword(TUser muser) {
+		return tUserMapper.updateByPrimaryKeySelective(muser);
+	}
+
 }

@@ -527,7 +527,7 @@ public class ClientController extends ClientBaseController {
 	}
 
 	/**
-	 * 释放病例
+	 * 上传前修改状态
 	 * 
 	 * @param request
 	 * @param id
@@ -574,5 +574,50 @@ public class ClientController extends ClientBaseController {
 			}
 		}
 	}
-
+	
+	/**
+	 * 上传前修改状态
+	 * 
+	 * @param request
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value = "/changePass", method = { RequestMethod.POST })
+	@ResponseBody
+	public String changePass(HttpServletRequest request, String oldPass,String newPass) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		TUser tUser = getAccountInfo(request);
+		if(StringUtils.isBlank(oldPass) || StringUtils.isBlank(newPass)){
+			map.put("status", 0);
+			map.put("msg", "参数不全");
+			String resultJson = JacksonMapper.beanToJson(map);
+			return resultJson;
+		}
+		if (tUser == null) {
+			map.put("status", -1);
+			map.put("msg", "未登录");
+			String resultJson = JacksonMapper.beanToJson(map);
+			return resultJson;
+		} else {
+			if(!StringUtils.equals(oldPass, tUser.getPassword())){
+				map.put("status", 0);
+				map.put("msg", "原密码不正确");
+				String resultJson = JacksonMapper.beanToJson(map);
+				return resultJson;
+			}
+			TUser temp = new TUser();
+			temp.setId(tUser.getId());
+			temp.setPassword(newPass);
+			temp.setUpdateTime(new Date());
+			int count = userServices.changePassword(temp);
+			if (count > 0) {
+				map.put("status", 1);
+				map.put("msg", "修改成功");
+			}
+		}
+		String resultJson = JacksonMapper.beanToJson(map);
+		return resultJson;
+	}
+	
+	
 }
