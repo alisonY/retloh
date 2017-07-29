@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">  
 <html>
 <head>
-	<title>报告查询X</title>
+	<title>报告查询</title>
 	<#include "commonHead.ftl" />
 </head>
 <body style="padding: 0px 0px 0px 0px;">
@@ -9,10 +9,10 @@
     
 	<!--工具栏-->
 	<div id="tb" style="padding:2px 5px;">
-                身份证号码：<input id="idCard" class="easyui-textbox"  style="width:300px;height:28px">
-                患者姓名：<input id="patName" class="easyui-textbox"  style="width:300px;height:28px">
-                社保号：<input id="socialId" class="easyui-textbox"  style="width:300px;height:28px">
-                门诊号(?住院号)：<input id="patNo" class="easyui-textbox"  style="width:300px;height:28px">
+                身份证号码：<input id="idCard" class="easyui-textbox"  style="width:200px;height:28px">
+                患者姓名：<input id="patName" class="easyui-textbox"  style="width:200px;height:28px">
+                社保号：<input id="socialId" class="easyui-textbox"  style="width:200px;height:28px">
+                门诊号(?住院号)：<input id="patNo" class="easyui-textbox"  style="width:200px;height:28px">
         <a href="#" class="easyui-linkbutton" iconCls="icon-search" onclick="doSearch()" >条件查询</a>
         <a href="#" class="easyui-linkbutton" iconCls="icon-redo" onclick="resetParms()" >重置条件</a>
 		<!--分隔符--><span class="datagrid-btn-separator" style="vertical-align: middle;display:inline-block;float:none"></span>
@@ -23,8 +23,6 @@
 	$(document).ready(function(){
 		datagrid("");
 	}); 
-	var editRow = undefined;//编辑的行
-	
 	function datagrid(url){
 		var urls = url;
 		
@@ -32,8 +30,6 @@
 		var socialId = $.trim($("#socialId").textbox('getValue'));
 		var patNo = $.trim($("#patNo").textbox('getValue'));
 		var idCard = $.trim($("#idCard").textbox('getValue'));
-		patName="赵婷婷";
-		patNo="888888";
 		var nc = 0;
 		if(!patName){
 			nc = nc+1;
@@ -109,7 +105,6 @@
 	}
 	
 	function doSearch(){
-		console.info("12123");
 		var urls = "${rootPath}${BasePath}/down/search.do";
 		datagrid(urls);
 	}
@@ -123,6 +118,7 @@
 	
 	function downPdf(path){
 		window.open("${rootPath}${BasePath}/down/file.do?filePath="+path);
+		resetParms();
 	}
 	function viewPdf(path){
 		window.open(path);

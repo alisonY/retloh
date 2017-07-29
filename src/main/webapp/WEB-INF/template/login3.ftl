@@ -23,7 +23,8 @@
             <input type="text" name="loginName" maxlength="20" placeholder="请输入您的用户名" class="ipt-name">
             <input type="password" name="password" style="border-bottom: none;" maxlength="20" placeholder="请输入密码" class="ipt-lock">
         </div>
-        <a href="javascript:;" class="login-btn">登录</a>
+        <a href="javascript:;" id="login-btn" class="login-btn">登录</a>
+        <a href="${rootPath}${BasePath}/down/toPage.do" class="login-btn">报告查询</a>
         <span class="pro tips" style="display: none;"></span>
     </div>
 </form>
@@ -41,7 +42,7 @@
 
     });
 
-    $(".login-btn").click(function(){
+    $("#login-btn").click(function(){
         login();
     });
     function login() {
@@ -64,7 +65,7 @@
         var ev = document.all ? window.event : e;
         if(ev.keyCode==13) {
             //监控回车事件
-            $(".login-btn").click();
+            $("#login-btn").click();
         }
     };
 </script>
