@@ -24,6 +24,7 @@ import com.retloh.model.Common;
 import com.retloh.service.CommonServices;
 import com.retloh.utils.FileUtil;
 import com.retloh.utils.JacksonMapper;
+import com.retloh.utils.JacksonUtils;
 
 @Controller
 @RequestMapping("/down")
@@ -63,7 +64,7 @@ public class FileDownloadController {
 	@RequestMapping(value = "/search", method = { RequestMethod.POST })
 	@ResponseBody
 	public String login(Common common, HttpServletRequest request) {
-		LOGGER.error("时间{}，查询信息",new Date(),JacksonMapper.beanToJson(common));
+		LOGGER.error("时间{}，查询信息",new Date(),JacksonUtils.getInstance().obj2Json(common));
 		Map<String, Object> maps = new HashMap<String, Object>();
 		maps.put("status", false);
 		int emptyCount = 0;
@@ -86,7 +87,7 @@ public class FileDownloadController {
 		
 		List<Common> result = commonServices.getpatInfoForDownload(common);
 		
-		return JacksonMapper.beanToJson(result);
+		return JacksonUtils.getInstance().obj2Json(result);
 	}	
 	
 }

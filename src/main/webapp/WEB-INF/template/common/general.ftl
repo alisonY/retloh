@@ -57,7 +57,7 @@
 					"patNo":patNo,
 					"idCard":idCard
 			},
-			rownumbers:true,
+			//rownumbers:true,
 			pagination:true,
 			fitColumns:false,
 			toolbar:"#tb",
@@ -87,19 +87,25 @@
 	        {field:'tell',title:'电话',width:200,align:"center"},
 	        {field:'hsName',title:'医院名称',width:200,align:"center"},
 	        {field:'patNo',title:'门诊号',width:200,align:"center"},
-	        {field:'analysedFile',title:'分析生成的文件',width:120,align:"center"},
-	        {field:'createTime',title:'上传时间',width:160,align:"center"},
-	        {field:'updateTime',title:'修改时间',width:160,align:"center"
+	        {field:'createTime',title:'上传时间',width:120,align:"center",
+				 formatter:function(value,row,index){
+     				return showValueAndTitle(value,row,index);
+     			}
+     		},
+	        {field:'updateTime',title:'修改时间',width:120,align:"center",
+				 formatter:function(value,row,index){
+     				return showValueAndTitle(value,row,index);
+     			}
      		}
 	        ]],
 			onLoadSuccess:function(data){
+				$("a[name='pdfDown']").linkbutton({text:'下载',plain:false,iconCls:'icon-down'});
+				$("a[name='pdfView']").linkbutton({text:'预览',plain:false,iconCls:'icon-more'});
 		        //调整表格宽高
 		        $('#common').datagrid('resize', {
 					width:function(){return document.body.clientWidth;},
 					height:function(){return document.body.clientHeight;},
 				});
-				$("a[name='pdfDown']").linkbutton({text:'下载',plain:false,iconCls:'icon-down'});
-				$("a[name='pdfView']").linkbutton({text:'预览',plain:false,iconCls:'icon-more'});
 		    }
 		});
 	}

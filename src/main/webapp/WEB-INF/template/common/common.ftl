@@ -68,7 +68,7 @@
 					"pgType":$.trim($("#pgType").textbox('getValue')),
 					"idCard":$.trim($("#idCard").textbox('getValue'))
 			},
-			rownumbers:true,
+			//rownumbers:true,
 			pagination:true,
 			fitColumns:false,
 			toolbar:"#tb",
@@ -148,10 +148,8 @@
 				var path = row.reportId;
 				if (! !path){
 					var directUrl = "${rootPath}${BasePath}"+"/data/"+row.id+"/"+row.reportId;
-					console.info(directUrl);
 					var str = '<a href="#" name="pdfDown" class="easyui-linkbutton" onclick="downPdf('+"'"+path+"'"+')" ></a>'+
 							  '<a href="#" name="pdfView" class="easyui-linkbutton" onclick="viewPdf('+"'"+directUrl+"'"+')" ></a>';
-							  
 					return str;  
 				}
 			}},
@@ -168,13 +166,13 @@
      		}
 	        ]],
 			onLoadSuccess:function(data){
+				$("a[name='pdfDown']").linkbutton({text:'下载',iconCls:'icon-down'});
+				$("a[name='pdfView']").linkbutton({text:'预览',iconCls:'icon-more'});
 		        //调整表格宽高
 		        $('#common').datagrid('resize', {
 					width:function(){return document.body.clientWidth;},
 					height:function(){return document.body.clientHeight;},
 				});
-				$("a[name='pdfDown']").linkbutton({text:'下载',plain:false,iconCls:'icon-down'});
-				$("a[name='pdfView']").linkbutton({text:'预览',plain:false,iconCls:'icon-more'});
 		    },
 		    onAfterEdit:function(rowIndex, rowData, changes){//行索引，数据，原先的改变的数据
 			
