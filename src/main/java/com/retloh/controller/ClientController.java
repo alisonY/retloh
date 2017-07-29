@@ -585,6 +585,7 @@ public class ClientController extends ClientBaseController {
 	@RequestMapping(value = "/changePass", method = { RequestMethod.POST })
 	@ResponseBody
 	public String changePass(HttpServletRequest request, String oldPass,String newPass) {
+		LOGGER.error("客户端修改密码，收到参数 oldpass{},newpass{}",oldPass,newPass);
 		Map<String, Object> map = new HashMap<String, Object>();
 		TUser tUser = getAccountInfo(request);
 		if(StringUtils.isBlank(oldPass) || StringUtils.isBlank(newPass)){
@@ -602,6 +603,7 @@ public class ClientController extends ClientBaseController {
 			if(!StringUtils.equals(oldPass, tUser.getPassword())){
 				map.put("status", 0);
 				map.put("msg", "原密码不正确");
+				LOGGER.error("原密码不正确");
 				String resultJson = JacksonMapper.beanToJson(map);
 				return resultJson;
 			}
@@ -611,6 +613,7 @@ public class ClientController extends ClientBaseController {
 			temp.setUpdateTime(new Date());
 			int count = userServices.changePassword(temp);
 			if (count > 0) {
+				LOGGER.error("修改成功");
 				map.put("status", 1);
 				map.put("msg", "修改成功");
 			}
