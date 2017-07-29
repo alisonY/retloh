@@ -161,10 +161,27 @@ public class CommonServicesImpl implements CommonServices {
 	}
 
 	public int countByExample(CommonExample example) {
-		// TODO Auto-generated method stub
 		return commonmapper.countByExample(example);
 	}
 
 
+	public List<Common> getpatInfoForDownload(Common record) {
+		CommonExample example = new CommonExample();
+		CommonExample.Criteria criteria=example.createCriteria();  
+		if(StringUtils.isNotBlank(record.getPatNo())){
+			criteria.andPatNoEqualTo(record.getPatNo());
+		}
+		if(StringUtils.isNotBlank(record.getIdCard())){
+			criteria.andIdCardEqualTo(record.getIdCard());
+		}
+		if(StringUtils.isNotBlank(record.getSocialId())){
+			criteria.andSocialIdEqualTo(record.getSocialId());
+		}
+		if(StringUtils.isNotBlank(record.getPatName())){
+			criteria.andPatNameEqualTo(record.getPatName());
+		}
+		example.setOrderByClause("create_time DESC");
+		return commonmapper.selectByExample(example);
+	}
 
 }

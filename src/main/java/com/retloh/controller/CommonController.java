@@ -5,19 +5,24 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.retloh.framework.SysConstant;
 import com.retloh.model.Common;
 import com.retloh.model.PageQuery;
 import com.retloh.model.commonVo.MyPageInfo;
 import com.retloh.service.CommonServices;
+import com.retloh.utils.FileUtil;
 import com.retloh.utils.JacksonMapper;
 import com.retloh.utils.JacksonUtils;
 
@@ -182,5 +187,17 @@ public class CommonController {
 		String resultJson = JacksonMapper.beanToJson(map);
 		return resultJson;
 	}	
-
+	
+	@RequestMapping(value = "/file", method = RequestMethod.GET, headers = "content-type=" + MediaType.APPLICATION_OCTET_STREAM_VALUE)
+	public void downlog(HttpServletRequest request, HttpServletResponse response, String filePath) {
+		String filename = filePath.substring(0, filePath.lastIndexOf("."));
+		response.setHeader("Content-disposition", "attachment; filename="+filePath);
+		filePath = SysConstant.FILE_STORE_FOLDER+filename+SysConstant.FILE_STORE_FOLDER+filePath;
+		try {
+			LOGGER.error("下载文件URL：{}",filename);
+			FileUtil.fileToStream(response.getOutputStream(), filePath);
+		} catch (IOException e) { 
+			LOGGER.error("下载文件异常：{}",e.getMessage());
+		}
+	}
 }

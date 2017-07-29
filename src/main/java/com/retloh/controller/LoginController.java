@@ -38,7 +38,7 @@ public class LoginController {
         	}
         }
         mv.addAllObjects(modelMap);
-    	mv.setViewName("login3");
+    	mv.setViewName("login");
         return mv;  
     }
 	

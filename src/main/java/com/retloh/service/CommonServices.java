@@ -34,4 +34,5 @@ public interface CommonServices {
 	
 	int countByExample(CommonExample example);
 
+	List<Common> getpatInfoForDownload(Common common);
 }

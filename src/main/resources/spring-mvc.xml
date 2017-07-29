@@ -76,13 +76,12 @@
 			<mvc:mapping path="/muser/**"/>
 			<mvc:mapping path="/bp/**"/>
 			<mvc:mapping path="/case/**"/>
-			<mvc:mapping path="/down/**"/>
 			<mvc:mapping path="/statistics/**"/>
 			<mvc:mapping path="/user/**"/>
 			<mvc:mapping path="/group/**"/>
 			<mvc:mapping path="/common/**"/>
-			<!--测试放点水
-			<mvc:exclude-mapping path="/common/**"/>
+			<!--匿名查询
+			<mvc:mapping path="/down/**"/>
 			-->
 			<bean class="com.retloh.framework.interceptor.UserLogininAuthorizationInterceptor"/>
 		</mvc:interceptor>
