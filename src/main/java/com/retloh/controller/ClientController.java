@@ -79,6 +79,8 @@ public class ClientController extends ClientBaseController {
 					LOGGER.error("client Authentication is success,query result is jsonStr={},cacheKey={},token={}", jsonStr,
 							cacheKey,token);
 					modelMap.put("status", true);
+					//user_type` '类型 0:管理员,1:采集端(上传端);2:分析端(下载端)
+					modelMap.put("type", temp.getUserType());
 					modelMap.put("token", token);
 				} else {
 					modelMap.put("errorInfo", "this account is only available at pc client.");
