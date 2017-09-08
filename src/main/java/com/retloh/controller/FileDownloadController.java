@@ -45,7 +45,7 @@ public class FileDownloadController {
 	public void downlog(HttpServletRequest request, HttpServletResponse response, String filePath) {
 		String filename = filePath.substring(0, filePath.lastIndexOf("."));
 		response.setHeader("Content-disposition", "attachment; filename="+filePath);
-		filePath = SysConstant.FILE_STORE_FOLDER+filename+SysConstant.FILE_STORE_FOLDER+filePath;
+		filePath = SysConstant.FILE_STORE_FOLDER+SysConstant.FILE_STEP+filename+SysConstant.FILE_STEP+filePath;
 		try {
 			LOGGER.error("下载文件URL：{}",filename);
 			FileUtil.fileToStream(response.getOutputStream(), filePath);

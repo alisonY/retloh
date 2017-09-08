@@ -381,7 +381,7 @@ public class ClientController extends ClientBaseController {
 					record.setId(id);
 					record.setAnaId(tUser.getId());
 					record.setAnaName(tUser.getLoginName());
-					int flagcom = commonServices.updateByPrimaryKeySelective(common);
+					int flagcom = commonServices.updateByPrimaryKeySelective(record);
 					
 					if (flagSta < 0 || flagcom <0) {
 						LOGGER.error("日志统计/添加分析端账号信息失败:" + statistics.toString());
