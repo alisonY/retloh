@@ -33,7 +33,7 @@
 				“1034-1040”则是可供客户端连接的端口，注意防火墙要将这些端口放行。
 				-->
             	<active enabled="true" local-port="2123" ip-check="false" />
-                <passive ports="2125" external-address="172.104.78.181"/>
+                <passive ports="2125-4840" external-address="172.16.0.105"/>
             	<!--<active enabled="true" local-address="1.2.3.4" local-port="2121" ip-check="true" ></active>
             	<passive ports="2121" address="1.2.3.4" external-address="1.2.3.4"> </passive>-->
         	</data-connection>
