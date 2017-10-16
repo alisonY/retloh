@@ -60,4 +60,9 @@ public class CacheConstant {
      * 无操作时登出时间，30分钟未操作登出
      */
     public static final int CLIENT_BEFORE_UPLOAD_LOCK_TIME = 30*60;
+    
+    /**
+     * 唯一登录
+     */
+    public static final String CLIENT_SINGLE_LOGIN = CACHE_PREFIX + "CLIENT_SINGLE_LOGIN_";
 }

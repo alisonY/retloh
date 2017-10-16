@@ -76,6 +76,12 @@ public class ClientController extends ClientBaseController {
 					String token = CommonUtil.md5(cacheKey);// token
 															// 根据当前用户cacheKey经过MD5编码后生成
 					LocalCacheUtil.getInstance().putLocalCache(token, temp, CacheConstant.CLIENT_LOGOUT_TIMES);
+					//登录唯一性
+					String singleLoginKey = CacheConstant.CLIENT_SINGLE_LOGIN + temp.getId();
+					LocalCacheUtil.getInstance().delLocalCache(singleLoginKey);
+					
+					LocalCacheUtil.getInstance().putLocalCache(singleLoginKey, token, CacheConstant.CLIENT_LOGOUT_TIMES);
+					
 					LOGGER.error("client Authentication is success,query result is jsonStr={},cacheKey={},token={}", jsonStr,
 							cacheKey,token);
 					modelMap.put("status", true);

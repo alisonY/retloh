@@ -3,8 +3,11 @@ package com.retloh.framework.interceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.servlet.ModelAndView;
 import com.retloh.framework.CacheConstant;
+import com.retloh.framework.cache.LocalCacheUtil;
 import com.retloh.model.TUser;
 import com.retloh.utils.CommonUtil;
 
@@ -20,6 +23,11 @@ public class ClientRequestInterceptor extends AbstractHandlerInterceptor {
 		TUser userInfoVoCached = (TUser)getIncached(ClientUserInfoCacheKey);
 		if(userInfoVoCached != null){
                 putIncached(ClientUserInfoCacheKey, userInfoVoCached, CacheConstant.CLIENT_LOGOUT_TIMES);
+				String singleLoginKey = CacheConstant.CLIENT_SINGLE_LOGIN + userInfoVoCached.getId();
+				String token = request.getHeader("token");
+				if(StringUtils.isNotBlank(token)){
+					LocalCacheUtil.getInstance().putLocalCache(singleLoginKey, token, CacheConstant.CLIENT_LOGOUT_TIMES);
+				}
 		}
 		return true;
 	}
