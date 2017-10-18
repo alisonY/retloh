@@ -584,7 +584,7 @@ public class ClientController extends ClientBaseController {
 	}
 	
 	/**
-	 * 上传前修改状态
+	 * 修改密码
 	 * 
 	 * @param request
 	 * @param id
